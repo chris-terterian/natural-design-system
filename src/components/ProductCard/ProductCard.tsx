@@ -104,7 +104,7 @@ export function ProductCard({
         (soldOut ? (
           <Button variant="secondary" className="nds-card__cta" onClick={onNotify}>Notify me</Button>
         ) : (
-          <Button className="nds-card__cta" onClick={onAddToCart}>Add to cart</Button>
+          <Button className="nds-card__cta" onClick={onAddToCart}>Add to Bag</Button>
         ))}
     </article>
   );

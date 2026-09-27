@@ -1,0 +1,23 @@
+@import './tokens.css';
+
+:root {
+  --nds-font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+body {
+  font-family: var(--nds-font-family);
+  color: var(--nds-color-brown-900);
+  background: var(--nds-color-white);
+}
+
+.nds-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

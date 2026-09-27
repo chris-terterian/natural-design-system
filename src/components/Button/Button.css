@@ -1,0 +1,63 @@
+.nds-button {
+  --_bg: var(--nds-button-primary-bg-default);
+  --_fg: var(--nds-button-primary-fg-default);
+  --_border: var(--nds-button-primary-border-default);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--nds-button-gap);
+  min-height: var(--nds-button-min-height);
+  padding: var(--nds-button-padding-y) var(--nds-button-padding-x);
+  border: var(--nds-button-border-width) solid var(--_border);
+  border-radius: var(--nds-button-radius);
+  background: var(--_bg);
+  color: var(--_fg);
+  font: 600 var(--nds-button-font-size) / var(--nds-button-line-height) var(--nds-font-family);
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+.nds-button--icon-left { padding-left: var(--nds-button-padding-x-icon); }
+.nds-button--icon-right { padding-right: var(--nds-button-padding-x-icon); }
+.nds-button__icon { display: inline-flex; }
+
+.nds-button:hover:not(:disabled), .nds-button[data-state='hover'] {
+  --_bg: var(--nds-button-primary-bg-hover);
+  --_border: var(--nds-button-primary-border-hover);
+}
+.nds-button:active:not(:disabled), .nds-button[data-state='pressed'] {
+  --_bg: var(--nds-button-primary-bg-pressed);
+  --_border: var(--nds-button-primary-border-pressed);
+}
+
+.nds-button--secondary {
+  --_bg: var(--nds-button-secondary-bg-default);
+  --_fg: var(--nds-button-secondary-fg-default);
+  --_border: var(--nds-button-secondary-border-default);
+}
+.nds-button--secondary:hover:not(:disabled), .nds-button--secondary[data-state='hover'] {
+  --_bg: var(--nds-button-secondary-bg-hover);
+  --_border: var(--nds-button-secondary-border-hover);
+}
+.nds-button--secondary:active:not(:disabled), .nds-button--secondary[data-state='pressed'] {
+  --_bg: var(--nds-button-secondary-bg-pressed);
+  --_border: var(--nds-button-secondary-border-pressed);
+}
+
+/* Focus: 2px ring with 2px offset (matches Figma "Focus ring" layer) */
+.nds-button:focus-visible, .nds-button[data-state='focus'] {
+  outline: var(--nds-button-focus-ring-width) solid var(--nds-button-focus-ring);
+  outline-offset: 2px;
+}
+
+.nds-button:disabled {
+  --_bg: var(--nds-button-primary-bg-disabled);
+  --_fg: var(--nds-button-primary-fg-disabled);
+  --_border: var(--nds-button-primary-border-disabled);
+  cursor: not-allowed;
+}
+.nds-button--secondary:disabled {
+  --_bg: var(--nds-button-secondary-bg-disabled);
+  --_fg: var(--nds-button-secondary-fg-disabled);
+  --_border: var(--nds-button-secondary-border-disabled);
+}

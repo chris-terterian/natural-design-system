@@ -1,0 +1,21 @@
+.nds-wishlist {
+  display: inline-grid;
+  place-items: center;
+  width: var(--nds-wishlist-size);
+  height: var(--nds-wishlist-size);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--nds-wishlist-bg-default);
+  color: var(--nds-wishlist-icon);
+  box-shadow: 0 1px 3px rgb(59 42 30 / 0.16);
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+.nds-wishlist svg { width: var(--nds-wishlist-icon-size); height: var(--nds-wishlist-icon-size); }
+.nds-wishlist:hover, .nds-wishlist[data-state='hover'] { background: var(--nds-wishlist-bg-hover); }
+.nds-wishlist:active, .nds-wishlist[data-state='pressed'] { background: var(--nds-wishlist-bg-pressed); }
+.nds-wishlist:focus-visible, .nds-wishlist[data-state='focus'] {
+  outline: var(--nds-card-focus-ring-width) solid var(--nds-wishlist-focus-ring);
+  outline-offset: 2px;
+}

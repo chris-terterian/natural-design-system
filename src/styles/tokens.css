@@ -47,6 +47,8 @@
   --nds-font-size-16: 16px;
   --nds-line-height-20: 20px;
   --nds-line-height-24: 24px;
+  --nds-font-size-12: 12px;
+  --nds-line-height-16: 16px;
   /* Button */
   --nds-button-primary-bg-default: var(--nds-color-brown-200);
   --nds-button-primary-fg-default: var(--nds-color-brown-900);
@@ -164,13 +166,6 @@
   --nds-card-text-price: var(--nds-color-brown-900);
   --nds-card-text-price-sale: var(--nds-color-red-600);
   --nds-card-text-price-compare: var(--nds-color-brown-600);
-  --nds-card-badge-new-bg: var(--nds-color-brown-900);
-  --nds-card-badge-new-text: var(--nds-color-white);
-  --nds-card-badge-sale-bg: var(--nds-color-red-600);
-  --nds-card-badge-sale-text: var(--nds-color-white);
-  --nds-card-badge-sold-out-bg: var(--nds-color-white);
-  --nds-card-badge-sold-out-text: var(--nds-color-brown-900);
-  --nds-card-badge-sold-out-border: var(--nds-color-brown-600);
   --nds-card-focus-ring: var(--nds-color-brown-900);
   --nds-card-width: var(--nds-size-280);
   --nds-card-media-height: var(--nds-size-350);
@@ -179,9 +174,6 @@
   --nds-card-gap: var(--nds-space-12);
   --nds-card-info-gap: var(--nds-space-4);
   --nds-card-media-inset: var(--nds-space-12);
-  --nds-card-badge-padding-x: var(--nds-space-8);
-  --nds-card-badge-padding-y: var(--nds-space-2);
-  --nds-card-badge-radius: var(--nds-radius-full);
   --nds-card-focus-ring-width: var(--nds-border-width-2);
   --nds-card-font-size-title: var(--nds-font-size-16);
   --nds-card-line-height-title: var(--nds-line-height-24);
@@ -195,4 +187,27 @@
   --nds-wishlist-size: var(--nds-size-40);
   --nds-wishlist-icon-size: var(--nds-space-20);
   --nds-wishlist-focus-ring-size: var(--nds-space-48);
+  --nds-card-price-gap: var(--nds-space-8);
+  /* Badge */
+  --nds-badge-dark-bg: var(--nds-color-brown-900);
+  --nds-badge-dark-text: var(--nds-color-white);
+  --nds-badge-dark-border: var(--nds-color-brown-900);
+  --nds-badge-light-bg: var(--nds-color-brown-100);
+  --nds-badge-light-text: var(--nds-color-brown-900);
+  --nds-badge-light-border: var(--nds-color-brown-100);
+  --nds-badge-sale-bg: var(--nds-color-red-600);
+  --nds-badge-sale-text: var(--nds-color-white);
+  --nds-badge-sale-border: var(--nds-color-red-600);
+  --nds-badge-success-bg: var(--nds-color-green-600);
+  --nds-badge-success-text: var(--nds-color-white);
+  --nds-badge-success-border: var(--nds-color-green-600);
+  --nds-badge-outline-bg: var(--nds-color-white);
+  --nds-badge-outline-text: var(--nds-color-brown-900);
+  --nds-badge-outline-border: var(--nds-color-brown-600);
+  --nds-badge-padding-x: var(--nds-space-8);
+  --nds-badge-padding-y: var(--nds-space-2);
+  --nds-badge-radius: var(--nds-radius-full);
+  --nds-badge-border-width: var(--nds-border-width-1);
+  --nds-badge-font-size: var(--nds-font-size-12);
+  --nds-badge-line-height: var(--nds-line-height-16);
 }

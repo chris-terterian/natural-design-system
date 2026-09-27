@@ -11,4 +11,5 @@ export const FIGMA_NODES = {
   radio: '1:637',
   wishlistButton: '1:815',
   productCard: '1:968',
+  badge: '2:171',
 } as const;

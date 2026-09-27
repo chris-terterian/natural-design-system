@@ -24,6 +24,7 @@ npm run storybook        # http://localhost:6007
 
 | Component | Figma node | Notes |
 |---|---|---|
+| `Badge` | `2:171` | Tone: Dark / Light / Sale / Success / Outline; used inside ProductCard |
 | `Button` | `1:202` | Primary / Secondary, left/right/both icons, 5 states |
 | `TextField`, `TextArea` | `1:498` | 8 states incl. error, success, read-only; textarea counter |
 | `Radio`, `RadioGroup` | `1:637` | Fieldset + legend, group-level error |
@@ -37,7 +38,7 @@ Every story links to its Figma component in the **Design** panel. Each component
 `tokens/figma-variables.json` mirrors the Figma variable collections one-to-one:
 
 - **Primitives**: raw values (`color/brown/200`, `space/12`, …). They're hidden from Figma pickers.
-- **Button, Input, Radio, Product Card**: semantic tokens that alias primitives.
+- **Badge, Button, Input, Radio, Product Card**: semantic tokens that alias primitives.
 
 A Figma variable `button/primary/bg/default` becomes the CSS custom property `--nds-button-primary-bg-default: var(--nds-color-brown-200)`.
 

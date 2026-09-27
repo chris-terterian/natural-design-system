@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { Badge, type BadgeTone } from '../Badge/Badge';
 import { Button } from '../Button/Button';
 import { WishlistButton } from '../WishlistButton/WishlistButton';
 import { ImagePlaceholderIcon } from '../../icons';
@@ -22,8 +23,10 @@ export interface ProductCardProps {
   /** Figma: Image. Falls back to the placeholder. */
   imageSrc?: string;
   imageAlt?: string;
-  /** Figma: Show badge. Text defaults to New / Sale / Sold out by status. */
+  /** Figma: Show badge + nested Badge Label. Defaults to New / Sale / Sold out by status. */
   badge?: string | false;
+  /** Figma: nested Badge Tone. Defaults to dark / sale / outline by status. */
+  badgeTone?: BadgeTone;
   /** Figma: Show wishlist */
   showWishlist?: boolean;
   wishlisted?: boolean;
@@ -37,7 +40,11 @@ export interface ProductCardProps {
   children?: ReactNode;
 }
 
-const DEFAULT_BADGE: Record<ProductCardStatus, string> = { default: 'New', sale: 'Sale', 'sold-out': 'Sold out' };
+const DEFAULT_BADGE: Record<ProductCardStatus, { label: string; tone: BadgeTone }> = {
+  default: { label: 'New', tone: 'dark' },
+  sale: { label: 'Sale', tone: 'sale' },
+  'sold-out': { label: 'Sold out', tone: 'outline' },
+};
 
 /** Figma: Product Card */
 export function ProductCard({
@@ -50,6 +57,7 @@ export function ProductCard({
   imageSrc,
   imageAlt = '',
   badge,
+  badgeTone,
   showWishlist = true,
   wishlisted,
   onWishlistChange,
@@ -59,7 +67,7 @@ export function ProductCard({
   forceState,
   className,
 }: ProductCardProps) {
-  const badgeText = badge === false ? null : (badge ?? DEFAULT_BADGE[status]);
+  const badgeText = badge === false ? null : (badge ?? DEFAULT_BADGE[status].label);
   const soldOut = status === 'sold-out';
   return (
     <article className={['nds-card', className].filter(Boolean).join(' ')} data-status={status} data-state={forceState}>
@@ -69,7 +77,7 @@ export function ProductCard({
         ) : (
           <div className="nds-card__image nds-card__placeholder"><ImagePlaceholderIcon /></div>
         )}
-        {badgeText && <span className="nds-card__badge">{badgeText}</span>}
+        {badgeText && <Badge className="nds-card__badge" tone={badgeTone ?? DEFAULT_BADGE[status].tone}>{badgeText}</Badge>}
         {showWishlist && (
           <WishlistButton className="nds-card__wishlist" productName={title} selected={wishlisted} onChange={onWishlistChange} />
         )}

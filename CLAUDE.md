@@ -5,4 +5,5 @@
 - Keep `tokens/figma-variables.json` names identical to Figma variable names. Figma variable names cannot contain `.` (use `1-5`, not `1.5`).
 - Every component story: title `Components/<Figma component name>`, `parameters: figma(FIGMA_NODES.x)`, plus an `AllVariants` story laid out like the Figma grid (State columns, variant rows, labelled).
 - Accessibility bar: WCAG 2.2 AA. Text ≥4.5:1, UI boundaries/focus ≥3:1, targets ≥24px, states never conveyed by colour alone. Disabled text is intentionally below 4.5:1 (WCAG-exempt).
-- Figma pages: Buttons, Input Fields, Radio Buttons, Product Cards; still empty: Images, Product Rows, Tags, Modal Form.
+- Figma pages: Buttons, Input Fields, Radio Buttons, Product Cards, Tags (Badge 2:171); still empty: Images, Product Rows, Modal Form.
+- Shared pieces are their own components and nested as exposed instances (Button in ProductCard CTA, WishlistButton, Badge). Don't hand-build a sub-element inside another component.

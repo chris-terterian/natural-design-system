@@ -2,6 +2,8 @@
 
 A natural goods e-commerce design system: React + TypeScript components, design tokens and Storybook, kept in step with the Figma file **Natural Design System** (`84MjZXozBoKCvf9lwIU5pu`).
 
+**Live Storybook:** https://chris-terterian.github.io/natural-design-system/
+
 All components target **WCAG 2.2 AA**. Contrast ratios for every state are documented in Figma next to each component.
 
 ## Getting started

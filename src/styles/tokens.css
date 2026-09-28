@@ -93,6 +93,8 @@
   --nds-button-focus-ring-width: var(--nds-border-width-2);
   --nds-button-font-size: var(--nds-font-size-16);
   --nds-button-line-height: var(--nds-line-height-20);
+  --nds-button-spinner: var(--nds-color-brown-900);
+  --nds-button-icon-size: var(--nds-space-20);
   /* Input */
   --nds-input-bg-default: var(--nds-color-white);
   --nds-input-bg-disabled: var(--nds-color-brown-100);

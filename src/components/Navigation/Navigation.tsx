@@ -5,17 +5,13 @@ import './Navigation.css';
 
 /* ---------- Logo ---------- */
 
-export interface LogoProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  /** Figma: Show descriptor */
-  showDescriptor?: boolean;
-}
+export type LogoProps = AnchorHTMLAttributes<HTMLAnchorElement>;
 
-/** Figma: Logo */
-export function Logo({ showDescriptor = true, href = '/', className, ...rest }: LogoProps) {
+/** Figma: Logo. The Natural wordmark, linking home. */
+export function Logo({ href = '/', className, ...rest }: LogoProps) {
   return (
-    <a href={href} className={['nds-logo', className].filter(Boolean).join(' ')} aria-label="Natural Goods — home" {...rest}>
+    <a href={href} className={['nds-logo', className].filter(Boolean).join(' ')} aria-label="Natural — home" {...rest}>
       <span className="nds-logo__wordmark">natural</span>
-      {showDescriptor && <span className="nds-logo__descriptor">goods</span>}
     </a>
   );
 }
@@ -220,7 +216,7 @@ export function MobileMenu({ open, onClose, items = DEFAULT_NAV_ITEMS, accountIt
     <>
       <div className="nds-mobile-menu__bar">
         <IconButton label="Close menu" icon={<CloseIcon />} onClick={onClose} />
-        <Logo showDescriptor={false} />
+        <Logo />
         <IconButton label="Bag" icon={<BagIcon />} count={bagCount} />
       </div>
       <nav className="nds-mobile-menu__list" aria-label="Main">

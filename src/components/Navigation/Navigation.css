@@ -1,8 +1,6 @@
 /* ---------- Logo ---------- */
 .nds-logo {
   display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
   color: var(--nds-nav-logo);
   text-decoration: none;
   font: var(--nds-nav-font-size-logo) / var(--nds-nav-line-height-logo) var(--nds-font-family);
@@ -10,7 +8,6 @@
   border-radius: var(--nds-nav-radius);
 }
 .nds-logo__wordmark { font-weight: 700; }
-.nds-logo__descriptor { font-weight: 400; }
 .nds-logo:focus-visible { outline: var(--nds-nav-focus-ring-width) solid var(--nds-nav-focus-ring); outline-offset: 2px; }
 
 /* ---------- Nav Link ---------- */
@@ -126,7 +123,7 @@
 /* Mobile breakpoint: the header's own width, not the viewport */
 @container (max-width: 767px) {
   .nds-nav__bar { height: var(--nds-nav-height-mobile); padding: 0 var(--nds-nav-padding-x-mobile); }
-  .nds-nav__links, .nds-nav__desktop-only, .nds-logo__descriptor { display: none; }
+  .nds-nav__links, .nds-nav__desktop-only { display: none; }
   .nds-nav__leading { display: flex; }
 }
 

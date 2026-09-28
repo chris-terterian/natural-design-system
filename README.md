@@ -4,6 +4,8 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
+**Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
+
 All components target **WCAG 2.2 AA**. Contrast ratios for every state are documented in Figma next to each component.
 
 ## Getting started
@@ -15,7 +17,7 @@ npm run storybook        # http://localhost:6007
 
 | Script | What it does |
 |---|---|
-| `npm run tokens` | Regenerates `src/styles/tokens.css` from `tokens/figma-variables.json` |
+| `npm run tokens` | Regenerates `src/styles/tokens.css` and the `DESIGN.md` token front matter from `tokens/figma-variables.json` |
 | `npm run storybook` | Tokens + Storybook dev server on port 6007 |
 | `npm run build-storybook` | Static Storybook in `storybook-static/` |
 | `npm run build` | Library build to `dist/` (ES module + CSS + types) |
@@ -27,7 +29,8 @@ npm run storybook        # http://localhost:6007
 | Component | Figma node | Notes |
 |---|---|---|
 | `Badge` | `2:171` | Tone: Dark / Light / Sale / Success / Outline; used inside ProductCard |
-| `Button` | `1:202` | Primary / Secondary, left/right/both icons, 5 states |
+| `Button` | `1:202` | Primary / Secondary, left/right/both icons, 6 states incl. Loading; `fullWidth` |
+| `Spinner` | `64:50` | Loading indicator used by Button |
 | `TextField`, `TextArea` | `1:498` | 8 states incl. error, success, read-only; textarea counter |
 | `NavigationMenu`, `MobileMenu` | `61:134`, `61:135` | Desktop/mobile header (container query at 768px), modal mobile menu |
 | `NavLink`, `IconButton`, `MenuItem`, `Logo` | `60:88`, `60:69`, `60:107`, `59:67` | Navigation building blocks; IconButton count uses Badge |

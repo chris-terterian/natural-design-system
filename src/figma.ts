@@ -18,4 +18,5 @@ export const FIGMA_NODES = {
   iconButton: '60:69',
   menuItem: '60:107',
   logo: '59:67',
+  spinner: '64:50',
 } as const;

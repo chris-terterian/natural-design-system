@@ -24,8 +24,13 @@ export const IconLeft: Story = { args: { leftIcon: <PlusIcon /> } };
 export const IconRight: Story = { args: { rightIcon: <ArrowRightIcon /> } };
 export const IconBoth: Story = { args: { leftIcon: <PlusIcon />, rightIcon: <ArrowRightIcon /> } };
 export const Disabled: Story = { args: { disabled: true } };
+export const Loading: Story = { args: { loading: true, children: 'Add to Bag' } };
+export const FullWidth: Story = {
+  args: { fullWidth: true, children: 'Add to Bag' },
+  decorators: [(Story) => <div style={{ width: 320 }}><Story /></div>],
+};
 
-const STATES = ['default', 'hover', 'pressed', 'focus', 'disabled'] as const;
+const STATES = ['default', 'hover', 'pressed', 'focus', 'disabled', 'loading'] as const;
 const ICONS = {
   None: {},
   Left: { leftIcon: <PlusIcon /> },
@@ -57,7 +62,8 @@ export const AllVariants: Story = {
                     variant={variant}
                     {...iconProps}
                     disabled={s === 'disabled'}
-                    forceState={s === 'default' || s === 'disabled' ? undefined : s}
+                    loading={s === 'loading'}
+                    forceState={s === 'hover' || s === 'pressed' || s === 'focus' ? s : undefined}
                   >
                     Button
                   </Button>

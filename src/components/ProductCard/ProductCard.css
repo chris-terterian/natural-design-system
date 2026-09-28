@@ -51,7 +51,7 @@
 .nds-card[data-status='sale'] .nds-card__price-current { color: var(--nds-card-text-price-sale); }
 .nds-card__price-compare { color: var(--nds-card-text-price-compare); font: 400 var(--nds-card-font-size-meta) / var(--nds-card-line-height-meta) var(--nds-font-family); }
 
-.nds-card__cta { position: relative; z-index: 2; width: 100%; }
+.nds-card__cta { z-index: 2; }
 
 /* Hover: 5% image zoom + title underline */
 .nds-card:hover .nds-card__image, .nds-card[data-state='hover'] .nds-card__image { transform: scale(1.05); }

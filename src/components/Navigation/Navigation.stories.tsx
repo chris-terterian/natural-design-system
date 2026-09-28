@@ -91,10 +91,5 @@ export const MenuItems: Story = {
 export const LogoStory: Story = {
   name: 'Logo',
   parameters: { ...figma(FIGMA_NODES.logo), layout: 'padded' },
-  render: () => (
-    <div style={{ display: 'flex', gap: 48, alignItems: 'center' }}>
-      <Logo />
-      <Logo showDescriptor={false} />
-    </div>
-  ),
+  render: () => <Logo />,
 };

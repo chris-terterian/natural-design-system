@@ -16,7 +16,14 @@
   font: 600 var(--nds-button-font-size) / var(--nds-button-line-height) var(--nds-font-family);
   cursor: pointer;
   transition: background-color 120ms ease, border-color 120ms ease;
+  position: relative;
 }
+.nds-button--full-width { display: flex; width: 100%; }
+
+/* Loading: content stays in place (keeps the width) but is hidden behind a centred spinner */
+.nds-button--loading { cursor: progress; }
+.nds-button--loading > :not(.nds-button__spinner) { opacity: 0; } /* opacity, not visibility: the label must stay in the accessibility tree */
+.nds-button__spinner { position: absolute; inset: 0; margin: auto; }
 .nds-button--icon-left { padding-left: var(--nds-button-padding-x-icon); }
 .nds-button--icon-right { padding-right: var(--nds-button-padding-x-icon); }
 .nds-button__icon { display: inline-flex; }

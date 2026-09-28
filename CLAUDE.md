@@ -1,5 +1,7 @@
 # Natural Design System: working notes
 
+- **Read `DESIGN.md` first.** It is the brand, voice, foundations, component and pattern brief for Natural; its front matter lists every token (value, alias, CSS variable). Keep it current when components or tokens change (§6 component specs, §10 changelog); `npm run tokens` regenerates its front matter.
+
 - Repo is the source of truth; Figma file "Natural Design System" (key `84MjZXozBoKCvf9lwIU5pu`) mirrors it via the figma-console MCP (Desktop Bridge).
 - Change flow: edit code/tokens → verify in Storybook (port 6007) → update Figma (variables via `npm run figma:sync-script` output in `figma_execute`; component changes by hand + screenshot) → **ask the user before committing/pushing** to GitHub (`main`).
 - Keep `tokens/figma-variables.json` names identical to Figma variable names. Figma variable names cannot contain `.` (use `1-5`, not `1.5`).

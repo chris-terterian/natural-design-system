@@ -370,6 +370,14 @@
     "button/line-height": {
       "type": "FLOAT",
       "alias": "line-height/20"
+    },
+    "button/spinner": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "button/icon-size": {
+      "type": "FLOAT",
+      "alias": "space/20"
     }
   },
   "Input": {

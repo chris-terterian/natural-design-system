@@ -135,7 +135,7 @@ The system follows [semantic versioning](https://semver.org) and **stays in 0.x*
 | Fix, doc or a11y repair with no API change | **patch** (0.2.0 → 0.2.1) | patch |
 
 **Release steps**
-1. `npm run check` passes locally.
+1. `npm run check` passes locally (it starts with `check:install`, which installs the lock file with CI's exact npm). When dependencies change, regenerate the lock file with that npm: `npx npm@11.19.0 install`.
 2. Figma snapshot refreshed and `npm run check:parity` passes.
 3. Bump `package.json`, then add a dated, versioned entry to `CHANGELOG.md` (Added / Changed / Removed / Fixed).
 4. Owner approves; commit, push, and tag `vX.Y.Z`.

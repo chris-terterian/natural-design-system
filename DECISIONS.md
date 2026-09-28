@@ -21,6 +21,7 @@ Short records of *why* the Natural Design System is the way it is. Each entry: c
 | D-015 | Navigation menus use the disclosure pattern, opened by click | 2026-09-28 | Accepted |
 | D-016 | All 11 components promoted to Stable | 2026-09-28 | Accepted |
 | D-017 | Figma parity is a blocking check via an MCP-exported snapshot | 2026-09-28 | Accepted |
+| D-018 | Pin the toolchain CI installs with | 2026-09-28 | Accepted |
 
 ---
 
@@ -108,3 +109,8 @@ Short records of *why* the Natural Design System is the way it is. Each entry: c
 **Context.** Parity was first listed as a manual pre-release step because Figma's server-side Variables API needs an Enterprise plan. But the Figma MCP (figma-console and Figma's own MCP) can read the live file wherever Figma is open, which is how parity had been checked by hand all along.
 **Decision.** Split parity in two. An export script, run through the MCP, writes `governance/figma-snapshot.json`: every variable per mode, the structure of every component the code links to, and text-style bindings. `npm run check:parity` compares that snapshot with the repo and blocks CI on any difference, including unwired component properties (D-009) and name drift.
 **Consequences.** Drift from code changes is caught automatically. Edits made in Figma after the last snapshot aren't, so the snapshot is refreshed with every Figma or token change and before every release, and its timestamp shows how current it is. Verified by simulating three kinds of drift, each caught.
+
+### D-018: Pin the toolchain CI installs with
+**Context.** v0.2.0 and v0.2.1 both failed CI at `npm ci`, before any quality gate ran. The lock file was generated with npm 11.6 locally; CI's Node 24 ships npm 11.19, which is stricter about optional `@emnapi/*` packages. The first fix (moving CI to Node 24) guessed at the cause; reproducing CI's exact npm locally found it.
+**Decision.** CI is pinned to Node 24.21.0 (npm 11.19.0). The lock file is generated with that npm, and `npm run check:install` verifies it locally with that exact version before any push. Install scripts are reviewed explicitly (`allowScripts`: esbuild approved; fsevents denied, since it's Mac-only and ships a prebuilt binary).
+**Consequences.** Upgrading Node or npm in CI is a deliberate change: bump the pin, regenerate the lock file, run `check:install`. Lesson recorded: reproduce the failing environment before fixing.

@@ -2,6 +2,14 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.2.2] – 2026-09-28
+
+### Fixed
+- CI install, properly this time: v0.2.1's CI still stopped at `npm ci`. Root cause: the lock file was generated with npm 11.6 locally, while CI's Node 24 ships npm 11.19, which is stricter about optional `@emnapi/*` packages. The lock file is regenerated with npm 11.19, CI is pinned to Node 24.21.0 (npm 11.19.0), and install scripts are reviewed explicitly (`allowScripts`: esbuild approved; fsevents, a Mac-only package with a prebuilt binary, denied).
+
+### Added
+- `npm run check:install`: verifies the lock file installs with CI's exact npm; part of `npm run check` (D-018).
+
 ## [0.2.1] – 2026-09-28
 
 ### Fixed
@@ -10,7 +18,7 @@ All notable changes to the Natural Design System. Format: [Keep a Changelog](htt
 ## [0.2.0] – 2026-09-28
 
 ### Added
-- **Governance:** `GOVERNANCE.md` (principles, roles, change tiers, lifecycle, quality gates, versioning, Figma hygiene), `DECISIONS.md` (D-001 – D-017) and this changelog.
+- **Governance:** `GOVERNANCE.md` (principles, roles, change tiers, lifecycle, quality gates, versioning, Figma hygiene), `DECISIONS.md` (D-001 – D-018) and this changelog.
 - **Component registry** (`governance/components.json`): the single source of component status: all 11 components Stable at release.
 - **Blocking quality gates** in CI: governance check (`npm run check:governance`) and accessibility gate (`npm run check:a11y`, axe on every story). Storybook only deploys when all gates pass.
 - **Figma ↔ code parity gate** (`npm run check:parity`, D-017): compares a committed snapshot of the live Figma file (every variable per mode, linked component structure, text-style bindings), exported through the Figma MCP, with the repo. Blocking in CI.

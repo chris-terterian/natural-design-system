@@ -102,12 +102,27 @@ Run on every push to `main` by `.github/workflows/storybook-pages.yml`. **Any fa
 | Gate | Command | Blocks | Checks |
 |---|---|---|---|
 | Typecheck | `npm run typecheck` | ✅ | TypeScript compiles |
+| **validate_file** | `npm run validate_file -- --all` (and the pre-commit hook) | ✅ | Hardcoded values, broken naming and placeholder link text block; other static accessibility issues warn. Every finding comes with a fix suggestion |
 | Governance | `npm run check:governance` | ✅ | Tokens resolve; generated `tokens.css` and `DESIGN.md` front matter are current; every component is registered with a valid status, matching story tag, Figma node and `DESIGN.md` spec |
 | Build | `npm run build-storybook` | ✅ | Every story builds |
 | Accessibility | `npm run check:a11y` | ✅ | axe (WCAG 2.0 / 2.1 / 2.2, A + AA) on every story; only registered exceptions pass |
 | Figma ↔ code parity | `npm run check:parity` | ✅ | Every variable matches per mode, both directions; every Figma node the code links to exists with the registry name; no unwired component properties; text styles bound to Typography variables. Compares against `governance/figma-snapshot.json`, which is exported from the live file through the Figma MCP |
 
 Run everything locally with `npm run check`.
+
+### validate_file guardrail (pre-commit)
+
+Runs on every `git commit` (a Git hook in `.githooks/`, installed automatically by `npm install`) against the **staged** files, and in CI against **all** files so a skipped hook can't sneak anything through.
+
+| Blocks the commit | Examples | Suggested fix |
+|---|---|---|
+| **Hardcoded values** | `#3B2A1E`, `rgb(…)`, `padding: 18px` in component CSS; colours or sizes in component inline styles | The matching component token for that property and component (e.g. `var(--nds-card-text-title)`), or the nearest scale step |
+| **Broken naming** | Classes outside `nds-block__element--modifier`; unknown `--nds-*` tokens (typo-matched); token names with `.` or the wrong collection prefix; non-PascalCase components; story titles that don't match Figma; undocumented breakpoints | The corrected name, or "did you mean…" |
+| **Placeholder link text** | "click here", "read more", "learn more", "link" | Say where the link goes (WCAG 2.4.4) |
+
+**Warns** (doesn't block): removed focus outlines, `<img>` without `alt`, click handlers on non-interactive elements, positive `tabIndex`, icon buttons without a name.
+
+**Exceptions** go inline with a reason, on the same line or the line above: `/* validate-ignore <rule>: <why> */`. An ignore without a reason is itself an error. Today's exceptions: the visually-hidden technique (`1px`), and the product card link's outline (the card draws the ring). Story and governance-page layout scaffolding is exempt from the hardcoded-value rule; placeholder link text and naming still apply there. Never commit with `--no-verify`; CI runs the same check.
 
 ### Figma parity snapshot
 

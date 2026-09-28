@@ -2,6 +2,18 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.3.0] – 2026-09-28
+
+### Added
+- **validate_file guardrail** (D-019): a pre-commit hook (`.githooks/pre-commit`, installed by `npm install`) and CI step that blocks hardcoded values, broken naming and placeholder link text, warns on other static accessibility issues, and prints a fix suggestion for every finding. `npm run validate_file -- <files> | --staged | --all`.
+- 20 tokens for values that were hardcoded: `*/focus-ring-offset` for Button, Input, Toggle, Product Card, Wishlist and Navigation; `wishlist/shadow/{color,y,blur}`; `nav/backdrop`, `nav/count-offset-top`, `nav/link/underline-offset`, `nav/dropdown/group-width`, `nav/submenu/group-padding-{top,bottom}`; primitives `color/brown/900-a16`, `color/brown/900-a40`, `size/200`, `elevation/float/{y,blur}`. Created in Figma too; the wishlist shadow is bound to them.
+- Alpha colours (8-digit hex) in the token pipeline, Figma sync and snapshot export.
+
+### Changed
+- Nav link hover underline offset: 3px → 4px (nearest spacing step).
+- Mobile Menu's documentation-only preview size moved from component CSS into its stories.
+- Nav Link stories use real labels ("Journal", "Shop") instead of the placeholder "Link".
+
 ## [0.2.2] – 2026-09-28
 
 ### Fixed
@@ -18,7 +30,7 @@ All notable changes to the Natural Design System. Format: [Keep a Changelog](htt
 ## [0.2.0] – 2026-09-28
 
 ### Added
-- **Governance:** `GOVERNANCE.md` (principles, roles, change tiers, lifecycle, quality gates, versioning, Figma hygiene), `DECISIONS.md` (D-001 – D-018) and this changelog.
+- **Governance:** `GOVERNANCE.md` (principles, roles, change tiers, lifecycle, quality gates, versioning, Figma hygiene), `DECISIONS.md` (D-001 – D-019) and this changelog.
 - **Component registry** (`governance/components.json`): the single source of component status: all 11 components Stable at release.
 - **Blocking quality gates** in CI: governance check (`npm run check:governance`) and accessibility gate (`npm run check:a11y`, axe on every story). Storybook only deploys when all gates pass.
 - **Figma ↔ code parity gate** (`npm run check:parity`, D-017): compares a committed snapshot of the live Figma file (every variable per mode, linked component structure, text-style bindings), exported through the Figma MCP, with the repo. Blocking in CI.

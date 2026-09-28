@@ -12,9 +12,12 @@ body {
 
 .nds-visually-hidden {
   position: absolute;
+  /* validate-ignore hardcoded-size: visually-hidden technique (1px / -1px are technique constants) */
   width: 1px;
+  /* validate-ignore hardcoded-size: visually-hidden technique */
   height: 1px;
   padding: 0;
+  /* validate-ignore hardcoded-size: visually-hidden technique */
   margin: -1px;
   overflow: hidden;
   clip: rect(0 0 0 0);

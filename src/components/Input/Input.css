@@ -48,7 +48,7 @@ textarea.nds-field__input {
 /* Keyboard focus ring (2px, 2px offset), matching Button */
 .nds-field__control:has(:focus-visible), .nds-field[data-state='focus'] .nds-field__control {
   outline: var(--nds-input-focus-ring-width) solid var(--nds-input-focus-ring);
-  outline-offset: 2px;
+  outline-offset: var(--nds-input-focus-ring-offset);
 }
 .nds-field[data-status='error'] .nds-field__control { --_border: var(--nds-input-border-error); }
 .nds-field[data-status='success'] .nds-field__control { --_border: var(--nds-input-border-success); }

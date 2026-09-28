@@ -76,6 +76,11 @@
   --nds-letter-spacing-normal: 0px;
   --nds-size-640: 640px;
   --nds-size-343: 343px;
+  --nds-color-brown-900-a16: #3B2A1E29;
+  --nds-color-brown-900-a40: #3B2A1E66;
+  --nds-size-200: 200px;
+  --nds-elevation-float-y: 1px;
+  --nds-elevation-float-blur: 3px;
   /* Button */
   --nds-button-primary-bg-default: var(--nds-color-brown-200);
   --nds-button-primary-fg-default: var(--nds-color-brown-900);
@@ -115,6 +120,7 @@
   --nds-button-line-height: var(--nds-line-height-20);
   --nds-button-spinner: var(--nds-color-brown-900);
   --nds-button-icon-size: var(--nds-space-20);
+  --nds-button-focus-ring-offset: var(--nds-space-2);
   /* Input */
   --nds-input-bg-default: var(--nds-color-white);
   --nds-input-bg-disabled: var(--nds-color-brown-100);
@@ -153,6 +159,7 @@
   --nds-input-line-height-value: var(--nds-line-height-24);
   --nds-input-font-size-label: var(--nds-font-size-14);
   --nds-input-line-height-label: var(--nds-line-height-20);
+  --nds-input-focus-ring-offset: var(--nds-space-2);
   /* Radio */
   --nds-radio-bg-default: var(--nds-color-white);
   --nds-radio-bg-hover: var(--nds-color-brown-50);
@@ -216,6 +223,11 @@
   --nds-wishlist-icon-size: var(--nds-space-20);
   --nds-wishlist-focus-ring-size: var(--nds-space-48);
   --nds-card-price-gap: var(--nds-space-8);
+  --nds-card-focus-ring-offset: var(--nds-space-4);
+  --nds-wishlist-focus-ring-offset: var(--nds-space-2);
+  --nds-wishlist-shadow-color: var(--nds-color-brown-900-a16);
+  --nds-wishlist-shadow-y: var(--nds-elevation-float-y);
+  --nds-wishlist-shadow-blur: var(--nds-elevation-float-blur);
   /* Badge */
   --nds-badge-dark-bg: var(--nds-color-brown-900);
   --nds-badge-dark-text: var(--nds-color-white);
@@ -287,6 +299,13 @@
   --nds-nav-group-title-text: var(--nds-color-brown-800);
   --nds-nav-font-size-group-title: var(--nds-font-size-14);
   --nds-nav-line-height-group-title: var(--nds-line-height-20);
+  --nds-nav-focus-ring-offset: var(--nds-space-2);
+  --nds-nav-backdrop: var(--nds-color-brown-900-a40);
+  --nds-nav-count-offset-top: var(--nds-space-2);
+  --nds-nav-link-underline-offset: var(--nds-space-4);
+  --nds-nav-dropdown-group-width: var(--nds-size-200);
+  --nds-nav-submenu-group-padding-top: var(--nds-space-20);
+  --nds-nav-submenu-group-padding-bottom: var(--nds-space-4);
   /* Toggle */
   --nds-toggle-track-bg-off: var(--nds-color-white);
   --nds-toggle-track-bg-off-hover: var(--nds-color-brown-50);
@@ -322,6 +341,7 @@
   --nds-toggle-line-height-label: var(--nds-line-height-24);
   --nds-toggle-font-size-description: var(--nds-font-size-14);
   --nds-toggle-line-height-description: var(--nds-line-height-20);
+  --nds-toggle-focus-ring-offset: var(--nds-space-2);
   /* Product Row */
   --nds-row-bg: var(--nds-color-white);
   --nds-row-padding-x: var(--nds-space-40);

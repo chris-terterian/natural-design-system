@@ -10,7 +10,9 @@
 .nds-radio__input {
   position: absolute;
   opacity: 0;
+  /* validate-ignore hardcoded-size: visually-hidden technique; 1px is a technique constant, not a design value */
   width: 1px;
+  /* validate-ignore hardcoded-size: visually-hidden technique */
   height: 1px;
   margin: 0;
 }

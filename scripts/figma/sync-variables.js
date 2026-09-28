@@ -12,7 +12,7 @@ const TOKENS = __TOKENS__;
 
 const hexToRgba = (hex) => {
   const h = hex.replace('#', '');
-  return { r: parseInt(h.slice(0, 2), 16) / 255, g: parseInt(h.slice(2, 4), 16) / 255, b: parseInt(h.slice(4, 6), 16) / 255, a: 1 };
+  return { r: parseInt(h.slice(0, 2), 16) / 255, g: parseInt(h.slice(2, 4), 16) / 255, b: parseInt(h.slice(4, 6), 16) / 255, a: h.length === 8 ? parseInt(h.slice(6, 8), 16) / 255 : 1 };
 };
 
 const collections = await figma.variables.getLocalVariableCollectionsAsync();
@@ -72,7 +72,7 @@ for (const { v, modeId, token, name } of pending) {
     next = { type: 'VARIABLE_ALIAS', id: target.id };
   } else if (token.type === 'COLOR') {
     next = hexToRgba(token.value);
-    if (current && !current.type && ['r', 'g', 'b'].every((k) => Math.abs(current[k] - next[k]) < 0.002)) { report.unchanged++; continue; }
+    if (current && !current.type && ['r', 'g', 'b', 'a'].every((k) => Math.abs((current[k] ?? 1) - next[k]) < 0.002)) { report.unchanged++; continue; }
   } else {
     next = token.value;
     if (current === next) { report.unchanged++; continue; }

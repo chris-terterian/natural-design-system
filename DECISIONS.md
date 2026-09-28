@@ -22,6 +22,7 @@ Short records of *why* the Natural Design System is the way it is. Each entry: c
 | D-016 | All 11 components promoted to Stable | 2026-09-28 | Accepted |
 | D-017 | Figma parity is a blocking check via an MCP-exported snapshot | 2026-09-28 | Accepted |
 | D-018 | Pin the toolchain CI installs with | 2026-09-28 | Accepted |
+| D-019 | validate_file: a pre-commit guardrail for tokens, naming and link text | 2026-09-28 | Accepted |
 
 ---
 
@@ -114,3 +115,8 @@ Short records of *why* the Natural Design System is the way it is. Each entry: c
 **Context.** v0.2.0 and v0.2.1 both failed CI at `npm ci`, before any quality gate ran. The lock file was generated with npm 11.6 locally; CI's Node 24 ships npm 11.19, which is stricter about optional `@emnapi/*` packages. The first fix (moving CI to Node 24) guessed at the cause; reproducing CI's exact npm locally found it.
 **Decision.** CI is pinned to Node 24.21.0 (npm 11.19.0). The lock file is generated with that npm, and `npm run check:install` verifies it locally with that exact version before any push. Install scripts are reviewed explicitly (`allowScripts`: esbuild approved; fsevents denied, since it's Mac-only and ships a prebuilt binary).
 **Consequences.** Upgrading Node or npm in CI is a deliberate change: bump the pin, regenerate the lock file, run `check:install`. Lesson recorded: reproduce the failing environment before fixing.
+
+### D-019: validate_file, a pre-commit guardrail for tokens, naming and link text
+**Context.** The gates in CI catch problems after a push. Hardcoded values and naming slips are cheapest to fix at the moment they're written, with the right token named for you.
+**Decision.** A Git pre-commit hook runs `validate_file` on staged files; CI runs it on all files. It blocks hardcoded values, broken naming and placeholder link text, warns on other static accessibility issues, and prints a context-aware fix for every finding (the component token for that property, a typo match for unknown tokens, the corrected name). Exceptions are inline `validate-ignore` comments that must carry a reason.
+**Consequences.** Its first run found 30 real issues in the shipped system: focus-ring gaps, the wishlist shadow, the menu backdrop and navigation spacing were hardcoded. They became 20 new tokens in code and Figma (with the shadow bound live in Figma). One visible change: the nav link underline offset moved from 3px to 4px, the nearest step on the spacing scale.

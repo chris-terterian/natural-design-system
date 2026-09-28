@@ -57,13 +57,13 @@ export const AllVariants: Story = {
 export const MobileMenuOpen: StoryObj<typeof MobileMenu> = {
   name: 'Mobile Menu (open)',
   parameters: { ...figma(FIGMA_NODES.mobileMenu), layout: 'padded' },
-  render: () => <MobileMenu open inline bagCount={2} onClose={() => {}} />,
+  render: () => <div style={{ width: 375, height: 812, display: 'flex', boxShadow: '0 0 0 1px var(--nds-nav-border)' }}><MobileMenu open inline bagCount={2} onClose={() => {}} /></div>,
 };
 
 export const MobileSubmenu: StoryObj<typeof MobileMenu> = {
   name: 'Mobile Menu (Submenu level)',
   parameters: { ...figma(FIGMA_NODES.mobileMenu), layout: 'padded' },
-  render: () => <MobileMenu open inline initialLevel="Shop" bagCount={2} onClose={() => {}} />,
+  render: () => <div style={{ width: 375, height: 812, display: 'flex', boxShadow: '0 0 0 1px var(--nds-nav-border)' }}><MobileMenu open inline initialLevel="Shop" bagCount={2} onClose={() => {}} /></div>,
 };
 
 const STATES = ['Default', 'Hover', 'Active', 'Focus'] as const;
@@ -77,7 +77,7 @@ export const NavLinks: Story = {
     <table style={{ borderSpacing: '48px 12px', fontSize: 12 }}>
       <thead><tr>{LINK_STATES.map((s) => <th key={s}>{s}</th>)}</tr></thead>
       <tbody><tr>{LINK_STATES.map((s) => (
-        <td key={s}><NavLink href="#" active={s === 'Active'} hasMenu={s === 'Open'} forceState={s === 'Open' ? 'open' : force(s)}>Link</NavLink></td>
+        <td key={s}><NavLink href="#" active={s === 'Active'} hasMenu={s === 'Open'} forceState={s === 'Open' ? 'open' : force(s)}>{s === 'Open' ? 'Shop' : 'Journal'}</NavLink></td>
       ))}</tr></tbody>
     </table>
   ),

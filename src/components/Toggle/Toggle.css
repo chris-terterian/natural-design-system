@@ -8,6 +8,7 @@
   font-family: var(--nds-font-family);
   cursor: pointer;
 }
+/* validate-ignore hardcoded-size: visually-hidden technique; 1px is a technique constant, not a design value */
 .nds-toggle__input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
 
 .nds-toggle__track {
@@ -53,7 +54,7 @@
 /* Focus ring: 2px, 2px gap */
 .nds-toggle:has(:focus-visible) .nds-toggle__track, .nds-toggle[data-state='focus'] .nds-toggle__track {
   outline: var(--nds-toggle-focus-ring-width) solid var(--nds-toggle-focus-ring);
-  outline-offset: 2px;
+  outline-offset: var(--nds-toggle-focus-ring-offset);
 }
 
 /* Disabled */

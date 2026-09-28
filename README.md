@@ -4,7 +4,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.2.2)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.3.0)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -24,6 +24,7 @@ npm run storybook        # http://localhost:6007
 | `npm run build-storybook` | Static Storybook in `storybook-static/` |
 | `npm run build` | Library build to `dist/` (ES module + CSS + types) |
 | `npm run typecheck` | TypeScript check |
+| `npm run validate_file -- <files> \| --staged \| --all` | The validate_file guardrail (also runs as a pre-commit hook): blocks hardcoded values, broken naming, placeholder link text; fix suggestion for every finding |
 | `npm run check` | All quality gates: typecheck, governance, parity, Storybook build, accessibility (the same gates CI runs before deploying) |
 | `npm run check:governance` | Registry ↔ stories ↔ Figma links ↔ DESIGN.md specs; tokens resolve and generated files are current |
 | `npm run check:parity` | Figma ↔ code parity against `governance/figma-snapshot.json` (variables per mode, linked components, unwired properties, text styles) |

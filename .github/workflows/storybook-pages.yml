@@ -27,6 +27,8 @@ jobs:
       # Quality gates (GOVERNANCE.md §6): any failure stops the deploy
       - name: Typecheck
         run: npm run typecheck
+      - name: validate_file guardrail (hardcoded values, naming, placeholder link text, a11y)
+        run: node scripts/validate-file.mjs --all
       - name: Governance check (registry, specs, Figma links, generated tokens)
         run: npm run check:governance
       - name: Figma ↔ code parity (committed snapshot of the Figma file)

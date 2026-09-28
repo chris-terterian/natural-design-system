@@ -42,6 +42,7 @@
 .nds-card__info { display: flex; flex-direction: column; gap: var(--nds-card-info-gap); flex: 1; } /* grows so CTAs align in a row */
 .nds-card__info p, .nds-card__title { margin: 0; }
 .nds-card__title { font: 600 var(--nds-card-font-size-title) / var(--nds-card-line-height-title) var(--nds-font-family); }
+/* validate-ignore a11y-focus: the whole card draws the focus ring via .nds-card:has(.nds-card__link:focus-visible) */
 .nds-card__link { color: var(--nds-card-text-title); text-decoration: none; outline: none; }
 /* Whole card is clickable via the title link; wishlist + CTA sit above it. */
 .nds-card__link::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: var(--nds-card-radius); }
@@ -60,7 +61,7 @@
 /* Focus: ring around the whole card when the title link has keyboard focus */
 .nds-card:has(.nds-card__link:focus-visible), .nds-card[data-state='focus'] {
   outline: var(--nds-card-focus-ring-width) solid var(--nds-card-focus-ring);
-  outline-offset: 4px;
+  outline-offset: var(--nds-card-focus-ring-offset);
   border-radius: var(--nds-card-radius);
 }
 

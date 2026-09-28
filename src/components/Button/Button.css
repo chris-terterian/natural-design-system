@@ -54,7 +54,7 @@
 /* Focus: 2px ring with 2px offset (matches Figma "Focus ring" layer) */
 .nds-button:focus-visible, .nds-button[data-state='focus'] {
   outline: var(--nds-button-focus-ring-width) solid var(--nds-button-focus-ring);
-  outline-offset: 2px;
+  outline-offset: var(--nds-button-focus-ring-offset);
 }
 
 .nds-button:disabled {

@@ -14,7 +14,7 @@
 const PART = __PART__;
 const NODES = __NODES__;
 
-const toHex = (c) => '#' + [c.r, c.g, c.b].map((x) => Math.round(x * 255).toString(16).padStart(2, '0')).join('').toUpperCase();
+const toHex = (c) => '#' + [c.r, c.g, c.b, ...(c.a !== undefined && c.a < 1 ? [c.a] : [])].map((x) => Math.round(x * 255).toString(16).padStart(2, '0')).join('').toUpperCase();
 const collections = await figma.variables.getLocalVariableCollectionsAsync();
 const variables = await figma.variables.getLocalVariablesAsync();
 const byId = Object.fromEntries(variables.map((v) => [v.id, v]));

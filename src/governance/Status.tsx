@@ -62,6 +62,7 @@ export const ExceptionsTable = () => (
 
 const GATES = [
   ['Typecheck', 'Yes', 'TypeScript compiles'],
+  ['validate_file', 'Yes (also pre-commit)', 'Blocks hardcoded values, broken naming and placeholder link text; warns on other static accessibility issues; every finding has a fix suggestion'],
   ['Governance check', 'Yes', 'Registry ↔ stories ↔ Figma links ↔ DESIGN.md specs; tokens resolve and generated files are current'],
   ['Storybook build', 'Yes', 'Every story builds'],
   ['Accessibility gate', 'Yes', 'axe (WCAG 2.0 / 2.1 / 2.2, A + AA) on every story, minus registered exceptions'],

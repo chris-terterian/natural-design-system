@@ -310,6 +310,26 @@
     "size/343": {
       "type": "FLOAT",
       "value": 343
+    },
+    "color/brown/900-a16": {
+      "type": "COLOR",
+      "value": "#3B2A1E29"
+    },
+    "color/brown/900-a40": {
+      "type": "COLOR",
+      "value": "#3B2A1E66"
+    },
+    "size/200": {
+      "type": "FLOAT",
+      "value": 200
+    },
+    "elevation/float/y": {
+      "type": "FLOAT",
+      "value": 1
+    },
+    "elevation/float/blur": {
+      "type": "FLOAT",
+      "value": 3
     }
   },
   "Button": {
@@ -464,6 +484,10 @@
     "button/icon-size": {
       "type": "FLOAT",
       "alias": "space/20"
+    },
+    "button/focus-ring-offset": {
+      "type": "FLOAT",
+      "alias": "space/2"
     }
   },
   "Input": {
@@ -614,6 +638,10 @@
     "input/line-height/label": {
       "type": "FLOAT",
       "alias": "line-height/20"
+    },
+    "input/focus-ring-offset": {
+      "type": "FLOAT",
+      "alias": "space/2"
     }
   },
   "Radio": {
@@ -862,6 +890,26 @@
     "card/price-gap": {
       "type": "FLOAT",
       "alias": "space/8"
+    },
+    "card/focus-ring-offset": {
+      "type": "FLOAT",
+      "alias": "space/4"
+    },
+    "wishlist/focus-ring-offset": {
+      "type": "FLOAT",
+      "alias": "space/2"
+    },
+    "wishlist/shadow/color": {
+      "type": "COLOR",
+      "alias": "color/brown/900-a16"
+    },
+    "wishlist/shadow/y": {
+      "type": "FLOAT",
+      "alias": "elevation/float/y"
+    },
+    "wishlist/shadow/blur": {
+      "type": "FLOAT",
+      "alias": "elevation/float/blur"
     }
   },
   "Badge": {
@@ -1142,6 +1190,34 @@
     "nav/line-height/group-title": {
       "type": "FLOAT",
       "alias": "line-height/20"
+    },
+    "nav/focus-ring-offset": {
+      "type": "FLOAT",
+      "alias": "space/2"
+    },
+    "nav/backdrop": {
+      "type": "COLOR",
+      "alias": "color/brown/900-a40"
+    },
+    "nav/count-offset-top": {
+      "type": "FLOAT",
+      "alias": "space/2"
+    },
+    "nav/link/underline-offset": {
+      "type": "FLOAT",
+      "alias": "space/4"
+    },
+    "nav/dropdown/group-width": {
+      "type": "FLOAT",
+      "alias": "size/200"
+    },
+    "nav/submenu/group-padding-top": {
+      "type": "FLOAT",
+      "alias": "space/20"
+    },
+    "nav/submenu/group-padding-bottom": {
+      "type": "FLOAT",
+      "alias": "space/4"
     }
   },
   "Toggle": {
@@ -1280,6 +1356,10 @@
     "toggle/line-height/description": {
       "type": "FLOAT",
       "alias": "line-height/20"
+    },
+    "toggle/focus-ring-offset": {
+      "type": "FLOAT",
+      "alias": "space/2"
     }
   },
   "Product Row": {

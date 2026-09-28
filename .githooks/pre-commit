@@ -1,0 +1,4 @@
+#!/bin/sh
+# validate_file guardrail: checks staged files for hardcoded values, broken naming and placeholder link text
+# (blocking) plus accessibility warnings, with a fix suggestion for each finding. See GOVERNANCE.md §6.
+node scripts/validate-file.mjs --staged

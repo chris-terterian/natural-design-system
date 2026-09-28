@@ -465,6 +465,41 @@ One family: **Inter** (400 Regular, 600 Semi Bold, 700 Bold), loaded from Google
 
 **Planned:** a heading and display scale. There is no type larger than 24px yet.
 
+#### Typography guidelines
+
+**Hierarchy.** One clear first read per view. Today it's built from weight and colour, not size:
+
+| Level | Style | Example |
+|---|---|---|
+| 1. What it is | Body Strong (600, Ink) | **River Clay Cup** |
+| 2. What it costs | Body Strong (600, Ink; Critical on sale) | **$38** |
+| 3. What it's made of | Small (400, Secondary) | Stoneware · ash glaze |
+| 4. Supporting detail | Small / helper | Dishwasher safe |
+
+Until the heading scale exists, page and section titles use **Body Strong**; don't invent sizes.
+
+**Rules**
+
+- **Sentence case everywhere:** "Add to Bag", "Order preferences", "New arrivals". Proper nouns and "Bag" keep their capitals.
+- **Line length:** 45–75 characters for product stories and descriptions (about `max-width: 38em` at 16px). Card titles: up to 2 lines.
+- **Alignment:** left-aligned. Centre only single-line UI (the announcement bar, badges). Never justify.
+- **Weights:** 400 for reading, 600 for emphasis and interactive labels, 700 only for the logo. No italics for emphasis; no underline except links.
+- **Minimum size:** 12px, and only for badges. Everything people need to read is 14px or more; inputs are always 16px.
+- **Numbers & units:**
+  - Prices: `$38`, `$1,240`. No `.00`, no "USD" in the shop, and the currency symbol is always shown.
+  - Measurements: `120 × 35 × 45 cm` with a real multiplication sign and a space before the unit.
+  - Weight and volume: `38 kg` · `300 ml` · `280 g`.
+  - Separators: a middle dot with spaces (` · `) between details. Never slashes or pipes.
+- **Truncation:** clamp card titles at 2 lines with an ellipsis; never truncate prices, labels, errors or buttons. The full title must be available to screen readers.
+- **Text resizing:** everything must stay readable and unclipped at 200% zoom. Use the tokens (px in CSS today), and never fix a text container's height.
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| "Split log bench" in sentence case | "SPLIT LOG BENCH" or "Split Log Bench – Hand Made!" |
+| `$38` · `120 × 35 cm` · `300 ml` | `$38.00 USD` · `120x35cm` · `300ML` |
+| Bold the one thing that matters (the price) | Bold whole paragraphs, or mix bold, italic and underline |
+| Left-aligned product story at a readable width | Centred multi-line paragraphs, or text running the full 1440px |
+
 ### 3.3 Space & size
 
 | Scale | Values (px) |
@@ -618,6 +653,11 @@ Naming: `component/part/property/state`. The Figma name `button/primary/bg/defau
 
 Every component exists in Figma and code with the same name, variants and states. Each has a Storybook **All Variants** story laid out like its Figma grid (State columns, variant rows) with a link to its Figma node. States called `forceState` in code exist only so docs can show hover, pressed and focus without interaction; real interaction uses CSS `:hover`, `:active` and `:focus-visible`.
 
+Each component ends with the same two blocks:
+
+- **Do / Don't:** ✅ good vs ❌ bad pairs, using Natural's own products and copy where it helps.
+- **Keyboard & screen reader:** what each key does and what assistive technology announces, as the code behaves today.
+
 Import everything from the package root:
 
 ```tsx
@@ -639,6 +679,22 @@ import 'natural-design-system/styles.css';
 **Style:** Logo text style (§4.1), colour `nav/logo` (13.67:1). **States:** focus ring (2px, 2px gap, radius 8).
 **Accessibility:** rendered as a link with `aria-label="Natural — home"`.
 **Rule:** the same wordmark on every breakpoint; never add a tagline or descriptor beside it.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Use the wordmark "natural" as is, in Ink on a light surface. | Recolour it, stretch it, add a leaf icon or a tagline next to it. |
+| Link it to the home page. | Make it a static image with no link, or link it anywhere else. |
+| Keep at least 16px of clear space around it. | Crowd it against nav links or the announcement bar. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab | Focuses the logo (focus ring appears) |
+| Enter | Goes home |
+| Announced | "Natural — home, link" |
 
 ### 6.2 Button
 
@@ -679,7 +735,26 @@ import 'natural-design-system/styles.css';
 | Loading | Default colours; label and icons invisible (width kept); Spinner centred in `button/spinner` `#3B2A1E` | same |
 
 **Behaviour & accessibility:** native `<button>`; `type="button"` by default. Icons are decorative (`aria-hidden`); the label names the action. **Loading** sets `aria-busy="true"` and `aria-disabled="true"` and ignores clicks; the label is hidden with `opacity: 0` (never `visibility: hidden`) so the button keeps its accessible name. Use it after the click (e.g. while adding to the bag), not as a default state. **Full width** is for narrow containers: product cards, mobile sheets, forms.
-**Do:** one Primary per area; verb-first labels ("Add to Bag"). **Don't:** use a Button to navigate (use a link), place two Primaries side by side, or make an icon-only Button (use Icon Button).
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| One Primary per area: **Add to Bag** (Primary) beside **Notify me** (Secondary). | Two Primaries side by side: **Add to Bag** + **Buy now**, both sand. |
+| Verb-first, specific labels: "Add to Bag", "Save address". | Vague or shouty labels: "OK", "Submit", "CLICK HERE!". |
+| Use Loading after the click while the action runs. | Leave the button active so it can be pressed twice, or disable it with no explanation. |
+| Use a link for navigation ("View the collection"). | Use a Button to change pages. |
+| Put icons only where they add meaning (Plus for add, Arrow for continue). | Add decorative icons to every button, or make an icon-only Button (use Icon Button). |
+| Use Full width in narrow containers (cards, mobile sheets). | Stretch buttons full width on wide desktop layouts. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab | Focuses the button; focus ring appears |
+| Enter / Space | Activates it (ignored while Loading) |
+| Announced | "Add to Bag, button"; while loading: "Add to Bag, button, busy, dimmed/unavailable" (wording varies by screen reader) |
+| Disabled | Skipped by Tab; announced as dimmed/unavailable if reached by a screen reader |
 
 ### 6.3 Badge
 
@@ -708,6 +783,22 @@ import 'natural-design-system/styles.css';
 | Outline | `#FFFFFF` | `#3B2A1E` | `#8A6A4A` | 13.67 | Sold out |
 
 **Rules:** one or two words; the words carry the meaning, tone only reinforces it. Not interactive. Use at most one badge per product card.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| One or two words from the vocabulary: **Handmade**, **One of a kind**, **Sold out**. | Sentences or claims: "Handmade & eco-friendly!", "Best seller of the season". |
+| One badge per card, top-left of the image. | Stack several badges, or place them over the product itself. |
+| Match tone to meaning: Sale = Sale tone, Sold out = Outline. | Use Sale red for "New", or Success green for decoration. |
+| Let the words carry the meaning. | Rely on colour alone (a red dot, an empty coloured pill). |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab | Not focusable (static text) |
+| Announced | Read inline as plain text in reading order, e.g. "Handmade". The bag count badge is hidden (`aria-hidden`) because the Icon Button name already says "Bag, 2 items". |
 
 ### 6.4 Text Field
 
@@ -747,7 +838,25 @@ import 'natural-design-system/styles.css';
 | Read-only | `#F6EFE7` | `#8A6A4A` | `#3B2A1E` | `#6B4F35` |
 
 **Behaviour & accessibility:** `<label for>` always present; message linked with `aria-describedby`; error sets `aria-invalid`. Value text is 16px so iOS doesn't zoom.
-**Do:** say how to fix an error ("Enter a valid email address."). **Don't:** use placeholder as the label, or show error colour without the message.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| A visible label that names the data: "Email". | Placeholder as the label ("Enter your email…" with no label). |
+| Placeholder as an example: `you@example.com`. | Placeholder as an instruction that disappears when typing. |
+| Errors that say how to fix: "Enter a valid email address." | Errors that blame or puzzle: "Invalid input", "Error 422". |
+| Show the error only after the person leaves the field or submits. | Flag errors on the first keystroke. |
+| Helper text for format or reassurance: "We'll never share your email." | Long paragraphs of helper text, or helper text that repeats the label. |
+| Use the right input type and autocomplete (`type="email"`, `autocomplete="email"`). | Use a plain text field for email, phone or postcode. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab | Focuses the field; border darkens and the focus ring appears |
+| Typing | Edits the value (read-only: selectable, not editable; disabled: skipped by Tab) |
+| Announced | "Email, edit text, We'll never share your email." In error: "invalid entry" plus the error message (via `aria-invalid` and `aria-describedby`) |
 
 ### 6.5 Text Area
 
@@ -760,6 +869,22 @@ Same properties, states and colours as Text Field (§6.4), plus:
 | Height | Field fixed at `input/textarea-height` = 120px, text top-aligned | `resize: vertical` |
 | Resize grip | 8px diagonal grip, bottom-right, `input/icon/default` | native |
 | Counter | "n/200" right of helper, Small style | `maxLength` shows a live `n/max` counter (`aria-live="polite"`) |
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Use for free text: gift messages, order notes, reviews. | Use for short single values (name, email). |
+| Show a counter when there's a limit: "73/200". | Cut text off silently at the limit. |
+| Label the purpose: "Gift message". | Label it "Comments" when you mean something specific. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab | Focuses the text area |
+| Enter | New line (it does not submit the form) |
+| Announced | Label, "edit text, multi-line", helper text; the counter updates politely (`aria-live="polite"`) |
 
 ### 6.6 Radio
 
@@ -795,6 +920,24 @@ Same properties, states and colours as Text Field (§6.4), plus:
 
 Label `#3B2A1E` (13.67), description `#6B4F35` (7.51).
 
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Use for 2–6 mutually exclusive options that should all be visible: shipping method, ring size. | Use for on/off (use Toggle) or for long lists (use a select; **Planned**). |
+| Pre-select the sensible default when there is one (Standard shipping). | Pre-select an option that costs more. |
+| Short labels, detail in the description: "Express" / "2–3 business days · $12". | Put price and timing in a long label. |
+| Keep the disabled option visible with the reason: "Unavailable for this address". | Hide unavailable options with no explanation. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab | Enters the group on the selected option (or the first); Tab again leaves the group |
+| ↑ ↓ ← → | Moves to and selects the previous or next option (disabled options are skipped) |
+| Space | Selects the focused option |
+| Announced | "Express, radio button, checked, 2 of 3, 2–3 business days · $12", after the group legend |
+
 ### 6.7 Radio Group
 
 Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size" examples on the Radio Buttons page. [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/components-radio--shipping-method)
@@ -808,6 +951,21 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 | `children` | `Radio` elements | 12px apart; legend 12px above |
 
 **Rules:** always use a group with a legend; show errors once at group level, never per option.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| A legend that asks the question: "Shipping method". | Radios with no legend, or a legend like "Options". |
+| One group error: "Select a ring size to continue." | An error under every option. |
+| Stack options vertically. | Put options in a row where labels wrap unevenly. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab / arrows | As Radio; the group is one Tab stop |
+| Announced | The legend when entering ("Shipping method, group"), then the option; with an error, the group is marked invalid and the message is read |
 
 ### 6.8 Wishlist Button
 
@@ -830,6 +988,22 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 | Focus ring | 48px circle, 2px, 2px gap |
 
 **Accessibility:** `<button aria-pressed>`; name toggles between "Add {product} to wishlist" and "Remove {product} from wishlist". Selected state is a shape change, not colour.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Place it top-right on product imagery. | Place it over the product itself or next to the price. |
+| Include the product name in the accessible name. | Use a generic name ("Heart", "Like"). |
+| Change the heart from outline to filled. | Show saved state only by colour. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab | Focuses the button |
+| Enter / Space | Toggles saved / not saved |
+| Announced | "Add River Clay Cup to wishlist, toggle button, not pressed" → "Remove River Clay Cup from wishlist, toggle button, pressed" |
 
 ### 6.9 Product Card
 
@@ -876,6 +1050,24 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 **Behaviour & accessibility:** the whole card is clickable through the title link (stretched link); the wishlist and CTA sit above it as separate focus stops. The sale price is announced as "Sale price … Original price …".
 **Rules:** meta is material first (*"Stoneware · ash glaze"*). One badge maximum. Never hide the price.
 
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Meta is material first: "Stoneware · ash glaze". | Marketing meta: "Our best-loved cup!". |
+| Show real photography cropped 4:5 on a neutral backdrop. | Mixed crops, busy backgrounds, heavy filters. |
+| Sale shows both prices: **$32** ~~$38~~ plus the Sale badge. | A red price with no original price or badge. |
+| Sold out stays visible with "Notify me". | Remove sold-out one-of-a-kind pieces without a trace. |
+| Keep titles to two lines: "Split Log Bench". | Stuff the title: "Split Log Bench – Rustic Oak Seat – Handmade – Free Shipping". |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab order | Wishlist Button → title link → Add to Bag / Notify me (three stops per card). **Suggested:** move the wishlist after the title in the page structure so keyboard users reach the product first. |
+| Enter on the title | Opens the product (the whole card surface is this link for mouse users) |
+| Announced | Title as a link inside a heading; meta; prices as "Sale price $32, Original price $38"; badge text; the image's alt text |
+
 ### 6.10 Icon Button
 
 [Figma 60:69](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=60-69) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/components-navigation-menu--icon-buttons)
@@ -897,6 +1089,21 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 | Focus | transparent + 52px ring, 2px, 2px gap | `#3B2A1E` |
 
 **Accessibility:** the name includes the count: "Bag, 2 items". The visual count badge is `aria-hidden`.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Use recognised icons only: Search, Account, Wishlist, Bag, Menu, Close. | Invent icons for actions that need words. |
+| Give every button a name, including state: "Bag, 2 items". | Leave it unnamed or named by the icon ("Magnifier"). |
+| Keep the 44px target even though the icon is 24px. | Shrink the target to the icon size. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab · Enter / Space | Focus · activate |
+| Announced | "Search, button"; "Bag, 2 items, button"; Menu adds "collapsed / expanded, has popup dialog" |
 
 ### 6.11 Nav Link
 
@@ -921,6 +1128,21 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 
 **Rule:** a link that opens a menu should become a `<button aria-expanded>` when the dropdown is built (**Planned**).
 
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| 4–6 top-level links with short nouns: Shop, Collections, Journal. | Eight or more links, or phrases ("Discover our story"). |
+| Mark the current section (indicator + semibold). | Show the current page by colour only. |
+| Use a chevron only when the link opens a menu. | Use chevrons as decoration. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab · Enter | Focus · follow the link |
+| Announced | "Shop, link, current page" (`aria-current="page"`) inside the "Main, navigation" landmark |
+
 ### 6.12 Menu Item
 
 [Figma 60:107](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=60-107) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/components-navigation-menu--menu-items)
@@ -940,6 +1162,21 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 | Hover | background `#F6EFE7` |
 | Active | Body Strong + 2px indicator on the left edge; `aria-current="page"` |
 | Focus | ring 2px, 2px gap, radius 8 |
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Match the desktop link labels and order. | Rename or reorder sections on mobile. |
+| Show a chevron only when the item opens a submenu. | Add chevrons to every row. |
+| Keep rows full width with a 56px height. | Shrink rows to fit more items. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab · Enter | Focus · follow the link |
+| Announced | "Shop, link, current page" inside the menu dialog's navigation |
 
 ### 6.13 Navigation Menu
 
@@ -968,6 +1205,21 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 
 **Behaviour & accessibility:** `<header>` + `<nav aria-label="Main">` with a list of links. The Menu button has `aria-haspopup="dialog"` and `aria-expanded`, and opens the Mobile Menu.
 
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| One short announcement: "Free shipping on orders over $75". | Rotating or scrolling announcements, or more than one line. |
+| Keep the header the same on every page. | Hide the Bag or Search on some pages. |
+| Show the bag count when there are items. | Show "0" in the badge. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab order | Desktop: Logo → nav links → Search → Account → Wishlist → Bag. Mobile: Menu → Search → Logo → Wishlist → Bag. The announcement is text, not a stop |
+| Announced | A "banner" header landmark containing "Main, navigation" with a list of 5 links |
+
 ### 6.14 Mobile Menu
 
 [Figma 61:135](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=61-135) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/components-navigation-menu--mobile-menu-open)
@@ -983,9 +1235,35 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 
 **Behaviour & accessibility:** native `<dialog>` opened with `showModal()`; focus moves inside and is trapped; Escape or Close closes it and returns focus to the Menu button; the backdrop uses Backdrop / Modal. Size in Figma 375 × 812.
 
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Open full screen as a modal and trap focus. | Slide in a panel that lets focus escape to the page behind. |
+| Close on Close, Escape, and after choosing a link. | Require the Close button as the only way out. |
+| Pin account links at the bottom. | Mix account and shop links in one list. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Open | Focus moves into the dialog (first stop: Close) |
+| Tab / Shift+Tab | Cycles within the menu only |
+| Escape | Closes the menu; focus returns to the Menu button |
+| Announced | "Menu, dialog"; then the links as in Menu Item |
+
 ### 6.15 Image Placeholder
 
 [Figma 1:816](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=1-816): a `#EFE6DB` frame with the image icon in `#CBAE8A`, used as the Product Card's default Image. In code, `ProductCard` renders it automatically when `imageSrc` is missing. Replace with real photography before launch.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Use it in designs and prototypes only. | Ship it to production in place of a product photo. |
+| Treat it as decorative. | Give it alt text like "placeholder image". |
+
+**Keyboard & screen reader:** not focusable; hidden from assistive technology.
 
 ### 6.16 Spinner
 
@@ -1001,6 +1279,15 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 | Motion | Spin / Loading (§4.3) | 800ms per turn; 2400ms under reduced motion |
 
 **Accessibility:** decorative (`aria-hidden`). The control that owns it must announce the busy state (`aria-busy`) or show text.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Use inside a Button's Loading state for short waits. | Use a spinner on its own to cover a whole page. |
+| Keep the button's label in place (hidden) so its name stays. | Replace the label with the spinner so the name is lost. |
+
+**Keyboard & screen reader:** not focusable; hidden. The owning Button announces "busy".
 
 ### 6.17 Toggle
 
@@ -1038,7 +1325,25 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 Label `#3B2A1E` (13.67), description `#6B4F35` (7.51). The thumb slides in 120ms (no motion under reduced motion).
 
 **Behaviour & accessibility:** a native `<input type="checkbox" role="switch">` inside a `<label>`, so the whole row is clickable, Space toggles it, and screen readers announce "switch, on/off". The description is linked with `aria-describedby`. On and off differ by **thumb position and the check mark**, never colour alone.
-**Do:** write the label as the setting when on ("Gift wrap this order"); group related toggles under a legend ("Order preferences"). **Don't:** use "On/Off" text next to the switch, or make the label a question.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Label the setting as it reads when on: "Gift wrap this order". | A question or a double negative: "Gift wrap?", "Don't send emails". |
+| Use when the change applies right away. | Use inside a form that only applies after Submit (use a checkbox; **Planned**). |
+| Group related toggles under a legend: "Order preferences". | Scatter single toggles with no context. |
+| Explain a disabled toggle: "Not available for pieces that ship by freight". | Disable it with no reason. |
+| Let the knob and check mark show the state. | Add "On/Off" text beside the switch. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab | Focuses the switch (ring around the track) |
+| Space | Toggles on/off (Enter does not; it's a checkbox underneath) |
+| Click anywhere on the row | Toggles it |
+| Announced | "Gift wrap this order, switch, on, Wrapped in recycled kraft paper and tied with jute twine" |
 
 ---
 
@@ -1064,16 +1369,63 @@ How the parts combine for Natural's shop. **Available** means buildable today fr
 
 ## 8. Accessibility standard (WCAG 2.2 AA)
 
-Non-negotiable for every component and page:
+Non-negotiable for every component and page. Each component in §6 lists its own keyboard and screen reader behaviour; this section is the standard they all meet.
 
-- **Contrast:** text ≥ 4.5:1; UI boundaries, icons and focus rings ≥ 3:1. Disabled controls are exempt and intentionally faded.
-- **Never colour alone:** errors pair an icon with a message, sale pairs a badge with a strikethrough, the current page pairs an indicator with a heavier weight, and wishlist state pairs a filled shape.
-- **Targets:** 44px minimum for controls, never below 24px.
-- **Focus:** always visible, using the Focus ring style (§4.3).
-- **Semantics:** real buttons for actions, links for navigation, `fieldset`/`legend` for groups, `aria-pressed` for toggles, `aria-current` for the current page, `<dialog>` for the mobile menu.
-- **Names:** every icon-only control has an accessible name that includes context (*"Add River Clay Cup to wishlist"*, *"Bag, 2 items"*).
-- **Motion:** respect `prefers-reduced-motion`.
-- **Check:** run the Storybook Accessibility panel (axe) on every story before shipping.
+### 8.1 Perceivable
+
+- **Contrast:** text ≥ 4.5:1; large text (24px+) ≥ 3:1; UI boundaries, icons and focus rings ≥ 3:1. Measured pairs are in §3.1. Disabled controls are exempt and intentionally faded.
+- **Never colour alone:**
+
+  | State | Shown by |
+  |---|---|
+  | Errors | Icon + message |
+  | Sale | Badge + strikethrough |
+  | Current page | Indicator + heavier weight |
+  | Wishlist | Filled vs outline shape |
+  | Toggle | Knob position + check mark |
+
+- **Text alternatives:** every product image has material-first alt text (§2); decorative images and icons are hidden (`alt=""`, `aria-hidden`).
+- **Resize & reflow:** usable at 200% zoom and at 320px wide with no horizontal scrolling (except large data tables). The header switches to its mobile layout by container width, which helps here.
+- **Text spacing:** nothing breaks when users increase line height to 1.5, paragraph spacing to 2×, and letter spacing to 0.12em. Never fix text container heights.
+
+### 8.2 Operable
+
+- **Keyboard:** everything works with a keyboard alone: Tab / Shift+Tab to move, Enter for links and buttons, Space for buttons, toggles and radios, arrows inside radio groups, Escape to close dialogs.
+- **Focus visible:** the Focus ring (§4.3) on every focusable element, never removed; focused items are never hidden behind sticky headers or overlays.
+- **Focus order:** follows reading order: header → main content → footer. Modals move focus in, trap it, and return it on close (Mobile Menu).
+- **Targets:** 44px minimum for controls, so neighbours can sit close (the header icons are 4px apart). Never go below 24px (WCAG 2.5.8); anything smaller than 44px needs clear space so its 24px target circle doesn't overlap another.
+- **Motion:** respect `prefers-reduced-motion` (image zoom off, spinner slowed, toggle slide off). Nothing flashes more than 3 times a second; no auto-playing carousels.
+- **No keyboard traps** outside modals, and **no time limits** on checkout without a way to extend.
+
+### 8.3 Understandable
+
+- **Language:** set `lang="en"` on the page.
+- **Consistent:** the same components, labels and order everywhere (e.g. "Add to Bag" never becomes "Add to Cart" elsewhere).
+- **Forms:** visible labels; instructions before the field; errors after leaving the field or on submit, in text, with how to fix; on submit, focus moves to the first error. Use `autocomplete` for personal data (name, email, address, card).
+- **No surprises:** changing a radio or toggle never navigates or submits on its own.
+
+### 8.4 Robust
+
+- **Native first:** `<button>`, `<a>`, `<input>`, `<fieldset>`/`<legend>`, `<dialog>` before any ARIA.
+- **ARIA only to add state:** `aria-pressed` (Wishlist), `aria-current` (nav), `aria-expanded` + `aria-haspopup` (Menu), `aria-busy` (Loading), `aria-invalid` + `aria-describedby` (fields), `role="switch"` (Toggle).
+- **Names include context:** "Add River Clay Cup to wishlist", "Bag, 2 items", "Natural — home".
+- **Landmarks:** one `<header>`, `<nav aria-label="Main">`, one `<main>`, one `<footer>`.
+
+### 8.5 Before shipping (checklist)
+
+- [ ] Storybook Accessibility panel (axe) shows no violations on every story
+- [ ] Keyboard only: reach and operate everything; the focus ring is always visible; the order makes sense
+- [ ] Screen reader pass (VoiceOver on macOS/iOS or NVDA on Windows): names, roles, states and errors are announced as §6 describes
+- [ ] 200% zoom and a 320px-wide viewport: nothing clipped, overlapping or scrolling sideways
+- [ ] Reduced motion on: no zoom, no slide
+- [ ] Every new colour pair measured and added to §3.1
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| `<button aria-label="Bag, 2 items">` | `<div onclick>` with an icon and no name |
+| Error: icon + "Enter a valid email address." under the field | Only turning the border red |
+| Keep the focus ring and style it (§4.3) | `outline: none` with no replacement |
+| Alt: "Split log bench in oak, seen from the side on a stone floor" | Alt: "image1.jpg" or "Beautiful bench" |
 
 ---
 
@@ -1105,6 +1457,7 @@ Non-negotiable for every component and page:
 
 | Date | Change |
 |---|---|
+| 2026-09-28 | DESIGN.md: Do/Don't and keyboard & screen reader tables for every component; typography guidelines; expanded accessibility standard |
 | 2026-09-28 | Toggle component + Toggle tokens + Check Mark icon |
 | 2026-09-28 | Button Loading state + full width, Spinner component; Logo is "natural" only; Menu Item submenu off by default |
 | 2026-09-28 | `DESIGN.md` with full component specs and styles; Navigation Menu, Mobile Menu, Nav Link, Icon Button, Menu Item, Logo, nav icons |

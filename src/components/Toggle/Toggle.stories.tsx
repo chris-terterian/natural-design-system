@@ -5,6 +5,7 @@ import { figma, FIGMA_NODES } from '../../figma';
 
 const meta = {
   title: 'Components/Toggle',
+  tags: ['status:stable'],
   component: Toggle,
   parameters: figma(FIGMA_NODES.toggle),
   args: { label: 'Gift wrap this order' },

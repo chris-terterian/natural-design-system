@@ -1,0 +1,922 @@
+{
+  "$comment": "Figma parity snapshot, exported through the Figma MCP (scripts/figma/export-snapshot.js). Checked by npm run check:parity. Refresh after any Figma or token change, and before every release.",
+  "generatedAt": "2026-09-28T20:13:03.935Z",
+  "figmaFile": "84MjZXozBoKCvf9lwIU5pu",
+  "variables": [
+    "Badge|badge/border-width||@border-width/1",
+    "Badge|badge/dark/bg||@color/brown/900",
+    "Badge|badge/dark/border||@color/brown/900",
+    "Badge|badge/dark/text||@color/white",
+    "Badge|badge/font-size||@font-size/12",
+    "Badge|badge/light/bg||@color/brown/100",
+    "Badge|badge/light/border||@color/brown/100",
+    "Badge|badge/light/text||@color/brown/900",
+    "Badge|badge/line-height||@line-height/16",
+    "Badge|badge/outline/bg||@color/white",
+    "Badge|badge/outline/border||@color/brown/600",
+    "Badge|badge/outline/text||@color/brown/900",
+    "Badge|badge/padding-x||@space/8",
+    "Badge|badge/padding-y||@space/2",
+    "Badge|badge/radius||@radius/full",
+    "Badge|badge/sale/bg||@color/red/600",
+    "Badge|badge/sale/border||@color/red/600",
+    "Badge|badge/sale/text||@color/white",
+    "Badge|badge/success/bg||@color/green/600",
+    "Badge|badge/success/border||@color/green/600",
+    "Badge|badge/success/text||@color/white",
+    "Button|button/border-width||@border-width/1",
+    "Button|button/focus-ring-radius||@radius/12",
+    "Button|button/focus-ring-width||@border-width/2",
+    "Button|button/focus-ring||@color/brown/900",
+    "Button|button/font-size||@font-size/16",
+    "Button|button/gap||@space/8",
+    "Button|button/icon-size||@space/20",
+    "Button|button/line-height||@line-height/20",
+    "Button|button/min-height||@space/44",
+    "Button|button/padding-x-icon||@space/20",
+    "Button|button/padding-x||@space/24",
+    "Button|button/padding-y||@space/12",
+    "Button|button/primary/bg/default||@color/brown/200",
+    "Button|button/primary/bg/disabled||@color/brown/100",
+    "Button|button/primary/bg/hover||@color/brown/300",
+    "Button|button/primary/bg/pressed||@color/brown/400",
+    "Button|button/primary/border/default||@color/brown/600",
+    "Button|button/primary/border/disabled||@color/taupe/300",
+    "Button|button/primary/border/hover||@color/brown/700",
+    "Button|button/primary/border/pressed||@color/brown/700",
+    "Button|button/primary/fg/default||@color/brown/900",
+    "Button|button/primary/fg/disabled||@color/taupe/500",
+    "Button|button/primary/fg/hover||@color/brown/900",
+    "Button|button/primary/fg/pressed||@color/brown/900",
+    "Button|button/radius||@radius/8",
+    "Button|button/secondary/bg/default||@color/white",
+    "Button|button/secondary/bg/disabled||@color/white",
+    "Button|button/secondary/bg/hover||@color/brown/50",
+    "Button|button/secondary/bg/pressed||@color/brown/150",
+    "Button|button/secondary/border/default||@color/brown/600",
+    "Button|button/secondary/border/disabled||@color/taupe/200",
+    "Button|button/secondary/border/hover||@color/brown/800",
+    "Button|button/secondary/border/pressed||@color/brown/800",
+    "Button|button/secondary/fg/default||@color/brown/900",
+    "Button|button/secondary/fg/disabled||@color/taupe/400",
+    "Button|button/secondary/fg/hover||@color/brown/900",
+    "Button|button/secondary/fg/pressed||@color/brown/900",
+    "Button|button/spinner||@color/brown/900",
+    "Input|input/bg/default||@color/white",
+    "Input|input/bg/disabled||@color/brown/100",
+    "Input|input/bg/read-only||@color/brown/50",
+    "Input|input/border-width||@border-width/1",
+    "Input|input/border/default||@color/brown/600",
+    "Input|input/border/disabled||@color/taupe/300",
+    "Input|input/border/error||@color/red/600",
+    "Input|input/border/focus||@color/brown/900",
+    "Input|input/border/hover||@color/brown/800",
+    "Input|input/border/read-only||@color/brown/600",
+    "Input|input/border/success||@color/green/600",
+    "Input|input/field-gap||@space/8",
+    "Input|input/focus-ring-radius||@radius/12",
+    "Input|input/focus-ring-width||@border-width/2",
+    "Input|input/focus-ring||@color/brown/900",
+    "Input|input/font-size/label||@font-size/14",
+    "Input|input/font-size/value||@font-size/16",
+    "Input|input/gap||@space/6",
+    "Input|input/icon/default||@color/brown/800",
+    "Input|input/icon/disabled||@color/taupe/500",
+    "Input|input/icon/error||@color/red/600",
+    "Input|input/icon/success||@color/green/600",
+    "Input|input/line-height/label||@line-height/20",
+    "Input|input/line-height/value||@line-height/24",
+    "Input|input/min-height||@space/44",
+    "Input|input/padding-x||@space/12",
+    "Input|input/padding-y||@space/10",
+    "Input|input/radius||@radius/8",
+    "Input|input/text/disabled||@color/taupe/500",
+    "Input|input/text/error||@color/red/600",
+    "Input|input/text/helper||@color/brown/800",
+    "Input|input/text/label||@color/brown/900",
+    "Input|input/text/placeholder||@color/brown/600",
+    "Input|input/text/success||@color/green/600",
+    "Input|input/text/value||@color/brown/900",
+    "Input|input/textarea-height||@size/120",
+    "Input|input/width||@size/320",
+    "Navigation|nav/announcement-padding-y||@space/8",
+    "Navigation|nav/announcement/bg||@color/brown/900",
+    "Navigation|nav/announcement/text||@color/white",
+    "Navigation|nav/bg||@color/white",
+    "Navigation|nav/border-width||@border-width/1",
+    "Navigation|nav/border||@color/taupe/200",
+    "Navigation|nav/chevron-size||@size/16",
+    "Navigation|nav/divider||@color/taupe/200",
+    "Navigation|nav/dropdown/bg||@color/white",
+    "Navigation|nav/dropdown/border||@color/taupe/200",
+    "Navigation|nav/dropdown/column-gap||@space/48",
+    "Navigation|nav/dropdown/group-gap||@space/8",
+    "Navigation|nav/dropdown/padding-y||@space/32",
+    "Navigation|nav/focus-ring-radius||@radius/12",
+    "Navigation|nav/focus-ring-width||@border-width/2",
+    "Navigation|nav/focus-ring||@color/brown/900",
+    "Navigation|nav/font-size/announcement||@font-size/14",
+    "Navigation|nav/font-size/group-title||@font-size/14",
+    "Navigation|nav/font-size/link||@font-size/16",
+    "Navigation|nav/font-size/logo||@font-size/24",
+    "Navigation|nav/group-title/text||@color/brown/800",
+    "Navigation|nav/height-mobile||@size/56",
+    "Navigation|nav/height||@size/72",
+    "Navigation|nav/icon-button-focus-ring-size||@size/52",
+    "Navigation|nav/icon-button-radius||@radius/full",
+    "Navigation|nav/icon-button-size||@space/44",
+    "Navigation|nav/icon-button/bg/hover||@color/brown/50",
+    "Navigation|nav/icon-button/bg/pressed||@color/brown/150",
+    "Navigation|nav/icon-gap||@space/4",
+    "Navigation|nav/icon-size||@space/24",
+    "Navigation|nav/icon||@color/brown/900",
+    "Navigation|nav/indicator-height||@border-width/2",
+    "Navigation|nav/line-height/announcement||@line-height/20",
+    "Navigation|nav/line-height/group-title||@line-height/20",
+    "Navigation|nav/line-height/link||@line-height/24",
+    "Navigation|nav/line-height/logo||@line-height/32",
+    "Navigation|nav/link-gap||@space/32",
+    "Navigation|nav/link-padding-x||@space/4",
+    "Navigation|nav/link-padding-y||@space/10",
+    "Navigation|nav/link/bg/hover||@color/brown/50",
+    "Navigation|nav/link/bg/open||@color/brown/50",
+    "Navigation|nav/link/indicator||@color/brown/900",
+    "Navigation|nav/link/text||@color/brown/900",
+    "Navigation|nav/logo||@color/brown/900",
+    "Navigation|nav/menu-item-padding-y||@space/16",
+    "Navigation|nav/padding-x-mobile||@space/16",
+    "Navigation|nav/padding-x||@space/40",
+    "Navigation|nav/radius||@radius/8",
+    "Primitives|border-width/1-5||1.5",
+    "Primitives|border-width/1||1",
+    "Primitives|border-width/2||2",
+    "Primitives|color/brown/100||#EFE6DB",
+    "Primitives|color/brown/150||#EADCCB",
+    "Primitives|color/brown/200||#D8BFA0",
+    "Primitives|color/brown/300||#CBAE8A",
+    "Primitives|color/brown/400||#BC9D76",
+    "Primitives|color/brown/50||#F6EFE7",
+    "Primitives|color/brown/600||#8A6A4A",
+    "Primitives|color/brown/700||#7A5C3E",
+    "Primitives|color/brown/800||#6B4F35",
+    "Primitives|color/brown/900||#3B2A1E",
+    "Primitives|color/green/600||#2E6B3F",
+    "Primitives|color/red/600||#B3261E",
+    "Primitives|color/taupe/200||#E3D8CB",
+    "Primitives|color/taupe/300||#DCCFBF",
+    "Primitives|color/taupe/400||#B3A392",
+    "Primitives|color/taupe/500||#9C8B7A",
+    "Primitives|color/white||#FFFFFF",
+    "Primitives|font-size/12||12",
+    "Primitives|font-size/14||14",
+    "Primitives|font-size/16||16",
+    "Primitives|font-size/18||18",
+    "Primitives|font-size/20||20",
+    "Primitives|font-size/24||24",
+    "Primitives|font-size/28||28",
+    "Primitives|font-size/32||32",
+    "Primitives|font-size/36||36",
+    "Primitives|font-size/48||48",
+    "Primitives|letter-spacing/normal||0",
+    "Primitives|letter-spacing/snug||-0.25",
+    "Primitives|letter-spacing/tighter||-1",
+    "Primitives|letter-spacing/tight||-0.5",
+    "Primitives|line-height/16||16",
+    "Primitives|line-height/20||20",
+    "Primitives|line-height/22||22",
+    "Primitives|line-height/24||24",
+    "Primitives|line-height/26||26",
+    "Primitives|line-height/28||28",
+    "Primitives|line-height/30||30",
+    "Primitives|line-height/32||32",
+    "Primitives|line-height/36||36",
+    "Primitives|line-height/40||40",
+    "Primitives|line-height/44||44",
+    "Primitives|line-height/56||56",
+    "Primitives|radius/12||12",
+    "Primitives|radius/8||8",
+    "Primitives|radius/full||999",
+    "Primitives|size/120||120",
+    "Primitives|size/16||16",
+    "Primitives|size/280||280",
+    "Primitives|size/28||28",
+    "Primitives|size/320||320",
+    "Primitives|size/343||343",
+    "Primitives|size/350||350",
+    "Primitives|size/40||40",
+    "Primitives|size/52||52",
+    "Primitives|size/56||56",
+    "Primitives|size/640||640",
+    "Primitives|size/72||72",
+    "Primitives|space/0||0",
+    "Primitives|space/10||10",
+    "Primitives|space/12||12",
+    "Primitives|space/16||16",
+    "Primitives|space/20||20",
+    "Primitives|space/24||24",
+    "Primitives|space/2||2",
+    "Primitives|space/32||32",
+    "Primitives|space/40||40",
+    "Primitives|space/44||44",
+    "Primitives|space/48||48",
+    "Primitives|space/4||4",
+    "Primitives|space/6||6",
+    "Primitives|space/8||8",
+    "Product Card|card/bg||@color/white",
+    "Product Card|card/focus-ring-radius||@radius/12",
+    "Product Card|card/focus-ring-width||@border-width/2",
+    "Product Card|card/focus-ring||@color/brown/900",
+    "Product Card|card/font-size/meta||@font-size/14",
+    "Product Card|card/font-size/title||@font-size/16",
+    "Product Card|card/gap||@space/12",
+    "Product Card|card/info-gap||@space/4",
+    "Product Card|card/line-height/meta||@line-height/20",
+    "Product Card|card/line-height/title||@line-height/24",
+    "Product Card|card/media-bg-sold-out||@color/brown/50",
+    "Product Card|card/media-bg||@color/brown/100",
+    "Product Card|card/media-icon||@color/brown/300",
+    "Product Card|card/media-inset||@space/12",
+    "Product Card|card/price-gap||@space/8",
+    "Product Card|card/radius||@radius/8",
+    "Product Card|card/text/meta||@color/brown/800",
+    "Product Card|card/text/price-compare||@color/brown/600",
+    "Product Card|card/text/price-sale||@color/red/600",
+    "Product Card|card/text/price||@color/brown/900",
+    "Product Card|card/text/title||@color/brown/900",
+    "Product Card|card/width||@size/280",
+    "Product Card|wishlist/bg/default||@color/white",
+    "Product Card|wishlist/bg/hover||@color/brown/50",
+    "Product Card|wishlist/bg/pressed||@color/brown/150",
+    "Product Card|wishlist/focus-ring-size||@space/48",
+    "Product Card|wishlist/focus-ring||@color/brown/900",
+    "Product Card|wishlist/icon-size||@space/20",
+    "Product Card|wishlist/icon||@color/brown/900",
+    "Product Card|wishlist/size||@size/40",
+    "Product Row|row/bg||@color/white",
+    "Product Row|row/gap-mobile||@space/16",
+    "Product Row|row/gap||@space/24",
+    "Product Row|row/header-gap||@space/24",
+    "Product Row|row/padding-x-mobile||@space/16",
+    "Product Row|row/padding-x||@space/40",
+    "Product Row|row/padding-y-mobile||@space/32",
+    "Product Row|row/padding-y||@space/48",
+    "Radio|radio/bg/checked-hover||@color/brown/300",
+    "Radio|radio/bg/checked-pressed||@color/brown/400",
+    "Radio|radio/bg/checked||@color/brown/200",
+    "Radio|radio/bg/default||@color/white",
+    "Radio|radio/bg/disabled||@color/brown/100",
+    "Radio|radio/bg/hover||@color/brown/50",
+    "Radio|radio/bg/pressed||@color/brown/150",
+    "Radio|radio/border-width||@border-width/1-5",
+    "Radio|radio/border/checked||@color/brown/900",
+    "Radio|radio/border/default||@color/brown/600",
+    "Radio|radio/border/disabled||@color/taupe/300",
+    "Radio|radio/border/error||@color/red/600",
+    "Radio|radio/border/hover||@color/brown/800",
+    "Radio|radio/dot-size||@space/8",
+    "Radio|radio/dot/default||@color/brown/900",
+    "Radio|radio/dot/disabled||@color/taupe/500",
+    "Radio|radio/focus-ring-size||@size/28",
+    "Radio|radio/focus-ring-width||@border-width/2",
+    "Radio|radio/focus-ring||@color/brown/900",
+    "Radio|radio/font-size/description||@font-size/14",
+    "Radio|radio/font-size/label||@font-size/16",
+    "Radio|radio/gap||@space/8",
+    "Radio|radio/hit-area||@space/24",
+    "Radio|radio/line-height/description||@line-height/20",
+    "Radio|radio/line-height/label||@line-height/24",
+    "Radio|radio/size||@space/20",
+    "Radio|radio/text-gap||@space/0",
+    "Radio|radio/text/description||@color/brown/800",
+    "Radio|radio/text/disabled||@color/taupe/500",
+    "Radio|radio/text/error||@color/red/600",
+    "Radio|radio/text/label||@color/brown/900",
+    "Toggle|toggle/border-width||@border-width/1-5",
+    "Toggle|toggle/focus-ring-height-size||@space/32",
+    "Toggle|toggle/focus-ring-width-size||@size/52",
+    "Toggle|toggle/focus-ring-width||@border-width/2",
+    "Toggle|toggle/focus-ring||@color/brown/900",
+    "Toggle|toggle/font-size/description||@font-size/14",
+    "Toggle|toggle/font-size/label||@font-size/16",
+    "Toggle|toggle/gap||@space/12",
+    "Toggle|toggle/line-height/description||@line-height/20",
+    "Toggle|toggle/line-height/label||@line-height/24",
+    "Toggle|toggle/radius||@radius/full",
+    "Toggle|toggle/text-gap||@space/0",
+    "Toggle|toggle/text/description||@color/brown/800",
+    "Toggle|toggle/text/disabled||@color/taupe/500",
+    "Toggle|toggle/text/label||@color/brown/900",
+    "Toggle|toggle/thumb-inset||@space/4",
+    "Toggle|toggle/thumb-size||@size/16",
+    "Toggle|toggle/thumb/disabled||@color/taupe/500",
+    "Toggle|toggle/thumb/off-hover||@color/brown/800",
+    "Toggle|toggle/thumb/off||@color/brown/600",
+    "Toggle|toggle/thumb/on||@color/brown/900",
+    "Toggle|toggle/track-height||@space/24",
+    "Toggle|toggle/track-width||@space/44",
+    "Toggle|toggle/track/bg/disabled||@color/brown/100",
+    "Toggle|toggle/track/bg/off-hover||@color/brown/50",
+    "Toggle|toggle/track/bg/off-pressed||@color/brown/150",
+    "Toggle|toggle/track/bg/off||@color/white",
+    "Toggle|toggle/track/bg/on-hover||@color/brown/300",
+    "Toggle|toggle/track/bg/on-pressed||@color/brown/400",
+    "Toggle|toggle/track/bg/on||@color/brown/200",
+    "Toggle|toggle/track/border/disabled||@color/taupe/300",
+    "Toggle|toggle/track/border/off-hover||@color/brown/800",
+    "Toggle|toggle/track/border/off||@color/brown/600",
+    "Toggle|toggle/track/border/on||@color/brown/900",
+    "Typography|text/caption/font-size|Desktop|@font-size/14",
+    "Typography|text/caption/font-size|Mobile|@font-size/14",
+    "Typography|text/caption/letter-spacing|Desktop|@letter-spacing/normal",
+    "Typography|text/caption/letter-spacing|Mobile|@letter-spacing/normal",
+    "Typography|text/caption/line-height|Desktop|@line-height/20",
+    "Typography|text/caption/line-height|Mobile|@line-height/20",
+    "Typography|text/color/heading|Desktop|@color/brown/900",
+    "Typography|text/color/heading|Mobile|@color/brown/900",
+    "Typography|text/color/muted|Desktop|@color/brown/800",
+    "Typography|text/color/muted|Mobile|@color/brown/800",
+    "Typography|text/color/paragraph|Desktop|@color/brown/900",
+    "Typography|text/color/paragraph|Mobile|@color/brown/900",
+    "Typography|text/h1/font-size|Desktop|@font-size/48",
+    "Typography|text/h1/font-size|Mobile|@font-size/32",
+    "Typography|text/h1/letter-spacing|Desktop|@letter-spacing/tighter",
+    "Typography|text/h1/letter-spacing|Mobile|@letter-spacing/tight",
+    "Typography|text/h1/line-height|Desktop|@line-height/56",
+    "Typography|text/h1/line-height|Mobile|@line-height/40",
+    "Typography|text/h2/font-size|Desktop|@font-size/36",
+    "Typography|text/h2/font-size|Mobile|@font-size/28",
+    "Typography|text/h2/letter-spacing|Desktop|@letter-spacing/tight",
+    "Typography|text/h2/letter-spacing|Mobile|@letter-spacing/snug",
+    "Typography|text/h2/line-height|Desktop|@line-height/44",
+    "Typography|text/h2/line-height|Mobile|@line-height/36",
+    "Typography|text/h3/font-size|Desktop|@font-size/24",
+    "Typography|text/h3/font-size|Mobile|@font-size/20",
+    "Typography|text/h3/letter-spacing|Desktop|@letter-spacing/normal",
+    "Typography|text/h3/letter-spacing|Mobile|@letter-spacing/normal",
+    "Typography|text/h3/line-height|Desktop|@line-height/32",
+    "Typography|text/h3/line-height|Mobile|@line-height/28",
+    "Typography|text/h4/font-size|Desktop|@font-size/20",
+    "Typography|text/h4/font-size|Mobile|@font-size/18",
+    "Typography|text/h4/letter-spacing|Desktop|@letter-spacing/normal",
+    "Typography|text/h4/letter-spacing|Mobile|@letter-spacing/normal",
+    "Typography|text/h4/line-height|Desktop|@line-height/28",
+    "Typography|text/h4/line-height|Mobile|@line-height/26",
+    "Typography|text/measure|Desktop|@size/640",
+    "Typography|text/measure|Mobile|@size/343",
+    "Typography|text/paragraph-lg/font-size|Desktop|@font-size/20",
+    "Typography|text/paragraph-lg/font-size|Mobile|@font-size/18",
+    "Typography|text/paragraph-lg/letter-spacing|Desktop|@letter-spacing/normal",
+    "Typography|text/paragraph-lg/letter-spacing|Mobile|@letter-spacing/normal",
+    "Typography|text/paragraph-lg/line-height|Desktop|@line-height/32",
+    "Typography|text/paragraph-lg/line-height|Mobile|@line-height/28",
+    "Typography|text/paragraph-sm/font-size|Desktop|@font-size/16",
+    "Typography|text/paragraph-sm/font-size|Mobile|@font-size/14",
+    "Typography|text/paragraph-sm/letter-spacing|Desktop|@letter-spacing/normal",
+    "Typography|text/paragraph-sm/letter-spacing|Mobile|@letter-spacing/normal",
+    "Typography|text/paragraph-sm/line-height|Desktop|@line-height/24",
+    "Typography|text/paragraph-sm/line-height|Mobile|@line-height/22",
+    "Typography|text/paragraph-spacing|Desktop|@space/20",
+    "Typography|text/paragraph-spacing|Mobile|@space/16",
+    "Typography|text/paragraph/font-size|Desktop|@font-size/18",
+    "Typography|text/paragraph/font-size|Mobile|@font-size/16",
+    "Typography|text/paragraph/letter-spacing|Desktop|@letter-spacing/normal",
+    "Typography|text/paragraph/letter-spacing|Mobile|@letter-spacing/normal",
+    "Typography|text/paragraph/line-height|Desktop|@line-height/30",
+    "Typography|text/paragraph/line-height|Mobile|@line-height/26",
+    "Typography|text/space/after-heading|Desktop|@space/16",
+    "Typography|text/space/after-heading|Mobile|@space/12",
+    "Typography|text/space/section|Desktop|@space/48",
+    "Typography|text/space/section|Mobile|@space/32"
+  ],
+  "components": {
+    "button": {
+      "id": "1:202",
+      "name": "Button",
+      "type": "COMPONENT_SET",
+      "variants": 48,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "default": "Button",
+          "wired": true
+        },
+        "Left icon": {
+          "type": "INSTANCE_SWAP",
+          "default": "(instance)",
+          "wired": true
+        },
+        "Right icon": {
+          "type": "INSTANCE_SWAP",
+          "default": "(instance)",
+          "wired": true
+        },
+        "Style": {
+          "type": "VARIANT",
+          "options": [
+            "Primary",
+            "Secondary"
+          ]
+        },
+        "Icon": {
+          "type": "VARIANT",
+          "options": [
+            "None",
+            "Left",
+            "Right",
+            "Both"
+          ]
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Pressed",
+            "Focus",
+            "Disabled",
+            "Loading"
+          ]
+        }
+      }
+    },
+    "input": {
+      "id": "1:498",
+      "name": "Input",
+      "type": "COMPONENT_SET",
+      "variants": 16,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "default": "Label",
+          "wired": true
+        },
+        "Show label": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Show helper": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Type": {
+          "type": "VARIANT",
+          "options": [
+            "Text",
+            "Textarea"
+          ]
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Focus",
+            "Filled",
+            "Error",
+            "Success",
+            "Disabled",
+            "Read-only"
+          ]
+        }
+      }
+    },
+    "radio": {
+      "id": "1:637",
+      "name": "Radio",
+      "type": "COMPONENT_SET",
+      "variants": 12,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "default": "Label",
+          "wired": true
+        },
+        "Description": {
+          "type": "TEXT",
+          "default": "Description",
+          "wired": true
+        },
+        "Show description": {
+          "type": "BOOLEAN",
+          "default": false,
+          "wired": true
+        },
+        "Checked": {
+          "type": "VARIANT",
+          "options": [
+            "False",
+            "True"
+          ]
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Pressed",
+            "Focus",
+            "Disabled",
+            "Error"
+          ]
+        }
+      }
+    },
+    "wishlistButton": {
+      "id": "1:815",
+      "name": "Wishlist Button",
+      "type": "COMPONENT_SET",
+      "variants": 8,
+      "properties": {
+        "Selected": {
+          "type": "VARIANT",
+          "options": [
+            "False",
+            "True"
+          ]
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Pressed",
+            "Focus"
+          ]
+        }
+      }
+    },
+    "productCard": {
+      "id": "1:968",
+      "name": "Product Card",
+      "type": "COMPONENT_SET",
+      "variants": 9,
+      "properties": {
+        "Title": {
+          "type": "TEXT",
+          "default": "Product name",
+          "wired": true
+        },
+        "Meta": {
+          "type": "TEXT",
+          "default": "14k gold · 3 colors",
+          "wired": true
+        },
+        "Price": {
+          "type": "TEXT",
+          "default": "$120",
+          "wired": true
+        },
+        "Compare price": {
+          "type": "TEXT",
+          "default": "$150",
+          "wired": true
+        },
+        "Show badge": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Show wishlist": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Show CTA": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Image": {
+          "type": "INSTANCE_SWAP",
+          "default": "(instance)",
+          "wired": true
+        },
+        "Status": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Sale",
+            "Sold out"
+          ]
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Focus"
+          ]
+        }
+      }
+    },
+    "badge": {
+      "id": "2:171",
+      "name": "Badge",
+      "type": "COMPONENT_SET",
+      "variants": 5,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "default": "Badge",
+          "wired": true
+        },
+        "Tone": {
+          "type": "VARIANT",
+          "options": [
+            "Dark",
+            "Light",
+            "Sale",
+            "Success",
+            "Outline"
+          ]
+        }
+      }
+    },
+    "navigationMenu": {
+      "id": "61:134",
+      "name": "Navigation Menu",
+      "type": "COMPONENT_SET",
+      "variants": 2,
+      "properties": {
+        "Show announcement": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Announcement": {
+          "type": "TEXT",
+          "default": "Free shipping on orders over $75",
+          "wired": true
+        },
+        "Breakpoint": {
+          "type": "VARIANT",
+          "options": [
+            "Desktop",
+            "Mobile"
+          ]
+        }
+      }
+    },
+    "mobileMenu": {
+      "id": "83:571",
+      "name": "Mobile Menu",
+      "type": "COMPONENT_SET",
+      "variants": 2,
+      "properties": {
+        "Level": {
+          "type": "VARIANT",
+          "options": [
+            "Main",
+            "Submenu"
+          ]
+        }
+      }
+    },
+    "navDropdown": {
+      "id": "83:510",
+      "name": "Nav Dropdown",
+      "type": "COMPONENT_SET",
+      "variants": 2,
+      "properties": {
+        "Menu": {
+          "type": "VARIANT",
+          "options": [
+            "Shop",
+            "Collections"
+          ]
+        }
+      }
+    },
+    "navGroup": {
+      "id": "83:97",
+      "name": "Nav Group",
+      "type": "COMPONENT",
+      "variants": 1,
+      "properties": {
+        "Title": {
+          "type": "TEXT",
+          "default": "Group title",
+          "wired": true
+        },
+        "Show link 4": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        }
+      }
+    },
+    "navLink": {
+      "id": "60:88",
+      "name": "Nav Link",
+      "type": "COMPONENT_SET",
+      "variants": 5,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "default": "Link",
+          "wired": true
+        },
+        "Has menu": {
+          "type": "BOOLEAN",
+          "default": false,
+          "wired": true
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Active",
+            "Focus",
+            "Open"
+          ]
+        }
+      }
+    },
+    "iconButton": {
+      "id": "60:69",
+      "name": "Icon Button",
+      "type": "COMPONENT_SET",
+      "variants": 4,
+      "properties": {
+        "Icon": {
+          "type": "INSTANCE_SWAP",
+          "default": "(instance)",
+          "wired": true
+        },
+        "Show count": {
+          "type": "BOOLEAN",
+          "default": false,
+          "wired": true
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Pressed",
+            "Focus"
+          ]
+        }
+      }
+    },
+    "menuItem": {
+      "id": "60:107",
+      "name": "Menu Item",
+      "type": "COMPONENT_SET",
+      "variants": 4,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "default": "Menu item",
+          "wired": true
+        },
+        "Has submenu": {
+          "type": "BOOLEAN",
+          "default": false,
+          "wired": true
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Active",
+            "Focus"
+          ]
+        }
+      }
+    },
+    "logo": {
+      "id": "59:67",
+      "name": "Logo",
+      "type": "COMPONENT",
+      "variants": 1,
+      "properties": {}
+    },
+    "spinner": {
+      "id": "64:50",
+      "name": "Spinner",
+      "type": "COMPONENT",
+      "variants": 1,
+      "properties": {}
+    },
+    "toggle": {
+      "id": "67:360",
+      "name": "Toggle",
+      "type": "COMPONENT_SET",
+      "variants": 10,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "default": "Label",
+          "wired": true
+        },
+        "Description": {
+          "type": "TEXT",
+          "default": "Description",
+          "wired": true
+        },
+        "Show description": {
+          "type": "BOOLEAN",
+          "default": false,
+          "wired": true
+        },
+        "Checked": {
+          "type": "VARIANT",
+          "options": [
+            "False",
+            "True"
+          ]
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Pressed",
+            "Focus",
+            "Disabled"
+          ]
+        }
+      }
+    },
+    "productRow": {
+      "id": "73:210",
+      "name": "Product Row",
+      "type": "COMPONENT_SET",
+      "variants": 2,
+      "properties": {
+        "Title": {
+          "type": "TEXT",
+          "default": "New arrivals",
+          "wired": true
+        },
+        "Show view all": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Breakpoint": {
+          "type": "VARIANT",
+          "options": [
+            "Desktop",
+            "Mobile"
+          ]
+        }
+      }
+    },
+    "typography": {
+      "id": "76:5",
+      "name": "Typography",
+      "type": "SECTION"
+    }
+  },
+  "textStyles": {
+    "Heading/H1": {
+      "lineHeight": "text/h1/line-height",
+      "letterSpacing": "text/h1/letter-spacing",
+      "fontSize": "text/h1/font-size"
+    },
+    "Heading/H2": {
+      "lineHeight": "text/h2/line-height",
+      "letterSpacing": "text/h2/letter-spacing",
+      "fontSize": "text/h2/font-size"
+    },
+    "Heading/H3": {
+      "lineHeight": "text/h3/line-height",
+      "letterSpacing": "text/h3/letter-spacing",
+      "fontSize": "text/h3/font-size"
+    },
+    "Heading/H4": {
+      "lineHeight": "text/h4/line-height",
+      "letterSpacing": "text/h4/letter-spacing",
+      "fontSize": "text/h4/font-size"
+    },
+    "Paragraph/Large": {
+      "lineHeight": "text/paragraph-lg/line-height",
+      "letterSpacing": "text/paragraph-lg/letter-spacing",
+      "paragraphSpacing": "text/paragraph-spacing",
+      "fontSize": "text/paragraph-lg/font-size"
+    },
+    "Paragraph/Default": {
+      "lineHeight": "text/paragraph/line-height",
+      "letterSpacing": "text/paragraph/letter-spacing",
+      "paragraphSpacing": "text/paragraph-spacing",
+      "fontSize": "text/paragraph/font-size"
+    },
+    "Paragraph/Small": {
+      "lineHeight": "text/paragraph-sm/line-height",
+      "letterSpacing": "text/paragraph-sm/letter-spacing",
+      "paragraphSpacing": "text/paragraph-spacing",
+      "fontSize": "text/paragraph-sm/font-size"
+    },
+    "Caption": {
+      "lineHeight": "text/caption/line-height",
+      "letterSpacing": "text/caption/letter-spacing",
+      "fontSize": "text/caption/font-size"
+    }
+  }
+}

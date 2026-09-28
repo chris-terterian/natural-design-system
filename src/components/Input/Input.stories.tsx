@@ -4,6 +4,7 @@ import { figma, FIGMA_NODES } from '../../figma';
 
 const meta = {
   title: 'Components/Input',
+  tags: ['status:stable'],
   component: TextField,
   parameters: figma(FIGMA_NODES.input),
   args: { label: 'Email', placeholder: 'you@example.com', helperText: 'We’ll never share your email.' },

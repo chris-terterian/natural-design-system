@@ -35,10 +35,52 @@
   height: var(--nds-nav-indicator-height);
   background: var(--nds-nav-link-indicator);
 }
+.nds-nav-link--button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+/* Current section shown as a button: same indicator + weight as an active link, hidden while open */
+.nds-nav-link--current:not([aria-expanded='true']) { font-weight: 600; }
+.nds-nav-link--current:not([aria-expanded='true'])::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--nds-nav-indicator-height);
+  background: var(--nds-nav-link-indicator);
+}
+/* Open: tinted background + chevron up (Figma: Nav Link State=Open) */
+.nds-nav-link[aria-expanded='true'], .nds-nav-link[data-state='open'] { background: var(--nds-nav-link-bg-open); text-decoration: none; }
+.nds-nav-link__chevron { transition: transform 120ms ease; }
+.nds-nav-link[aria-expanded='true'] .nds-nav-link__chevron, .nds-nav-link[data-state='open'] .nds-nav-link__chevron { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) { .nds-nav-link__chevron { transition: none; } }
+
 .nds-nav-link:focus-visible, .nds-nav-link[data-state='focus'] {
   outline: var(--nds-nav-focus-ring-width) solid var(--nds-nav-focus-ring);
   outline-offset: 2px;
 }
+
+/* ---------- Nav Group & Nav Dropdown ---------- */
+.nds-nav-group { display: flex; flex-direction: column; gap: var(--nds-nav-dropdown-group-gap); min-width: 200px; }
+.nds-nav-group__title {
+  margin: 0;
+  color: var(--nds-nav-group-title-text);
+  font: 600 var(--nds-nav-font-size-group-title) / var(--nds-nav-line-height-group-title) var(--nds-font-family);
+}
+.nds-nav-group__links { display: flex; flex-direction: column; margin: 0 0 0 calc(-1 * var(--nds-nav-link-padding-x)); padding: 0; list-style: none; }
+.nds-nav-dropdown {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--nds-nav-dropdown-padding-y) var(--nds-nav-padding-x);
+  background: var(--nds-nav-dropdown-bg);
+  border-bottom: var(--nds-nav-border-width) solid var(--nds-nav-dropdown-border);
+  font-family: var(--nds-font-family);
+}
+.nds-nav-dropdown__groups { display: flex; gap: var(--nds-nav-dropdown-column-gap); }
+.nds-nav__dropdown { position: absolute; top: 100%; left: 0; right: 0; z-index: 10; }
 
 /* ---------- Icon Button ---------- */
 .nds-icon-button {
@@ -74,7 +116,8 @@
   font: 400 var(--nds-nav-font-size-link) / var(--nds-nav-line-height-link) var(--nds-font-family);
   text-decoration: none;
 }
-.nds-menu-item__label { flex: 1; }
+.nds-menu-item__label { flex: 1; text-align: left; }
+button.nds-menu-item { width: 100%; border: 0; border-bottom: var(--nds-nav-border-width) solid var(--nds-nav-divider); background: transparent; cursor: pointer; }
 .nds-menu-item svg { width: var(--nds-nav-icon-size); height: var(--nds-nav-icon-size); }
 .nds-menu-item:hover, .nds-menu-item[data-state='hover'] { background: var(--nds-nav-link-bg-hover); }
 .nds-menu-item[aria-current='page'] { font-weight: 600; }
@@ -95,6 +138,7 @@
 
 /* ---------- Navigation Menu ---------- */
 .nds-nav {
+  position: relative;
   container-type: inline-size;
   background: var(--nds-nav-bg);
   font-family: var(--nds-font-family);
@@ -123,7 +167,7 @@
 /* Mobile breakpoint: the header's own width, not the viewport */
 @container (max-width: 767px) {
   .nds-nav__bar { height: var(--nds-nav-height-mobile); padding: 0 var(--nds-nav-padding-x-mobile); }
-  .nds-nav__links, .nds-nav__desktop-only { display: none; }
+  .nds-nav__links, .nds-nav__desktop-only, .nds-nav__dropdown { display: none; }
   .nds-nav__leading { display: flex; }
 }
 
@@ -153,3 +197,10 @@
 }
 .nds-mobile-menu__list { display: flex; flex-direction: column; padding: var(--nds-space-8) var(--nds-nav-padding-x-mobile) 0; }
 .nds-mobile-menu__list--account { margin-top: auto; padding-bottom: var(--nds-space-24); }
+
+.nds-mobile-menu__title {
+  margin: 0;
+  color: var(--nds-nav-link-text);
+  font: 600 var(--nds-nav-font-size-link) / var(--nds-nav-line-height-link) var(--nds-font-family);
+}
+.nds-mobile-menu__group-title { padding: 20px var(--nds-nav-link-padding-x) 4px; }

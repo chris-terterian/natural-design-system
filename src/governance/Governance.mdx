@@ -1,0 +1,36 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { StatusLegend, StatusTable, ExceptionsTable, GatesTable } from './Status';
+import { FIGMA_NODES } from '../figma';
+
+<Meta title="Governance/Component status" />
+
+# Governance
+
+How the Natural Design System changes, and how you know what's safe to use. The full policy lives in
+[`GOVERNANCE.md`](https://github.com/chris-terterian/natural-design-system/blob/main/GOVERNANCE.md); the reasoning behind
+decisions lives in [`DECISIONS.md`](https://github.com/chris-terterian/natural-design-system/blob/main/DECISIONS.md).
+
+This page is generated from `governance/components.json` and `governance/a11y-exceptions.json`, the same files the
+blocking checks read, so it can't drift from what's enforced. Figma ↔ code parity is checked against
+`governance/figma-snapshot.json`, exported from the live Figma file.
+
+## Statuses
+
+<StatusLegend />
+
+## Components
+
+<StatusTable figmaNodes={FIGMA_NODES} />
+
+Filter the sidebar by status with the tag filter (`status:stable`, `status:beta`).
+
+## Accessibility exceptions register
+
+Every story is scanned against WCAG 2.2 AA on each push, and a violation **blocks the deploy**. The only allowed
+exceptions are listed here, each with its WCAG basis.
+
+<ExceptionsTable />
+
+## Quality gates (every push to `main`)
+
+<GatesTable />

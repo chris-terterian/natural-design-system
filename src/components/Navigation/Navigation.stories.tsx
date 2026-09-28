@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { IconButton, Logo, MenuItem, MobileMenu, NavigationMenu, NavLink } from './Navigation';
+import { DEFAULT_NAV_ITEMS, IconButton, Logo, MenuItem, MobileMenu, NavDropdown, NavigationMenu, NavLink } from './Navigation';
 import { BagIcon, SearchIcon } from '../../icons';
 import { figma, FIGMA_NODES } from '../../figma';
 
 const meta = {
   title: 'Components/Navigation Menu',
+  tags: ['status:stable'],
   component: NavigationMenu,
   parameters: { ...figma(FIGMA_NODES.navigationMenu), layout: 'fullscreen' },
   args: { bagCount: 2 },
@@ -17,6 +18,28 @@ export const Mobile: Story = {
   decorators: [(Story) => <div style={{ width: 375 }}><Story /></div>],
 };
 export const NoAnnouncement: Story = { args: { announcement: false } };
+
+/** Mirrors the Figma example "Desktop with Shop open": Shop in the Open state with its Nav Dropdown. */
+export const DesktopShopOpen: Story = {
+  name: 'Desktop — Shop open',
+  args: { defaultOpenMenu: 'Shop' },
+  decorators: [(Story) => <div style={{ width: 1440, minHeight: 480 }}><Story /></div>],
+};
+
+export const NavDropdowns: Story = {
+  name: 'Nav Dropdown — All Variants',
+  parameters: { ...figma(FIGMA_NODES.navDropdown), layout: 'padded' },
+  render: () => (
+    <div style={{ display: 'grid', gap: 32, width: 1440, fontSize: 12 }}>
+      {DEFAULT_NAV_ITEMS.filter((i) => i.menu).map((i) => (
+        <div key={i.label} style={{ display: 'grid', gap: 8 }}>
+          <strong>{`Menu / ${i.label}`}</strong>
+          <NavDropdown {...i.menu!} />
+        </div>
+      ))}
+    </div>
+  ),
+};
 
 /** Mirrors the Figma grid: Breakpoint = Desktop, Mobile. */
 export const AllVariants: Story = {
@@ -37,7 +60,14 @@ export const MobileMenuOpen: StoryObj<typeof MobileMenu> = {
   render: () => <MobileMenu open inline bagCount={2} onClose={() => {}} />,
 };
 
+export const MobileSubmenu: StoryObj<typeof MobileMenu> = {
+  name: 'Mobile Menu (Submenu level)',
+  parameters: { ...figma(FIGMA_NODES.mobileMenu), layout: 'padded' },
+  render: () => <MobileMenu open inline initialLevel="Shop" bagCount={2} onClose={() => {}} />,
+};
+
 const STATES = ['Default', 'Hover', 'Active', 'Focus'] as const;
+const LINK_STATES = [...STATES, 'Open'] as const;
 const force = (s: string) => (s === 'Hover' ? 'hover' : s === 'Focus' ? 'focus' : undefined);
 
 export const NavLinks: Story = {
@@ -45,9 +75,9 @@ export const NavLinks: Story = {
   parameters: { ...figma(FIGMA_NODES.navLink), layout: 'padded' },
   render: () => (
     <table style={{ borderSpacing: '48px 12px', fontSize: 12 }}>
-      <thead><tr>{STATES.map((s) => <th key={s}>{s}</th>)}</tr></thead>
-      <tbody><tr>{STATES.map((s) => (
-        <td key={s}><NavLink href="#" active={s === 'Active'} forceState={force(s)}>Link</NavLink></td>
+      <thead><tr>{LINK_STATES.map((s) => <th key={s}>{s}</th>)}</tr></thead>
+      <tbody><tr>{LINK_STATES.map((s) => (
+        <td key={s}><NavLink href="#" active={s === 'Active'} hasMenu={s === 'Open'} forceState={s === 'Open' ? 'open' : force(s)}>Link</NavLink></td>
       ))}</tr></tbody>
     </table>
   ),
@@ -81,7 +111,7 @@ export const MenuItems: Story = {
       <tbody>{STATES.map((s) => (
         <tr key={s}>
           <th style={{ textAlign: 'left' }}>{s}</th>
-          <td style={{ width: 343, paddingLeft: 12 }}><MenuItem href="#" hasSubmenu active={s === 'Active'} forceState={force(s)}>Menu item</MenuItem></td>
+          <td style={{ width: 343, paddingLeft: 12 }}>{s === 'Active' ? <MenuItem href="#" active forceState={force(s)}>Menu item</MenuItem> : <MenuItem hasSubmenu forceState={force(s)}>Menu item</MenuItem>}</td>
         </tr>
       ))}</tbody>
     </table>

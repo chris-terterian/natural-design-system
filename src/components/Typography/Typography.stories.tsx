@@ -6,6 +6,7 @@ import { figma, FIGMA_NODES } from '../../figma';
 
 const meta = {
   title: 'Foundations/Typography',
+  tags: ['status:stable'],
   component: Heading,
   parameters: { ...figma(FIGMA_NODES.typography), layout: 'padded' },
   args: { level: 1, children: 'Made from what the land lets go' },

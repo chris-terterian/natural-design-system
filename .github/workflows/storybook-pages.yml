@@ -1,4 +1,4 @@
-name: Deploy Storybook to GitHub Pages
+name: Quality gates + deploy Storybook
 
 on:
   push:
@@ -24,8 +24,19 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run typecheck
-      - run: npm run build-storybook
+      # Quality gates (GOVERNANCE.md §6): any failure stops the deploy
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Governance check (registry, specs, Figma links, generated tokens)
+        run: npm run check:governance
+      - name: Figma ↔ code parity (committed snapshot of the Figma file)
+        run: npm run check:parity
+      - name: Build Storybook
+        run: npm run build-storybook
+      - name: Install Chromium for the accessibility gate
+        run: npx playwright install --with-deps chromium
+      - name: Accessibility gate (axe, WCAG 2.2 AA, every story)
+        run: npm run check:a11y
       - uses: actions/upload-pages-artifact@v3
         with:
           path: storybook-static

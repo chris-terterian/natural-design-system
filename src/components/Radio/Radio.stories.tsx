@@ -5,6 +5,7 @@ import { figma, FIGMA_NODES } from '../../figma';
 
 const meta = {
   title: 'Components/Radio',
+  tags: ['status:stable'],
   component: Radio,
   parameters: figma(FIGMA_NODES.radio),
   args: { label: 'Label', name: 'demo' },

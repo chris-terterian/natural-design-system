@@ -4,6 +4,7 @@ import { figma, FIGMA_NODES } from '../../figma';
 
 const meta = {
   title: 'Components/Wishlist Button',
+  tags: ['status:stable'],
   component: WishlistButton,
   parameters: { ...figma(FIGMA_NODES.wishlistButton), backgrounds: { default: 'media' } },
   decorators: [(Story) => <div style={{ background: 'var(--nds-card-media-bg)', padding: 32, borderRadius: 8 }}><Story /></div>],

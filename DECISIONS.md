@@ -1,0 +1,110 @@
+# Decision log
+
+Short records of *why* the Natural Design System is the way it is. Each entry: context, decision, consequences. New entries go at the bottom; superseded ones stay, marked **Superseded by D-xxx**.
+
+| ID | Decision | Date | Status |
+|---|---|---|---|
+| D-001 | The repo is the source of truth; Figma mirrors it | 2026-09-27 | Accepted |
+| D-002 | WCAG 2.2 AA is a blocking gate | 2026-09-27 | Accepted |
+| D-003 | Primitives + component tokens, named identically in Figma and code | 2026-09-27 | Accepted |
+| D-004 | "Add to Bag", never "cart" | 2026-09-27 | Accepted |
+| D-005 | Shared parts are separate, nested components | 2026-09-27 | Accepted |
+| D-006 | Brand name is "Natural"; the logo is the wordmark only | 2026-09-28 | Accepted |
+| D-007 | Component breakpoints use container queries; type uses the viewport | 2026-09-28 | Accepted |
+| D-008 | Light badges only on white surfaces | 2026-09-28 | Accepted |
+| D-009 | Loading is a state; Full width is instance sizing | 2026-09-28 | Accepted |
+| D-010 | Toggle thumb has no check mark | 2026-09-28 | Accepted |
+| D-011 | Product rows: 4 across on desktop, 2 per row on mobile | 2026-09-28 | Accepted |
+| D-012 | Product Card keyboard order: title before actions | 2026-09-28 | Accepted |
+| D-013 | Responsive typography via variable modes | 2026-09-28 | Accepted |
+| D-014 | Stay in 0.x; governance ships as v0.2.0 | 2026-09-28 | Accepted |
+| D-015 | Navigation menus use the disclosure pattern, opened by click | 2026-09-28 | Accepted |
+| D-016 | All 11 components promoted to Stable | 2026-09-28 | Accepted |
+| D-017 | Figma parity is a blocking check via an MCP-exported snapshot | 2026-09-28 | Accepted |
+
+---
+
+### D-001: The repo is the source of truth; Figma mirrors it
+**Context.** Designs and code drift when each can change independently.
+**Decision.** Tokens and components are defined in the repo. Figma variables and components mirror them one-to-one; Storybook renders the repo.
+**Consequences.** Changes land in code and Figma together; a parity check (count and value of every variable, per mode) runs before each release.
+
+### D-002: WCAG 2.2 AA is a blocking gate
+**Context.** Advisory accessibility checks get ignored under deadline pressure.
+**Decision.** Every story is scanned with axe on every push, and a violation blocks the deploy. The only way through is a registered exception with a WCAG basis.
+**Consequences.** One exception exists today (EX-001: disabled field text, which WCAG exempts).
+
+### D-003: Primitives + component tokens, named identically in Figma and code
+**Context.** Designers and developers need to point at the same thing.
+**Decision.** Two layers: primitives (`color/brown/200`), hidden from Figma pickers, and component tokens (`button/primary/bg/default`) that alias them. The Figma name maps directly to the CSS variable (`--nds-button-primary-bg-default`).
+**Consequences.** Re-theming is a primitive or alias change, not a component edit.
+
+### D-004: "Add to Bag", never "cart"
+**Context.** One Product Card variant was hand-edited to "Add to Cart" while the rest said "Add to Bag".
+**Decision.** "Add to Bag" is the only purchase label, listed in the `DESIGN.md` UI vocabulary.
+**Consequences.** Mixed wording is a review-checklist failure.
+
+### D-005: Shared parts are separate, nested components
+**Context.** The Product Card's badge was first drawn inside the card, so its words and colours couldn't change.
+**Decision.** Any part used in more than one place (Badge, Button, Wishlist Button, Icon Button, Spinner) is its own component, nested as an exposed instance.
+**Consequences.** One change updates every use; the card's badge tokens were removed in favour of Badge's.
+
+### D-006: Brand name is "Natural"; the logo is the wordmark only
+**Context.** The logo read "natural goods" and its accessible name was "Natural Goods — home".
+**Decision.** The brand is **Natural**. The logo is the wordmark "natural"; the accessible name is "Natural — home".
+**Consequences.** The Logo's descriptor layer and property were removed in Figma and code.
+
+### D-007: Component breakpoints use container queries; type uses the viewport
+**Context.** Headers and product rows get placed in containers of different widths; body text should track the device.
+**Decision.** Navigation Menu and Product Row switch layouts by their own width (container query at 768px). The type scale switches by viewport (media query at 768px), or by `data-nds-mode`.
+**Consequences.** Components adapt wherever they're placed; Storybook can show both modes side by side.
+
+### D-008: Light badges only on white surfaces
+**Context.** The Light badge's fill (`#EFE6DB`) matched the product image backdrop, so the pill disappeared.
+**Decision.** On product imagery use Dark, Sale or Outline; Light is for white surfaces. "Handmade" on cards uses Dark.
+**Consequences.** Added to the Badge Do / Don't.
+
+### D-009: Loading is a state; Full width is instance sizing
+**Context.** `Loading` and `Full width` booleans were added to the Figma Button but weren't connected to any layer and didn't exist in code. Figma booleans can only show or hide layers.
+**Decision.** Loading is a `State=Loading` variant (spinner centred, label kept invisible so width holds). Full width is done by setting the instance to Fill container; code has a `fullWidth` prop. Unwired properties are not allowed.
+**Consequences.** The Figma hygiene rule "no unwired properties" in `GOVERNANCE.md`.
+
+### D-010: Toggle thumb has no check mark
+**Context.** The first Toggle showed a white check mark on the thumb when on.
+**Decision.** Removed at the owner's request. On and off still differ without colour: thumb position (left or right) plus the filled sand track and darker border.
+**Consequences.** The Check Mark icon and the `toggle/check` token were deleted.
+
+### D-011: Product rows: 4 across on desktop, 2 per row on mobile
+**Context.** Three cards across a 375px screen are about 104px wide, narrower than the Add to Bag button, and titles wrap badly.
+**Decision.** 4 columns at 768px and wider; 2 per row below, with the same 4 products wrapping to two rows. Cards fill their column and keep 4:5 imagery.
+**Consequences.** Product rows should hold 4 (or a multiple of 4) products.
+
+### D-012: Product Card keyboard order: title before actions
+**Context.** In the card's markup, the Wishlist Button came before the title link, so keyboard and screen reader users met "Add to wishlist" before knowing which product it was.
+**Decision.** The wishlist moves after the title in the markup and stays visually top-right over the image (positioned by CSS). Tab order: title → wishlist → Add to Bag.
+**Consequences.** Implemented in 0.2.0; verified by test (same 12px position, new order).
+
+### D-013: Responsive typography via variable modes
+**Context.** Headers and paragraph copy must look the same on content and category pages and stay readable on desktop and mobile.
+**Decision.** One Typography collection with **Desktop** and **Mobile** modes (H1–H4, Paragraph Large / Default / Small, Caption, spacing, measure), with Figma text styles bound to it. Component UI text keeps fixed sizes.
+**Consequences.** The token format, build and Figma sync gained mode support; the Product Row title moved onto Heading/H3.
+
+### D-014: Stay in 0.x; governance ships as v0.2.0
+**Context.** The system is a learning and showcase project, not yet in production use.
+**Decision.** Stay in 0.x until real photography, image guidelines and the modal form exist and the Beta components reach Stable. Everything shipped so far is v0.1.0; the governance release is v0.2.0.
+**Consequences.** In 0.x, breaking changes bump the minor version.
+
+### D-015: Navigation menus use the disclosure pattern, opened by click
+**Context.** Shop and Collections showed chevrons without menus. Building the menus meant choosing between an ARIA `menu` (application-style, arrow-key driven) and the disclosure pattern (a button that shows a region of links), and between hover and click to open.
+**Decision.** Disclosure pattern: each menu item is a `<button aria-expanded aria-controls>` that shows a Nav Dropdown of ordinary links. It opens on click / Enter / Space, never on hover alone; Escape, clicking outside, or opening another menu closes it. On mobile the same data drives a Submenu level in the Mobile Menu, with a Back button that restores focus.
+**Consequences.** Site navigation stays ordinary links that screen readers list and Tab reaches, with no arrow-key model to learn. Hover-open can be added later as an enhancement on top of click, never instead of it.
+
+### D-016: All 11 components promoted to Stable
+**Context.** Four components were Beta: Product Card (keyboard order and placeholder imagery), Product Row (Figma row heights set by hand), Navigation Menu (chevrons without menus) and Typography (no display size or page grid).
+**Decision.** The two real gaps were fixed (D-012 keyboard order; D-015 dropdowns and submenus). The rest weren't defects in the components: photography is content, a display size and page grid are future additions, and row heights are a Figma tooling limit the code doesn't share. Those moved to the roadmap or into the spec as documented limitations. Every component now meets the Stable criteria in `GOVERNANCE.md` §5.
+**Consequences.** The registry, Storybook tags, the Storybook Governance page and the Figma Governance page show 11 Stable. Future work (photography, display type, page grid) arrives as enhancements, not as gaps in shipped components.
+
+### D-017: Figma parity is a blocking check via an MCP-exported snapshot
+**Context.** Parity was first listed as a manual pre-release step because Figma's server-side Variables API needs an Enterprise plan. But the Figma MCP (figma-console and Figma's own MCP) can read the live file wherever Figma is open, which is how parity had been checked by hand all along.
+**Decision.** Split parity in two. An export script, run through the MCP, writes `governance/figma-snapshot.json`: every variable per mode, the structure of every component the code links to, and text-style bindings. `npm run check:parity` compares that snapshot with the repo and blocks CI on any difference, including unwired component properties (D-009) and name drift.
+**Consequences.** Drift from code changes is caught automatically. Edits made in Figma after the last snapshot aren't, so the snapshot is refreshed with every Figma or token change and before every release, and its timestamp shows how current it is. Verified by simulating three kinds of drift, each caught.

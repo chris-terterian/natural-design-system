@@ -1,0 +1,15 @@
+{
+  "$comment": "Exceptions register for the blocking accessibility gate (scripts/check-a11y.mjs). An exception applies when axe's rule matches AND the failing element matches the CSS selector. Every entry needs a WCAG basis, an owner and a review date. Review at each release.",
+  "exceptions": [
+    {
+      "id": "EX-001",
+      "rule": "color-contrast",
+      "selector": ".nds-field:has(.nds-field__input:disabled) *",
+      "reason": "Text belonging to a disabled form field (label, helper, counter) is intentionally faded (#9C8B7A). WCAG 2.2 SC 1.4.3 exempts text that is part of an inactive user interface component.",
+      "wcag": "1.4.3 Contrast (Minimum): incidental / inactive UI exemption",
+      "owner": "Design system owner",
+      "added": "2026-09-28",
+      "review": "Each release"
+    }
+  ]
+}

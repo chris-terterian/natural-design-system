@@ -1,6 +1,6 @@
 {
   "name": "natural-design-system",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A natural goods e-commerce design system — React components, tokens and Storybook, mirrored with the Figma file \"Natural Design System\".",
   "type": "module",
   "license": "MIT",
@@ -20,7 +20,13 @@
     "build-storybook": "npm run tokens && storybook build",
     "build": "npm run tokens && tsc -p tsconfig.build.json && vite build",
     "typecheck": "tsc --noEmit",
-    "figma:sync-script": "node scripts/figma/print-sync.mjs"
+    "figma:sync-script": "node scripts/figma/print-sync.mjs",
+    "check:a11y": "node scripts/check-a11y.mjs",
+    "check:governance": "node scripts/check-governance.mjs",
+    "check": "npm run typecheck && npm run check:governance && npm run check:parity && npm run build-storybook && npm run check:a11y",
+    "figma:snapshot-script": "node scripts/figma/print-snapshot.mjs",
+    "figma:snapshot-save": "node scripts/figma/save-snapshot.mjs",
+    "check:parity": "node scripts/check-parity.mjs"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -34,6 +40,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "playwright": "^1.63.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "storybook": "^10.6.0",

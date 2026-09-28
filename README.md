@@ -4,6 +4,8 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.2.0)
+
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
 All components target **WCAG 2.2 AA**. Contrast ratios for every state are documented in Figma next to each component.
@@ -22,6 +24,12 @@ npm run storybook        # http://localhost:6007
 | `npm run build-storybook` | Static Storybook in `storybook-static/` |
 | `npm run build` | Library build to `dist/` (ES module + CSS + types) |
 | `npm run typecheck` | TypeScript check |
+| `npm run check` | All quality gates: typecheck, governance, parity, Storybook build, accessibility (the same gates CI runs before deploying) |
+| `npm run check:governance` | Registry ↔ stories ↔ Figma links ↔ DESIGN.md specs; tokens resolve and generated files are current |
+| `npm run check:parity` | Figma ↔ code parity against `governance/figma-snapshot.json` (variables per mode, linked components, unwired properties, text styles) |
+| `npm run figma:snapshot-script -- <part>` | Prints the Figma export script (`variables-1`, `variables-2`, `structure`) to run through the Figma MCP |
+| `npm run figma:snapshot-save -- <files>` | Merges the three export results into `governance/figma-snapshot.json` |
+| `npm run check:a11y` | axe (WCAG 2.2 AA) on every story in the built Storybook, minus registered exceptions |
 | `npm run figma:sync-script` | Prints the Figma variable sync script with current tokens inlined |
 
 ## Components

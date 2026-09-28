@@ -4,6 +4,7 @@ import { figma, FIGMA_NODES } from '../../figma';
 
 const meta = {
   title: 'Components/Product Card',
+  tags: ['status:stable'],
   component: ProductCard,
   parameters: figma(FIGMA_NODES.productCard),
   args: { title: 'Product name', meta: '14k gold · 3 colors', price: '$120', comparePrice: '$150', href: '#', status: 'default' },

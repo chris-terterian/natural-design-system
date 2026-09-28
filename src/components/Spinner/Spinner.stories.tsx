@@ -4,6 +4,7 @@ import { figma, FIGMA_NODES } from '../../figma';
 
 const meta = {
   title: 'Components/Spinner',
+  tags: ['status:stable'],
   component: Spinner,
   parameters: figma(FIGMA_NODES.spinner),
 } satisfies Meta<typeof Spinner>;

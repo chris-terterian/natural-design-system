@@ -4,6 +4,7 @@ import { figma, FIGMA_NODES } from '../../figma';
 
 const meta = {
   title: 'Components/Badge',
+  tags: ['status:stable'],
   component: Badge,
   parameters: figma(FIGMA_NODES.badge),
   args: { children: 'New', tone: 'dark' },

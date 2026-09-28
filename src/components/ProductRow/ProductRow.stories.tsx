@@ -12,6 +12,7 @@ const PRODUCTS: ProductCardProps[] = [
 
 const meta = {
   title: 'Components/Product Row',
+  tags: ['status:stable'],
   component: ProductRow,
   parameters: { ...figma(FIGMA_NODES.productRow), layout: 'fullscreen' },
   args: { title: 'New arrivals', viewAllHref: '#new', products: PRODUCTS },

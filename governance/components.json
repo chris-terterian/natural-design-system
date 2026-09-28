@@ -1,0 +1,197 @@
+{
+  "$comment": "Component registry: the single source of truth for component status. Checked by scripts/check-governance.mjs; rendered in Storybook (Governance/Component status) and mirrored on the Figma Governance page.",
+  "statuses": {
+    "proposed": "Idea accepted for exploration on the Figma Proposals page. Not in code.",
+    "in-progress": "Being designed and built. Not for use in product work.",
+    "beta": "Usable, in Figma and code, meets WCAG 2.2 AA, but has known gaps listed in its notes. API may change in a minor release.",
+    "stable": "Complete: Figma + code + story + DESIGN.md spec + a11y gate + real usage in a pattern. Changes follow the versioning policy.",
+    "deprecated": "Still works, but has a named replacement and a removal version. Don't use in new work."
+  },
+  "components": [
+    {
+      "name": "Button",
+      "exports": [
+        "Button"
+      ],
+      "status": "stable",
+      "since": "0.1.0",
+      "storyFile": "src/components/Button/Button.stories.tsx",
+      "storyTitle": "Components/Button",
+      "figmaKey": "button",
+      "specs": [
+        "6.2 Button"
+      ],
+      "notes": ""
+    },
+    {
+      "name": "Spinner",
+      "exports": [
+        "Spinner"
+      ],
+      "status": "stable",
+      "since": "0.1.0",
+      "storyFile": "src/components/Spinner/Spinner.stories.tsx",
+      "storyTitle": "Components/Spinner",
+      "figmaKey": "spinner",
+      "specs": [
+        "6.16 Spinner"
+      ],
+      "notes": ""
+    },
+    {
+      "name": "Badge",
+      "exports": [
+        "Badge"
+      ],
+      "status": "stable",
+      "since": "0.1.0",
+      "storyFile": "src/components/Badge/Badge.stories.tsx",
+      "storyTitle": "Components/Badge",
+      "figmaKey": "badge",
+      "specs": [
+        "6.3 Badge"
+      ],
+      "notes": ""
+    },
+    {
+      "name": "Input",
+      "exports": [
+        "TextField",
+        "TextArea"
+      ],
+      "status": "stable",
+      "since": "0.1.0",
+      "storyFile": "src/components/Input/Input.stories.tsx",
+      "storyTitle": "Components/Input",
+      "figmaKey": "input",
+      "specs": [
+        "6.4 Text Field",
+        "6.5 Text Area"
+      ],
+      "notes": "Disabled text contrast is registered exception EX-001 (WCAG-exempt), not a gap."
+    },
+    {
+      "name": "Radio",
+      "exports": [
+        "Radio",
+        "RadioGroup"
+      ],
+      "status": "stable",
+      "since": "0.1.0",
+      "storyFile": "src/components/Radio/Radio.stories.tsx",
+      "storyTitle": "Components/Radio",
+      "figmaKey": "radio",
+      "specs": [
+        "6.6 Radio",
+        "6.7 Radio Group"
+      ],
+      "notes": ""
+    },
+    {
+      "name": "Toggle",
+      "exports": [
+        "Toggle"
+      ],
+      "status": "stable",
+      "since": "0.1.0",
+      "storyFile": "src/components/Toggle/Toggle.stories.tsx",
+      "storyTitle": "Components/Toggle",
+      "figmaKey": "toggle",
+      "specs": [
+        "6.17 Toggle"
+      ],
+      "notes": ""
+    },
+    {
+      "name": "Wishlist Button",
+      "exports": [
+        "WishlistButton"
+      ],
+      "status": "stable",
+      "since": "0.1.0",
+      "storyFile": "src/components/WishlistButton/WishlistButton.stories.tsx",
+      "storyTitle": "Components/Wishlist Button",
+      "figmaKey": "wishlistButton",
+      "specs": [
+        "6.8 Wishlist Button"
+      ],
+      "notes": ""
+    },
+    {
+      "name": "Product Card",
+      "exports": [
+        "ProductCard"
+      ],
+      "status": "stable",
+      "since": "0.1.0",
+      "storyFile": "src/components/ProductCard/ProductCard.stories.tsx",
+      "storyTitle": "Components/Product Card",
+      "figmaKey": "productCard",
+      "specs": [
+        "6.9 Product Card",
+        "6.15 Image Placeholder"
+      ],
+      "notes": ""
+    },
+    {
+      "name": "Product Row",
+      "exports": [
+        "ProductRow"
+      ],
+      "status": "stable",
+      "since": "0.1.0",
+      "storyFile": "src/components/ProductRow/ProductRow.stories.tsx",
+      "storyTitle": "Components/Product Row",
+      "figmaKey": "productRow",
+      "specs": [
+        "6.18 Product Row"
+      ],
+      "notes": "Figma can't stretch cards to the tallest in a row, so row heights are set by hand in Figma (code does it automatically). Documented in the spec."
+    },
+    {
+      "name": "Navigation Menu",
+      "exports": [
+        "NavigationMenu",
+        "MobileMenu",
+        "NavLink",
+        "NavMenuButton",
+        "NavDropdown",
+        "NavGroup",
+        "IconButton",
+        "MenuItem",
+        "Logo"
+      ],
+      "status": "stable",
+      "since": "0.1.0",
+      "storyFile": "src/components/Navigation/Navigation.stories.tsx",
+      "storyTitle": "Components/Navigation Menu",
+      "figmaKey": "navigationMenu",
+      "specs": [
+        "6.1 Logo",
+        "6.10 Icon Button",
+        "6.11 Nav Link",
+        "6.12 Menu Item",
+        "6.13 Navigation Menu",
+        "6.14 Mobile Menu",
+        "6.20 Nav Dropdown & Nav Group"
+      ],
+      "notes": ""
+    },
+    {
+      "name": "Typography",
+      "exports": [
+        "Heading",
+        "Text"
+      ],
+      "status": "stable",
+      "since": "0.1.0",
+      "storyFile": "src/components/Typography/Typography.stories.tsx",
+      "storyTitle": "Foundations/Typography",
+      "figmaKey": "typography",
+      "specs": [
+        "6.19 Heading & Text"
+      ],
+      "notes": ""
+    }
+  ]
+}

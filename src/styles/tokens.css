@@ -278,6 +278,15 @@
   --nds-nav-icon-button-focus-ring-size: var(--nds-size-52);
   --nds-nav-chevron-size: var(--nds-size-16);
   --nds-nav-focus-ring-radius: var(--nds-radius-12);
+  --nds-nav-link-bg-open: var(--nds-color-brown-50);
+  --nds-nav-dropdown-bg: var(--nds-color-white);
+  --nds-nav-dropdown-border: var(--nds-color-taupe-200);
+  --nds-nav-dropdown-padding-y: var(--nds-space-32);
+  --nds-nav-dropdown-column-gap: var(--nds-space-48);
+  --nds-nav-dropdown-group-gap: var(--nds-space-8);
+  --nds-nav-group-title-text: var(--nds-color-brown-800);
+  --nds-nav-font-size-group-title: var(--nds-font-size-14);
+  --nds-nav-line-height-group-title: var(--nds-line-height-20);
   /* Toggle */
   --nds-toggle-track-bg-off: var(--nds-color-white);
   --nds-toggle-track-bg-off-hover: var(--nds-color-brown-50);

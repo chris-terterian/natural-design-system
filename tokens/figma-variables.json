@@ -1106,6 +1106,42 @@
     "nav/focus-ring-radius": {
       "type": "FLOAT",
       "alias": "radius/12"
+    },
+    "nav/link/bg/open": {
+      "type": "COLOR",
+      "alias": "color/brown/50"
+    },
+    "nav/dropdown/bg": {
+      "type": "COLOR",
+      "alias": "color/white"
+    },
+    "nav/dropdown/border": {
+      "type": "COLOR",
+      "alias": "color/taupe/200"
+    },
+    "nav/dropdown/padding-y": {
+      "type": "FLOAT",
+      "alias": "space/32"
+    },
+    "nav/dropdown/column-gap": {
+      "type": "FLOAT",
+      "alias": "space/48"
+    },
+    "nav/dropdown/group-gap": {
+      "type": "FLOAT",
+      "alias": "space/8"
+    },
+    "nav/group-title/text": {
+      "type": "COLOR",
+      "alias": "color/brown/800"
+    },
+    "nav/font-size/group-title": {
+      "type": "FLOAT",
+      "alias": "font-size/14"
+    },
+    "nav/line-height/group-title": {
+      "type": "FLOAT",
+      "alias": "line-height/20"
     }
   },
   "Toggle": {

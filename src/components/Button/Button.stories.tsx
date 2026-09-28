@@ -5,6 +5,7 @@ import { figma, FIGMA_NODES } from '../../figma';
 
 const meta = {
   title: 'Components/Button',
+  tags: ['status:stable'],
   component: Button,
   parameters: figma(FIGMA_NODES.button),
   args: { children: 'Button', variant: 'primary' },

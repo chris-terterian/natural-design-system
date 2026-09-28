@@ -78,14 +78,16 @@ export function ProductCard({
           <div className="nds-card__image nds-card__placeholder"><ImagePlaceholderIcon /></div>
         )}
         {badgeText && <Badge className="nds-card__badge" tone={badgeTone ?? DEFAULT_BADGE[status].tone}>{badgeText}</Badge>}
-        {showWishlist && (
-          <WishlistButton className="nds-card__wishlist" productName={title} selected={wishlisted} onChange={onWishlistChange} />
-        )}
       </div>
       <div className="nds-card__info">
         <h3 className="nds-card__title">
           <a className="nds-card__link" href={href}>{title}</a>
         </h3>
+        {/* After the title in the markup so keyboard users meet the product before its actions (D-012);
+            positioned over the image top-right by CSS. */}
+        {showWishlist && (
+          <WishlistButton className="nds-card__wishlist" productName={title} selected={wishlisted} onChange={onWishlistChange} />
+        )}
         {meta && <p className="nds-card__meta">{meta}</p>}
         <p className="nds-card__price">
           {status === 'sale' && comparePrice ? (

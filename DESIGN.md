@@ -270,6 +270,42 @@ tokens:
     "nav/icon-button-focus-ring-size": { value: "52px", ref: "size/52", css: "--nds-nav-icon-button-focus-ring-size" }
     "nav/chevron-size": { value: "16px", ref: "size/16", css: "--nds-nav-chevron-size" }
     "nav/focus-ring-radius": { value: "12px", ref: "radius/12", css: "--nds-nav-focus-ring-radius" }
+  "Toggle":
+    "toggle/track/bg/off": { value: "#FFFFFF", ref: "color/white", css: "--nds-toggle-track-bg-off" }
+    "toggle/track/bg/off-hover": { value: "#F6EFE7", ref: "color/brown/50", css: "--nds-toggle-track-bg-off-hover" }
+    "toggle/track/bg/off-pressed": { value: "#EADCCB", ref: "color/brown/150", css: "--nds-toggle-track-bg-off-pressed" }
+    "toggle/track/bg/on": { value: "#D8BFA0", ref: "color/brown/200", css: "--nds-toggle-track-bg-on" }
+    "toggle/track/bg/on-hover": { value: "#CBAE8A", ref: "color/brown/300", css: "--nds-toggle-track-bg-on-hover" }
+    "toggle/track/bg/on-pressed": { value: "#BC9D76", ref: "color/brown/400", css: "--nds-toggle-track-bg-on-pressed" }
+    "toggle/track/bg/disabled": { value: "#EFE6DB", ref: "color/brown/100", css: "--nds-toggle-track-bg-disabled" }
+    "toggle/track/border/off": { value: "#8A6A4A", ref: "color/brown/600", css: "--nds-toggle-track-border-off" }
+    "toggle/track/border/off-hover": { value: "#6B4F35", ref: "color/brown/800", css: "--nds-toggle-track-border-off-hover" }
+    "toggle/track/border/on": { value: "#3B2A1E", ref: "color/brown/900", css: "--nds-toggle-track-border-on" }
+    "toggle/track/border/disabled": { value: "#DCCFBF", ref: "color/taupe/300", css: "--nds-toggle-track-border-disabled" }
+    "toggle/thumb/off": { value: "#8A6A4A", ref: "color/brown/600", css: "--nds-toggle-thumb-off" }
+    "toggle/thumb/off-hover": { value: "#6B4F35", ref: "color/brown/800", css: "--nds-toggle-thumb-off-hover" }
+    "toggle/thumb/on": { value: "#3B2A1E", ref: "color/brown/900", css: "--nds-toggle-thumb-on" }
+    "toggle/thumb/disabled": { value: "#9C8B7A", ref: "color/taupe/500", css: "--nds-toggle-thumb-disabled" }
+    "toggle/check": { value: "#FFFFFF", ref: "color/white", css: "--nds-toggle-check" }
+    "toggle/text/label": { value: "#3B2A1E", ref: "color/brown/900", css: "--nds-toggle-text-label" }
+    "toggle/text/description": { value: "#6B4F35", ref: "color/brown/800", css: "--nds-toggle-text-description" }
+    "toggle/text/disabled": { value: "#9C8B7A", ref: "color/taupe/500", css: "--nds-toggle-text-disabled" }
+    "toggle/focus-ring": { value: "#3B2A1E", ref: "color/brown/900", css: "--nds-toggle-focus-ring" }
+    "toggle/track-width": { value: "44px", ref: "space/44", css: "--nds-toggle-track-width" }
+    "toggle/track-height": { value: "24px", ref: "space/24", css: "--nds-toggle-track-height" }
+    "toggle/thumb-size": { value: "16px", ref: "size/16", css: "--nds-toggle-thumb-size" }
+    "toggle/thumb-inset": { value: "4px", ref: "space/4", css: "--nds-toggle-thumb-inset" }
+    "toggle/focus-ring-width-size": { value: "52px", ref: "size/52", css: "--nds-toggle-focus-ring-width-size" }
+    "toggle/focus-ring-height-size": { value: "32px", ref: "space/32", css: "--nds-toggle-focus-ring-height-size" }
+    "toggle/gap": { value: "12px", ref: "space/12", css: "--nds-toggle-gap" }
+    "toggle/text-gap": { value: "0px", ref: "space/0", css: "--nds-toggle-text-gap" }
+    "toggle/radius": { value: "999px", ref: "radius/full", css: "--nds-toggle-radius" }
+    "toggle/border-width": { value: "1.5px", ref: "border-width/1-5", css: "--nds-toggle-border-width" }
+    "toggle/focus-ring-width": { value: "2px", ref: "border-width/2", css: "--nds-toggle-focus-ring-width" }
+    "toggle/font-size/label": { value: "16px", ref: "font-size/16", css: "--nds-toggle-font-size-label" }
+    "toggle/line-height/label": { value: "24px", ref: "line-height/24", css: "--nds-toggle-line-height-label" }
+    "toggle/font-size/description": { value: "14px", ref: "font-size/14", css: "--nds-toggle-font-size-description" }
+    "toggle/line-height/description": { value: "20px", ref: "line-height/20", css: "--nds-toggle-line-height-description" }
 ---
 
 # Natural Design System
@@ -470,6 +506,7 @@ Line icons with rounded caps and joins, drawn in `currentColor`. Icon-only contr
 | Chevron Right | `Icon/Chevron Right` (59:66) | `ChevronRightIcon` | 24 | 1.75 | Menu Item "Has submenu" |
 | Image placeholder | `Image/Placeholder` (1:816) | `ImagePlaceholderIcon` | 40 × 34 | 2 | Product Card without a photo |
 | Spinner | `Spinner` (64:50) | `Spinner` | 20 | 2 (track at 25% opacity) | Button loading |
+| Check Mark | `Icon/Check Mark` (67:287) | `CheckMarkIcon` | 16 | 1.75 | Toggle thumb (on) |
 
 ### 3.6 Imagery
 
@@ -554,7 +591,7 @@ What each colour *means*. Pick by role, then use that component's token.
 | **Header height** | 72px desktop, 56px mobile; announcement bar 36px (8 + 20 + 8) |
 | **Product card width** | 280px; media 280 × 350 |
 | **Form field width** | 320px default |
-| **Stack gaps** | Label→field 6 · field→helper 6 · card media→info 12 · info lines 4 · radio options 12 |
+| **Stack gaps** | Label→field 6 · field→helper 6 · card media→info 12 · info lines 4 · radio options 12 · toggle control→text 12 · toggle rows 16 |
 
 **Planned:** a page grid (columns, max width) for product listing and detail pages.
 
@@ -565,7 +602,7 @@ What each colour *means*. Pick by role, then use that component's token.
 Two layers, identical in Figma and code:
 
 1. **Primitives** (`color/brown/200`, `space/12`, …): raw values. Hidden from Figma's pickers; never used directly in components.
-2. **Component tokens** (`button/primary/bg/default`, `input/border/error`, …): aliases of primitives, in collections Button, Input, Radio, Product Card, Badge, Navigation.
+2. **Component tokens** (`button/primary/bg/default`, `input/border/error`, …): aliases of primitives, in collections Button, Input, Radio, Toggle, Product Card, Badge, Navigation.
 
 Naming: `component/part/property/state`. The Figma name `button/primary/bg/default` becomes the CSS variable `--nds-button-primary-bg-default: var(--nds-color-brown-200)`.
 
@@ -584,8 +621,8 @@ Every component exists in Figma and code with the same name, variants and states
 Import everything from the package root:
 
 ```tsx
-import { Button, Badge, TextField, TextArea, Radio, RadioGroup, WishlistButton, ProductCard,
-  NavigationMenu, MobileMenu, NavLink, IconButton, MenuItem, Logo } from 'natural-design-system';
+import { Button, Badge, TextField, TextArea, Radio, RadioGroup, Toggle, WishlistButton, ProductCard,
+  NavigationMenu, MobileMenu, NavLink, IconButton, MenuItem, Logo, Spinner } from 'natural-design-system';
 import 'natural-design-system/styles.css';
 ```
 
@@ -965,6 +1002,44 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 
 **Accessibility:** decorative (`aria-hidden`). The control that owns it must announce the busy state (`aria-busy`) or show text.
 
+### 6.17 Toggle
+
+[Figma 67:360](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=67-360) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/components-toggle--all-variants)
+
+**Purpose:** turn a single setting on or off, taking effect immediately: gift wrap, back-in-stock emails, "show only handmade" filters. **When not to use:** choosing between options (use Radio Group), or a choice that only applies after pressing Submit in a long form (a checkbox reads better there; **Planned**).
+**Anatomy:** ① Track (44 × 24) · ② Thumb (16px) · ③ Check mark (on) · ④ Label · ⑤ Description (optional) · ⑥ Focus ring.
+
+| Figma property | Type | Values / default | Code prop | Type / default |
+|---|---|---|---|---|
+| Checked | Variant | False, True | `checked` / `defaultChecked`, `onChange` | `boolean`; `(checked) => void` |
+| State | Variant | Default, Hover, Pressed, Focus, Disabled | `disabled`, `forceState` | `boolean`; `'hover' \| 'pressed' \| 'focus'` |
+| Label | Text | "Label" | `label` | `ReactNode` (required) |
+| Description | Text | "Description" | `description` | `ReactNode` |
+| Show description | Boolean | false | `description` | omit to hide |
+| none | | | `name`, `value`, `id` | native checkbox attributes |
+
+| Layout | Token | Value |
+|---|---|---|
+| Track | `toggle/track-width` · `toggle/track-height` | 44 × 24px, radius full |
+| Track border | `toggle/border-width` | 1.5px |
+| Thumb · inset | `toggle/thumb-size` · `toggle/thumb-inset` | 16px · 4px (left when off, right when on) |
+| Control→text gap | `toggle/gap` | 12px |
+| Focus ring | `toggle/focus-ring-width-size` × `toggle/focus-ring-height-size` | 52 × 32px, 2px, 2px gap |
+| Text | Body (label), Small (description) | |
+
+| State | Off: track bg / border / thumb | On: track bg / border / thumb + check |
+|---|---|---|
+| Default | `#FFFFFF` / `#8A6A4A` / `#8A6A4A` (4.95) | `#D8BFA0` / `#3B2A1E` / `#3B2A1E` (7.73) + white check (13.67) |
+| Hover | `#F6EFE7` / `#6B4F35` / `#6B4F35` | `#CBAE8A` / `#3B2A1E` / `#3B2A1E` |
+| Pressed | `#EADCCB` / `#6B4F35` / `#6B4F35` | `#BC9D76` / `#3B2A1E` / `#3B2A1E` |
+| Focus | Default + focus ring | Default + focus ring |
+| Disabled | `#EFE6DB` / `#DCCFBF` / `#9C8B7A`, text `#9C8B7A` (exempt) | same colours, thumb right with check |
+
+Label `#3B2A1E` (13.67), description `#6B4F35` (7.51). The thumb slides in 120ms (no motion under reduced motion).
+
+**Behaviour & accessibility:** a native `<input type="checkbox" role="switch">` inside a `<label>`, so the whole row is clickable, Space toggles it, and screen readers announce "switch, on/off". The description is linked with `aria-describedby`. On and off differ by **thumb position and the check mark**, never colour alone.
+**Do:** write the label as the setting when on ("Gift wrap this order"); group related toggles under a legend ("Order preferences"). **Don't:** use "On/Off" text next to the switch, or make the label a question.
+
 ---
 
 ## 7. E-commerce patterns
@@ -982,7 +1057,7 @@ How the parts combine for Natural's shop. **Available** means buildable today fr
 | Large items (freight) | Planned | "Ships by freight" + weight and dimensions before Add to Bag |
 | Forms & checkout | Partly available | Text Field, Text Area, Radio Group, Button. Modal Form page is empty |
 | Loading & full-width buttons | Available | Button `State=Loading` / `loading`; Fill container / `fullWidth` |
-| Toggles / switches | Planned | Figma Toggles page is empty |
+| Toggles / switches | Available | Toggle; group with a legend (e.g. Order preferences) |
 | Empty states | Planned | One line of voice + one clear action |
 
 ---
@@ -1024,12 +1099,13 @@ Non-negotiable for every component and page:
 
 ## 10. Roadmap & changelog
 
-**Next up (Figma pages already created, still empty):** Images · Product Rows · Text (type scale) · Toggles · Modal Form. Also planned: product detail, material swatches, heading scale, Figma Styles for §4.
+**Next up (Figma pages already created, still empty):** Images · Product Rows · Text (type scale) · Modal Form. Also planned: product detail, material swatches, heading scale, Figma Styles for §4.
 
 **Known differences to resolve:** none. Figma and code match.
 
 | Date | Change |
 |---|---|
+| 2026-09-28 | Toggle component + Toggle tokens + Check Mark icon |
 | 2026-09-28 | Button Loading state + full width, Spinner component; Logo is "natural" only; Menu Item submenu off by default |
 | 2026-09-28 | `DESIGN.md` with full component specs and styles; Navigation Menu, Mobile Menu, Nav Link, Icon Button, Menu Item, Logo, nav icons |
 | 2026-09-27 | Badge component (nested in Product Card); Product Card CTA renamed to "Add to Bag" |

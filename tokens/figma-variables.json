@@ -1025,5 +1025,147 @@
       "type": "FLOAT",
       "alias": "radius/12"
     }
+  },
+  "Toggle": {
+    "toggle/track/bg/off": {
+      "type": "COLOR",
+      "alias": "color/white"
+    },
+    "toggle/track/bg/off-hover": {
+      "type": "COLOR",
+      "alias": "color/brown/50"
+    },
+    "toggle/track/bg/off-pressed": {
+      "type": "COLOR",
+      "alias": "color/brown/150"
+    },
+    "toggle/track/bg/on": {
+      "type": "COLOR",
+      "alias": "color/brown/200"
+    },
+    "toggle/track/bg/on-hover": {
+      "type": "COLOR",
+      "alias": "color/brown/300"
+    },
+    "toggle/track/bg/on-pressed": {
+      "type": "COLOR",
+      "alias": "color/brown/400"
+    },
+    "toggle/track/bg/disabled": {
+      "type": "COLOR",
+      "alias": "color/brown/100"
+    },
+    "toggle/track/border/off": {
+      "type": "COLOR",
+      "alias": "color/brown/600"
+    },
+    "toggle/track/border/off-hover": {
+      "type": "COLOR",
+      "alias": "color/brown/800"
+    },
+    "toggle/track/border/on": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "toggle/track/border/disabled": {
+      "type": "COLOR",
+      "alias": "color/taupe/300"
+    },
+    "toggle/thumb/off": {
+      "type": "COLOR",
+      "alias": "color/brown/600"
+    },
+    "toggle/thumb/off-hover": {
+      "type": "COLOR",
+      "alias": "color/brown/800"
+    },
+    "toggle/thumb/on": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "toggle/thumb/disabled": {
+      "type": "COLOR",
+      "alias": "color/taupe/500"
+    },
+    "toggle/check": {
+      "type": "COLOR",
+      "alias": "color/white"
+    },
+    "toggle/text/label": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "toggle/text/description": {
+      "type": "COLOR",
+      "alias": "color/brown/800"
+    },
+    "toggle/text/disabled": {
+      "type": "COLOR",
+      "alias": "color/taupe/500"
+    },
+    "toggle/focus-ring": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "toggle/track-width": {
+      "type": "FLOAT",
+      "alias": "space/44"
+    },
+    "toggle/track-height": {
+      "type": "FLOAT",
+      "alias": "space/24"
+    },
+    "toggle/thumb-size": {
+      "type": "FLOAT",
+      "alias": "size/16"
+    },
+    "toggle/thumb-inset": {
+      "type": "FLOAT",
+      "alias": "space/4"
+    },
+    "toggle/focus-ring-width-size": {
+      "type": "FLOAT",
+      "alias": "size/52"
+    },
+    "toggle/focus-ring-height-size": {
+      "type": "FLOAT",
+      "alias": "space/32"
+    },
+    "toggle/gap": {
+      "type": "FLOAT",
+      "alias": "space/12"
+    },
+    "toggle/text-gap": {
+      "type": "FLOAT",
+      "alias": "space/0"
+    },
+    "toggle/radius": {
+      "type": "FLOAT",
+      "alias": "radius/full"
+    },
+    "toggle/border-width": {
+      "type": "FLOAT",
+      "alias": "border-width/1-5"
+    },
+    "toggle/focus-ring-width": {
+      "type": "FLOAT",
+      "alias": "border-width/2"
+    },
+    "toggle/font-size/label": {
+      "type": "FLOAT",
+      "alias": "font-size/16"
+    },
+    "toggle/line-height/label": {
+      "type": "FLOAT",
+      "alias": "line-height/24"
+    },
+    "toggle/font-size/description": {
+      "type": "FLOAT",
+      "alias": "font-size/14"
+    },
+    "toggle/line-height/description": {
+      "type": "FLOAT",
+      "alias": "line-height/20"
+    }
   }
 }

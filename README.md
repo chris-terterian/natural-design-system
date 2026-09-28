@@ -34,6 +34,7 @@ npm run storybook        # http://localhost:6007
 | `TextField`, `TextArea` | `1:498` | 8 states incl. error, success, read-only; textarea counter |
 | `NavigationMenu`, `MobileMenu` | `61:134`, `61:135` | Desktop/mobile header (container query at 768px), modal mobile menu |
 | `NavLink`, `IconButton`, `MenuItem`, `Logo` | `60:88`, `60:69`, `60:107`, `59:67` | Navigation building blocks; IconButton count uses Badge |
+| `Toggle` | `67:360` | On/off switch (`role="switch"`), label + description |
 | `Radio`, `RadioGroup` | `1:637` | Fieldset + legend, group-level error |
 | `WishlistButton` | `1:815` | `aria-pressed` toggle; filled vs outline heart |
 | `ProductCard` | `1:968` | Default / Sale / Sold out; nested wishlist + CTA |
@@ -45,7 +46,7 @@ Every story links to its Figma component in the **Design** panel. Each component
 `tokens/figma-variables.json` mirrors the Figma variable collections one-to-one:
 
 - **Primitives**: raw values (`color/brown/200`, `space/12`, …). They're hidden from Figma pickers.
-- **Badge, Button, Input, Navigation, Radio, Product Card**: semantic tokens that alias primitives.
+- **Badge, Button, Input, Navigation, Radio, Toggle, Product Card**: semantic tokens that alias primitives.
 
 A Figma variable `button/primary/bg/default` becomes the CSS custom property `--nds-button-primary-bg-default: var(--nds-color-brown-200)`.
 

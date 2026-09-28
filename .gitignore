@@ -3,3 +3,9 @@ dist
 storybook-static
 .DS_Store
 *.log
+
+.env
+src/stories/generated
+src/stories/.story-mappings.json
+.story-ui-history/
+.story-ui/

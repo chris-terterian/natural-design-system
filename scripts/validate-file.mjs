@@ -30,6 +30,8 @@ if (args.includes('--staged')) {
 }
 const inScope = (f) =>
   f !== 'src/styles/tokens.css' && // generated
+  !f.startsWith('src/stories/StoryUI') && // Story UI's own tool code (third-party, like node_modules)
+  !f.startsWith('src/stories/generated/') && // AI drafts (gitignored); promoted into src/components they're checked
   (/^src\/.+\.(css|tsx?)$/.test(f) || f === 'tokens/figma-variables.json');
 files = files.filter((f) => inScope(f) && existsSync(new URL(`../${f}`, import.meta.url)));
 

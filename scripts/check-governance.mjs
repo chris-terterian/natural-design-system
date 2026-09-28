@@ -28,7 +28,7 @@ for (const [collection, vars] of Object.entries(tokens)) {
 
 // ---- 2. Generated files are current ----
 execSync('node scripts/build-tokens.mjs', { stdio: 'ignore' });
-const dirty = execSync('git status --porcelain -- src/styles/tokens.css DESIGN.md').toString().trim();
+const dirty = execSync('git status --porcelain -- src/styles/tokens.css DESIGN.md story-ui-docs/guidelines story-ui-docs/tokens').toString().trim();
 if (dirty && process.env.CI) fail(`Generated files are out of date. Run "npm run tokens" and commit:\n${dirty}`);
 
 // ---- 3. Component registry ----

@@ -2,6 +2,20 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.4.0] – 2026-09-28
+
+### Added
+- **Story UI** (`@tpitre/story-ui` 5.21.2) for AI-assisted story drafting, local development only (D-020): `npm run storybook-with-ui` starts Storybook and the Story UI server; the workspace opens at `?path=/workspace/`. Requires an Anthropic key in `.env` (gitignored).
+- `story-ui-considerations.md`: the system's rules for the AI (components, tokens, voice, "Add to Bag", link text, WCAG 2.2 AA).
+- `story-ui-docs/`: generated copies of `DESIGN.md` and the tokens, refreshed by `npm run tokens` and checked by the governance gate.
+- GOVERNANCE.md: policy for AI-generated stories (drafts until promoted through the contribution flow).
+
+### Changed
+- Storybook's story globs are explicit (`src/components`, `src/governance`); Story UI's pages load only in local dev, and its toolbar only on `localhost`.
+
+### Fixed
+- Story UI's generated `voice/canvas/componentRegistry.ts` had escaped template literals that failed the typecheck.
+
 ## [0.3.1] – 2026-09-28
 
 ### Fixed
@@ -39,7 +53,7 @@ All notable changes to the Natural Design System. Format: [Keep a Changelog](htt
 ## [0.2.0] – 2026-09-28
 
 ### Added
-- **Governance:** `GOVERNANCE.md` (principles, roles, change tiers, lifecycle, quality gates, versioning, Figma hygiene), `DECISIONS.md` (D-001 – D-019) and this changelog.
+- **Governance:** `GOVERNANCE.md` (principles, roles, change tiers, lifecycle, quality gates, versioning, Figma hygiene), `DECISIONS.md` (D-001 – D-020) and this changelog.
 - **Component registry** (`governance/components.json`): the single source of component status: all 11 components Stable at release.
 - **Blocking quality gates** in CI: governance check (`npm run check:governance`) and accessibility gate (`npm run check:a11y`, axe on every story). Storybook only deploys when all gates pass.
 - **Figma ↔ code parity gate** (`npm run check:parity`, D-017): compares a committed snapshot of the live Figma file (every variable per mode, linked component structure, text-style bindings), exported through the Figma MCP, with the repo. Blocking in CI.

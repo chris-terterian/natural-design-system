@@ -4,7 +4,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.3.1)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.4.0)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -32,6 +32,19 @@ npm run storybook        # http://localhost:6007
 | `npm run figma:snapshot-save -- <files>` | Merges the three export results into `governance/figma-snapshot.json` |
 | `npm run check:a11y` | axe (WCAG 2.2 AA) on every story in the built Storybook, minus registered exceptions |
 | `npm run figma:sync-script` | Prints the Figma variable sync script with current tokens inlined |
+
+## AI story drafting (Story UI, local only)
+
+Generate Storybook stories from a prompt, built only from this system's components:
+
+```bash
+# once: put your Anthropic key in .env (gitignored)
+#   ANTHROPIC_API_KEY=sk-ant-…
+npx story-ui check          # confirms the install; names anything to fix
+npm run storybook-with-ui   # Storybook (6007) + Story UI server (4001)
+```
+
+Open `http://localhost:6007/?path=/workspace/`. Generated stories are drafts in `src/stories/generated/` (gitignored); keeping one means promoting it into `src/components/` through the contribution flow in `GOVERNANCE.md`. The published Storybook doesn't include Story UI.
 
 ## Components
 

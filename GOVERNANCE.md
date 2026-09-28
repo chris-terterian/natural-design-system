@@ -79,6 +79,15 @@ How the Natural Design System changes, who decides, and how quality is enforced.
 
 ---
 
+### AI-generated stories (Story UI)
+
+[Story UI](https://github.com/southleft/story-ui) generates stories from prompts, using only this system's components and the rules in `story-ui-considerations.md` (it also reads generated copies of `DESIGN.md` and the tokens in `story-ui-docs/`).
+
+- **Drafts, not system.** Generated stories land in `src/stories/generated/`, which is gitignored and never published. They're exploration, like the Figma Proposals page.
+- **Promotion goes through the flow.** To keep a generated pattern, a person moves it into `src/components/` as a proposal (§4). From there every gate applies: validate_file, governance, parity, accessibility.
+- **Local only.** Story UI needs its own server and an API key, so it runs only on `localhost`. The published Storybook never includes it (D-020).
+- **Keys stay local.** The provider key lives in `.env`, which is gitignored. Never paste it into docs, issues or chat.
+
 ## 5. Component lifecycle
 
 | Status | Meaning | To enter it |

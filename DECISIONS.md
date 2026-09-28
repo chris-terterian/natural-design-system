@@ -23,6 +23,7 @@ Short records of *why* the Natural Design System is the way it is. Each entry: c
 | D-017 | Figma parity is a blocking check via an MCP-exported snapshot | 2026-09-28 | Accepted |
 | D-018 | Pin the toolchain CI installs with | 2026-09-28 | Accepted |
 | D-019 | validate_file: a pre-commit guardrail for tokens, naming and link text | 2026-09-28 | Accepted |
+| D-020 | Story UI is a local drafting tool, not part of the published system | 2026-09-28 | Accepted |
 
 ---
 
@@ -120,3 +121,8 @@ Short records of *why* the Natural Design System is the way it is. Each entry: c
 **Context.** The gates in CI catch problems after a push. Hardcoded values and naming slips are cheapest to fix at the moment they're written, with the right token named for you.
 **Decision.** A Git pre-commit hook runs `validate_file` on staged files; CI runs it on all files. It blocks hardcoded values, broken naming and placeholder link text, warns on other static accessibility issues, and prints a context-aware fix for every finding (the component token for that property, a typo match for unknown tokens, the corrected name). Exceptions are inline `validate-ignore` comments that must carry a reason.
 **Consequences.** Its first run found 30 real issues in the shipped system: focus-ring gaps, the wishlist shadow, the menu backdrop and navigation spacing were hardcoded. They became 20 new tokens in code and Figma (with the shadow bound live in Figma). One visible change: the nav link underline offset moved from 3px to 4px, the nearest step on the spacing scale.
+
+### D-020: Story UI is a local drafting tool, not part of the published system
+**Context.** Story UI (`@tpitre/story-ui`) generates Storybook stories from prompts using the system's own components. It needs a local server and an AI provider key, and it adds its workspace to Storybook.
+**Decision.** It runs only in local development: its toolbar and workspace load on `localhost`, and `storybook build` (GitHub Pages) leaves its pages out. Generated stories are gitignored drafts; keeping one means promoting it into `src/components/` through the contribution flow, where every gate applies. Its own source (`src/stories/StoryUI*`) is third-party tool code, excluded from validate_file like `node_modules`. It learns the system from `story-ui-considerations.md` (rules) and generated copies of `DESIGN.md` and the tokens (`story-ui-docs/`, refreshed by `npm run tokens` and checked by the governance gate).
+**Consequences.** The public Storybook stays a clean showcase with nothing that can't connect; AI output can never bypass governance. Installing it surfaced two issues that were fixed: `init` added dependencies without updating the lock file (caught by `check:install`, D-018), and one generated file had escaped template literals that failed the typecheck (fixed locally; worth reporting upstream).

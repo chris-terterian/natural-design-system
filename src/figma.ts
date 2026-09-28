@@ -20,4 +20,5 @@ export const FIGMA_NODES = {
   logo: '59:67',
   spinner: '64:50',
   toggle: '67:360',
+  productRow: '73:210',
 } as const;

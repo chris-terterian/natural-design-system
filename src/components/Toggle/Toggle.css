@@ -26,16 +26,13 @@
   transition: background-color 120ms ease, border-color 120ms ease;
 }
 .nds-toggle__thumb {
-  display: grid;
-  place-items: center;
+  display: block;
   width: var(--nds-toggle-thumb-size);
   height: var(--nds-toggle-thumb-size);
   border-radius: var(--nds-toggle-radius);
   background: var(--_thumb);
-  color: var(--nds-toggle-check);
   transition: transform 120ms ease, background-color 120ms ease;
 }
-.nds-toggle__check { visibility: hidden; }
 
 .nds-toggle__text { display: flex; flex-direction: column; gap: var(--nds-toggle-text-gap); }
 .nds-toggle__label { color: var(--nds-toggle-text-label); font: 400 var(--nds-toggle-font-size-label) / var(--nds-toggle-line-height-label) var(--nds-font-family); }
@@ -45,14 +42,13 @@
 .nds-toggle:hover, .nds-toggle[data-state='hover'] { --_bg: var(--nds-toggle-track-bg-off-hover); --_border: var(--nds-toggle-track-border-off-hover); --_thumb: var(--nds-toggle-thumb-off-hover); }
 .nds-toggle:active, .nds-toggle[data-state='pressed'] { --_bg: var(--nds-toggle-track-bg-off-pressed); --_border: var(--nds-toggle-track-border-off-hover); --_thumb: var(--nds-toggle-thumb-off-hover); }
 
-/* On: thumb moves right (track width − thumb − 2 × inset − 2 × border) and shows the check */
+/* On: thumb moves right (track width − thumb − 2 × inset − 2 × border) */
 .nds-toggle:has(:checked) { --_bg: var(--nds-toggle-track-bg-on); --_border: var(--nds-toggle-track-border-on); --_thumb: var(--nds-toggle-thumb-on); }
 .nds-toggle:has(:checked):hover, .nds-toggle:has(:checked)[data-state='hover'] { --_bg: var(--nds-toggle-track-bg-on-hover); }
 .nds-toggle:has(:checked):active, .nds-toggle:has(:checked)[data-state='pressed'] { --_bg: var(--nds-toggle-track-bg-on-pressed); }
 .nds-toggle:has(:checked) .nds-toggle__thumb {
   transform: translateX(calc(var(--nds-toggle-track-width) - var(--nds-toggle-thumb-size) - 2 * var(--nds-toggle-thumb-inset) - 2 * var(--nds-toggle-border-width)));
 }
-.nds-toggle:has(:checked) .nds-toggle__check { visibility: visible; }
 
 /* Focus ring: 2px, 2px gap */
 .nds-toggle:has(:focus-visible) .nds-toggle__track, .nds-toggle[data-state='focus'] .nds-toggle__track {

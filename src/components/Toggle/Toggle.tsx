@@ -1,5 +1,4 @@
 import { useId, type InputHTMLAttributes, type ReactNode } from 'react';
-import { CheckMarkIcon } from '../../icons';
 import './Toggle.css';
 
 export type ToggleForcedState = 'hover' | 'pressed' | 'focus';
@@ -17,7 +16,7 @@ export interface ToggleProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
 
 /**
  * Figma: Toggle. A checkbox input with role="switch", for settings that apply immediately.
- * On is shown by thumb position + check mark, not colour alone.
+ * On is shown by thumb position + sand track, not colour alone.
  */
 export function Toggle({ label, description, checked, onChange, forceState, className, id: idProp, ...rest }: ToggleProps) {
   const autoId = useId();
@@ -36,9 +35,7 @@ export function Toggle({ label, description, checked, onChange, forceState, clas
         {...rest}
       />
       <span className="nds-toggle__track" aria-hidden="true">
-        <span className="nds-toggle__thumb">
-          <CheckMarkIcon className="nds-toggle__check" />
-        </span>
+        <span className="nds-toggle__thumb" />
       </span>
       <span className="nds-toggle__text">
         <span className="nds-toggle__label">{label}</span>

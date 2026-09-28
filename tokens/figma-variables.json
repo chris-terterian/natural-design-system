@@ -701,10 +701,6 @@
       "type": "FLOAT",
       "alias": "size/280"
     },
-    "card/media-height": {
-      "type": "FLOAT",
-      "alias": "size/350"
-    },
     "card/radius": {
       "type": "FLOAT",
       "alias": "radius/8"
@@ -1087,10 +1083,6 @@
       "type": "COLOR",
       "alias": "color/taupe/500"
     },
-    "toggle/check": {
-      "type": "COLOR",
-      "alias": "color/white"
-    },
     "toggle/text/label": {
       "type": "COLOR",
       "alias": "color/brown/900"
@@ -1166,6 +1158,52 @@
     "toggle/line-height/description": {
       "type": "FLOAT",
       "alias": "line-height/20"
+    }
+  },
+  "Product Row": {
+    "row/bg": {
+      "type": "COLOR",
+      "alias": "color/white"
+    },
+    "row/text/title": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "row/padding-x": {
+      "type": "FLOAT",
+      "alias": "space/40"
+    },
+    "row/padding-x-mobile": {
+      "type": "FLOAT",
+      "alias": "space/16"
+    },
+    "row/padding-y": {
+      "type": "FLOAT",
+      "alias": "space/48"
+    },
+    "row/padding-y-mobile": {
+      "type": "FLOAT",
+      "alias": "space/32"
+    },
+    "row/gap": {
+      "type": "FLOAT",
+      "alias": "space/24"
+    },
+    "row/gap-mobile": {
+      "type": "FLOAT",
+      "alias": "space/16"
+    },
+    "row/header-gap": {
+      "type": "FLOAT",
+      "alias": "space/24"
+    },
+    "row/font-size/title": {
+      "type": "FLOAT",
+      "alias": "font-size/24"
+    },
+    "row/line-height/title": {
+      "type": "FLOAT",
+      "alias": "line-height/32"
     }
   }
 }

@@ -11,7 +11,7 @@
 
 .nds-card__media {
   position: relative;
-  height: var(--nds-card-media-height);
+  aspect-ratio: 4 / 5; /* 280 × 350 at the default width; scales when the card fills a column */
   border-radius: var(--nds-card-radius);
   overflow: hidden;
   background: var(--nds-card-media-bg);
@@ -39,7 +39,7 @@
   z-index: 2;
 }
 
-.nds-card__info { display: flex; flex-direction: column; gap: var(--nds-card-info-gap); }
+.nds-card__info { display: flex; flex-direction: column; gap: var(--nds-card-info-gap); flex: 1; } /* grows so CTAs align in a row */
 .nds-card__info p, .nds-card__title { margin: 0; }
 .nds-card__title { font: 600 var(--nds-card-font-size-title) / var(--nds-card-line-height-title) var(--nds-font-family); }
 .nds-card__link { color: var(--nds-card-text-title); text-decoration: none; outline: none; }

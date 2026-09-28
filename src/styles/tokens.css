@@ -177,7 +177,6 @@
   --nds-card-text-price-compare: var(--nds-color-brown-600);
   --nds-card-focus-ring: var(--nds-color-brown-900);
   --nds-card-width: var(--nds-size-280);
-  --nds-card-media-height: var(--nds-size-350);
   --nds-card-radius: var(--nds-radius-8);
   --nds-card-focus-ring-radius: var(--nds-radius-12);
   --nds-card-gap: var(--nds-space-12);
@@ -275,7 +274,6 @@
   --nds-toggle-thumb-off-hover: var(--nds-color-brown-800);
   --nds-toggle-thumb-on: var(--nds-color-brown-900);
   --nds-toggle-thumb-disabled: var(--nds-color-taupe-500);
-  --nds-toggle-check: var(--nds-color-white);
   --nds-toggle-text-label: var(--nds-color-brown-900);
   --nds-toggle-text-description: var(--nds-color-brown-800);
   --nds-toggle-text-disabled: var(--nds-color-taupe-500);
@@ -295,4 +293,16 @@
   --nds-toggle-line-height-label: var(--nds-line-height-24);
   --nds-toggle-font-size-description: var(--nds-font-size-14);
   --nds-toggle-line-height-description: var(--nds-line-height-20);
+  /* Product Row */
+  --nds-row-bg: var(--nds-color-white);
+  --nds-row-text-title: var(--nds-color-brown-900);
+  --nds-row-padding-x: var(--nds-space-40);
+  --nds-row-padding-x-mobile: var(--nds-space-16);
+  --nds-row-padding-y: var(--nds-space-48);
+  --nds-row-padding-y-mobile: var(--nds-space-32);
+  --nds-row-gap: var(--nds-space-24);
+  --nds-row-gap-mobile: var(--nds-space-16);
+  --nds-row-header-gap: var(--nds-space-24);
+  --nds-row-font-size-title: var(--nds-font-size-24);
+  --nds-row-line-height-title: var(--nds-line-height-32);
 }

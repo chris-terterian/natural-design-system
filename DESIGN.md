@@ -188,7 +188,6 @@ tokens:
     "card/text/price-compare": { value: "#8A6A4A", ref: "color/brown/600", css: "--nds-card-text-price-compare" }
     "card/focus-ring": { value: "#3B2A1E", ref: "color/brown/900", css: "--nds-card-focus-ring" }
     "card/width": { value: "280px", ref: "size/280", css: "--nds-card-width" }
-    "card/media-height": { value: "350px", ref: "size/350", css: "--nds-card-media-height" }
     "card/radius": { value: "8px", ref: "radius/8", css: "--nds-card-radius" }
     "card/focus-ring-radius": { value: "12px", ref: "radius/12", css: "--nds-card-focus-ring-radius" }
     "card/gap": { value: "12px", ref: "space/12", css: "--nds-card-gap" }
@@ -286,7 +285,6 @@ tokens:
     "toggle/thumb/off-hover": { value: "#6B4F35", ref: "color/brown/800", css: "--nds-toggle-thumb-off-hover" }
     "toggle/thumb/on": { value: "#3B2A1E", ref: "color/brown/900", css: "--nds-toggle-thumb-on" }
     "toggle/thumb/disabled": { value: "#9C8B7A", ref: "color/taupe/500", css: "--nds-toggle-thumb-disabled" }
-    "toggle/check": { value: "#FFFFFF", ref: "color/white", css: "--nds-toggle-check" }
     "toggle/text/label": { value: "#3B2A1E", ref: "color/brown/900", css: "--nds-toggle-text-label" }
     "toggle/text/description": { value: "#6B4F35", ref: "color/brown/800", css: "--nds-toggle-text-description" }
     "toggle/text/disabled": { value: "#9C8B7A", ref: "color/taupe/500", css: "--nds-toggle-text-disabled" }
@@ -306,6 +304,18 @@ tokens:
     "toggle/line-height/label": { value: "24px", ref: "line-height/24", css: "--nds-toggle-line-height-label" }
     "toggle/font-size/description": { value: "14px", ref: "font-size/14", css: "--nds-toggle-font-size-description" }
     "toggle/line-height/description": { value: "20px", ref: "line-height/20", css: "--nds-toggle-line-height-description" }
+  "Product Row":
+    "row/bg": { value: "#FFFFFF", ref: "color/white", css: "--nds-row-bg" }
+    "row/text/title": { value: "#3B2A1E", ref: "color/brown/900", css: "--nds-row-text-title" }
+    "row/padding-x": { value: "40px", ref: "space/40", css: "--nds-row-padding-x" }
+    "row/padding-x-mobile": { value: "16px", ref: "space/16", css: "--nds-row-padding-x-mobile" }
+    "row/padding-y": { value: "48px", ref: "space/48", css: "--nds-row-padding-y" }
+    "row/padding-y-mobile": { value: "32px", ref: "space/32", css: "--nds-row-padding-y-mobile" }
+    "row/gap": { value: "24px", ref: "space/24", css: "--nds-row-gap" }
+    "row/gap-mobile": { value: "16px", ref: "space/16", css: "--nds-row-gap-mobile" }
+    "row/header-gap": { value: "24px", ref: "space/24", css: "--nds-row-header-gap" }
+    "row/font-size/title": { value: "24px", ref: "font-size/24", css: "--nds-row-font-size-title" }
+    "row/line-height/title": { value: "32px", ref: "line-height/32", css: "--nds-row-line-height-title" }
 ---
 
 # Natural Design System
@@ -463,7 +473,7 @@ One family: **Inter** (400 Regular, 600 Semi Bold, 700 Bold), loaded from Google
 | `font-size/16` | 16px | `line-height/24` (24px), or 20px in buttons |
 | `font-size/24` | 24px | `line-height/32` (32px) |
 
-**Planned:** a heading and display scale. There is no type larger than 24px yet.
+**Heading scale (started):** one heading style so far, **Section title** (24/32, 600), used for section headings such as "New arrivals". **Planned:** page-title and display sizes. There is no type larger than 24px yet.
 
 #### Typography guidelines
 
@@ -476,7 +486,7 @@ One family: **Inter** (400 Regular, 600 Semi Bold, 700 Bold), loaded from Google
 | 3. What it's made of | Small (400, Secondary) | Stoneware · ash glaze |
 | 4. Supporting detail | Small / helper | Dishwasher safe |
 
-Until the heading scale exists, page and section titles use **Body Strong**; don't invent sizes.
+Section headings use **Section title** (24/32, 600, `<h2>`). Until the rest of the heading scale exists, don't invent other sizes.
 
 **Rules**
 
@@ -541,7 +551,6 @@ Line icons with rounded caps and joins, drawn in `currentColor`. Icon-only contr
 | Chevron Right | `Icon/Chevron Right` (59:66) | `ChevronRightIcon` | 24 | 1.75 | Menu Item "Has submenu" |
 | Image placeholder | `Image/Placeholder` (1:816) | `ImagePlaceholderIcon` | 40 × 34 | 2 | Product Card without a photo |
 | Spinner | `Spinner` (64:50) | `Spinner` | 20 | 2 (track at 25% opacity) | Button loading |
-| Check Mark | `Icon/Check Mark` (67:287) | `CheckMarkIcon` | 16 | 1.75 | Toggle thumb (on) |
 
 ### 3.6 Imagery
 
@@ -570,6 +579,7 @@ Named styles built from the foundations. Each maps to the tokens a component use
 | Style | Family / weight | Size / line height | Letter spacing | Colour | Tokens | Used in |
 |---|---|---|---|---|---|---|
 | **Logo** | Inter 700 | 24 / 32 | −2% | Ink | `nav/font-size/logo`, `nav/line-height/logo` | Logo "natural" |
+| **Section title** | Inter 600 | 24 / 32 | 0 | Ink | `row/font-size/title`, `row/line-height/title` | Product Row heading (`<h2>`) |
 | **Body** | Inter 400 | 16 / 24 | 0 | Ink | `font-size/16`, `line-height/24` | Input value, radio label, nav link, menu item |
 | **Body Strong** | Inter 600 | 16 / 24 | 0 | Ink | same | Product title, price, active nav link / menu item |
 | **Button** | Inter 600 | 16 / 20 | 0 | per state | `button/font-size`, `button/line-height` | Button label |
@@ -624,11 +634,12 @@ What each colour *means*. Pick by role, then use that component's token.
 | **Breakpoint** | Mobile layout when the header's container is narrower than **768px** (container query, not viewport) |
 | **Page gutter** | 40px desktop (`nav/padding-x`), 16px mobile (`nav/padding-x-mobile`) |
 | **Header height** | 72px desktop, 56px mobile; announcement bar 36px (8 + 20 + 8) |
-| **Product card width** | 280px; media 280 × 350 |
+| **Product card width** | 280px standalone; fills its column in a Product Row. Media is always 4:5 |
+| **Product grid** | 4 columns ≥ 768px (24px gaps, 40px margins, 48px top/bottom) · 2 columns below (16px gaps, 16px margins, 32px top/bottom); container query |
 | **Form field width** | 320px default |
 | **Stack gaps** | Label→field 6 · field→helper 6 · card media→info 12 · info lines 4 · radio options 12 · toggle control→text 12 · toggle rows 16 |
 
-**Planned:** a page grid (columns, max width) for product listing and detail pages.
+**Planned:** a full page grid (max width, columns for detail pages).
 
 ---
 
@@ -637,7 +648,7 @@ What each colour *means*. Pick by role, then use that component's token.
 Two layers, identical in Figma and code:
 
 1. **Primitives** (`color/brown/200`, `space/12`, …): raw values. Hidden from Figma's pickers; never used directly in components.
-2. **Component tokens** (`button/primary/bg/default`, `input/border/error`, …): aliases of primitives, in collections Button, Input, Radio, Toggle, Product Card, Badge, Navigation.
+2. **Component tokens** (`button/primary/bg/default`, `input/border/error`, …): aliases of primitives, in collections Button, Input, Radio, Toggle, Product Card, Product Row, Badge, Navigation.
 
 Naming: `component/part/property/state`. The Figma name `button/primary/bg/default` becomes the CSS variable `--nds-button-primary-bg-default: var(--nds-color-brown-200)`.
 
@@ -661,7 +672,7 @@ Each component ends with the same two blocks:
 Import everything from the package root:
 
 ```tsx
-import { Button, Badge, TextField, TextArea, Radio, RadioGroup, Toggle, WishlistButton, ProductCard,
+import { Button, Badge, TextField, TextArea, Radio, RadioGroup, Toggle, WishlistButton, ProductCard, ProductRow,
   NavigationMenu, MobileMenu, NavLink, IconButton, MenuItem, Logo, Spinner } from 'natural-design-system';
 import 'natural-design-system/styles.css';
 ```
@@ -777,7 +788,7 @@ import 'natural-design-system/styles.css';
 | Tone | Background | Text | Border | Contrast | Use for |
 |---|---|---|---|---|---|
 | Dark | `#3B2A1E` | `#FFFFFF` | `#3B2A1E` | 13.67 | New, bag count |
-| Light | `#EFE6DB` | `#3B2A1E` | `#EFE6DB` | 11.08 | Handmade, One of a kind |
+| Light | `#EFE6DB` | `#3B2A1E` | `#EFE6DB` | 11.08 | Handmade, One of a kind **on white surfaces only** |
 | Sale | `#B3261E` | `#FFFFFF` | `#B3261E` | 6.54 | Sale |
 | Success | `#2E6B3F` | `#FFFFFF` | `#2E6B3F` | 6.38 | In stock |
 | Outline | `#FFFFFF` | `#3B2A1E` | `#8A6A4A` | 13.67 | Sold out |
@@ -790,6 +801,8 @@ import 'natural-design-system/styles.css';
 |---|---|
 | One or two words from the vocabulary: **Handmade**, **One of a kind**, **Sold out**. | Sentences or claims: "Handmade & eco-friendly!", "Best seller of the season". |
 | One badge per card, top-left of the image. | Stack several badges, or place them over the product itself. |
+| On product images use Dark, Sale or Outline ("Handmade" → Dark). | Use Light on images: its fill matches the image backdrop and the pill disappears. |
+| A sold-out piece keeps its **Sold out** badge. | Replace "Sold out" with another label ("One of a kind"), hiding that it's unavailable. |
 | Match tone to meaning: Sale = Sale tone, Sold out = Outline. | Use Sale red for "New", or Success green for decoration. |
 | Let the words carry the meaning. | Rely on colour alone (a red dot, an empty coloured pill). |
 
@@ -1028,11 +1041,11 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 
 | Layout | Token | Value |
 |---|---|---|
-| Width · media height | `card/width` · `card/media-height` | 280 · 350px |
+| Width · media | `card/width` · aspect ratio | 280px standalone (fills its column in a Product Row) · media always 4:5 (280 × 350 at default width) |
 | Media radius | `card/radius` | 8px |
 | Badge / wishlist inset | `card/media-inset` | 12px |
 | Media→info, info→CTA gap | `card/gap` | 12px |
-| Info line gap | `card/info-gap` | 4px |
+| Info line gap | `card/info-gap` | 4px (the info block grows, so CTAs align when cards share a row) |
 | Price gap | `card/price-gap` | 8px |
 | Text | Body Strong (title, price), Small (meta, compare price) | |
 
@@ -1294,7 +1307,7 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 [Figma 67:360](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=67-360) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/components-toggle--all-variants)
 
 **Purpose:** turn a single setting on or off, taking effect immediately: gift wrap, back-in-stock emails, "show only handmade" filters. **When not to use:** choosing between options (use Radio Group), or a choice that only applies after pressing Submit in a long form (a checkbox reads better there; **Planned**).
-**Anatomy:** ① Track (44 × 24) · ② Thumb (16px) · ③ Check mark (on) · ④ Label · ⑤ Description (optional) · ⑥ Focus ring.
+**Anatomy:** ① Track (44 × 24) · ② Thumb (16px) · ③ Label · ④ Description (optional) · ⑤ Focus ring.
 
 | Figma property | Type | Values / default | Code prop | Type / default |
 |---|---|---|---|---|
@@ -1314,17 +1327,17 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 | Focus ring | `toggle/focus-ring-width-size` × `toggle/focus-ring-height-size` | 52 × 32px, 2px, 2px gap |
 | Text | Body (label), Small (description) | |
 
-| State | Off: track bg / border / thumb | On: track bg / border / thumb + check |
+| State | Off: track bg / border / thumb | On: track bg / border / thumb |
 |---|---|---|
-| Default | `#FFFFFF` / `#8A6A4A` / `#8A6A4A` (4.95) | `#D8BFA0` / `#3B2A1E` / `#3B2A1E` (7.73) + white check (13.67) |
+| Default | `#FFFFFF` / `#8A6A4A` / `#8A6A4A` (4.95) | `#D8BFA0` / `#3B2A1E` / `#3B2A1E` (7.73) |
 | Hover | `#F6EFE7` / `#6B4F35` / `#6B4F35` | `#CBAE8A` / `#3B2A1E` / `#3B2A1E` |
 | Pressed | `#EADCCB` / `#6B4F35` / `#6B4F35` | `#BC9D76` / `#3B2A1E` / `#3B2A1E` |
 | Focus | Default + focus ring | Default + focus ring |
-| Disabled | `#EFE6DB` / `#DCCFBF` / `#9C8B7A`, text `#9C8B7A` (exempt) | same colours, thumb right with check |
+| Disabled | `#EFE6DB` / `#DCCFBF` / `#9C8B7A`, text `#9C8B7A` (exempt) | same colours, thumb right |
 
 Label `#3B2A1E` (13.67), description `#6B4F35` (7.51). The thumb slides in 120ms (no motion under reduced motion).
 
-**Behaviour & accessibility:** a native `<input type="checkbox" role="switch">` inside a `<label>`, so the whole row is clickable, Space toggles it, and screen readers announce "switch, on/off". The description is linked with `aria-describedby`. On and off differ by **thumb position and the check mark**, never colour alone.
+**Behaviour & accessibility:** a native `<input type="checkbox" role="switch">` inside a `<label>`, so the whole row is clickable, Space toggles it, and screen readers announce "switch, on/off". The description is linked with `aria-describedby`. On and off differ by **thumb position** (left → right) plus the filled sand track and darker border, never colour alone.
 
 **Do / Don't**
 
@@ -1334,7 +1347,7 @@ Label `#3B2A1E` (13.67), description `#6B4F35` (7.51). The thumb slides in 120ms
 | Use when the change applies right away. | Use inside a form that only applies after Submit (use a checkbox; **Planned**). |
 | Group related toggles under a legend: "Order preferences". | Scatter single toggles with no context. |
 | Explain a disabled toggle: "Not available for pieces that ship by freight". | Disable it with no reason. |
-| Let the knob and check mark show the state. | Add "On/Off" text beside the switch. |
+| Let the knob position show the state. | Add "On/Off" text beside the switch, or icons inside the thumb. |
 
 **Keyboard & screen reader**
 
@@ -1345,6 +1358,48 @@ Label `#3B2A1E` (13.67), description `#6B4F35` (7.51). The thumb slides in 120ms
 | Click anywhere on the row | Toggles it |
 | Announced | "Gift wrap this order, switch, on, Wrapped in recycled kraft paper and tied with jute twine" |
 
+### 6.18 Product Row
+
+[Figma 73:210](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=73-210) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/components-product-row--all-variants)
+
+**Purpose:** a titled row of products for home and collection pages ("New arrivals", "Made in clay"). **Anatomy:** ① Section title · ② View all link (Nav Link) · ③ Grid of Product Cards (exposed instances in Figma).
+
+| Figma property | Type | Values / default | Code prop | Type / default |
+|---|---|---|---|---|
+| Breakpoint | Variant | Desktop, Mobile | automatic | container query at 768px |
+| Title | Text | "New arrivals" | `title` | `string` (required) |
+| Show view all | Boolean | true | `viewAllHref`, `viewAllLabel` | `string` (omit to hide) · `'View all'` |
+| Cards (nested, exposed) | Product Card | 4 products | `products` | `ProductCardProps[]` |
+
+| Layout | Desktop | Mobile |
+|---|---|---|
+| Columns | 4 | 2 (same 4 products wrap to 2 rows) |
+| Card size (at 1440 / 375) | 322 × 548.5, media 322 × 402.5 | 163.5 × ~350, media 163.5 × 204.4 |
+| Gap (both directions) | 24px (`row/gap`) | 16px (`row/gap-mobile`) |
+| Side margins | 40px (`row/padding-x`) | 16px (`row/padding-x-mobile`) |
+| Top / bottom | 48px (`row/padding-y`) | 32px (`row/padding-y-mobile`) |
+| Title → grid | 24px (`row/header-gap`) | 24px |
+| Title | Section title, `row/text/title` `#3B2A1E` (13.67) | same |
+| Background | `row/bg` `#FFFFFF` | same |
+
+**Behaviour:** cards fill their column and each grid row stretches them to equal height, so the Add to Bag buttons line up even when a title wraps (mobile: "Basalt Mortar & Pestle" wraps to 2 lines). In Figma, card heights in a row are set to the tallest card with the Info block filling; update them if you change a product's text.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| 4 products per row: a full row on desktop, 2 even rows on mobile. | 3 or 5 products, which leave gaps on one of the breakpoints. |
+| A short title in the product's language: "New arrivals", "Made in clay". | Marketing headlines: "Shop our amazing new collection!!". |
+| Mix statuses honestly (Sale, Sold out) with correct badges. | Hide sold-out pieces or give every card a badge. |
+| Keep 2 columns on phones. | Squeeze 3 or more cards across a phone screen (cards under ~160px lose the button and wrap titles badly). |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab order | View all → then each card (Wishlist → title link → Add to Bag / Notify me), left to right, top to bottom |
+| Announced | A region labelled by its heading ("New arrivals, heading level 2"), then a list of 4 items, each a Product Card |
+
 ---
 
 ## 7. E-commerce patterns
@@ -1354,7 +1409,7 @@ How the parts combine for Natural's shop. **Available** means buildable today fr
 | Pattern | Status | Notes |
 |---|---|---|
 | Site header & mobile menu | Available | Navigation Menu + Mobile Menu |
-| Product grid | Available (layout Planned) | Product Cards in a grid; suggested 4 columns desktop, 2 mobile, 24px gap. Figma "Product Rows" page is still empty |
+| Product grid | Available | Product Row: 4 columns desktop, 2 per row mobile. Longer listings repeat rows (or the same grid with more items) |
 | Product detail | Planned | Gallery (whole piece, material close-up, scale shot) · name · story · details list · variation note · care · delivery · Add to Bag |
 | Finish / glaze / wood picker | Planned | Material swatches (oak, walnut, ash glaze…). Use Radio Group until designed |
 | One-of-a-kind stock | Planned | "One of a kind" Light badge; no quantity picker; sold out after one sale |
@@ -1382,7 +1437,7 @@ Non-negotiable for every component and page. Each component in §6 lists its own
   | Sale | Badge + strikethrough |
   | Current page | Indicator + heavier weight |
   | Wishlist | Filled vs outline shape |
-  | Toggle | Knob position + check mark |
+  | Toggle | Knob position (left / right) + filled track |
 
 - **Text alternatives:** every product image has material-first alt text (§2); decorative images and icons are hidden (`alt=""`, `aria-hidden`).
 - **Resize & reflow:** usable at 200% zoom and at 320px wide with no horizontal scrolling (except large data tables). The header switches to its mobile layout by container width, which helps here.
@@ -1451,12 +1506,14 @@ Non-negotiable for every component and page. Each component in §6 lists its own
 
 ## 10. Roadmap & changelog
 
-**Next up (Figma pages already created, still empty):** Images · Product Rows · Text (type scale) · Modal Form. Also planned: product detail, material swatches, heading scale, Figma Styles for §4.
+**Next up (Figma pages already created, still empty):** Images · Text (type scale) · Modal Form. Also planned: product detail, material swatches, heading scale, Figma Styles for §4.
 
 **Known differences to resolve:** none. Figma and code match.
 
 | Date | Change |
 |---|---|
+| 2026-09-28 | Product Row (4 desktop / 2 mobile), Section title style, Product Card media now 4:5 and fills its column; `card/media-height` token removed |
+| 2026-09-28 | Toggle: check mark removed from the thumb (Check Mark icon and `toggle/check` token deleted) |
 | 2026-09-28 | DESIGN.md: Do/Don't and keyboard & screen reader tables for every component; typography guidelines; expanded accessibility standard |
 | 2026-09-28 | Toggle component + Toggle tokens + Check Mark icon |
 | 2026-09-28 | Button Loading state + full width, Spinner component; Logo is "natural" only; Menu Item submenu off by default |

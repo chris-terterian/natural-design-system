@@ -1,0 +1,34 @@
+.nds-product-row {
+  container-type: inline-size;
+  background: var(--nds-row-bg);
+  font-family: var(--nds-font-family);
+}
+.nds-product-row__inner { padding: var(--nds-row-padding-y) var(--nds-row-padding-x); }
+.nds-product-row__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--nds-row-header-gap);
+}
+.nds-product-row__title {
+  margin: 0;
+  color: var(--nds-row-text-title);
+  font: 600 var(--nds-row-font-size-title) / var(--nds-row-line-height-title) var(--nds-font-family);
+}
+.nds-product-row__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--nds-row-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nds-product-row__grid > li { display: flex; }
+/* Cards fill their column; grid rows stretch them to equal height so CTAs align */
+.nds-product-row .nds-card { width: auto; flex: 1; }
+
+/* Mobile: 2 per row, tighter spacing (the row's own width, not the viewport) */
+@container (max-width: 767px) {
+  .nds-product-row__inner { padding: var(--nds-row-padding-y-mobile) var(--nds-row-padding-x-mobile); }
+  .nds-product-row__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--nds-row-gap-mobile); }
+}

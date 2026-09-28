@@ -65,8 +65,3 @@ export const ChevronDownIcon = (p: IconProps) => (
 export const ChevronRightIcon = (p: IconProps) => (
   <svg {...nav(p)}><path d="m10 7 5 5-5 5" /></svg>
 );
-
-/** Figma: Icon/Check Mark (16px). Used on the Toggle thumb. */
-export const CheckMarkIcon = (p: IconProps) => (
-  <svg {...base(p)} width={16} height={16} viewBox="0 0 16 16" strokeWidth={1.75}><path d="M4.5 8.2 6.8 10.5l4.7-4.7" /></svg>
-);

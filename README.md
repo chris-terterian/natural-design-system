@@ -4,7 +4,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.2.0)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.2.1)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 

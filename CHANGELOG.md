@@ -2,6 +2,11 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.2.1] – 2026-09-28
+
+### Fixed
+- CI install: `package-lock.json` regenerated (optional `@emnapi/*` entries were out of sync after adding Playwright) and CI moved to Node 24 so it uses the same npm (11) as local development. v0.2.0's CI run stopped at `npm ci`, before any quality gate ran, so nothing was deployed.
+
 ## [0.2.0] – 2026-09-28
 
 ### Added

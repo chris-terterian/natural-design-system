@@ -10,11 +10,7 @@
   justify-content: space-between;
   margin-bottom: var(--nds-row-header-gap);
 }
-.nds-product-row__title {
-  margin: 0;
-  color: var(--nds-row-text-title);
-  font: 600 var(--nds-row-font-size-title) / var(--nds-row-line-height-title) var(--nds-font-family);
-}
+.nds-product-row__title { margin: 0; } /* Heading/H3 via the Heading component */
 .nds-product-row__grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

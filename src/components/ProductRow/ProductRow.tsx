@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import { ProductCard, type ProductCardProps } from '../ProductCard/ProductCard';
 import { NavLink } from '../Navigation/Navigation';
+import { Heading } from '../Typography/Typography';
 import './ProductRow.css';
 
 export interface ProductRowProps {
@@ -24,7 +25,7 @@ export function ProductRow({ title, viewAllHref, viewAllLabel = 'View all', prod
     <section className={['nds-product-row', className].filter(Boolean).join(' ')} aria-labelledby={headingId}>
       <div className="nds-product-row__inner">
       <div className="nds-product-row__header">
-        <h2 id={headingId} className="nds-product-row__title">{title}</h2>
+        <Heading level={2} size="h3" id={headingId} className="nds-product-row__title">{title}</Heading>
         {viewAllHref && <NavLink href={viewAllHref}>{viewAllLabel}</NavLink>}
       </div>
       <ul className="nds-product-row__grid">

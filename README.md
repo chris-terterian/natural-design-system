@@ -37,6 +37,7 @@ npm run storybook        # http://localhost:6007
 | `Toggle` | `67:360` | On/off switch (`role="switch"`), label + description |
 | `Radio`, `RadioGroup` | `1:637` | Fieldset + legend, group-level error |
 | `WishlistButton` | `1:815` | `aria-pressed` toggle; filled vs outline heart |
+| `Heading`, `Text` | `76:5` | Content type scale: H1–H4, Paragraph Large / Default / Small, Caption; Desktop / Mobile modes |
 | `ProductRow` | `73:210` | Titled row: 4 cards desktop, 2 per row mobile (container query) |
 | `ProductCard` | `1:968` | Default / Sale / Sold out; nested wishlist + CTA |
 
@@ -48,6 +49,7 @@ Every story links to its Figma component in the **Design** panel. Each component
 
 - **Primitives**: raw values (`color/brown/200`, `space/12`, …). They're hidden from Figma pickers.
 - **Badge, Button, Input, Navigation, Radio, Toggle, Product Card, Product Row**: semantic tokens that alias primitives.
+- **Typography**: the content type scale, with **Desktop** and **Mobile** modes (mobile applies below 768px, or force it with `data-nds-mode="mobile"`).
 
 A Figma variable `button/primary/bg/default` becomes the CSS custom property `--nds-button-primary-bg-default: var(--nds-color-brown-200)`.
 

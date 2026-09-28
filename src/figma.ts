@@ -21,4 +21,5 @@ export const FIGMA_NODES = {
   spinner: '64:50',
   toggle: '67:360',
   productRow: '73:210',
+  typography: '76:5',
 } as const;

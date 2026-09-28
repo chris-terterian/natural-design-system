@@ -1,0 +1,30 @@
+/* Typography: Figma text styles Heading/H1–H4, Paragraph/Large · Default · Small, Caption.
+   Sizes come from the Typography collection: Desktop by default, Mobile below 768px
+   (or inside [data-nds-mode="mobile"]). */
+
+.nds-heading,
+.nds-text {
+  margin: 0;
+  font-family: var(--nds-font-family);
+}
+
+.nds-heading { font-weight: 600; color: var(--nds-text-color-heading); text-wrap: balance; }
+.nds-h1 { font-size: var(--nds-text-h1-font-size); line-height: var(--nds-text-h1-line-height); letter-spacing: var(--nds-text-h1-letter-spacing); }
+.nds-h2 { font-size: var(--nds-text-h2-font-size); line-height: var(--nds-text-h2-line-height); letter-spacing: var(--nds-text-h2-letter-spacing); }
+.nds-h3 { font-size: var(--nds-text-h3-font-size); line-height: var(--nds-text-h3-line-height); letter-spacing: var(--nds-text-h3-letter-spacing); }
+.nds-h4 { font-size: var(--nds-text-h4-font-size); line-height: var(--nds-text-h4-line-height); letter-spacing: var(--nds-text-h4-letter-spacing); }
+
+.nds-text { font-weight: 400; color: var(--nds-text-color-paragraph); max-width: var(--nds-text-measure); }
+.nds-text--muted { color: var(--nds-text-color-muted); }
+.nds-paragraph-lg { font-size: var(--nds-text-paragraph-lg-font-size); line-height: var(--nds-text-paragraph-lg-line-height); }
+.nds-paragraph { font-size: var(--nds-text-paragraph-font-size); line-height: var(--nds-text-paragraph-line-height); }
+.nds-paragraph-sm { font-size: var(--nds-text-paragraph-sm-font-size); line-height: var(--nds-text-paragraph-sm-line-height); }
+.nds-caption { font-size: var(--nds-text-caption-font-size); line-height: var(--nds-text-caption-line-height); }
+
+/* Consecutive paragraphs */
+.nds-text + .nds-text { margin-top: var(--nds-text-paragraph-spacing); }
+
+/* Prose container: vertical rhythm for content and category pages */
+.nds-prose > * + * { margin-top: var(--nds-text-space-after-heading); }
+.nds-prose > .nds-text + .nds-text { margin-top: var(--nds-text-paragraph-spacing); }
+.nds-prose > * + :is(.nds-h2, .nds-h3) { margin-top: calc(2 * var(--nds-text-space-after-heading)); }

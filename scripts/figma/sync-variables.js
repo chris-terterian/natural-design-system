@@ -4,6 +4,7 @@
  * `scripts/figma/print-sync.mjs` prints this file with TOKENS inlined, ready to execute.
  *
  * - Creates missing collections and variables, updates changed values and aliases.
+ * - Tokens with "modes" (e.g. Typography: Desktop / Mobile) get one value per mode; missing modes are created.
  * - Never deletes variables: removals are reported so they can be handled deliberately
  *   (deleting a variable in Figma detaches it from every component that uses it).
  */
@@ -29,7 +30,16 @@ for (const [collectionName, tokens] of Object.entries(TOKENS)) {
     collection = figma.variables.createVariableCollection(collectionName);
     collections.push(collection);
   }
-  const modeId = collection.modes[0].modeId;
+  // Ensure named modes exist (first token with modes defines them)
+  const withModes = Object.values(tokens).find((t) => t.modes);
+  if (withModes) {
+    Object.keys(withModes.modes).forEach((modeName, i) => {
+      if (collection.modes.some((m) => m.name === modeName)) return;
+      if (i === 0) collection.renameMode(collection.modes[0].modeId, modeName);
+      else collection.addMode(modeName);
+    });
+  }
+  const modeIdFor = (modeName) => (modeName ? collection.modes.find((m) => m.name === modeName).modeId : collection.modes[0].modeId);
   for (const [name, token] of Object.entries(tokens)) {
     let v = byName[name];
     if (!v) {
@@ -38,7 +48,11 @@ for (const [collectionName, tokens] of Object.entries(TOKENS)) {
       byName[name] = v;
       report.created.push(name);
     }
-    pending.push({ v, modeId, token, name });
+    if (token.modes) {
+      for (const [modeName, modeToken] of Object.entries(token.modes)) pending.push({ v, modeId: modeIdFor(modeName), token: { type: token.type, ...modeToken }, name: `${name} (${modeName})` });
+    } else {
+      pending.push({ v, modeId: modeIdFor(), token, name });
+    }
   }
   const inJson = new Set(Object.keys(tokens));
   for (const id of collection.variableIds) {

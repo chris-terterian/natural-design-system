@@ -56,6 +56,26 @@
   --nds-line-height-32: 32px;
   --nds-size-52: 52px;
   --nds-size-16: 16px;
+  --nds-font-size-18: 18px;
+  --nds-font-size-20: 20px;
+  --nds-font-size-28: 28px;
+  --nds-font-size-32: 32px;
+  --nds-font-size-36: 36px;
+  --nds-font-size-48: 48px;
+  --nds-line-height-22: 22px;
+  --nds-line-height-26: 26px;
+  --nds-line-height-28: 28px;
+  --nds-line-height-30: 30px;
+  --nds-line-height-36: 36px;
+  --nds-line-height-40: 40px;
+  --nds-line-height-44: 44px;
+  --nds-line-height-56: 56px;
+  --nds-letter-spacing-tighter: -1px;
+  --nds-letter-spacing-tight: -0.5px;
+  --nds-letter-spacing-snug: -0.25px;
+  --nds-letter-spacing-normal: 0px;
+  --nds-size-640: 640px;
+  --nds-size-343: 343px;
   /* Button */
   --nds-button-primary-bg-default: var(--nds-color-brown-200);
   --nds-button-primary-fg-default: var(--nds-color-brown-900);
@@ -295,7 +315,6 @@
   --nds-toggle-line-height-description: var(--nds-line-height-20);
   /* Product Row */
   --nds-row-bg: var(--nds-color-white);
-  --nds-row-text-title: var(--nds-color-brown-900);
   --nds-row-padding-x: var(--nds-space-40);
   --nds-row-padding-x-mobile: var(--nds-space-16);
   --nds-row-padding-y: var(--nds-space-48);
@@ -303,6 +322,142 @@
   --nds-row-gap: var(--nds-space-24);
   --nds-row-gap-mobile: var(--nds-space-16);
   --nds-row-header-gap: var(--nds-space-24);
-  --nds-row-font-size-title: var(--nds-font-size-24);
-  --nds-row-line-height-title: var(--nds-line-height-32);
+  /* Typography */
+  --nds-text-h1-font-size: var(--nds-font-size-48);
+  --nds-text-h1-line-height: var(--nds-line-height-56);
+  --nds-text-h1-letter-spacing: var(--nds-letter-spacing-tighter);
+  --nds-text-h2-font-size: var(--nds-font-size-36);
+  --nds-text-h2-line-height: var(--nds-line-height-44);
+  --nds-text-h2-letter-spacing: var(--nds-letter-spacing-tight);
+  --nds-text-h3-font-size: var(--nds-font-size-24);
+  --nds-text-h3-line-height: var(--nds-line-height-32);
+  --nds-text-h3-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-h4-font-size: var(--nds-font-size-20);
+  --nds-text-h4-line-height: var(--nds-line-height-28);
+  --nds-text-h4-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-paragraph-lg-font-size: var(--nds-font-size-20);
+  --nds-text-paragraph-lg-line-height: var(--nds-line-height-32);
+  --nds-text-paragraph-lg-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-paragraph-font-size: var(--nds-font-size-18);
+  --nds-text-paragraph-line-height: var(--nds-line-height-30);
+  --nds-text-paragraph-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-paragraph-sm-font-size: var(--nds-font-size-16);
+  --nds-text-paragraph-sm-line-height: var(--nds-line-height-24);
+  --nds-text-paragraph-sm-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-caption-font-size: var(--nds-font-size-14);
+  --nds-text-caption-line-height: var(--nds-line-height-20);
+  --nds-text-caption-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-paragraph-spacing: var(--nds-space-20);
+  --nds-text-space-after-heading: var(--nds-space-16);
+  --nds-text-space-section: var(--nds-space-48);
+  --nds-text-measure: var(--nds-size-640);
+  --nds-text-color-heading: var(--nds-color-brown-900);
+  --nds-text-color-paragraph: var(--nds-color-brown-900);
+  --nds-text-color-muted: var(--nds-color-brown-800);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --nds-text-h1-font-size: var(--nds-font-size-32);
+    --nds-text-h1-line-height: var(--nds-line-height-40);
+    --nds-text-h1-letter-spacing: var(--nds-letter-spacing-tight);
+    --nds-text-h2-font-size: var(--nds-font-size-28);
+    --nds-text-h2-line-height: var(--nds-line-height-36);
+    --nds-text-h2-letter-spacing: var(--nds-letter-spacing-snug);
+    --nds-text-h3-font-size: var(--nds-font-size-20);
+    --nds-text-h3-line-height: var(--nds-line-height-28);
+    --nds-text-h3-letter-spacing: var(--nds-letter-spacing-normal);
+    --nds-text-h4-font-size: var(--nds-font-size-18);
+    --nds-text-h4-line-height: var(--nds-line-height-26);
+    --nds-text-h4-letter-spacing: var(--nds-letter-spacing-normal);
+    --nds-text-paragraph-lg-font-size: var(--nds-font-size-18);
+    --nds-text-paragraph-lg-line-height: var(--nds-line-height-28);
+    --nds-text-paragraph-lg-letter-spacing: var(--nds-letter-spacing-normal);
+    --nds-text-paragraph-font-size: var(--nds-font-size-16);
+    --nds-text-paragraph-line-height: var(--nds-line-height-26);
+    --nds-text-paragraph-letter-spacing: var(--nds-letter-spacing-normal);
+    --nds-text-paragraph-sm-font-size: var(--nds-font-size-14);
+    --nds-text-paragraph-sm-line-height: var(--nds-line-height-22);
+    --nds-text-paragraph-sm-letter-spacing: var(--nds-letter-spacing-normal);
+    --nds-text-caption-font-size: var(--nds-font-size-14);
+    --nds-text-caption-line-height: var(--nds-line-height-20);
+    --nds-text-caption-letter-spacing: var(--nds-letter-spacing-normal);
+    --nds-text-paragraph-spacing: var(--nds-space-16);
+    --nds-text-space-after-heading: var(--nds-space-12);
+    --nds-text-space-section: var(--nds-space-32);
+    --nds-text-measure: var(--nds-size-343);
+    --nds-text-color-heading: var(--nds-color-brown-900);
+    --nds-text-color-paragraph: var(--nds-color-brown-900);
+    --nds-text-color-muted: var(--nds-color-brown-800);
+  }
+}
+
+/* Force Desktop values for a subtree (mirrors setting a frame's mode in Figma) */
+[data-nds-mode='desktop'] {
+  --nds-text-h1-font-size: var(--nds-font-size-48);
+  --nds-text-h1-line-height: var(--nds-line-height-56);
+  --nds-text-h1-letter-spacing: var(--nds-letter-spacing-tighter);
+  --nds-text-h2-font-size: var(--nds-font-size-36);
+  --nds-text-h2-line-height: var(--nds-line-height-44);
+  --nds-text-h2-letter-spacing: var(--nds-letter-spacing-tight);
+  --nds-text-h3-font-size: var(--nds-font-size-24);
+  --nds-text-h3-line-height: var(--nds-line-height-32);
+  --nds-text-h3-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-h4-font-size: var(--nds-font-size-20);
+  --nds-text-h4-line-height: var(--nds-line-height-28);
+  --nds-text-h4-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-paragraph-lg-font-size: var(--nds-font-size-20);
+  --nds-text-paragraph-lg-line-height: var(--nds-line-height-32);
+  --nds-text-paragraph-lg-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-paragraph-font-size: var(--nds-font-size-18);
+  --nds-text-paragraph-line-height: var(--nds-line-height-30);
+  --nds-text-paragraph-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-paragraph-sm-font-size: var(--nds-font-size-16);
+  --nds-text-paragraph-sm-line-height: var(--nds-line-height-24);
+  --nds-text-paragraph-sm-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-caption-font-size: var(--nds-font-size-14);
+  --nds-text-caption-line-height: var(--nds-line-height-20);
+  --nds-text-caption-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-paragraph-spacing: var(--nds-space-20);
+  --nds-text-space-after-heading: var(--nds-space-16);
+  --nds-text-space-section: var(--nds-space-48);
+  --nds-text-measure: var(--nds-size-640);
+  --nds-text-color-heading: var(--nds-color-brown-900);
+  --nds-text-color-paragraph: var(--nds-color-brown-900);
+  --nds-text-color-muted: var(--nds-color-brown-800);
+}
+
+/* Force Mobile values for a subtree (mirrors setting a frame's mode in Figma) */
+[data-nds-mode='mobile'] {
+  --nds-text-h1-font-size: var(--nds-font-size-32);
+  --nds-text-h1-line-height: var(--nds-line-height-40);
+  --nds-text-h1-letter-spacing: var(--nds-letter-spacing-tight);
+  --nds-text-h2-font-size: var(--nds-font-size-28);
+  --nds-text-h2-line-height: var(--nds-line-height-36);
+  --nds-text-h2-letter-spacing: var(--nds-letter-spacing-snug);
+  --nds-text-h3-font-size: var(--nds-font-size-20);
+  --nds-text-h3-line-height: var(--nds-line-height-28);
+  --nds-text-h3-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-h4-font-size: var(--nds-font-size-18);
+  --nds-text-h4-line-height: var(--nds-line-height-26);
+  --nds-text-h4-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-paragraph-lg-font-size: var(--nds-font-size-18);
+  --nds-text-paragraph-lg-line-height: var(--nds-line-height-28);
+  --nds-text-paragraph-lg-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-paragraph-font-size: var(--nds-font-size-16);
+  --nds-text-paragraph-line-height: var(--nds-line-height-26);
+  --nds-text-paragraph-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-paragraph-sm-font-size: var(--nds-font-size-14);
+  --nds-text-paragraph-sm-line-height: var(--nds-line-height-22);
+  --nds-text-paragraph-sm-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-caption-font-size: var(--nds-font-size-14);
+  --nds-text-caption-line-height: var(--nds-line-height-20);
+  --nds-text-caption-letter-spacing: var(--nds-letter-spacing-normal);
+  --nds-text-paragraph-spacing: var(--nds-space-16);
+  --nds-text-space-after-heading: var(--nds-space-12);
+  --nds-text-space-section: var(--nds-space-32);
+  --nds-text-measure: var(--nds-size-343);
+  --nds-text-color-heading: var(--nds-color-brown-900);
+  --nds-text-color-paragraph: var(--nds-color-brown-900);
+  --nds-text-color-muted: var(--nds-color-brown-800);
 }

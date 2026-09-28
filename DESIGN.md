@@ -10,6 +10,7 @@ repository: https://github.com/chris-terterian/natural-design-system
 standard: WCAG 2.2 AA
 css_prefix: --nds-
 font: { family: Inter, weights: [400, 600, 700], fallback: system-ui }
+modes: { Typography: { Desktop: default, Mobile: "max-width 767px or data-nds-mode=mobile" } }
 tokens:
   "Primitives":
     "color/white": { value: "#FFFFFF", css: "--nds-color-white" }
@@ -67,6 +68,26 @@ tokens:
     "line-height/32": { value: "32px", css: "--nds-line-height-32" }
     "size/52": { value: "52px", css: "--nds-size-52" }
     "size/16": { value: "16px", css: "--nds-size-16" }
+    "font-size/18": { value: "18px", css: "--nds-font-size-18" }
+    "font-size/20": { value: "20px", css: "--nds-font-size-20" }
+    "font-size/28": { value: "28px", css: "--nds-font-size-28" }
+    "font-size/32": { value: "32px", css: "--nds-font-size-32" }
+    "font-size/36": { value: "36px", css: "--nds-font-size-36" }
+    "font-size/48": { value: "48px", css: "--nds-font-size-48" }
+    "line-height/22": { value: "22px", css: "--nds-line-height-22" }
+    "line-height/26": { value: "26px", css: "--nds-line-height-26" }
+    "line-height/28": { value: "28px", css: "--nds-line-height-28" }
+    "line-height/30": { value: "30px", css: "--nds-line-height-30" }
+    "line-height/36": { value: "36px", css: "--nds-line-height-36" }
+    "line-height/40": { value: "40px", css: "--nds-line-height-40" }
+    "line-height/44": { value: "44px", css: "--nds-line-height-44" }
+    "line-height/56": { value: "56px", css: "--nds-line-height-56" }
+    "letter-spacing/tighter": { value: "-1px", css: "--nds-letter-spacing-tighter" }
+    "letter-spacing/tight": { value: "-0.5px", css: "--nds-letter-spacing-tight" }
+    "letter-spacing/snug": { value: "-0.25px", css: "--nds-letter-spacing-snug" }
+    "letter-spacing/normal": { value: "0px", css: "--nds-letter-spacing-normal" }
+    "size/640": { value: "640px", css: "--nds-size-640" }
+    "size/343": { value: "343px", css: "--nds-size-343" }
   "Button":
     "button/primary/bg/default": { value: "#D8BFA0", ref: "color/brown/200", css: "--nds-button-primary-bg-default" }
     "button/primary/fg/default": { value: "#3B2A1E", ref: "color/brown/900", css: "--nds-button-primary-fg-default" }
@@ -306,7 +327,6 @@ tokens:
     "toggle/line-height/description": { value: "20px", ref: "line-height/20", css: "--nds-toggle-line-height-description" }
   "Product Row":
     "row/bg": { value: "#FFFFFF", ref: "color/white", css: "--nds-row-bg" }
-    "row/text/title": { value: "#3B2A1E", ref: "color/brown/900", css: "--nds-row-text-title" }
     "row/padding-x": { value: "40px", ref: "space/40", css: "--nds-row-padding-x" }
     "row/padding-x-mobile": { value: "16px", ref: "space/16", css: "--nds-row-padding-x-mobile" }
     "row/padding-y": { value: "48px", ref: "space/48", css: "--nds-row-padding-y" }
@@ -314,8 +334,38 @@ tokens:
     "row/gap": { value: "24px", ref: "space/24", css: "--nds-row-gap" }
     "row/gap-mobile": { value: "16px", ref: "space/16", css: "--nds-row-gap-mobile" }
     "row/header-gap": { value: "24px", ref: "space/24", css: "--nds-row-header-gap" }
-    "row/font-size/title": { value: "24px", ref: "font-size/24", css: "--nds-row-font-size-title" }
-    "row/line-height/title": { value: "32px", ref: "line-height/32", css: "--nds-row-line-height-title" }
+  "Typography":
+    "text/h1/font-size": { Desktop: { value: "48px", ref: "font-size/48" }, Mobile: { value: "32px", ref: "font-size/32" }, css: "--nds-text-h1-font-size" }
+    "text/h1/line-height": { Desktop: { value: "56px", ref: "line-height/56" }, Mobile: { value: "40px", ref: "line-height/40" }, css: "--nds-text-h1-line-height" }
+    "text/h1/letter-spacing": { Desktop: { value: "-1px", ref: "letter-spacing/tighter" }, Mobile: { value: "-0.5px", ref: "letter-spacing/tight" }, css: "--nds-text-h1-letter-spacing" }
+    "text/h2/font-size": { Desktop: { value: "36px", ref: "font-size/36" }, Mobile: { value: "28px", ref: "font-size/28" }, css: "--nds-text-h2-font-size" }
+    "text/h2/line-height": { Desktop: { value: "44px", ref: "line-height/44" }, Mobile: { value: "36px", ref: "line-height/36" }, css: "--nds-text-h2-line-height" }
+    "text/h2/letter-spacing": { Desktop: { value: "-0.5px", ref: "letter-spacing/tight" }, Mobile: { value: "-0.25px", ref: "letter-spacing/snug" }, css: "--nds-text-h2-letter-spacing" }
+    "text/h3/font-size": { Desktop: { value: "24px", ref: "font-size/24" }, Mobile: { value: "20px", ref: "font-size/20" }, css: "--nds-text-h3-font-size" }
+    "text/h3/line-height": { Desktop: { value: "32px", ref: "line-height/32" }, Mobile: { value: "28px", ref: "line-height/28" }, css: "--nds-text-h3-line-height" }
+    "text/h3/letter-spacing": { Desktop: { value: "0px", ref: "letter-spacing/normal" }, Mobile: { value: "0px", ref: "letter-spacing/normal" }, css: "--nds-text-h3-letter-spacing" }
+    "text/h4/font-size": { Desktop: { value: "20px", ref: "font-size/20" }, Mobile: { value: "18px", ref: "font-size/18" }, css: "--nds-text-h4-font-size" }
+    "text/h4/line-height": { Desktop: { value: "28px", ref: "line-height/28" }, Mobile: { value: "26px", ref: "line-height/26" }, css: "--nds-text-h4-line-height" }
+    "text/h4/letter-spacing": { Desktop: { value: "0px", ref: "letter-spacing/normal" }, Mobile: { value: "0px", ref: "letter-spacing/normal" }, css: "--nds-text-h4-letter-spacing" }
+    "text/paragraph-lg/font-size": { Desktop: { value: "20px", ref: "font-size/20" }, Mobile: { value: "18px", ref: "font-size/18" }, css: "--nds-text-paragraph-lg-font-size" }
+    "text/paragraph-lg/line-height": { Desktop: { value: "32px", ref: "line-height/32" }, Mobile: { value: "28px", ref: "line-height/28" }, css: "--nds-text-paragraph-lg-line-height" }
+    "text/paragraph-lg/letter-spacing": { Desktop: { value: "0px", ref: "letter-spacing/normal" }, Mobile: { value: "0px", ref: "letter-spacing/normal" }, css: "--nds-text-paragraph-lg-letter-spacing" }
+    "text/paragraph/font-size": { Desktop: { value: "18px", ref: "font-size/18" }, Mobile: { value: "16px", ref: "font-size/16" }, css: "--nds-text-paragraph-font-size" }
+    "text/paragraph/line-height": { Desktop: { value: "30px", ref: "line-height/30" }, Mobile: { value: "26px", ref: "line-height/26" }, css: "--nds-text-paragraph-line-height" }
+    "text/paragraph/letter-spacing": { Desktop: { value: "0px", ref: "letter-spacing/normal" }, Mobile: { value: "0px", ref: "letter-spacing/normal" }, css: "--nds-text-paragraph-letter-spacing" }
+    "text/paragraph-sm/font-size": { Desktop: { value: "16px", ref: "font-size/16" }, Mobile: { value: "14px", ref: "font-size/14" }, css: "--nds-text-paragraph-sm-font-size" }
+    "text/paragraph-sm/line-height": { Desktop: { value: "24px", ref: "line-height/24" }, Mobile: { value: "22px", ref: "line-height/22" }, css: "--nds-text-paragraph-sm-line-height" }
+    "text/paragraph-sm/letter-spacing": { Desktop: { value: "0px", ref: "letter-spacing/normal" }, Mobile: { value: "0px", ref: "letter-spacing/normal" }, css: "--nds-text-paragraph-sm-letter-spacing" }
+    "text/caption/font-size": { Desktop: { value: "14px", ref: "font-size/14" }, Mobile: { value: "14px", ref: "font-size/14" }, css: "--nds-text-caption-font-size" }
+    "text/caption/line-height": { Desktop: { value: "20px", ref: "line-height/20" }, Mobile: { value: "20px", ref: "line-height/20" }, css: "--nds-text-caption-line-height" }
+    "text/caption/letter-spacing": { Desktop: { value: "0px", ref: "letter-spacing/normal" }, Mobile: { value: "0px", ref: "letter-spacing/normal" }, css: "--nds-text-caption-letter-spacing" }
+    "text/paragraph-spacing": { Desktop: { value: "20px", ref: "space/20" }, Mobile: { value: "16px", ref: "space/16" }, css: "--nds-text-paragraph-spacing" }
+    "text/space/after-heading": { Desktop: { value: "16px", ref: "space/16" }, Mobile: { value: "12px", ref: "space/12" }, css: "--nds-text-space-after-heading" }
+    "text/space/section": { Desktop: { value: "48px", ref: "space/48" }, Mobile: { value: "32px", ref: "space/32" }, css: "--nds-text-space-section" }
+    "text/measure": { Desktop: { value: "640px", ref: "size/640" }, Mobile: { value: "343px", ref: "size/343" }, css: "--nds-text-measure" }
+    "text/color/heading": { Desktop: { value: "#3B2A1E", ref: "color/brown/900" }, Mobile: { value: "#3B2A1E", ref: "color/brown/900" }, css: "--nds-text-color-heading" }
+    "text/color/paragraph": { Desktop: { value: "#3B2A1E", ref: "color/brown/900" }, Mobile: { value: "#3B2A1E", ref: "color/brown/900" }, css: "--nds-text-color-paragraph" }
+    "text/color/muted": { Desktop: { value: "#6B4F35", ref: "color/brown/800" }, Mobile: { value: "#6B4F35", ref: "color/brown/800" }, css: "--nds-text-color-muted" }
 ---
 
 # Natural Design System
@@ -466,14 +516,38 @@ The palette is **bark to sand**: one warm brown scale, a softer taupe for quiet 
 
 One family: **Inter** (400 Regular, 600 Semi Bold, 700 Bold), loaded from Google Fonts, falling back to `system-ui, -apple-system, 'Segoe UI', sans-serif` (`--nds-font-family`).
 
-| Size primitive | Value | Paired line height |
-|---|---|---|
-| `font-size/12` | 12px | `line-height/16` (16px) |
-| `font-size/14` | 14px | `line-height/20` (20px) |
-| `font-size/16` | 16px | `line-height/24` (24px), or 20px in buttons |
-| `font-size/24` | 24px | `line-height/32` (32px) |
+#### Content type scale (headers & paragraph copy)
 
-**Heading scale (started):** one heading style so far, **Section title** (24/32, 600), used for section headings such as "New arrivals". **Planned:** page-title and display sizes. There is no type larger than 24px yet.
+One scale for **every page that carries content**: About, Journal, category pages, product stories. A heading or paragraph looks the same wherever it appears. Sizes live in the **Typography** variable collection, which has two modes: **Desktop** (the default) and **Mobile** (below 768px). In Figma, set a frame's Typography mode; in code, the mobile values apply automatically under 768px, or you can force a mode with `data-nds-mode="mobile"`.
+
+| Style (Figma text style) | Weight | Desktop size / line / tracking | Mobile size / line / tracking | Tokens | Use for |
+|---|---|---|---|---|---|
+| **Heading/H1** | 600 | 48 / 56 · −1px | 32 / 40 · −0.5px | `text/h1/*` | Page title: one per page ("Clay & ceramics", "Made from what the land lets go") |
+| **Heading/H2** | 600 | 36 / 44 · −0.5px | 28 / 36 · −0.25px | `text/h2/*` | Major section of a content page ("Finding the wood") |
+| **Heading/H3** | 600 | 24 / 32 · 0 | 20 / 28 · 0 | `text/h3/*` | Sub-section; product row titles ("Cups & mugs") |
+| **Heading/H4** | 600 | 20 / 28 · 0 | 18 / 26 · 0 | `text/h4/*` | Small groups: care, dimensions, FAQs |
+| **Paragraph/Large** | 400 | 20 / 32 | 18 / 28 | `text/paragraph-lg/*` | Intro under an H1 (one short paragraph) |
+| **Paragraph/Default** | 400 | 18 / 30 | 16 / 26 | `text/paragraph/*` | Body copy: stories, articles, product descriptions |
+| **Paragraph/Small** | 400 | 16 / 24 | 14 / 22 | `text/paragraph-sm/*` | Secondary copy: care notes, fine print (muted colour) |
+| **Caption** | 400 | 14 / 20 | 14 / 20 | `text/caption/*` | Image captions, eyebrows ("Journal") (muted colour) |
+
+| Spacing & measure | Desktop | Mobile | Token |
+|---|---|---|---|
+| Between paragraphs | 20px | 16px | `text/paragraph-spacing` |
+| Below a heading | 16px | 12px | `text/space/after-heading` |
+| Above an H2 / H3 | 32px (2× below) | 24px | `text/space/after-heading` × 2 |
+| Top / bottom of a content section | 48px | 32px | `text/space/section` |
+| Max line width (paragraphs) | 640px | 343px (full column at 375) | `text/measure` |
+
+| Colour | Value | Token |
+|---|---|---|
+| Headings | `#3B2A1E` (13.67:1) | `text/color/heading` |
+| Paragraphs | `#3B2A1E` (13.67:1) | `text/color/paragraph` |
+| Small copy & captions | `#6B4F35` (7.51:1) | `text/color/muted` |
+
+**UI text** inside components (buttons, fields, labels, cards, navigation) keeps its fixed component sizes (§4.1): 16/24 body, 14/20 labels, 12/16 badges. The content scale is for reading.
+
+Size primitives now run `font-size/12 · 14 · 16 · 18 · 20 · 24 · 28 · 32 · 36 · 48` with line heights `16 · 20 · 22 · 24 · 26 · 28 · 30 · 32 · 36 · 40 · 44 · 56`, and tracking `letter-spacing/tighter (−1) · tight (−0.5) · snug (−0.25) · normal (0)` in px.
 
 #### Typography guidelines
 
@@ -486,7 +560,10 @@ One family: **Inter** (400 Regular, 600 Semi Bold, 700 Bold), loaded from Google
 | 3. What it's made of | Small (400, Secondary) | Stoneware · ash glaze |
 | 4. Supporting detail | Small / helper | Dishwasher safe |
 
-Section headings use **Section title** (24/32, 600, `<h2>`). Until the rest of the heading scale exists, don't invent other sizes.
+**Page structure** (content pages and category pages alike): H1 → Paragraph/Large intro → H2 sections → H3 sub-sections → Paragraph/Default. Category pages go H1 → intro → Product Rows, whose titles are H3.
+
+- **One H1 per page**, and never skip levels in the HTML outline (h1 → h2 → h3). The **visual** size can differ from the level when the layout needs it: a Product Row title is an `<h2>` in the outline but uses the H3 style.
+- **Don't invent sizes.** If nothing in the scale fits, propose a new style rather than setting a one-off size.
 
 **Rules**
 
@@ -572,14 +649,14 @@ Quiet and brief. Colour and border changes: 120ms ease. Product image hover zoom
 
 ## 4. Styles
 
-Named styles built from the foundations. Each maps to the tokens a component uses; the names are the vocabulary to use in design reviews and prompts. The Figma file currently expresses these through **variables only** (no Figma text, colour or effect Styles exist). **Planned:** publish them as Figma Styles with these exact names.
+Named styles built from the foundations. Each maps to the tokens a component uses; the names are the vocabulary to use in design reviews and prompts. **Figma text styles exist** for the content scale (Heading/H1–H4, Paragraph/Large · Default · Small, Caption), each bound to the Typography variables so they resize with the frame's mode. The component text styles below, and the colour and effect styles, are still expressed through variables only. **Planned:** publish those as Figma Styles with these exact names.
 
 ### 4.1 Text styles
 
 | Style | Family / weight | Size / line height | Letter spacing | Colour | Tokens | Used in |
 |---|---|---|---|---|---|---|
 | **Logo** | Inter 700 | 24 / 32 | −2% | Ink | `nav/font-size/logo`, `nav/line-height/logo` | Logo "natural" |
-| **Section title** | Inter 600 | 24 / 32 | 0 | Ink | `row/font-size/title`, `row/line-height/title` | Product Row heading (`<h2>`) |
+| **Heading/H1 – H4, Paragraph/*, Caption** | Inter 600 / 400 | see §3.2 (Desktop / Mobile) | see §3.2 | Ink / Secondary | `text/*` (Typography collection) | Content pages, category pages, Product Row titles (H3). **Figma text styles.** |
 | **Body** | Inter 400 | 16 / 24 | 0 | Ink | `font-size/16`, `line-height/24` | Input value, radio label, nav link, menu item |
 | **Body Strong** | Inter 600 | 16 / 24 | 0 | Ink | same | Product title, price, active nav link / menu item |
 | **Button** | Inter 600 | 16 / 20 | 0 | per state | `button/font-size`, `button/line-height` | Button label |
@@ -648,7 +725,8 @@ What each colour *means*. Pick by role, then use that component's token.
 Two layers, identical in Figma and code:
 
 1. **Primitives** (`color/brown/200`, `space/12`, …): raw values. Hidden from Figma's pickers; never used directly in components.
-2. **Component tokens** (`button/primary/bg/default`, `input/border/error`, …): aliases of primitives, in collections Button, Input, Radio, Toggle, Product Card, Product Row, Badge, Navigation.
+2. **Component tokens** (`button/primary/bg/default`, `input/border/error`, …): aliases of primitives, in collections Button, Input, Radio, Toggle, Product Card, Product Row, Badge, Navigation, and **Typography**.
+3. **Modes:** the Typography collection has two modes, **Desktop** and **Mobile**. In the JSON, a moded token looks like `{ "type": "FLOAT", "modes": { "Desktop": { "alias": "font-size/48" }, "Mobile": { "alias": "font-size/32" } } }`. The build writes Desktop values on `:root`, Mobile values inside `@media (max-width: 767px)`, and both under `[data-nds-mode="desktop" | "mobile"]` so a subtree can force a mode, just like a frame's mode in Figma. The Figma sync script creates missing modes and sets each mode's value.
 
 Naming: `component/part/property/state`. The Figma name `button/primary/bg/default` becomes the CSS variable `--nds-button-primary-bg-default: var(--nds-color-brown-200)`.
 
@@ -1362,7 +1440,7 @@ Label `#3B2A1E` (13.67), description `#6B4F35` (7.51). The thumb slides in 120ms
 
 [Figma 73:210](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=73-210) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/components-product-row--all-variants)
 
-**Purpose:** a titled row of products for home and collection pages ("New arrivals", "Made in clay"). **Anatomy:** ① Section title · ② View all link (Nav Link) · ③ Grid of Product Cards (exposed instances in Figma).
+**Purpose:** a titled row of products for home and collection pages ("New arrivals", "Made in clay"). **Anatomy:** ① Title (Heading/H3 style, `<h2>` in the outline) · ② View all link (Nav Link) · ③ Grid of Product Cards (exposed instances in Figma).
 
 | Figma property | Type | Values / default | Code prop | Type / default |
 |---|---|---|---|---|
@@ -1379,7 +1457,7 @@ Label `#3B2A1E` (13.67), description `#6B4F35` (7.51). The thumb slides in 120ms
 | Side margins | 40px (`row/padding-x`) | 16px (`row/padding-x-mobile`) |
 | Top / bottom | 48px (`row/padding-y`) | 32px (`row/padding-y-mobile`) |
 | Title → grid | 24px (`row/header-gap`) | 24px |
-| Title | Section title, `row/text/title` `#3B2A1E` (13.67) | same |
+| Title | Heading/H3, 24 / 32, `text/color/heading` `#3B2A1E` (13.67) | Heading/H3, 20 / 28 (Mobile mode) |
 | Background | `row/bg` `#FFFFFF` | same |
 
 **Behaviour:** cards fill their column and each grid row stretches them to equal height, so the Add to Bag buttons line up even when a title wraps (mobile: "Basalt Mortar & Pestle" wraps to 2 lines). In Figma, card heights in a row are set to the tallest card with the Info block filling; update them if you change a product's text.
@@ -1400,6 +1478,41 @@ Label `#3B2A1E` (13.67), description `#6B4F35` (7.51). The thumb slides in 120ms
 | Tab order | View all → then each card (Wishlist → title link → Add to Bag / Notify me), left to right, top to bottom |
 | Announced | A region labelled by its heading ("New arrivals, heading level 2"), then a list of 4 items, each a Product Card |
 
+### 6.19 Heading & Text
+
+[Figma 76:5 (Typography)](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=76-5) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/foundations-typography--type-scale)
+
+**Purpose:** the only way to set headers and paragraph copy, so content and category pages stay identical. In Figma, apply the **Heading/** and **Paragraph/** text styles; in code, use these two components.
+
+| Code | Props | Figma equivalent |
+|---|---|---|
+| `<Heading level={1–6} size?>` | `level`: the HTML level (outline). `size`: `'h1' \| 'h2' \| 'h3' \| 'h4'`, defaults to the level (h5/h6 use H4) | Heading/H1 – H4 |
+| `<Text variant? muted? as?>` | `variant`: `'paragraph-lg' \| 'paragraph' \| 'paragraph-sm' \| 'caption'` = `'paragraph'`. `muted`: secondary colour (default for small and caption). `as`: `p` (default), `span`, `div`, `figcaption` | Paragraph/Large · Default · Small, Caption |
+| `className="nds-prose"` | Wrap a run of Headings and Text to get the vertical rhythm from §3.2 (paragraph spacing, space below/above headings) | Frame auto layout with `text/space/*` gaps |
+| `data-nds-mode="desktop" \| "mobile"` | Forces a Typography mode for a subtree (docs, previews, fixed-width modules) | A frame's Typography mode |
+
+```tsx
+<article className="nds-prose">
+  <Text variant="caption">Journal</Text>
+  <Heading level={1}>Made from what the land lets go</Heading>
+  <Text variant="paragraph-lg">Every piece starts with a material we didn't make…</Text>
+  <Heading level={2}>Finding the wood</Heading>
+  <Text>We only use trees that have already come down…</Text>
+</article>
+```
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Use the same H1 + Paragraph/Large intro on every content and category page. | Style a category title differently from an article title. |
+| One H1 per page; H2 and H3 for sections, in order. | Pick heading levels by size ("H4 looks right here"), or skip from H1 to H3 in the HTML. |
+| Keep paragraphs at the 640px measure on desktop. | Let body copy run the full 1440px width. |
+| Use Paragraph/Default for stories and descriptions. | Use Paragraph/Small or Caption for anything people need to read in full. |
+| Let the mode change sizes. | Hand-set mobile sizes on individual text layers. |
+
+**Keyboard & screen reader:** static text, not focusable. Headings form the page outline that screen reader users navigate by (H key / rotor), so the HTML levels must be in order.
+
 ---
 
 ## 7. E-commerce patterns
@@ -1409,6 +1522,8 @@ How the parts combine for Natural's shop. **Available** means buildable today fr
 | Pattern | Status | Notes |
 |---|---|---|
 | Site header & mobile menu | Available | Navigation Menu + Mobile Menu |
+| Content page (About, Journal) | Available | Heading + Text in `nds-prose`: H1 → Paragraph/Large → H2/H3 → Paragraph/Default → Caption |
+| Category page header | Available | Same H1 + Paragraph/Large intro as content pages, then Product Rows (H3 titles) |
 | Product grid | Available | Product Row: 4 columns desktop, 2 per row mobile. Longer listings repeat rows (or the same grid with more items) |
 | Product detail | Planned | Gallery (whole piece, material close-up, scale shot) · name · story · details list · variation note · care · delivery · Add to Bag |
 | Finish / glaze / wood picker | Planned | Material swatches (oak, walnut, ash glaze…). Use Radio Group until designed |
@@ -1506,12 +1621,13 @@ Non-negotiable for every component and page. Each component in §6 lists its own
 
 ## 10. Roadmap & changelog
 
-**Next up (Figma pages already created, still empty):** Images · Text (type scale) · Modal Form. Also planned: product detail, material swatches, heading scale, Figma Styles for §4.
+**Next up (Figma pages already created, still empty):** Images · Modal Form. Also planned: product detail, material swatches, heading scale, Figma Styles for §4.
 
 **Known differences to resolve:** none. Figma and code match.
 
 | Date | Change |
 |---|---|
+| 2026-09-28 | Typography: Desktop / Mobile type scale (H1–H4, Paragraph Large / Default / Small, Caption) as a moded variable collection + Figma text styles; Heading & Text components; Product Row title now Heading/H3 (row title tokens removed) |
 | 2026-09-28 | Product Row (4 desktop / 2 mobile), Section title style, Product Card media now 4:5 and fills its column; `card/media-height` token removed |
 | 2026-09-28 | Toggle: check mark removed from the thumb (Check Mark icon and `toggle/check` token deleted) |
 | 2026-09-28 | DESIGN.md: Do/Don't and keyboard & screen reader tables for every component; typography guidelines; expanded accessibility standard |

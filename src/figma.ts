@@ -12,4 +12,10 @@ export const FIGMA_NODES = {
   wishlistButton: '1:815',
   productCard: '1:968',
   badge: '2:171',
+  navigationMenu: '61:134',
+  mobileMenu: '61:135',
+  navLink: '60:88',
+  iconButton: '60:69',
+  menuItem: '60:107',
+  logo: '59:67',
 } as const;

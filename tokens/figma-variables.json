@@ -196,6 +196,34 @@
     "line-height/16": {
       "type": "FLOAT",
       "value": 16
+    },
+    "size/56": {
+      "type": "FLOAT",
+      "value": 56
+    },
+    "size/72": {
+      "type": "FLOAT",
+      "value": 72
+    },
+    "space/40": {
+      "type": "FLOAT",
+      "value": 40
+    },
+    "font-size/24": {
+      "type": "FLOAT",
+      "value": 24
+    },
+    "line-height/32": {
+      "type": "FLOAT",
+      "value": 32
+    },
+    "size/52": {
+      "type": "FLOAT",
+      "value": 52
+    },
+    "size/16": {
+      "type": "FLOAT",
+      "value": 16
     }
   },
   "Button": {
@@ -830,6 +858,164 @@
     "badge/line-height": {
       "type": "FLOAT",
       "alias": "line-height/16"
+    }
+  },
+  "Navigation": {
+    "nav/bg": {
+      "type": "COLOR",
+      "alias": "color/white"
+    },
+    "nav/border": {
+      "type": "COLOR",
+      "alias": "color/taupe/200"
+    },
+    "nav/announcement/bg": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "nav/announcement/text": {
+      "type": "COLOR",
+      "alias": "color/white"
+    },
+    "nav/logo": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "nav/link/text": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "nav/link/indicator": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "nav/link/bg/hover": {
+      "type": "COLOR",
+      "alias": "color/brown/50"
+    },
+    "nav/icon": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "nav/icon-button/bg/hover": {
+      "type": "COLOR",
+      "alias": "color/brown/50"
+    },
+    "nav/icon-button/bg/pressed": {
+      "type": "COLOR",
+      "alias": "color/brown/150"
+    },
+    "nav/divider": {
+      "type": "COLOR",
+      "alias": "color/taupe/200"
+    },
+    "nav/focus-ring": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "nav/height": {
+      "type": "FLOAT",
+      "alias": "size/72"
+    },
+    "nav/height-mobile": {
+      "type": "FLOAT",
+      "alias": "size/56"
+    },
+    "nav/padding-x": {
+      "type": "FLOAT",
+      "alias": "space/40"
+    },
+    "nav/padding-x-mobile": {
+      "type": "FLOAT",
+      "alias": "space/16"
+    },
+    "nav/link-gap": {
+      "type": "FLOAT",
+      "alias": "space/32"
+    },
+    "nav/link-padding-x": {
+      "type": "FLOAT",
+      "alias": "space/4"
+    },
+    "nav/link-padding-y": {
+      "type": "FLOAT",
+      "alias": "space/10"
+    },
+    "nav/icon-gap": {
+      "type": "FLOAT",
+      "alias": "space/4"
+    },
+    "nav/icon-button-size": {
+      "type": "FLOAT",
+      "alias": "space/44"
+    },
+    "nav/icon-size": {
+      "type": "FLOAT",
+      "alias": "space/24"
+    },
+    "nav/indicator-height": {
+      "type": "FLOAT",
+      "alias": "border-width/2"
+    },
+    "nav/announcement-padding-y": {
+      "type": "FLOAT",
+      "alias": "space/8"
+    },
+    "nav/menu-item-padding-y": {
+      "type": "FLOAT",
+      "alias": "space/16"
+    },
+    "nav/radius": {
+      "type": "FLOAT",
+      "alias": "radius/8"
+    },
+    "nav/border-width": {
+      "type": "FLOAT",
+      "alias": "border-width/1"
+    },
+    "nav/focus-ring-width": {
+      "type": "FLOAT",
+      "alias": "border-width/2"
+    },
+    "nav/font-size/link": {
+      "type": "FLOAT",
+      "alias": "font-size/16"
+    },
+    "nav/line-height/link": {
+      "type": "FLOAT",
+      "alias": "line-height/24"
+    },
+    "nav/font-size/announcement": {
+      "type": "FLOAT",
+      "alias": "font-size/14"
+    },
+    "nav/line-height/announcement": {
+      "type": "FLOAT",
+      "alias": "line-height/20"
+    },
+    "nav/font-size/logo": {
+      "type": "FLOAT",
+      "alias": "font-size/24"
+    },
+    "nav/line-height/logo": {
+      "type": "FLOAT",
+      "alias": "line-height/32"
+    },
+    "nav/icon-button-radius": {
+      "type": "FLOAT",
+      "alias": "radius/full"
+    },
+    "nav/icon-button-focus-ring-size": {
+      "type": "FLOAT",
+      "alias": "size/52"
+    },
+    "nav/chevron-size": {
+      "type": "FLOAT",
+      "alias": "size/16"
+    },
+    "nav/focus-ring-radius": {
+      "type": "FLOAT",
+      "alias": "radius/12"
     }
   }
 }

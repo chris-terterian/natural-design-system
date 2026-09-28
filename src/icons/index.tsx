@@ -40,3 +40,28 @@ export const ImagePlaceholderIcon = (p: IconProps) => (
     <circle cx="30" cy="11" r="3" />
   </svg>
 );
+
+/* 24px navigation icons (Figma: Icon/Search, Icon/User, …) */
+const nav = (p: IconProps) => ({ ...base(p), width: 24, height: 24, viewBox: '0 0 24 24', strokeWidth: 1.75 });
+
+export const SearchIcon = (p: IconProps) => (
+  <svg {...nav(p)}><circle cx="11" cy="11" r="7" /><path d="M16 16l4.5 4.5" /></svg>
+);
+export const UserIcon = (p: IconProps) => (
+  <svg {...nav(p)}><circle cx="12" cy="8" r="4" /><path d="M4.5 20c0-3.6 3.4-5.5 7.5-5.5s7.5 1.9 7.5 5.5" /></svg>
+);
+export const BagIcon = (p: IconProps) => (
+  <svg {...nav(p)}><path d="M5 8h14l-1 12H6L5 8Z" /><path d="M9 8V7a3 3 0 0 1 6 0v1" /></svg>
+);
+export const MenuIcon = (p: IconProps) => (
+  <svg {...nav(p)}><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+);
+export const CloseIcon = (p: IconProps) => (
+  <svg {...nav(p)}><path d="M6 6l12 12M18 6 6 18" /></svg>
+);
+export const ChevronDownIcon = (p: IconProps) => (
+  <svg {...nav(p)}><path d="m7 10 5 5 5-5" /></svg>
+);
+export const ChevronRightIcon = (p: IconProps) => (
+  <svg {...nav(p)}><path d="m10 7 5 5-5 5" /></svg>
+);

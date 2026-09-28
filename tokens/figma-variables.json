@@ -330,6 +330,10 @@
     "elevation/float/blur": {
       "type": "FLOAT",
       "value": 3
+    },
+    "size/480": {
+      "type": "FLOAT",
+      "value": 480
     }
   },
   "Button": {
@@ -1218,6 +1222,10 @@
     "nav/submenu/group-padding-bottom": {
       "type": "FLOAT",
       "alias": "space/4"
+    },
+    "nav/mobile-menu/max-width": {
+      "type": "FLOAT",
+      "alias": "size/480"
     }
   },
   "Toggle": {

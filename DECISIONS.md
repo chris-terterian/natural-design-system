@@ -59,7 +59,7 @@ Short records of *why* the Natural Design System is the way it is. Each entry: c
 ### D-007: Component breakpoints use container queries; type uses the viewport
 **Context.** Headers and product rows get placed in containers of different widths; body text should track the device.
 **Decision.** Navigation Menu and Product Row switch layouts by their own width (container query at 768px). The type scale switches by viewport (media query at 768px), or by `data-nds-mode`.
-**Consequences.** Components adapt wherever they're placed; Storybook can show both modes side by side.
+**Consequences.** Components adapt wherever they're placed; Storybook can show both modes side by side. One catch (fixed in 0.3.1): a modal like the Mobile Menu opens over the whole viewport, not the container, so it's capped at 480px (`nav/mobile-menu/max-width`) to stay phone-shaped when a narrow header sits in a wide window.
 
 ### D-008: Light badges only on white surfaces
 **Context.** The Light badge's fill (`#EFE6DB`) matched the product image backdrop, so the pill disappeared.

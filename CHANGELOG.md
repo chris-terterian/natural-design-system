@@ -2,6 +2,15 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.3.1] – 2026-09-28
+
+### Fixed
+- **Mobile Menu took the full page width** when the header was narrow because of its container but the window was wide (e.g. the Storybook "Mobile" story on a desktop screen): the modal opens over the whole viewport. It's now full screen on phones and a left-anchored sheet capped at 480px on wider screens (new token `nav/mobile-menu/max-width` → `size/480`, in code and Figma).
+- The current section (Shop) lost its indicator in the mobile menu after submenu items became buttons; it's back, with `aria-current="true"`.
+
+### Changed
+- Storybook: the Navigation Menu "Mobile" story opens at a 375 × 812 phone viewport; a new "Mobile — narrow container, wide window" story shows the 480px sheet.
+
 ## [0.3.0] – 2026-09-28
 
 ### Added

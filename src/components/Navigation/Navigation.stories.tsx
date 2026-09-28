@@ -14,7 +14,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Desktop: Story = {};
+/** Opens at a phone viewport, so the Menu button shows the full-screen mobile menu as on a real phone. */
 export const Mobile: Story = {
+  globals: { viewport: { value: 'naturalPhone', isRotated: false } },
+};
+
+/** The header is narrow because of its container, but the window is wide: the menu opens as a 480px sheet. */
+export const MobileInWideWindow: Story = {
+  name: 'Mobile — narrow container, wide window',
   decorators: [(Story) => <div style={{ width: 375 }}><Story /></div>],
 };
 export const NoAnnouncement: Story = { args: { announcement: false } };

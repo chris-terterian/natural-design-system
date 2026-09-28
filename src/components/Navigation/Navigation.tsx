@@ -244,9 +244,9 @@ export function MenuItem(props: MenuItemProps) {
   const { active, forceState, className, children } = props;
   const classes = ['nds-menu-item', className].filter(Boolean).join(' ');
   if (props.hasSubmenu) {
-    const { hasSubmenu: _h, onOpenSubmenu, active: _a, forceState: _f, className: _c, children: _ch, ...rest } = props;
+    const { hasSubmenu: _h, onOpenSubmenu, active: _a, forceState: _f, className: _c, children: _ch, ...rest } = props; // active → aria-current="true" (a button, not a page link)
     return (
-      <button type="button" className={classes} data-state={forceState} onClick={onOpenSubmenu} {...rest}>
+      <button type="button" className={classes} aria-current={active ? 'true' : undefined} data-state={forceState} onClick={onOpenSubmenu} {...rest}>
         <span className="nds-menu-item__label">{children}</span>
         <ChevronRightIcon />
       </button>
@@ -428,6 +428,7 @@ export function MobileMenu({ open, onClose, items = DEFAULT_NAV_ITEMS, accountIt
             <MenuItem
               key={item.label}
               hasSubmenu
+              active={item.active}
               ref={(el) => { itemRefs.current[item.label] = el; }}
               onOpenSubmenu={() => { returnTo.current = item.label; setLevel(item.label); }}
             >

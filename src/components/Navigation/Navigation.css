@@ -121,8 +121,8 @@
 button.nds-menu-item { width: 100%; border: 0; border-bottom: var(--nds-nav-border-width) solid var(--nds-nav-divider); background: transparent; cursor: pointer; }
 .nds-menu-item svg { width: var(--nds-nav-icon-size); height: var(--nds-nav-icon-size); }
 .nds-menu-item:hover, .nds-menu-item[data-state='hover'] { background: var(--nds-nav-link-bg-hover); }
-.nds-menu-item[aria-current='page'] { font-weight: 600; }
-.nds-menu-item[aria-current='page']::before {
+.nds-menu-item[aria-current] { font-weight: 600; }
+.nds-menu-item[aria-current]::before {
   content: '';
   position: absolute;
   left: calc(-1 * var(--nds-space-12));
@@ -173,9 +173,11 @@ button.nds-menu-item { width: 100%; border: 0; border-bottom: var(--nds-nav-bord
 }
 
 /* ---------- Mobile Menu ---------- */
+/* Full screen on phones; on wider screens a left-anchored sheet capped at 480px over the backdrop.
+   (The dialog opens over the whole viewport, even when the header is only narrow because of its container.) */
 .nds-mobile-menu {
   width: 100%;
-  max-width: 100%;
+  max-width: var(--nds-nav-mobile-menu-max-width);
   height: 100%;
   max-height: 100%;
   margin: 0;

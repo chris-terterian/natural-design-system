@@ -81,6 +81,7 @@
   --nds-size-200: 200px;
   --nds-elevation-float-y: 1px;
   --nds-elevation-float-blur: 3px;
+  --nds-size-480: 480px;
   /* Button */
   --nds-button-primary-bg-default: var(--nds-color-brown-200);
   --nds-button-primary-fg-default: var(--nds-color-brown-900);
@@ -306,6 +307,7 @@
   --nds-nav-dropdown-group-width: var(--nds-size-200);
   --nds-nav-submenu-group-padding-top: var(--nds-space-20);
   --nds-nav-submenu-group-padding-bottom: var(--nds-space-4);
+  --nds-nav-mobile-menu-max-width: var(--nds-size-480);
   /* Toggle */
   --nds-toggle-track-bg-off: var(--nds-color-white);
   --nds-toggle-track-bg-off-hover: var(--nds-color-brown-50);

@@ -2,6 +2,11 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.7.1] – 2026-09-29
+
+### Fixed
+- The accessibility gate crashed in CI with "Axe is already running" (v0.7.0 didn't deploy): after the Storybook 10.6.1 update, the a11y addon's own scan can still be running when the gate starts. The gate now waits for it and retries. No accessibility findings changed.
+
 ## [0.7.0] – 2026-09-29
 
 ### Added

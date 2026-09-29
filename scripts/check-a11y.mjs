@@ -36,9 +36,18 @@ for (const story of stories) {
   await page.evaluate(() => document.fonts.ready);
   await page.addScriptTag({ content: axeSource });
   const violations = await page.evaluate(async (exceptions) => {
-    const r = await window.axe.run(document.querySelector('#storybook-root'), {
+    // Storybook's a11y addon runs its own axe scan on load, and axe allows one run at a time.
+    // Wait for it to finish instead of failing (it's a timing race, not a violation).
+    const run = () => window.axe.run(document.querySelector('#storybook-root'), {
       runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'],
     });
+    let r;
+    for (let attempt = 0; ; attempt++) {
+      try { r = await run(); break; } catch (e) {
+        if (!String(e).includes('already running') || attempt >= 100) throw e;
+        await new Promise((ok) => setTimeout(ok, 100));
+      }
+    }
     // An exception applies when the rule matches and the failing element matches its CSS selector.
     return r.violations.flatMap((v) =>
       v.nodes.map((n) => {

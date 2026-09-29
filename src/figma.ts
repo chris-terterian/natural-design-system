@@ -19,7 +19,7 @@ export const FIGMA_NODES = {
   navLink: '60:88',
   iconButton: '60:69',
   menuItem: '60:107',
-  logo: '59:67',
+  logo: '153:822',
   spinner: '64:50',
   toggle: '67:360',
   productRow: '73:210',

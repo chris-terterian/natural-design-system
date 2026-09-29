@@ -1019,10 +1019,6 @@
       "type": "COLOR",
       "alias": "color/white"
     },
-    "nav/logo": {
-      "type": "COLOR",
-      "alias": "color/brown/900"
-    },
     "nav/link/text": {
       "type": "COLOR",
       "alias": "color/brown/900"
@@ -1134,14 +1130,6 @@
     "nav/line-height/announcement": {
       "type": "FLOAT",
       "alias": "line-height/20"
-    },
-    "nav/font-size/logo": {
-      "type": "FLOAT",
-      "alias": "font-size/24"
-    },
-    "nav/line-height/logo": {
-      "type": "FLOAT",
-      "alias": "line-height/32"
     },
     "nav/icon-button-radius": {
       "type": "FLOAT",
@@ -1745,6 +1733,40 @@
           "alias": "color/brown/800"
         }
       }
+    }
+  },
+  "Logo": {
+    "logo/color": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "logo/font-size": {
+      "type": "FLOAT",
+      "alias": "font-size/24"
+    },
+    "logo/line-height": {
+      "type": "FLOAT",
+      "alias": "line-height/32"
+    },
+    "logo/letter-spacing": {
+      "type": "FLOAT",
+      "alias": "letter-spacing/tight"
+    },
+    "logo/focus-ring": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "logo/focus-ring-width": {
+      "type": "FLOAT",
+      "alias": "border-width/2"
+    },
+    "logo/focus-ring-offset": {
+      "type": "FLOAT",
+      "alias": "space/2"
+    },
+    "logo/radius": {
+      "type": "FLOAT",
+      "alias": "radius/8"
     }
   }
 }

@@ -58,6 +58,7 @@ const ignoreWithoutReason = /validate-ignore\s+[\w-]+\s*(?::\s*)?(\*\/|$)/;
 // Allowed literal values in CSS (not design decisions): 0, 100%/50%, auto, keywords, 1px hairlines in
 // accessibility utilities, transform/animation values, ms/deg units.
 const pxRe = /(?<![\w.-])(-?\d*\.?\d+)px\b/g;
+const emRe = /(?<![\w.-])(-?\d*\.?\d+)r?em\b/g;
 const hexRe = /#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\b/g;
 const colorFnRe = /\b(?:rgba?|hsla?)\s*\(/g;
 const BEM = /^nds-[a-z0-9]+(?:-[a-z0-9]+)*(?:__[a-z0-9]+(?:-[a-z0-9]+)*)?(?:--[a-z0-9]+(?:-[a-z0-9]+)*)?$/;
@@ -134,6 +135,11 @@ function checkCss(file, src) {
       colorFnRe.lastIndex = 0;
     }
     if (!/^\s*--/.test(code) && !ignored(lines, i, 'hardcoded-size')) {
+      for (const m of code.matchAll(emRe)) {
+        if (Number(m[1]) === 0) continue;
+        CTX.prop = propAt(code, m.index);
+        add(file, n, 'hardcoded-size', 'error', `Hardcoded size ${m[0]}`, `use a token instead of ${m[0].replace(/^-/, '')}: for letter-spacing, \`letter-spacing/*\` (px); for sizes, ${suggestPx(Math.round(Math.abs(Number(m[1])) * 16))}`, line);
+      }
       for (const m of code.matchAll(pxRe)) {
         const v = Math.abs(Number(m[1]));
         if (v === 0) continue;

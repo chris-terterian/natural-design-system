@@ -149,6 +149,21 @@
       "notes": "Figma can't stretch cards to the tallest in a row, so row heights are set by hand in Figma (code does it automatically). Documented in the spec."
     },
     {
+      "name": "Logo",
+      "exports": [
+        "Logo"
+      ],
+      "status": "stable",
+      "since": "0.1.0",
+      "storyFile": "src/components/Logo/Logo.stories.tsx",
+      "storyTitle": "Components/Logo",
+      "figmaKey": "logo",
+      "specs": [
+        "6.1 Logo"
+      ],
+      "notes": "Extracted from Navigation into its own component in 0.5.0 (D-021)."
+    },
+    {
       "name": "Navigation Menu",
       "exports": [
         "NavigationMenu",
@@ -158,8 +173,7 @@
         "NavDropdown",
         "NavGroup",
         "IconButton",
-        "MenuItem",
-        "Logo"
+        "MenuItem"
       ],
       "status": "stable",
       "since": "0.1.0",
@@ -167,7 +181,6 @@
       "storyTitle": "Components/Navigation Menu",
       "figmaKey": "navigationMenu",
       "specs": [
-        "6.1 Logo",
         "6.10 Icon Button",
         "6.11 Nav Link",
         "6.12 Menu Item",

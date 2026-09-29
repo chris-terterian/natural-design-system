@@ -1,6 +1,6 @@
 {
   "$comment": "Figma parity snapshot, exported through the Figma MCP (scripts/figma/export-snapshot.js). Checked by npm run check:parity. Refresh after any Figma or token change, and before every release.",
-  "generatedAt": "2026-09-28T22:38:51.552Z",
+  "generatedAt": "2026-09-29T00:23:13.366Z",
   "figmaFile": "84MjZXozBoKCvf9lwIU5pu",
   "variables": [
     "Badge|badge/border-width||@border-width/1",
@@ -101,6 +101,14 @@
     "Input|input/text/value||@color/brown/900",
     "Input|input/textarea-height||@size/120",
     "Input|input/width||@size/320",
+    "Logo|logo/color||@color/brown/900",
+    "Logo|logo/focus-ring-offset||@space/2",
+    "Logo|logo/focus-ring-width||@border-width/2",
+    "Logo|logo/focus-ring||@color/brown/900",
+    "Logo|logo/font-size||@font-size/24",
+    "Logo|logo/letter-spacing||@letter-spacing/tight",
+    "Logo|logo/line-height||@line-height/32",
+    "Logo|logo/radius||@radius/8",
     "Navigation|nav/announcement-padding-y||@space/8",
     "Navigation|nav/announcement/bg||@color/brown/900",
     "Navigation|nav/announcement/text||@color/white",
@@ -124,7 +132,6 @@
     "Navigation|nav/font-size/announcement||@font-size/14",
     "Navigation|nav/font-size/group-title||@font-size/14",
     "Navigation|nav/font-size/link||@font-size/16",
-    "Navigation|nav/font-size/logo||@font-size/24",
     "Navigation|nav/group-title/text||@color/brown/800",
     "Navigation|nav/height-mobile||@size/56",
     "Navigation|nav/height||@size/72",
@@ -140,7 +147,6 @@
     "Navigation|nav/line-height/announcement||@line-height/20",
     "Navigation|nav/line-height/group-title||@line-height/20",
     "Navigation|nav/line-height/link||@line-height/24",
-    "Navigation|nav/line-height/logo||@line-height/32",
     "Navigation|nav/link-gap||@space/32",
     "Navigation|nav/link-padding-x||@space/4",
     "Navigation|nav/link-padding-y||@space/10",
@@ -149,7 +155,6 @@
     "Navigation|nav/link/indicator||@color/brown/900",
     "Navigation|nav/link/text||@color/brown/900",
     "Navigation|nav/link/underline-offset||@space/4",
-    "Navigation|nav/logo||@color/brown/900",
     "Navigation|nav/menu-item-padding-y||@space/16",
     "Navigation|nav/mobile-menu/max-width||@size/480",
     "Navigation|nav/padding-x-mobile||@space/16",
@@ -812,11 +817,19 @@
       }
     },
     "logo": {
-      "id": "59:67",
+      "id": "153:822",
       "name": "Logo",
-      "type": "COMPONENT",
-      "variants": 1,
-      "properties": {}
+      "type": "COMPONENT_SET",
+      "variants": 2,
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Focus"
+          ]
+        }
+      }
     },
     "spinner": {
       "id": "64:50",

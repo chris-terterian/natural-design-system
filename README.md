@@ -4,7 +4,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.4.0)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.5.0)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -55,7 +55,8 @@ Open `http://localhost:6007/?path=/workspace/`. Generated stories are drafts in 
 | `Spinner` | `64:50` | Loading indicator used by Button |
 | `TextField`, `TextArea` | `1:498` | 8 states incl. error, success, read-only; textarea counter |
 | `NavigationMenu`, `MobileMenu` | `61:134`, `61:135` | Desktop/mobile header (container query at 768px), modal mobile menu |
-| `NavLink`, `IconButton`, `MenuItem`, `Logo` | `60:88`, `60:69`, `60:107`, `59:67` | Navigation building blocks; IconButton count uses Badge |
+| `Logo` | `153:822` | The "natural" wordmark linking home; Default / Focus; nested in both menus |
+| `NavLink`, `IconButton`, `MenuItem` | `60:88`, `60:69`, `60:107` | Navigation building blocks; IconButton count uses Badge |
 | `Toggle` | `67:360` | On/off switch (`role="switch"`), label + description |
 | `Radio`, `RadioGroup` | `1:637` | Fieldset + legend, group-level error |
 | `WishlistButton` | `1:815` | `aria-pressed` toggle; filled vs outline heart |

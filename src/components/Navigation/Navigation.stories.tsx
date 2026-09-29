@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { DEFAULT_NAV_ITEMS, IconButton, Logo, MenuItem, MobileMenu, NavDropdown, NavigationMenu, NavLink } from './Navigation';
+import { DEFAULT_NAV_ITEMS, IconButton, MenuItem, MobileMenu, NavDropdown, NavigationMenu, NavLink } from './Navigation';
 import { BagIcon, SearchIcon } from '../../icons';
 import { figma, FIGMA_NODES } from '../../figma';
 
@@ -123,10 +123,4 @@ export const MenuItems: Story = {
       ))}</tbody>
     </table>
   ),
-};
-
-export const LogoStory: Story = {
-  name: 'Logo',
-  parameters: { ...figma(FIGMA_NODES.logo), layout: 'padded' },
-  render: () => <Logo />,
 };

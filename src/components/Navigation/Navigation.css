@@ -1,15 +1,3 @@
-/* ---------- Logo ---------- */
-.nds-logo {
-  display: inline-flex;
-  color: var(--nds-nav-logo);
-  text-decoration: none;
-  font: var(--nds-nav-font-size-logo) / var(--nds-nav-line-height-logo) var(--nds-font-family);
-  letter-spacing: -0.02em;
-  border-radius: var(--nds-nav-radius);
-}
-.nds-logo__wordmark { font-weight: 700; }
-.nds-logo:focus-visible { outline: var(--nds-nav-focus-ring-width) solid var(--nds-nav-focus-ring); outline-offset: var(--nds-nav-focus-ring-offset); }
-
 /* ---------- Nav Link ---------- */
 .nds-nav-link {
   position: relative;

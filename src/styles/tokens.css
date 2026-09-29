@@ -256,7 +256,6 @@
   --nds-nav-border: var(--nds-color-taupe-200);
   --nds-nav-announcement-bg: var(--nds-color-brown-900);
   --nds-nav-announcement-text: var(--nds-color-white);
-  --nds-nav-logo: var(--nds-color-brown-900);
   --nds-nav-link-text: var(--nds-color-brown-900);
   --nds-nav-link-indicator: var(--nds-color-brown-900);
   --nds-nav-link-bg-hover: var(--nds-color-brown-50);
@@ -285,8 +284,6 @@
   --nds-nav-line-height-link: var(--nds-line-height-24);
   --nds-nav-font-size-announcement: var(--nds-font-size-14);
   --nds-nav-line-height-announcement: var(--nds-line-height-20);
-  --nds-nav-font-size-logo: var(--nds-font-size-24);
-  --nds-nav-line-height-logo: var(--nds-line-height-32);
   --nds-nav-icon-button-radius: var(--nds-radius-full);
   --nds-nav-icon-button-focus-ring-size: var(--nds-size-52);
   --nds-nav-chevron-size: var(--nds-size-16);
@@ -385,6 +382,15 @@
   --nds-text-color-heading: var(--nds-color-brown-900);
   --nds-text-color-paragraph: var(--nds-color-brown-900);
   --nds-text-color-muted: var(--nds-color-brown-800);
+  /* Logo */
+  --nds-logo-color: var(--nds-color-brown-900);
+  --nds-logo-font-size: var(--nds-font-size-24);
+  --nds-logo-line-height: var(--nds-line-height-32);
+  --nds-logo-letter-spacing: var(--nds-letter-spacing-tight);
+  --nds-logo-focus-ring: var(--nds-color-brown-900);
+  --nds-logo-focus-ring-width: var(--nds-border-width-2);
+  --nds-logo-focus-ring-offset: var(--nds-space-2);
+  --nds-logo-radius: var(--nds-radius-8);
 }
 
 @media (max-width: 767px) {

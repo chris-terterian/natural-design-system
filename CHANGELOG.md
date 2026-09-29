@@ -2,6 +2,20 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.5.0] – 2026-09-28
+
+### Added
+- **Logo** is its own component (D-021): `src/components/Logo`, story `Components/Logo` (Default, Focus, All Variants, Clear Space), Figma page and component set `153:822` (State = Default / Focus), registry entry (Stable).
+- Logo token collection: `logo/color`, `logo/font-size`, `logo/line-height`, `logo/letter-spacing`, `logo/focus-ring`, `logo/focus-ring-width`, `logo/focus-ring-offset`, `logo/radius`.
+- validate_file flags hardcoded `em` / `rem` lengths, not only `px`.
+
+### Changed
+- Navigation Menu and Mobile Menu nest the Logo component; the Logo story moved out of Navigation Menu.
+- Logo letter-spacing is tokenized (`letter-spacing/tight`, −0.5px; was −0.02em).
+
+### Removed
+- `nav/logo`, `nav/font-size/logo`, `nav/line-height/logo` (replaced by the Logo collection).
+
 ## [0.4.0] – 2026-09-28
 
 ### Added

@@ -10,6 +10,7 @@ import {
   type Ref,
 } from 'react';
 import { Badge } from '../Badge/Badge';
+import { Logo } from '../Logo/Logo';
 import {
   BagIcon,
   ChevronDownIcon,
@@ -87,19 +88,6 @@ export const DEFAULT_ACCOUNT_ITEMS: NavItem[] = [
   { label: 'Wishlist', href: '#wishlist' },
   { label: 'Help & contact', href: '#help' },
 ];
-
-/* ---------- Logo ---------- */
-
-export type LogoProps = AnchorHTMLAttributes<HTMLAnchorElement>;
-
-/** Figma: Logo. The Natural wordmark, linking home. */
-export function Logo({ href = '/', className, ...rest }: LogoProps) {
-  return (
-    <a href={href} className={['nds-logo', className].filter(Boolean).join(' ')} aria-label="Natural — home" {...rest}>
-      <span className="nds-logo__wordmark">natural</span>
-    </a>
-  );
-}
 
 /* ---------- Nav Link ---------- */
 

@@ -4,7 +4,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.5.0)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.6.0)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -61,7 +61,7 @@ Open `http://localhost:6007/?path=/workspace/`. Generated stories are drafts in 
 | `Radio`, `RadioGroup` | `1:637` | Fieldset + legend, group-level error |
 | `WishlistButton` | `1:815` | `aria-pressed` toggle; filled vs outline heart |
 | `Heading`, `Text` | `76:5` | Content type scale: H1–H4, Paragraph Large / Default / Small, Caption; Desktop / Mobile modes |
-| `ProductRow` | `73:210` | Titled row: 4 cards desktop, 2 per row mobile (container query) |
+| `ProductRow` | `73:210` | Titled row: 4 cards desktop, 2 per row mobile (container query); `showButtons` off by default |
 | `ProductCard` | `1:968` | Default / Sale / Sold out; nested wishlist + CTA |
 
 Every story links to its Figma component in the **Design** panel. Each component has an **All Variants** story laid out the same way as its Figma variant grid. `forceState` props show hover/pressed/focus without interaction; they're for documentation only.

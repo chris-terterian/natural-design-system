@@ -146,7 +146,7 @@
       "specs": [
         "6.18 Product Row"
       ],
-      "notes": "Figma can't stretch cards to the tallest in a row, so row heights are set by hand in Figma (code does it automatically). Documented in the spec."
+      "notes": "Show buttons is off by default (0.6.0, D-022); in Figma it is a True/False variant because a row can't drive a nested card's boolean. Figma can't stretch cards to the tallest in a row, so Show buttons = True row heights are set by hand in Figma (code does it automatically). Documented in the spec."
     },
     {
       "name": "Logo",

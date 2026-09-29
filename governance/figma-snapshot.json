@@ -1,6 +1,6 @@
 {
   "$comment": "Figma parity snapshot, exported through the Figma MCP (scripts/figma/export-snapshot.js). Checked by npm run check:parity. Refresh after any Figma or token change, and before every release.",
-  "generatedAt": "2026-09-29T00:23:13.366Z",
+  "generatedAt": "2026-09-29T14:51:31.045Z",
   "figmaFile": "84MjZXozBoKCvf9lwIU5pu",
   "variables": [
     "Badge|badge/border-width||@border-width/1",
@@ -882,7 +882,7 @@
       "id": "73:210",
       "name": "Product Row",
       "type": "COMPONENT_SET",
-      "variants": 2,
+      "variants": 4,
       "properties": {
         "Title": {
           "type": "TEXT",
@@ -899,6 +899,13 @@
           "options": [
             "Desktop",
             "Mobile"
+          ]
+        },
+        "Show buttons": {
+          "type": "VARIANT",
+          "options": [
+            "True",
+            "False"
           ]
         }
       }

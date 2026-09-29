@@ -2,6 +2,15 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.6.0] – 2026-09-29
+
+### Added
+- Product Row **Show buttons** (D-022): `showButtons` in code, a True/False variant (shown as a toggle) in Figma. New `WithButtons` story; All Variants shows both settings at both breakpoints.
+
+### Changed
+- Product Row cards no longer show Add to Bag / Notify me by default, matching most stores. Pass `showButtons` to bring them back. Figma example rows were switched to the new default.
+- `ProductRow` `products` no longer take `showCta`; the row decides.
+
 ## [0.5.0] – 2026-09-28
 
 ### Added

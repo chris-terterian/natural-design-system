@@ -1,6 +1,6 @@
 {
   "name": "natural-design-system",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A natural goods e-commerce design system \u2014 React components, tokens and Storybook, mirrored with the Figma file \"Natural Design System\".",
   "type": "module",
   "license": "MIT",

@@ -2,6 +2,14 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.7.0] – 2026-09-29
+
+### Added
+- **Storybook MCP** (`@storybook/addon-mcp`, D-023): `http://localhost:6007/mcp` on the dev server gives AI agents the components, props and stories; `.mcp.json` registers it for Claude Code. Not part of the published Storybook.
+
+### Changed
+- Storybook packages updated to 10.6.1 (required by the addon).
+
 ## [0.6.0] – 2026-09-29
 
 ### Added

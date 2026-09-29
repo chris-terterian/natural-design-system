@@ -4,7 +4,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.6.0)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.7.0)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -45,6 +45,10 @@ npm run storybook-with-ui   # Storybook (6007) + Story UI server (4001)
 ```
 
 Open `http://localhost:6007/?path=/workspace/`. Generated stories are drafts in `src/stories/generated/` (gitignored); keeping one means promoting it into `src/components/` through the contribution flow in `GOVERNANCE.md`. The published Storybook doesn't include Story UI.
+
+## Storybook MCP (AI agents, local only)
+
+`@storybook/addon-mcp` serves `http://localhost:6007/mcp` while `npm run storybook` is running. It gives an AI agent the system as Storybook documents it: the component list, props, stories and usage notes. `.mcp.json` registers it for Claude Code (approve it once when Claude Code asks). Together with the Figma MCP, one request like "make the Figma Product Row match Storybook" can be read from Storybook and applied in Figma, then proved by `npm run check:parity`. Nothing syncs by itself: a code change on GitHub never edits Figma, and the parity gate blocks the deploy until Figma matches (D-023).
 
 ## Components
 

@@ -10,7 +10,14 @@ const config: StorybookConfig = {
     '../src/governance/**/*.mdx',
     ...(isStaticBuild ? [] : ['../src/stories/**/*.mdx', '../src/stories/**/*.stories.@(ts|tsx)']),
   ],
-  addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-designs'],
+  addons: [
+    '@storybook/addon-docs',
+    '@storybook/addon-a11y',
+    '@storybook/addon-designs',
+    // Storybook MCP (D-023): serves http://localhost:6007/mcp so an AI agent can read components,
+    // props and stories. Dev server only; the published site has no server to host it.
+    ...(isStaticBuild ? [] : ['@storybook/addon-mcp']),
+  ],
   framework: { name: '@storybook/react-vite', options: {} },
   viteFinal: async (config) => {
     // Story UI: Exclude from dependency optimization to handle CSS imports correctly

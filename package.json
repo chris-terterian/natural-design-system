@@ -1,7 +1,7 @@
 {
   "name": "natural-design-system",
-  "version": "0.6.0",
-  "description": "A natural goods e-commerce design system \u2014 React components, tokens and Storybook, mirrored with the Figma file \"Natural Design System\".",
+  "version": "0.7.0",
+  "description": "A natural goods e-commerce design system — React components, tokens and Storybook, mirrored with the Figma file \"Natural Design System\".",
   "type": "module",
   "license": "MIT",
   "main": "./dist/natural-design-system.js",
@@ -38,22 +38,23 @@
     "react-dom": ">=18"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^10.6.0",
+    "@storybook/addon-a11y": "^10.6.1",
     "@storybook/addon-designs": "^11.1.4",
-    "@storybook/addon-docs": "^10.6.0",
-    "@storybook/react-vite": "^10.6.0",
+    "@storybook/addon-docs": "^10.6.1",
+    "@storybook/addon-mcp": "^10.6.1",
+    "@storybook/react-vite": "^10.6.1",
     "@tpitre/story-ui": "^5.21.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "concurrently": "^8.2.0",
     "playwright": "^1.63.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "storybook": "^10.6.0",
+    "react-live": "^4.1.8",
+    "storybook": "^10.6.1",
     "typescript": "^7.0.2",
-    "vite": "^8.3.1",
-    "concurrently": "^8.2.0",
-    "react-live": "^4.1.8"
+    "vite": "^8.3.1"
   },
   "allowScripts": {
     "esbuild@0.28.2": true,

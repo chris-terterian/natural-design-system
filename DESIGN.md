@@ -559,6 +559,8 @@ Describe what's shown, material first: *"River clay cup with a matte grey ash gl
 
 The palette is **bark to sand**: one warm brown scale, a softer taupe for quiet UI, and two status colours. These are primitives; components never use them directly (see §4.2 for roles).
 
+**Figma: [Colors page](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=210-341).** A chart of all 19 primitives (chip bound to the variable, hex, role, contrast on white and on ink, how many tokens use it) and the text/background **pairings** the components actually use, with their ratios. Built from two documentation-only components (`_Doc / Color Swatch`, `_Doc / Color Pairing`), which have no code counterpart.
+
 | Primitive | Hex | CSS variable |
 |---|---|---|
 | `color/white` | `#FFFFFF` | `--nds-color-white` |
@@ -805,7 +807,18 @@ What each colour *means*. Pick by role, then use that component's token.
 | **Form field width** | 320px default |
 | **Stack gaps** | Label→field 6 · field→helper 6 · card media→info 12 · info lines 4 · radio options 12 · toggle control→text 12 · toggle rows 16 |
 
-**Planned:** a full page grid (max width, columns for detail pages).
+**Page grid** ([Figma: Grid page](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=210-342)): grid styles **Grid/Desktop** and **Grid/Mobile**, applied to any page frame.
+
+| | Desktop (1440) | Mobile (375) |
+|---|---|---|
+| Columns | 12 | 4 |
+| Margin | 40 (`row/padding-x`) | 16 (`row/padding-x-mobile`) |
+| Gutter | 24 (`row/gap`) | 16 (`row/gap-mobile`) |
+| Product Card | 3 of 12 (322px) | 2 of 4 (163.5px) |
+| Half-page Image Block + copy | 6 + 6, full bleed | 4 of 4, stacked |
+| Hero, Banner | full bleed | full bleed |
+
+The grid's margin and gutter are bound to the Product Row tokens in Figma, so the grid and the rows can't drift apart. In code, layout comes from the components themselves (Product Row's container query), so there is no separate grid utility yet.
 
 ---
 
@@ -1896,7 +1909,7 @@ Non-negotiable for every component and page. Each component in §6 lists its own
 
 ## 10. Roadmap & changelog
 
-**Next up:** real photography for Image Block and Product Card (the Images page has the slots) · Modal Form (Figma page still empty). Also planned: display type size, page grid. Also planned: product detail, material swatches, heading scale, Figma Styles for §4.
+**Next up:** real photography for Image Block and Product Card (the Images page has the slots) · Modal Form (Figma page still empty). Also planned: display type size. Also planned: product detail, material swatches, heading scale, Figma Styles for §4.
 
 **Known differences to resolve:** none. Figma and code match.
 

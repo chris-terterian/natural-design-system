@@ -6,7 +6,8 @@ All notable changes to the Natural Design System. Format: [Keep a Changelog](htt
 
 ### Added
 - **Image Block** (Beta, D-025): Hero, Banner and Half-page imagery at Desktop and Mobile sizes. Figma: Images page, component set 212:29 (6 variants, Show placeholder), labelled grid and a Half-page-with-copy example. Code: `ImageBlock` (`type`, `src`, required `alt`, Half-page `children`), container query at 768px. Image Block token collection (8 tokens) and primitives `size/360`, `size/375`, `size/720`.
-- Figma Example page: a Category page (Desktop and Mobile) built entirely from design-system instances.
+- Figma **Colors** page: all 19 primitives with role, contrast on white and ink, and token usage, plus the text/background pairings the components use.
+- Figma **Grid** page: grid styles Grid/Desktop (12 columns, 40 margin, 24 gutter) and Grid/Mobile (4 columns, 16 margin, 16 gutter), bound to the Product Row tokens, with drawn overlays showing cards on 3 of 12 and 2 of 4 columns.
 
 ## [0.8.0] – 2026-09-29
 

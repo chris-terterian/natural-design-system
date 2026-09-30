@@ -4,7 +4,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.8.0)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.9.0)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -63,6 +63,7 @@ Open `http://localhost:6007/?path=/workspace/`. Generated stories are drafts in 
 | `NavLink`, `IconButton`, `MenuItem` | `60:88`, `60:69`, `60:107` | Navigation building blocks; IconButton count uses Badge |
 | `DateField` | `1:498` | Input Type=Date: typed MM/DD/YYYY + calendar button opening the Calendar |
 | `Calendar`, `CalendarDay` | `196:580`, `195:65` | Single date or range; ARIA grid keyboard support (Beta) |
+| `ImageBlock` | `212:29` | Hero, Banner, Half-page imagery; full bleed, placeholder until a photo is set (Beta) |
 | `Toggle` | `67:360` | On/off switch (`role="switch"`), label + description |
 | `Radio`, `RadioGroup` | `1:637` | Fieldset + legend, group-level error |
 | `WishlistButton` | `1:815` | `aria-pressed` toggle; filled vs outline heart |

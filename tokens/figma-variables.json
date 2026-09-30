@@ -334,6 +334,18 @@
     "size/480": {
       "type": "FLOAT",
       "value": 480
+    },
+    "size/360": {
+      "type": "FLOAT",
+      "value": 360
+    },
+    "size/375": {
+      "type": "FLOAT",
+      "value": 375
+    },
+    "size/720": {
+      "type": "FLOAT",
+      "value": 720
     }
   },
   "Button": {
@@ -1917,6 +1929,40 @@
     "calendar/focus-ring-offset": {
       "type": "FLOAT",
       "alias": "space/2"
+    }
+  },
+  "Image Block": {
+    "image/bg": {
+      "type": "COLOR",
+      "alias": "color/brown/100"
+    },
+    "image/icon": {
+      "type": "COLOR",
+      "alias": "color/brown/300"
+    },
+    "image/hero/height": {
+      "type": "FLOAT",
+      "alias": "size/640"
+    },
+    "image/hero/height-mobile": {
+      "type": "FLOAT",
+      "alias": "size/480"
+    },
+    "image/banner/height": {
+      "type": "FLOAT",
+      "alias": "size/360"
+    },
+    "image/banner/height-mobile": {
+      "type": "FLOAT",
+      "alias": "size/200"
+    },
+    "image/half/size": {
+      "type": "FLOAT",
+      "alias": "size/720"
+    },
+    "image/half/size-mobile": {
+      "type": "FLOAT",
+      "alias": "size/375"
     }
   }
 }

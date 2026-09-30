@@ -2,6 +2,12 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.9.0] – 2026-09-30
+
+### Added
+- **Image Block** (Beta, D-025): Hero, Banner and Half-page imagery at Desktop and Mobile sizes. Figma: Images page, component set 212:29 (6 variants, Show placeholder), labelled grid and a Half-page-with-copy example. Code: `ImageBlock` (`type`, `src`, required `alt`, Half-page `children`), container query at 768px. Image Block token collection (8 tokens) and primitives `size/360`, `size/375`, `size/720`.
+- Figma Example page: a Category page (Desktop and Mobile) built entirely from design-system instances.
+
 ## [0.8.0] – 2026-09-29
 
 ### Added

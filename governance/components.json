@@ -225,6 +225,21 @@
         "6.22 Calendar & Calendar Day"
       ],
       "notes": "Beta gaps: no hover preview of a range before the second click; a range may span disabled days; one month at a time (no two-month view); not yet paired with a text field (Date Field is next)."
+    },
+    {
+      "name": "Image Block",
+      "exports": [
+        "ImageBlock"
+      ],
+      "status": "beta",
+      "since": "0.9.0",
+      "storyFile": "src/components/ImageBlock/ImageBlock.stories.tsx",
+      "storyTitle": "Components/Image Block",
+      "figmaKey": "imageBlock",
+      "specs": [
+        "6.23 Image Block"
+      ],
+      "notes": "Beta gaps: placeholder only until real photography exists; no art direction (a different crop per breakpoint via <picture>); no text overlay variant for heroes."
     }
   ]
 }

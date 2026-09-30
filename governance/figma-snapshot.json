@@ -1,6 +1,6 @@
 {
   "$comment": "Figma parity snapshot, exported through the Figma MCP (scripts/figma/export-snapshot.js). Checked by npm run check:parity. Refresh after any Figma or token change, and before every release.",
-  "generatedAt": "2026-09-30T04:26:44.129Z",
+  "generatedAt": "2026-09-30T13:09:11.001Z",
   "figmaFile": "84MjZXozBoKCvf9lwIU5pu",
   "variables": [
     "Badge|badge/border-width||@border-width/1",
@@ -95,6 +95,14 @@
     "Calendar|calendar/row-gap||@space/4",
     "Calendar|calendar/title/text||@color/brown/900",
     "Calendar|calendar/weekday/text||@color/brown/800",
+    "Image Block|image/banner/height-mobile||@size/200",
+    "Image Block|image/banner/height||@size/360",
+    "Image Block|image/bg||@color/brown/100",
+    "Image Block|image/half/size-mobile||@size/375",
+    "Image Block|image/half/size||@size/720",
+    "Image Block|image/hero/height-mobile||@size/480",
+    "Image Block|image/hero/height||@size/640",
+    "Image Block|image/icon||@color/brown/300",
     "Input|input/bg/default||@color/white",
     "Input|input/bg/disabled||@color/brown/100",
     "Input|input/bg/read-only||@color/brown/50",
@@ -260,11 +268,14 @@
     "Primitives|size/320||320",
     "Primitives|size/343||343",
     "Primitives|size/350||350",
+    "Primitives|size/360||360",
+    "Primitives|size/375||375",
     "Primitives|size/40||40",
     "Primitives|size/480||480",
     "Primitives|size/52||52",
     "Primitives|size/56||56",
     "Primitives|size/640||640",
+    "Primitives|size/720||720",
     "Primitives|size/72||72",
     "Primitives|space/0||0",
     "Primitives|space/10||10",
@@ -1002,6 +1013,34 @@
             "Range end",
             "Outside",
             "Disabled"
+          ]
+        }
+      }
+    },
+    "imageBlock": {
+      "id": "212:29",
+      "name": "Image Block",
+      "type": "COMPONENT_SET",
+      "variants": 6,
+      "properties": {
+        "Show placeholder": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Type": {
+          "type": "VARIANT",
+          "options": [
+            "Hero",
+            "Banner",
+            "Half-page"
+          ]
+        },
+        "Breakpoint": {
+          "type": "VARIANT",
+          "options": [
+            "Desktop",
+            "Mobile"
           ]
         }
       }

@@ -1,0 +1,36 @@
+.nds-image-block { container-type: inline-size; width: 100%; }
+.nds-image-block__inner { display: flex; align-items: center; }
+.nds-image-block__media {
+  flex: none;
+  width: 100%;
+  height: var(--nds-image-hero-height);
+  overflow: hidden;
+  background: var(--nds-image-bg);
+}
+.nds-image-block[data-type='banner'] .nds-image-block__media { height: var(--nds-image-banner-height); }
+/* Half-page: half the row, square, capped at the Figma size. */
+.nds-image-block[data-type='half'] .nds-image-block__media {
+  width: 50%;
+  height: auto;
+  aspect-ratio: 1;
+  max-height: var(--nds-image-half-size);
+}
+.nds-image-block__copy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--nds-text-space-after-heading);
+  padding: var(--nds-row-padding-y);
+}
+
+.nds-image-block__img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.nds-image-block__placeholder { display: grid; place-items: center; height: 100%; color: var(--nds-image-icon); }
+
+@container (max-width: 767px) {
+  .nds-image-block__inner { flex-direction: column; align-items: stretch; }
+  .nds-image-block__media { height: var(--nds-image-hero-height-mobile); }
+  .nds-image-block[data-type='banner'] .nds-image-block__media { height: var(--nds-image-banner-height-mobile); }
+  .nds-image-block[data-type='half'] .nds-image-block__media { width: 100%; aspect-ratio: auto; height: var(--nds-image-half-size-mobile); max-height: none; }
+  .nds-image-block__copy { padding: var(--nds-row-padding-y-mobile) var(--nds-row-padding-x-mobile); }
+}

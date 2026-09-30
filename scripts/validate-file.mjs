@@ -74,7 +74,7 @@ const CATEGORY = [
   [/^(border|outline)(-width)?$|-width$/, ['border-width']],
   [/^(width|height|min-|max-|flex-basis)/, ['size', 'space']],
 ];
-const FOLDER_PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], ProductCard: ['card'], WishlistButton: ['wishlist'], ProductRow: ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Spinner: ['button'], Logo: ['logo'], Calendar: ['calendar'] };
+const FOLDER_PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], ProductCard: ['card'], WishlistButton: ['wishlist'], ProductRow: ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Spinner: ['button'], Logo: ['logo'], Calendar: ['calendar'], ImageBlock: ['image'] };
 let CTX = { prop: '', prefixes: [] };
 const propAt = (code, index) => { const m = [...code.slice(0, index).matchAll(/([a-z-]+)\s*:/g)].pop(); return m ? m[1] : ''; };
 const componentTokens = (primitive) => {
@@ -211,7 +211,7 @@ function checkTokens(file, src) {
   const data = JSON.parse(src);
   const PRIM = /^(color|space|size|radius|border-width|font-size|line-height|letter-spacing|elevation)\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/;
   const SEM = /^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)+$/;
-  const PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], 'Product Card': ['card', 'wishlist'], 'Product Row': ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Logo: ['logo'], Calendar: ['calendar'] };
+  const PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], 'Product Card': ['card', 'wishlist'], 'Product Row': ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Logo: ['logo'], Calendar: ['calendar'], 'Image Block': ['image'] };
   const lineOf = (name) => lines.findIndex((l) => l.includes(`"${name}"`)) + 1;
   for (const [col, vars] of Object.entries(data)) {
     if (col.startsWith('$')) continue;

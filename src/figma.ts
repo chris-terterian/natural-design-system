@@ -26,4 +26,5 @@ export const FIGMA_NODES = {
   typography: '76:5',
   calendar: '196:580',
   calendarDay: '195:65',
+  imageBlock: '212:29',
 } as const;

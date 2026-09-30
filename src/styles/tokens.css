@@ -82,6 +82,9 @@
   --nds-elevation-float-y: 1px;
   --nds-elevation-float-blur: 3px;
   --nds-size-480: 480px;
+  --nds-size-360: 360px;
+  --nds-size-375: 375px;
+  --nds-size-720: 720px;
   /* Button */
   --nds-button-primary-bg-default: var(--nds-color-brown-200);
   --nds-button-primary-fg-default: var(--nds-color-brown-900);
@@ -429,6 +432,15 @@
   --nds-calendar-focus-ring: var(--nds-color-brown-900);
   --nds-calendar-focus-ring-width: var(--nds-border-width-2);
   --nds-calendar-focus-ring-offset: var(--nds-space-2);
+  /* Image Block */
+  --nds-image-bg: var(--nds-color-brown-100);
+  --nds-image-icon: var(--nds-color-brown-300);
+  --nds-image-hero-height: var(--nds-size-640);
+  --nds-image-hero-height-mobile: var(--nds-size-480);
+  --nds-image-banner-height: var(--nds-size-360);
+  --nds-image-banner-height-mobile: var(--nds-size-200);
+  --nds-image-half-size: var(--nds-size-720);
+  --nds-image-half-size-mobile: var(--nds-size-375);
 }
 
 @media (max-width: 767px) {

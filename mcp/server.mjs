@@ -9,6 +9,8 @@
 // Checkpoints (stop-and-verify workflow against drift): get_system_fingerprint (0) · review_plan (1) · validate_code (2, 3)
 //   · check_copy (4) · check_contrast (5) · run_checkpoints (6: all gates in order, then human review)
 // Prompt: build_page (walks the checkpoints)
+// `natural-mcp setup …` registers the server with Claude Desktop / Cursor / Claude Code instead of starting it.
+if (process.argv[2] === 'setup') { await import('./setup.mjs'); process.exit(0); }
 import { readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';

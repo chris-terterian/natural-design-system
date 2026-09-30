@@ -2,6 +2,16 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.15.1] – 2026-09-30
+
+### Fixed
+- **The Natural MCP server runs without cloning the repo:** `npx -y github:chris-terterian/natural-design-system` (Claude Code: `claude mcp add natural -- npx -y github:chris-terterian/natural-design-system`). The package now ships the server and what it reads (DESIGN.md, tokens, registry, Figma map, component sources, the validator), and `@modelcontextprotocol/sdk` and `zod` are runtime dependencies. Verified from an empty folder via the GitHub path and via a packed tarball (the npm path).
+- `npm publish` rebuilds `dist/` first (`prepublishOnly`), which had gone stale (it was missing the ten newest components), and runs the MCP smoke test.
+- `prepare` only installs the git hooks inside a git checkout.
+- **`setup` command** for Claude Desktop, Cursor and Claude Code: `npx -y github:chris-terterian/natural-design-system setup`. Writes absolute npx / Node paths (apps opened from the Dock don't get the terminal PATH, so a bare `"command": "npx"` fails with `spawn npx ENOENT`), prefers stable links over versioned Homebrew paths, handles Windows (`cmd /c`), merges with existing config and keeps a backup; `--dry-run`, `--remove`. Proven: in a Dock-like environment the bare config fails with ENOENT and the written one passes the smoke test; Claude Code reports the server Connected.
+- `check:mcp` can test an installed copy (`NATURAL_MCP_COMMAND`, `NATURAL_MCP_ENV`).
+- `engines.node >= 20`, repository and keywords for npm.
+
 ## [0.15.0] – 2026-09-30
 
 ### Added

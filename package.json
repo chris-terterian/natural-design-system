@@ -1,6 +1,6 @@
 {
   "name": "natural-design-system",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "description": "A natural goods e-commerce design system — React components, tokens and Storybook, mirrored with the Figma file \"Natural Design System\".",
   "type": "module",
   "license": "MIT",
@@ -12,7 +12,19 @@
     "./styles.css": "./dist/natural-design-system.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "mcp/server.mjs",
+    "mcp/setup.mjs",
+    "mcp/README.md",
+    "scripts/validate-file.mjs",
+    "DESIGN.md",
+    "tokens/figma-variables.json",
+    "governance/components.json",
+    "src/figma.ts",
+    "src/styles/tokens.css",
+    "src/styles/global.css",
+    "src/components/*/*.tsx",
+    "!src/components/*/*.stories.tsx"
   ],
   "scripts": {
     "tokens": "node scripts/build-tokens.mjs",
@@ -28,20 +40,24 @@
     "figma:snapshot-save": "node scripts/figma/save-snapshot.mjs",
     "check:parity": "node scripts/check-parity.mjs",
     "check:install": "npx -y npm@11.19.0 ci --dry-run",
-    "prepare": "git config core.hooksPath .githooks || true",
+    "prepare": "git rev-parse --git-dir >/dev/null 2>&1 && git config core.hooksPath .githooks || true",
     "validate_file": "node scripts/validate-file.mjs",
     "story-ui": "story-ui start --port 4001",
     "storybook-with-ui": "concurrently \"npm run storybook\" \"npm run story-ui\"",
     "mcp": "node mcp/server.mjs",
     "check:mcp": "node mcp/smoke.mjs",
-    "mcp:demo": "node mcp/examples/gift-guide/demo.mjs"
+    "mcp:demo": "node mcp/examples/gift-guide/demo.mjs",
+    "prepublishOnly": "npm run build && npm run check:mcp"
   },
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18"
   },
-  "devDependencies": {
+  "dependencies": {
     "@modelcontextprotocol/sdk": "^1.31.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
     "@storybook/addon-a11y": "^10.6.1",
     "@storybook/addon-designs": "^11.1.4",
     "@storybook/addon-docs": "^10.6.1",
@@ -58,8 +74,7 @@
     "react-live": "^4.1.8",
     "storybook": "^10.6.1",
     "typescript": "^7.0.2",
-    "vite": "^8.3.1",
-    "zod": "^3.25.76"
+    "vite": "^8.3.1"
   },
   "allowScripts": {
     "esbuild@0.28.2": true,
@@ -67,5 +82,20 @@
   },
   "bin": {
     "natural-mcp": "mcp/server.mjs"
-  }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chris-terterian/natural-design-system.git"
+  },
+  "keywords": [
+    "ai",
+    "design-system",
+    "design-tokens",
+    "mcp",
+    "model-context-protocol",
+    "react"
+  ]
 }

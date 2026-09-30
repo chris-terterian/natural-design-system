@@ -4,7 +4,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.15.0)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.15.1)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -79,7 +79,7 @@ Every story links to its Figma component in the **Design** panel. Each component
 
 ## Build with AI (Natural MCP server)
 
-`npm run mcp` starts an MCP server that gives AI agents the system: components and specs, tokens by tier, brand and accessibility rules, and the repo's own checks (`validate_code`, `check_contrast`, `check_copy`). Agents work through **checkpoints** (anchor → plan → structure → style → content → accessibility → final gate), so drift is stopped at the step where it happens. `npm run mcp:demo` shows a drifted attempt being stopped and a fixed one passing; `npm run check:mcp` proves it in CI. Details: [`mcp/README.md`](mcp/README.md).
+No clone needed: `npx -y github:chris-terterian/natural-design-system setup` registers it with Claude Desktop, Cursor and Claude Code (absolute paths, so it works from the Dock too). The MCP server gives AI agents the system: components and specs, tokens by tier, brand and accessibility rules, and the repo's own checks (`validate_code`, `check_contrast`, `check_copy`). Agents work through **checkpoints** (anchor → plan → structure → style → content → accessibility → final gate), so drift is stopped at the step where it happens. `npm run mcp:demo` shows a drifted attempt being stopped and a fixed one passing; `npm run check:mcp` proves it in CI. Details: [`mcp/README.md`](mcp/README.md).
 
 ## Tokens
 

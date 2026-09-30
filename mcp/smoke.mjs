@@ -4,7 +4,11 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 
 const client = new Client({ name: 'natural-smoke', version: '1.0.0' });
-await client.connect(new StdioClientTransport({ command: process.execPath, args: [new URL('./server.mjs', import.meta.url).pathname] }));
+// NATURAL_MCP_COMMAND='["npx","-y","github:chris-terterian/natural-design-system"]' tests an installed copy instead of this checkout.
+const [command, ...cmdArgs] = process.env.NATURAL_MCP_COMMAND ? JSON.parse(process.env.NATURAL_MCP_COMMAND) : [process.execPath, new URL('./server.mjs', import.meta.url).pathname];
+// NATURAL_MCP_ENV='{"PATH":"/usr/bin:/bin"}' launches with only that environment (like an app started from the Dock).
+const env = process.env.NATURAL_MCP_ENV ? JSON.parse(process.env.NATURAL_MCP_ENV) : undefined;
+await client.connect(new StdioClientTransport({ command, args: cmdArgs, env, cwd: process.env.NATURAL_MCP_CWD || process.cwd() }));
 const errors = [];
 const ok = (cond, msg) => { if (!cond) errors.push(msg); };
 const call = async (name, args = {}) => { const r = await client.callTool({ name, arguments: args }); return r.content[0].text; };

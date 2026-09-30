@@ -3,6 +3,7 @@ import './styles/global.css';
 export * from './components/Badge/Badge';
 export * from './components/Button/Button';
 export * from './components/Input/Input';
+export * from './components/Calendar/Calendar';
 export * from './components/Logo/Logo';
 export * from './components/Navigation/Navigation';
 export * from './components/Radio/Radio';

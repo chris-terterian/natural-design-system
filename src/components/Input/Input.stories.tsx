@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { TextArea, TextField } from './Input';
+import { useState } from 'react';
+import { DateField, TextArea, TextField } from './Input';
 import { figma, FIGMA_NODES } from '../../figma';
 
 const meta = {
@@ -28,6 +29,36 @@ export const Textarea: StoryObj<typeof TextArea> = {
   args: { label: 'Message', placeholder: 'Tell us about your order…', helperText: 'Up to 200 characters.', maxLength: 200 },
 };
 
+/* Delivery example, as in Figma: earliest 5 October 2026, no Sundays. */
+const dateRules = { today: new Date(2026, 8, 29), min: new Date(2026, 9, 5), isDateDisabled: (d: Date) => d.getDay() === 0 };
+
+/** Figma: Input / Type=Date. Type MM/DD/YYYY or use the calendar button. */
+export const Date_: StoryObj<typeof DateField> = {
+  name: 'Date',
+  render: (args) => {
+    const [date, setDate] = useState<Date | null>(null);
+    const sunday = date?.getDay() === 0;
+    return (
+      <DateField
+        {...args}
+        value={date}
+        onChange={setDate}
+        status={sunday ? 'error' : date ? 'success' : 'default'}
+        statusMessage={sunday ? 'We don’t deliver on Sundays.' : date ? `Arrives ${date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}.` : undefined}
+      />
+    );
+  },
+  args: { label: 'Delivery date', helperText: 'Earliest delivery Oct 5. No Sundays.', ...dateRules },
+};
+
+/** The open state from the Figma example: the Calendar sits 4px below the field. */
+export const DateOpen: StoryObj<typeof DateField> = {
+  name: 'Date (open)',
+  parameters: { layout: 'padded' },
+  render: (args) => <div style={{ minHeight: 480 }}><DateField {...args} /></div>,
+  args: { label: 'Delivery date', defaultOpen: true, defaultValue: new Date(2026, 9, 9), ...dateRules },
+};
+
 const STATES = ['Default', 'Hover', 'Focus', 'Filled', 'Error', 'Success', 'Disabled', 'Read-only'] as const;
 const stateProps = (s: (typeof STATES)[number], value: string, err: string, ok: string) =>
   ({
@@ -39,6 +70,18 @@ const stateProps = (s: (typeof STATES)[number], value: string, err: string, ok: 
     Success: { status: 'success', statusMessage: ok, defaultValue: value },
     Disabled: { disabled: true },
     'Read-only': { readOnly: true, defaultValue: value },
+  })[s] as object;
+
+const dateStateProps = (s: (typeof STATES)[number]) =>
+  ({
+    Default: {},
+    Hover: { forceState: 'hover' },
+    Focus: { forceState: 'focus' },
+    Filled: { defaultValue: new Date(2026, 9, 9) },
+    Error: { status: 'error', statusMessage: 'We don’t deliver on Sundays.', defaultValue: new Date(2026, 9, 11) },
+    Success: { status: 'success', statusMessage: 'Arrives Friday, October 9.', defaultValue: new Date(2026, 9, 9) },
+    Disabled: { disabled: true },
+    'Read-only': { readOnly: true, defaultValue: new Date(2026, 9, 9) },
   })[s] as object;
 
 /** Mirrors the Figma variant grid: Type × State. */
@@ -53,6 +96,8 @@ export const AllVariants: Story = {
             {...stateProps(s, 'jane@naturalco.com', 'Enter a valid email address.', 'Email is available.')} />
           <TextArea label="Message" placeholder="Tell us about your order…" helperText="Up to 200 characters." maxLength={200}
             {...stateProps(s, 'Could you gift-wrap this order and include a handwritten note? Thank you!', 'Please enter a message.', 'Message looks good.')} />
+          <DateField label="Delivery date" helperText={s === 'Read-only' ? 'Delivery date is confirmed.' : 'Earliest delivery Oct 5. No Sundays.'}
+            {...dateStateProps(s)} />
         </div>
       ))}
     </div>

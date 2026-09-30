@@ -1,6 +1,6 @@
 {
   "$comment": "Figma parity snapshot, exported through the Figma MCP (scripts/figma/export-snapshot.js). Checked by npm run check:parity. Refresh after any Figma or token change, and before every release.",
-  "generatedAt": "2026-09-29T14:51:31.045Z",
+  "generatedAt": "2026-09-30T04:26:44.129Z",
   "figmaFile": "84MjZXozBoKCvf9lwIU5pu",
   "variables": [
     "Badge|badge/border-width||@border-width/1",
@@ -63,6 +63,38 @@
     "Button|button/secondary/fg/hover||@color/brown/900",
     "Button|button/secondary/fg/pressed||@color/brown/900",
     "Button|button/spinner||@color/brown/900",
+    "Calendar|calendar/bg||@color/white",
+    "Calendar|calendar/border-width||@border-width/1",
+    "Calendar|calendar/border||@color/taupe/200",
+    "Calendar|calendar/day/bg/hover||@color/brown/50",
+    "Calendar|calendar/day/bg/pressed||@color/brown/150",
+    "Calendar|calendar/day/bg/selected||@color/brown/900",
+    "Calendar|calendar/day/radius||@radius/full",
+    "Calendar|calendar/day/range/bg||@color/brown/100",
+    "Calendar|calendar/day/range/border||@color/brown/600",
+    "Calendar|calendar/day/size||@size/40",
+    "Calendar|calendar/day/text/disabled||@color/taupe/500",
+    "Calendar|calendar/day/text/outside||@color/brown/600",
+    "Calendar|calendar/day/text/selected||@color/white",
+    "Calendar|calendar/day/text||@color/brown/900",
+    "Calendar|calendar/day/today-dot-offset||@space/6",
+    "Calendar|calendar/day/today-dot-size||@space/4",
+    "Calendar|calendar/day/today-dot||@color/brown/900",
+    "Calendar|calendar/focus-ring-offset||@space/2",
+    "Calendar|calendar/focus-ring-width||@border-width/2",
+    "Calendar|calendar/focus-ring||@color/brown/900",
+    "Calendar|calendar/font-size/day||@font-size/14",
+    "Calendar|calendar/font-size/title||@font-size/16",
+    "Calendar|calendar/font-size/weekday||@font-size/12",
+    "Calendar|calendar/gap||@space/12",
+    "Calendar|calendar/line-height/day||@line-height/20",
+    "Calendar|calendar/line-height/title||@line-height/24",
+    "Calendar|calendar/line-height/weekday||@line-height/16",
+    "Calendar|calendar/padding||@space/16",
+    "Calendar|calendar/radius||@radius/12",
+    "Calendar|calendar/row-gap||@space/4",
+    "Calendar|calendar/title/text||@color/brown/900",
+    "Calendar|calendar/weekday/text||@color/brown/800",
     "Input|input/bg/default||@color/white",
     "Input|input/bg/disabled||@color/brown/100",
     "Input|input/bg/read-only||@color/brown/50",
@@ -82,6 +114,10 @@
     "Input|input/font-size/label||@font-size/14",
     "Input|input/font-size/value||@font-size/16",
     "Input|input/gap||@space/6",
+    "Input|input/icon-button-radius||@radius/8",
+    "Input|input/icon-button-size||@space/24",
+    "Input|input/icon-button/bg/hover||@color/brown/50",
+    "Input|input/icon-button/bg/pressed||@color/brown/150",
     "Input|input/icon/default||@color/brown/800",
     "Input|input/icon/disabled||@color/taupe/500",
     "Input|input/icon/error||@color/red/600",
@@ -91,6 +127,7 @@
     "Input|input/min-height||@space/44",
     "Input|input/padding-x||@space/12",
     "Input|input/padding-y||@space/10",
+    "Input|input/popover-gap||@space/4",
     "Input|input/radius||@radius/8",
     "Input|input/text/disabled||@color/taupe/500",
     "Input|input/text/error||@color/red/600",
@@ -470,7 +507,7 @@
       "id": "1:498",
       "name": "Input",
       "type": "COMPONENT_SET",
-      "variants": 16,
+      "variants": 24,
       "properties": {
         "Label": {
           "type": "TEXT",
@@ -491,7 +528,8 @@
           "type": "VARIANT",
           "options": [
             "Text",
-            "Textarea"
+            "Textarea",
+            "Date"
           ]
         },
         "State": {
@@ -914,6 +952,59 @@
       "id": "76:5",
       "name": "Typography",
       "type": "SECTION"
+    },
+    "calendar": {
+      "id": "196:580",
+      "name": "Calendar",
+      "type": "COMPONENT_SET",
+      "variants": 2,
+      "properties": {
+        "Month": {
+          "type": "TEXT",
+          "default": "October 2026",
+          "wired": true
+        },
+        "Mode": {
+          "type": "VARIANT",
+          "options": [
+            "Single",
+            "Range"
+          ]
+        }
+      }
+    },
+    "calendarDay": {
+      "id": "195:65",
+      "name": "Calendar Day",
+      "type": "COMPONENT_SET",
+      "variants": 10,
+      "properties": {
+        "Day": {
+          "type": "TEXT",
+          "default": "9",
+          "wired": true
+        },
+        "Today": {
+          "type": "BOOLEAN",
+          "default": false,
+          "wired": true
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Pressed",
+            "Focus",
+            "Selected",
+            "Range start",
+            "Range middle",
+            "Range end",
+            "Outside",
+            "Disabled"
+          ]
+        }
+      }
     }
   },
   "textStyles": {

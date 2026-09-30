@@ -24,4 +24,6 @@ export const FIGMA_NODES = {
   toggle: '67:360',
   productRow: '73:210',
   typography: '76:5',
+  calendar: '196:580',
+  calendarDay: '195:65',
 } as const;

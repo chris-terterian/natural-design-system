@@ -646,6 +646,26 @@
     "input/focus-ring-offset": {
       "type": "FLOAT",
       "alias": "space/2"
+    },
+    "input/icon-button/bg/hover": {
+      "type": "COLOR",
+      "alias": "color/brown/50"
+    },
+    "input/icon-button/bg/pressed": {
+      "type": "COLOR",
+      "alias": "color/brown/150"
+    },
+    "input/icon-button-size": {
+      "type": "FLOAT",
+      "alias": "space/24"
+    },
+    "input/icon-button-radius": {
+      "type": "FLOAT",
+      "alias": "radius/8"
+    },
+    "input/popover-gap": {
+      "type": "FLOAT",
+      "alias": "space/4"
     }
   },
   "Radio": {
@@ -1767,6 +1787,136 @@
     "logo/radius": {
       "type": "FLOAT",
       "alias": "radius/8"
+    }
+  },
+  "Calendar": {
+    "calendar/bg": {
+      "type": "COLOR",
+      "alias": "color/white"
+    },
+    "calendar/border": {
+      "type": "COLOR",
+      "alias": "color/taupe/200"
+    },
+    "calendar/border-width": {
+      "type": "FLOAT",
+      "alias": "border-width/1"
+    },
+    "calendar/radius": {
+      "type": "FLOAT",
+      "alias": "radius/12"
+    },
+    "calendar/padding": {
+      "type": "FLOAT",
+      "alias": "space/16"
+    },
+    "calendar/gap": {
+      "type": "FLOAT",
+      "alias": "space/12"
+    },
+    "calendar/row-gap": {
+      "type": "FLOAT",
+      "alias": "space/4"
+    },
+    "calendar/title/text": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "calendar/font-size/title": {
+      "type": "FLOAT",
+      "alias": "font-size/16"
+    },
+    "calendar/line-height/title": {
+      "type": "FLOAT",
+      "alias": "line-height/24"
+    },
+    "calendar/weekday/text": {
+      "type": "COLOR",
+      "alias": "color/brown/800"
+    },
+    "calendar/font-size/weekday": {
+      "type": "FLOAT",
+      "alias": "font-size/12"
+    },
+    "calendar/line-height/weekday": {
+      "type": "FLOAT",
+      "alias": "line-height/16"
+    },
+    "calendar/day/size": {
+      "type": "FLOAT",
+      "alias": "size/40"
+    },
+    "calendar/day/radius": {
+      "type": "FLOAT",
+      "alias": "radius/full"
+    },
+    "calendar/day/text": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "calendar/day/text/outside": {
+      "type": "COLOR",
+      "alias": "color/brown/600"
+    },
+    "calendar/day/text/disabled": {
+      "type": "COLOR",
+      "alias": "color/taupe/500"
+    },
+    "calendar/day/text/selected": {
+      "type": "COLOR",
+      "alias": "color/white"
+    },
+    "calendar/day/bg/hover": {
+      "type": "COLOR",
+      "alias": "color/brown/50"
+    },
+    "calendar/day/bg/pressed": {
+      "type": "COLOR",
+      "alias": "color/brown/150"
+    },
+    "calendar/day/bg/selected": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "calendar/day/range/bg": {
+      "type": "COLOR",
+      "alias": "color/brown/100"
+    },
+    "calendar/day/range/border": {
+      "type": "COLOR",
+      "alias": "color/brown/600"
+    },
+    "calendar/day/today-dot": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "calendar/day/today-dot-size": {
+      "type": "FLOAT",
+      "alias": "space/4"
+    },
+    "calendar/day/today-dot-offset": {
+      "type": "FLOAT",
+      "alias": "space/6"
+    },
+    "calendar/font-size/day": {
+      "type": "FLOAT",
+      "alias": "font-size/14"
+    },
+    "calendar/line-height/day": {
+      "type": "FLOAT",
+      "alias": "line-height/20"
+    },
+    "calendar/focus-ring": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "calendar/focus-ring-width": {
+      "type": "FLOAT",
+      "alias": "border-width/2"
+    },
+    "calendar/focus-ring-offset": {
+      "type": "FLOAT",
+      "alias": "space/2"
     }
   }
 }

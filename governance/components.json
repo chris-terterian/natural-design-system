@@ -57,7 +57,10 @@
       "name": "Input",
       "exports": [
         "TextField",
-        "TextArea"
+        "TextArea",
+        "DateField",
+        "formatDate",
+        "parseDate"
       ],
       "status": "stable",
       "since": "0.1.0",
@@ -66,7 +69,8 @@
       "figmaKey": "input",
       "specs": [
         "6.4 Text Field",
-        "6.5 Text Area"
+        "6.5 Text Area",
+        "6.21 Date Field"
       ],
       "notes": "Disabled text contrast is registered exception EX-001 (WCAG-exempt), not a gap."
     },
@@ -205,6 +209,22 @@
         "6.19 Heading & Text"
       ],
       "notes": ""
+    },
+    {
+      "name": "Calendar",
+      "exports": [
+        "Calendar",
+        "CalendarDay"
+      ],
+      "status": "beta",
+      "since": "0.8.0",
+      "storyFile": "src/components/Calendar/Calendar.stories.tsx",
+      "storyTitle": "Components/Calendar",
+      "figmaKey": "calendar",
+      "specs": [
+        "6.22 Calendar & Calendar Day"
+      ],
+      "notes": "Beta gaps: no hover preview of a range before the second click; a range may span disabled days; one month at a time (no two-month view); not yet paired with a text field (Date Field is next)."
     }
   ]
 }

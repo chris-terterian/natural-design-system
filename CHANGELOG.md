@@ -2,6 +2,17 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.8.0] – 2026-09-29
+
+### Added
+- **Calendar** (Beta, D-024): `Calendar` (Mode = Single / Range) and `CalendarDay` (10 states + Today). ARIA grid keyboard support; disabled days stay focusable; always 6 weeks. Figma page "Calendar" with both sets (196:580, 195:65), labelled grids and a delivery-date example. Calendar token collection (32 tokens).
+- **Date Field**: Input Type=Date in Figma (8 states) and `DateField` in code. Type MM/DD/YYYY or open the Calendar from the 24px calendar button (dialog pattern, Escape closes, focus returns). `formatDate` / `parseDate` helpers. Stories: Date, Date (open), and a Date row in All Variants.
+- `CalendarIcon`; Figma Icon/Calendar. Input tokens `input/icon-button/*`, `input/icon-button-size`, `input/icon-button-radius`, `input/popover-gap`.
+
+### Fixed
+- validate_file now checks token prefixes for Logo (missed in 0.5.0) and Calendar.
+- Input's keyboard focus ring now reacts only to its own input, so a button inside the field draws a single ring.
+
 ## [0.7.1] – 2026-09-29
 
 ### Fixed

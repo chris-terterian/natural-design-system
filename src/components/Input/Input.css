@@ -45,8 +45,9 @@ textarea.nds-field__input {
 .nds-field__control:focus-within, .nds-field[data-state='focus'] .nds-field__control {
   --_border: var(--nds-input-border-focus);
 }
-/* Keyboard focus ring (2px, 2px offset), matching Button */
-.nds-field__control:has(:focus-visible), .nds-field[data-state='focus'] .nds-field__control {
+/* Keyboard focus ring (2px, 2px offset), matching Button. The field's own input only: the Date Field
+   calendar button draws its own ring. */
+.nds-field__control:has(.nds-field__input:focus-visible), .nds-field[data-state='focus'] .nds-field__control {
   outline: var(--nds-input-focus-ring-width) solid var(--nds-input-focus-ring);
   outline-offset: var(--nds-input-focus-ring-offset);
 }
@@ -86,3 +87,32 @@ textarea.nds-field__input {
 }
 .nds-field__input:disabled { cursor: not-allowed; }
 .nds-field__input:disabled::placeholder { color: var(--nds-input-text-disabled); }
+
+/* ---------- Date Field ---------- */
+.nds-field__anchor { position: relative; }
+.nds-field__icon-button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--nds-input-icon-button-size);
+  height: var(--nds-input-icon-button-size);
+  padding: 0;
+  border: 0;
+  border-radius: var(--nds-input-icon-button-radius);
+  background: none;
+  color: var(--nds-input-icon-default);
+  cursor: pointer;
+}
+.nds-field__icon-button:hover { background: var(--nds-input-icon-button-bg-hover); }
+.nds-field__icon-button:active { background: var(--nds-input-icon-button-bg-pressed); }
+.nds-field__icon-button:focus-visible {
+  outline: var(--nds-input-focus-ring-width) solid var(--nds-input-focus-ring);
+  outline-offset: var(--nds-input-focus-ring-offset);
+}
+.nds-field__icon-button:disabled { background: none; color: var(--nds-input-icon-disabled); cursor: not-allowed; }
+.nds-field__popover {
+  position: absolute;
+  top: calc(100% + var(--nds-input-popover-gap));
+  left: 0;
+  z-index: 10;
+}

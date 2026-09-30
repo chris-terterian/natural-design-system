@@ -161,6 +161,11 @@
   --nds-input-font-size-label: var(--nds-font-size-14);
   --nds-input-line-height-label: var(--nds-line-height-20);
   --nds-input-focus-ring-offset: var(--nds-space-2);
+  --nds-input-icon-button-bg-hover: var(--nds-color-brown-50);
+  --nds-input-icon-button-bg-pressed: var(--nds-color-brown-150);
+  --nds-input-icon-button-size: var(--nds-space-24);
+  --nds-input-icon-button-radius: var(--nds-radius-8);
+  --nds-input-popover-gap: var(--nds-space-4);
   /* Radio */
   --nds-radio-bg-default: var(--nds-color-white);
   --nds-radio-bg-hover: var(--nds-color-brown-50);
@@ -391,6 +396,39 @@
   --nds-logo-focus-ring-width: var(--nds-border-width-2);
   --nds-logo-focus-ring-offset: var(--nds-space-2);
   --nds-logo-radius: var(--nds-radius-8);
+  /* Calendar */
+  --nds-calendar-bg: var(--nds-color-white);
+  --nds-calendar-border: var(--nds-color-taupe-200);
+  --nds-calendar-border-width: var(--nds-border-width-1);
+  --nds-calendar-radius: var(--nds-radius-12);
+  --nds-calendar-padding: var(--nds-space-16);
+  --nds-calendar-gap: var(--nds-space-12);
+  --nds-calendar-row-gap: var(--nds-space-4);
+  --nds-calendar-title-text: var(--nds-color-brown-900);
+  --nds-calendar-font-size-title: var(--nds-font-size-16);
+  --nds-calendar-line-height-title: var(--nds-line-height-24);
+  --nds-calendar-weekday-text: var(--nds-color-brown-800);
+  --nds-calendar-font-size-weekday: var(--nds-font-size-12);
+  --nds-calendar-line-height-weekday: var(--nds-line-height-16);
+  --nds-calendar-day-size: var(--nds-size-40);
+  --nds-calendar-day-radius: var(--nds-radius-full);
+  --nds-calendar-day-text: var(--nds-color-brown-900);
+  --nds-calendar-day-text-outside: var(--nds-color-brown-600);
+  --nds-calendar-day-text-disabled: var(--nds-color-taupe-500);
+  --nds-calendar-day-text-selected: var(--nds-color-white);
+  --nds-calendar-day-bg-hover: var(--nds-color-brown-50);
+  --nds-calendar-day-bg-pressed: var(--nds-color-brown-150);
+  --nds-calendar-day-bg-selected: var(--nds-color-brown-900);
+  --nds-calendar-day-range-bg: var(--nds-color-brown-100);
+  --nds-calendar-day-range-border: var(--nds-color-brown-600);
+  --nds-calendar-day-today-dot: var(--nds-color-brown-900);
+  --nds-calendar-day-today-dot-size: var(--nds-space-4);
+  --nds-calendar-day-today-dot-offset: var(--nds-space-6);
+  --nds-calendar-font-size-day: var(--nds-font-size-14);
+  --nds-calendar-line-height-day: var(--nds-line-height-20);
+  --nds-calendar-focus-ring: var(--nds-color-brown-900);
+  --nds-calendar-focus-ring-width: var(--nds-border-width-2);
+  --nds-calendar-focus-ring-offset: var(--nds-space-2);
 }
 
 @media (max-width: 767px) {

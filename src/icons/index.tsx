@@ -30,6 +30,9 @@ export const AlertIcon = (p: IconProps) => (
 export const CheckCircleIcon = (p: IconProps) => (
   <svg {...base(p)} strokeWidth={1.5}><circle cx="10" cy="10" r="7.5" /><path d="M6.8 10.2 9 12.4l4.2-4.6" strokeWidth={1.75} /></svg>
 );
+export const CalendarIcon = (p: IconProps) => (
+  <svg {...base(p)} strokeWidth={1.5}><rect x="3" y="4.5" width="14" height="12.5" rx="2" /><path d="M3 8.5h14M7 3v3M13 3v3" /></svg>
+);
 export const HeartIcon = ({ filled, ...p }: IconProps & { filled?: boolean }) => (
   <svg {...base(p)} strokeWidth={1.5}><path d={HEART} fill={filled ? 'currentColor' : 'none'} /></svg>
 );

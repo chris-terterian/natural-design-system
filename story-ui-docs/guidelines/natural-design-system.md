@@ -718,6 +718,8 @@ Size primitives now run `font-size/12 · 14 · 16 · 18 · 20 · 24 · 28 · 32 
 
 ### 3.3 Space & size
 
+**Figma: [Spacing page](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=234-2119).** Every `space/*` step with a bar bound to its variable, how many component tokens use it and what for, plus a Button, Product Card and Input marked up with their padding and gaps and the tokens behind them.
+
 | Scale | Values (px) |
 |---|---|
 | Space | `0 · 2 · 4 · 6 · 8 · 10 · 12 · 16 · 20 · 24 · 32 · 40 · 44 · 48` |
@@ -739,6 +741,8 @@ Every interactive target is **at least 44px** (radio hit area 24px, which meets 
 ### 3.5 Iconography
 
 Line icons with rounded caps and joins, drawn in `currentColor`. Icon-only controls always have an accessible name.
+
+**Figma: [Icons page](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=234-2118).** The source components for all 16 icons live here (UI 20px, Navigation 24px), each tile listing its code export, size, stroke and where it's used. Instances across the file link to them.
 
 | Icon | Figma | Code export | Grid | Stroke | Used in |
 |---|---|---|---|---|---|

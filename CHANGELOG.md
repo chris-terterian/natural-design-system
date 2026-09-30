@@ -7,6 +7,10 @@ All notable changes to the Natural Design System. Format: [Keep a Changelog](htt
 ### Changed
 - Product Card: the name, meta and price have 12px side padding (`card/info-padding-x`, new token), so they line up with the badge and the wishlist button. On mobile some meta lines now wrap; the Figma Product Row (Mobile, Show buttons=True) row heights were re-equalised to 370.375.
 
+### Added
+- Figma **Icons** page: the 16 icon source components moved here from the Buttons, Input Fields, Product Cards and Navigation pages (instances stay linked), each with its code export, size, stroke and usage; component descriptions name the code export.
+- Figma **Spacing** page: the `space/*` scale with bound bars, token usage counts and typical uses, plus a Button, Product Card and Input annotated with their padding and gap tokens.
+
 ## [0.10.0] – 2026-09-30
 
 ### Added

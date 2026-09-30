@@ -1964,5 +1964,151 @@
       "type": "FLOAT",
       "alias": "size/375"
     }
+  },
+  "Footer": {
+    "footer/bg": {
+      "type": "COLOR",
+      "alias": "color/brown/50"
+    },
+    "footer/border": {
+      "type": "COLOR",
+      "alias": "color/taupe/200"
+    },
+    "footer/border-width": {
+      "type": "FLOAT",
+      "alias": "border-width/1"
+    },
+    "footer/title/text": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "footer/link/text": {
+      "type": "COLOR",
+      "alias": "color/brown/800"
+    },
+    "footer/link/text-hover": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "footer/legal/text": {
+      "type": "COLOR",
+      "alias": "color/brown/800"
+    },
+    "footer/focus-ring": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    },
+    "footer/focus-ring-width": {
+      "type": "FLOAT",
+      "alias": "border-width/2"
+    },
+    "footer/focus-ring-offset": {
+      "type": "FLOAT",
+      "alias": "space/2"
+    },
+    "footer/focus-ring-radius": {
+      "type": "FLOAT",
+      "alias": "radius/8"
+    },
+    "footer/padding-x": {
+      "type": "FLOAT",
+      "alias": "space/40"
+    },
+    "footer/padding-x-mobile": {
+      "type": "FLOAT",
+      "alias": "space/16"
+    },
+    "footer/padding-top": {
+      "type": "FLOAT",
+      "alias": "space/48"
+    },
+    "footer/padding-top-mobile": {
+      "type": "FLOAT",
+      "alias": "space/32"
+    },
+    "footer/padding-bottom": {
+      "type": "FLOAT",
+      "alias": "space/32"
+    },
+    "footer/column-gap": {
+      "type": "FLOAT",
+      "alias": "space/24"
+    },
+    "footer/column-gap-mobile": {
+      "type": "FLOAT",
+      "alias": "space/0"
+    },
+    "footer/section-gap": {
+      "type": "FLOAT",
+      "alias": "space/48"
+    },
+    "footer/section-gap-mobile": {
+      "type": "FLOAT",
+      "alias": "space/32"
+    },
+    "footer/title-gap": {
+      "type": "FLOAT",
+      "alias": "space/12"
+    },
+    "footer/link-gap": {
+      "type": "FLOAT",
+      "alias": "space/8"
+    },
+    "footer/link-padding-y": {
+      "type": "FLOAT",
+      "alias": "space/2"
+    },
+    "footer/bottom-padding-top": {
+      "type": "FLOAT",
+      "alias": "space/24"
+    },
+    "footer/bottom-gap": {
+      "type": "FLOAT",
+      "alias": "space/16"
+    },
+    "footer/underline-offset": {
+      "type": "FLOAT",
+      "alias": "space/4"
+    },
+    "footer/font-size/title": {
+      "type": "FLOAT",
+      "alias": "font-size/14"
+    },
+    "footer/line-height/title": {
+      "type": "FLOAT",
+      "alias": "line-height/20"
+    },
+    "footer/font-size/link": {
+      "type": "FLOAT",
+      "alias": "font-size/14"
+    },
+    "footer/line-height/link": {
+      "type": "FLOAT",
+      "alias": "line-height/20"
+    },
+    "footer/font-size/legal": {
+      "type": "FLOAT",
+      "alias": "font-size/12"
+    },
+    "footer/line-height/legal": {
+      "type": "FLOAT",
+      "alias": "line-height/16"
+    },
+    "footer/legal-padding-y": {
+      "type": "FLOAT",
+      "alias": "space/4"
+    },
+    "footer/disclosure-padding-y": {
+      "type": "FLOAT",
+      "alias": "space/12"
+    },
+    "footer/chevron-size": {
+      "type": "FLOAT",
+      "alias": "size/16"
+    },
+    "footer/icon": {
+      "type": "COLOR",
+      "alias": "color/brown/900"
+    }
   }
 }

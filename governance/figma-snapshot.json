@@ -1,6 +1,6 @@
 {
   "$comment": "Figma parity snapshot, exported through the Figma MCP (scripts/figma/export-snapshot.js). Checked by npm run check:parity. Refresh after any Figma or token change, and before every release.",
-  "generatedAt": "2026-09-30T13:09:11.001Z",
+  "generatedAt": "2026-09-30T13:37:58.757Z",
   "figmaFile": "84MjZXozBoKCvf9lwIU5pu",
   "variables": [
     "Badge|badge/border-width||@border-width/1",
@@ -95,6 +95,42 @@
     "Calendar|calendar/row-gap||@space/4",
     "Calendar|calendar/title/text||@color/brown/900",
     "Calendar|calendar/weekday/text||@color/brown/800",
+    "Footer|footer/bg||@color/brown/50",
+    "Footer|footer/border-width||@border-width/1",
+    "Footer|footer/border||@color/taupe/200",
+    "Footer|footer/bottom-gap||@space/16",
+    "Footer|footer/bottom-padding-top||@space/24",
+    "Footer|footer/chevron-size||@size/16",
+    "Footer|footer/column-gap-mobile||@space/0",
+    "Footer|footer/column-gap||@space/24",
+    "Footer|footer/disclosure-padding-y||@space/12",
+    "Footer|footer/focus-ring-offset||@space/2",
+    "Footer|footer/focus-ring-radius||@radius/8",
+    "Footer|footer/focus-ring-width||@border-width/2",
+    "Footer|footer/focus-ring||@color/brown/900",
+    "Footer|footer/font-size/legal||@font-size/12",
+    "Footer|footer/font-size/link||@font-size/14",
+    "Footer|footer/font-size/title||@font-size/14",
+    "Footer|footer/icon||@color/brown/900",
+    "Footer|footer/legal-padding-y||@space/4",
+    "Footer|footer/legal/text||@color/brown/800",
+    "Footer|footer/line-height/legal||@line-height/16",
+    "Footer|footer/line-height/link||@line-height/20",
+    "Footer|footer/line-height/title||@line-height/20",
+    "Footer|footer/link-gap||@space/8",
+    "Footer|footer/link-padding-y||@space/2",
+    "Footer|footer/link/text-hover||@color/brown/900",
+    "Footer|footer/link/text||@color/brown/800",
+    "Footer|footer/padding-bottom||@space/32",
+    "Footer|footer/padding-top-mobile||@space/32",
+    "Footer|footer/padding-top||@space/48",
+    "Footer|footer/padding-x-mobile||@space/16",
+    "Footer|footer/padding-x||@space/40",
+    "Footer|footer/section-gap-mobile||@space/32",
+    "Footer|footer/section-gap||@space/48",
+    "Footer|footer/title-gap||@space/12",
+    "Footer|footer/title/text||@color/brown/900",
+    "Footer|footer/underline-offset||@space/4",
     "Image Block|image/banner/height-mobile||@size/200",
     "Image Block|image/banner/height||@size/360",
     "Image Block|image/bg||@color/brown/100",
@@ -1041,6 +1077,80 @@
           "options": [
             "Desktop",
             "Mobile"
+          ]
+        }
+      }
+    },
+    "footer": {
+      "id": "221:136",
+      "name": "Footer",
+      "type": "COMPONENT_SET",
+      "variants": 2,
+      "properties": {
+        "Copyright": {
+          "type": "TEXT",
+          "default": "© 2026 Natural. All rights reserved.",
+          "wired": true
+        },
+        "Breakpoint": {
+          "type": "VARIANT",
+          "options": [
+            "Desktop",
+            "Mobile"
+          ]
+        }
+      }
+    },
+    "footerLink": {
+      "id": "221:16",
+      "name": "Footer Link",
+      "type": "COMPONENT_SET",
+      "variants": 6,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "default": "Link",
+          "wired": true
+        },
+        "Size": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Small"
+          ]
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Focus"
+          ]
+        }
+      }
+    },
+    "footerColumn": {
+      "id": "223:116",
+      "name": "Footer Column",
+      "type": "COMPONENT_SET",
+      "variants": 3,
+      "properties": {
+        "Title": {
+          "type": "TEXT",
+          "default": "Shop",
+          "wired": true
+        },
+        "Show link 5": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Mode": {
+          "type": "VARIANT",
+          "options": [
+            "Static",
+            "Collapsed",
+            "Expanded"
           ]
         }
       }

@@ -27,4 +27,7 @@ export const FIGMA_NODES = {
   calendar: '196:580',
   calendarDay: '195:65',
   imageBlock: '212:29',
+  footer: '221:136',
+  footerLink: '221:16',
+  footerColumn: '223:116',
 } as const;

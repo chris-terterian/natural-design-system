@@ -441,6 +441,43 @@
   --nds-image-banner-height-mobile: var(--nds-size-200);
   --nds-image-half-size: var(--nds-size-720);
   --nds-image-half-size-mobile: var(--nds-size-375);
+  /* Footer */
+  --nds-footer-bg: var(--nds-color-brown-50);
+  --nds-footer-border: var(--nds-color-taupe-200);
+  --nds-footer-border-width: var(--nds-border-width-1);
+  --nds-footer-title-text: var(--nds-color-brown-900);
+  --nds-footer-link-text: var(--nds-color-brown-800);
+  --nds-footer-link-text-hover: var(--nds-color-brown-900);
+  --nds-footer-legal-text: var(--nds-color-brown-800);
+  --nds-footer-focus-ring: var(--nds-color-brown-900);
+  --nds-footer-focus-ring-width: var(--nds-border-width-2);
+  --nds-footer-focus-ring-offset: var(--nds-space-2);
+  --nds-footer-focus-ring-radius: var(--nds-radius-8);
+  --nds-footer-padding-x: var(--nds-space-40);
+  --nds-footer-padding-x-mobile: var(--nds-space-16);
+  --nds-footer-padding-top: var(--nds-space-48);
+  --nds-footer-padding-top-mobile: var(--nds-space-32);
+  --nds-footer-padding-bottom: var(--nds-space-32);
+  --nds-footer-column-gap: var(--nds-space-24);
+  --nds-footer-column-gap-mobile: var(--nds-space-0);
+  --nds-footer-section-gap: var(--nds-space-48);
+  --nds-footer-section-gap-mobile: var(--nds-space-32);
+  --nds-footer-title-gap: var(--nds-space-12);
+  --nds-footer-link-gap: var(--nds-space-8);
+  --nds-footer-link-padding-y: var(--nds-space-2);
+  --nds-footer-bottom-padding-top: var(--nds-space-24);
+  --nds-footer-bottom-gap: var(--nds-space-16);
+  --nds-footer-underline-offset: var(--nds-space-4);
+  --nds-footer-font-size-title: var(--nds-font-size-14);
+  --nds-footer-line-height-title: var(--nds-line-height-20);
+  --nds-footer-font-size-link: var(--nds-font-size-14);
+  --nds-footer-line-height-link: var(--nds-line-height-20);
+  --nds-footer-font-size-legal: var(--nds-font-size-12);
+  --nds-footer-line-height-legal: var(--nds-line-height-16);
+  --nds-footer-legal-padding-y: var(--nds-space-4);
+  --nds-footer-disclosure-padding-y: var(--nds-space-12);
+  --nds-footer-chevron-size: var(--nds-size-16);
+  --nds-footer-icon: var(--nds-color-brown-900);
 }
 
 @media (max-width: 767px) {

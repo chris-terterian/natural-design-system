@@ -2,6 +2,11 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.10.0] – 2026-09-30
+
+### Added
+- **Footer** (Beta, D-026): `Footer`, `FooterColumn` and `FooterLink` in code; Figma Footer page with Footer (221:136, Desktop / Mobile), Footer Column (223:116, Mode = Static / Collapsed / Expanded), Footer Link (221:16, Size × State) and a "Shop open" example. Three link columns (Shop, About, Help), Logo, copyright and legal links. On mobile the columns are collapsible sections (`aria-expanded`), closed by default: 356px instead of 840px. Footer token collection (36 tokens).
+
 ## [0.9.0] – 2026-09-30
 
 ### Added

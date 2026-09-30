@@ -240,6 +240,25 @@
         "6.23 Image Block"
       ],
       "notes": "Beta gaps: placeholder only until real photography exists; no art direction (a different crop per breakpoint via <picture>); no text overlay variant for heroes."
+    },
+    {
+      "name": "Footer",
+      "exports": [
+        "Footer",
+        "FooterColumn",
+        "FooterLink",
+        "DEFAULT_FOOTER_COLUMNS",
+        "DEFAULT_LEGAL_LINKS"
+      ],
+      "status": "beta",
+      "since": "0.10.0",
+      "storyFile": "src/components/Footer/Footer.stories.tsx",
+      "storyTitle": "Components/Footer",
+      "figmaKey": "footer",
+      "specs": [
+        "6.24 Footer, Footer Column & Footer Link"
+      ],
+      "notes": "Beta gaps: no newsletter sign-up or social links; mobile columns stack rather than collapse into disclosures; column count fixed at 3 in Figma."
     }
   ]
 }

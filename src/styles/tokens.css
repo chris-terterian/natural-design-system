@@ -519,6 +519,7 @@
   --nds-slider-line-height-label: var(--nds-line-height-20);
   --nds-slider-font-size-value: var(--nds-font-size-16);
   --nds-slider-line-height-value: var(--nds-line-height-24);
+  --nds-slider-text-separator: var(--nds-color-brown-800);
 }
 
 @media (max-width: 767px) {

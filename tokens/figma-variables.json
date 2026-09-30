@@ -2271,6 +2271,10 @@
     "slider/line-height/value": {
       "type": "FLOAT",
       "alias": "line-height/24"
+    },
+    "slider/text/separator": {
+      "type": "COLOR",
+      "alias": "color/brown/800"
     }
   }
 }

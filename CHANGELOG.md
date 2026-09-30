@@ -5,10 +5,14 @@ All notable changes to the Natural Design System. Format: [Keep a Changelog](htt
 ## [0.11.0] – 2026-09-30
 
 ### Added
-- **Slider** (Beta, D-027): `Slider` in code (native range input, optional number field, `formatValue` for `aria-valuetext`). Figma Slider page: Slider (239:2732, Field = None / Start / End / Top / Bottom × State), Slider Thumb (239:655, 5 states), Slider Input (239:665, 4 states). Slider token collection (39 tokens).
+- **Slider** (Beta, D-027): `Slider` in code (native range input, optional number field, `formatValue` for `aria-valuetext`). Figma Slider page: Slider (239:2732, Field = None / Start / End / Top / Bottom × State), Slider Thumb (239:655, 5 states), Slider Input (239:665, 4 states). Slider token collection (40 tokens).
+- **Range Slider** (Beta): two thumbs for a from–to range, `RangeSlider` in code (two native range inputs on one track, thumbs never cross); Figma Range Slider (242:722, Field = None / Sides / Top / Bottom × State).
 
 ### Fixed
 - validate_file: the focus-outline rule now honours `validate-ignore a11y-focus: <reason>`.
+
+### Governance
+- a11y exception **EX-002**: disabled Slider / Range Slider text (group label, "to") is WCAG-exempt inactive UI, like EX-001 for fields.
 
 ## [0.10.1] – 2026-09-30
 

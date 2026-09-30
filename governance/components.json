@@ -263,7 +263,8 @@
     {
       "name": "Slider",
       "exports": [
-        "Slider"
+        "Slider",
+        "RangeSlider"
       ],
       "status": "beta",
       "since": "0.11.0",
@@ -271,9 +272,10 @@
       "storyTitle": "Components/Slider",
       "figmaKey": "slider",
       "specs": [
-        "6.25 Slider, Slider Thumb & Slider Input"
+        "6.25 Slider, Slider Thumb & Slider Input",
+        "6.26 Range Slider"
       ],
-      "notes": "Beta gaps: single value only (no two-thumb range yet); no tick marks or min/max captions; the track fill is drawn from the thumb centre, so at the very ends it can sit a few pixels off the thumb edge in WebKit."
+      "notes": "Beta gaps: no tick marks or min / max captions; the track fill is drawn across the full width while the thumbs travel inside it, so at the very ends the fill can sit a few pixels off the thumb centre."
     }
   ]
 }

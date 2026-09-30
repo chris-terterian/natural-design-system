@@ -10,6 +10,16 @@
       "owner": "Design system owner",
       "added": "2026-09-28",
       "review": "Each release"
+    },
+    {
+      "id": "EX-002",
+      "rule": "color-contrast",
+      "selector": ".nds-slider[data-disabled] *",
+      "reason": "Text belonging to a disabled Slider or Range Slider (the group label and the \"to\" separator) is intentionally faded (#9C8B7A). The single Slider's <label> is exempted by axe automatically because it labels a disabled input; the Range Slider's group label is a <span>, so it needs this entry. WCAG 2.2 SC 1.4.3 exempts text that is part of an inactive user interface component.",
+      "wcag": "1.4.3 Contrast (Minimum): incidental / inactive UI exemption",
+      "owner": "Design system owner",
+      "added": "2026-09-30",
+      "review": "Each release"
     }
   ]
 }

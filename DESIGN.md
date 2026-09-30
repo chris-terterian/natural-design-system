@@ -531,6 +531,7 @@ tokens:
     "slider/line-height/label": { value: "20px", ref: "line-height/20", css: "--nds-slider-line-height-label" }
     "slider/font-size/value": { value: "16px", ref: "font-size/16", css: "--nds-slider-font-size-value" }
     "slider/line-height/value": { value: "24px", ref: "line-height/24", css: "--nds-slider-line-height-value" }
+    "slider/text/separator": { value: "#6B4F35", ref: "color/brown/800", css: "--nds-slider-text-separator" }
 ---
 
 # Natural Design System
@@ -934,7 +935,7 @@ Each component ends with the same two blocks:
 Import everything from the package root:
 
 ```tsx
-import { Button, Badge, TextField, TextArea, DateField, Calendar, CalendarDay, ImageBlock, Footer, Slider, Radio, RadioGroup, Toggle, WishlistButton, ProductCard, ProductRow,
+import { Button, Badge, TextField, TextArea, DateField, Calendar, CalendarDay, ImageBlock, Footer, Slider, RangeSlider, Radio, RadioGroup, Toggle, WishlistButton, ProductCard, ProductRow,
   NavigationMenu, MobileMenu, NavLink, NavMenuButton, NavDropdown, NavGroup,
   IconButton, MenuItem, Logo, Spinner, Heading, Text } from 'natural-design-system';
 import 'natural-design-system/styles.css';
@@ -1953,7 +1954,7 @@ Colours: `footer/bg` sand (brown/50), `footer/border` dividers. Titles and hover
 
 **Accessibility:** the thumb's position carries the value (ink ring 13.67:1), the filled track is ink, and the field or `aria-valuetext` states the number, so the sand rail (range only) doesn't need 3:1. Native range input, so keyboard and screen readers work everywhere. The field is labelled "Max price ($), exact value"; typed values commit on blur or Enter, snapped to the step and clamped to min and max.
 
-**Beta gaps:** one value only (no two-thumb range); no tick marks or min / max captions.
+**Beta gaps:** no tick marks or min / max captions. For a from–to range, use Range Slider (§6.26).
 
 **Do / Don't**
 
@@ -1972,6 +1973,31 @@ Colours: `footer/bg` sand (brown/50), `footer/border` dividers. Titles and hover
 | Home / End | Minimum / maximum |
 | Tab | Moves between the slider and its field (in visual order) |
 | Announced | "Max price ($), slider, $240"; field "Max price ($), exact value, spin button, 240" |
+
+### 6.26 Range Slider
+
+[Figma 242:722](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=242-722) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/components-slider--range)
+
+**Status: Beta.** **Purpose:** choose a from–to range: price in a collection filter, a length span. Two Slider Thumbs on one track, ink fill **between** them. Same thumb, field, sizes and colours as Slider (§6.25).
+
+| Figma property | Type | Values / default | Code prop | Type / default |
+|---|---|---|---|---|
+| Field | Variant | **None**, Sides (min field at the start, max at the end), Top, Bottom ("120 to 360" row) | `field` | `'none'` · `'sides'` · `'top'` · `'bottom'` |
+| State | Variant | Default, Disabled | `disabled` | `false` |
+| Label / Show label | Text / Boolean | "Price ($)" / true | `label` / `hideLabel` | group name |
+| none | | | `value` / `defaultValue`, `onChange` | `[number, number]` |
+| none | | | `min`, `max`, `step`, `minGap`, `formatValue` | `minGap` defaults to one step |
+
+**Behaviour:** the thumbs never cross (at least `minGap` apart). Typed values are snapped and clamped the same way. Where the thumbs overlap, the one that can still move is on top: the maximum, unless it's already at the top of the range. "to" between the fields is `separator` text (`slider/text/separator`), hidden from screen readers.
+
+**Accessibility:** a group named by the label ("Price ($)"), containing two native range inputs, "Price ($), minimum" and "Price ($), maximum", each with the full browser keyboard (arrows, Page Up / Down, Home / End) and `aria-valuetext`. Fields are "Price ($), minimum, exact value" and "…maximum, exact value". Tab order: min field, min thumb, max thumb, max field (Sides), or thumbs then fields.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Use for filters where both ends matter: "$120 to $360". | Use two single Sliders for min and max. |
+| Show the fields when exact bounds matter. | Hide the numbers so people guess from thumb positions. |
 
 ---
 

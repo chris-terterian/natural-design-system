@@ -125,7 +125,8 @@ Short records of *why* the Natural Design System is the way it is. Each entry: c
 ### D-027: Slider on a native range input, with an optional number field
 **Context.** Filters and product options need a range control (max price, bench length). Custom sliders built from divs need a full ARIA slider implementation to be accessible; the field placement varies by layout.
 **Decision.** Code uses `<input type="range">`, styled through the thumb and track pseudo-elements, so keyboard and screen-reader support come from the browser. One **Slider** component with Field = None / Start / End / Top / Bottom (DOM order matches visual order), built from **Slider Thumb** and **Slider Input**. The value is shown by the thumb (ink ring) and the ink fill, so the sand rail is allowed below 3:1. Focus draws a ring around the thumb, not the 44px hit area.
-**Consequences.** Beta until a two-thumb range is needed. While building it, the validator's focus-outline rule turned out to ignore `validate-ignore` comments; it now honours them, and still flags a bare `outline: none`.
+**Range Slider** (two thumbs) is its own set with Field = None / Sides / Top / Bottom: in code two native range inputs share one track, with only their thumbs taking pointer events, so each keeps browser keyboard support; the thumbs never cross, and where they overlap the one that can still move is on top.
+**Consequences.** Beta while tick marks and captions are open. While building it, the validator's focus-outline rule turned out to ignore `validate-ignore` comments; it now honours them, and still flags a bare `outline: none`.
 
 ### D-026: Footer, with collapsible sections on mobile
 **Context.** Pages had no footer. Three link columns stacked on a phone made the footer 840px tall, most of it links few people need at that moment.

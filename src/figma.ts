@@ -33,4 +33,5 @@ export const FIGMA_NODES = {
   slider: '239:2732',
   sliderThumb: '239:655',
   sliderInput: '239:665',
+  rangeSlider: '242:722',
 } as const;

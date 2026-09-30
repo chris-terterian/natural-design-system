@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Slider, type SliderField } from './Slider';
+import { RangeSlider, Slider, type RangeSliderField, type SliderField } from './Slider';
 import { figma, FIGMA_NODES } from '../../figma';
 
 const price = (v: number) => `$${v}`;
@@ -80,6 +80,46 @@ export const ThumbAndInputStates: Story = {
           ))}
           <td><div style={{ fontWeight: 600, marginBottom: 8 }}>Disabled</div><Slider {...args} field="start" hideLabel label="Input disabled" disabled /></td>
         </tr>
+      </tbody>
+    </table>
+  ),
+};
+
+/* ---------- Range Slider ---------- */
+
+/** Figma: Range Slider. Two thumbs for a from–to range; they never cross. */
+export const Range: Story = {
+  name: 'Range Slider',
+  parameters: figma(FIGMA_NODES.rangeSlider),
+  render: () => {
+    const [v, setV] = useState<[number, number]>([120, 360]);
+    return (
+      <div style={{ display: 'grid', gap: 12 }}>
+        <RangeSlider label="Price ($)" field="bottom" min={0} max={600} step={10} value={v} onChange={setV} formatValue={price} />
+        <span style={{ fontSize: 14 }}>Showing pieces from ${v[0]} to ${v[1]}</span>
+      </div>
+    );
+  },
+};
+
+const RANGE_FIELDS: [string, RangeSliderField][] = [['None (slider only)', 'none'], ['Sides (min start, max end)', 'sides'], ['Top (above)', 'top'], ['Bottom (below)', 'bottom']];
+
+/** Mirrors the Figma Range Slider grid: Field columns × State rows. */
+export const RangeAllVariants: Story = {
+  name: 'Range Slider: All Variants',
+  parameters: figma(FIGMA_NODES.rangeSlider),
+  render: () => (
+    <table style={{ borderSpacing: '40px 24px', fontSize: 12, textAlign: 'left' }}>
+      <thead><tr><th>Field</th>{RANGE_FIELDS.map(([l]) => <th key={l}>{l}</th>)}</tr></thead>
+      <tbody>
+        {[false, true].map((dis) => (
+          <tr key={String(dis)} style={{ verticalAlign: 'top' }}>
+            <th>{`State / ${dis ? 'Disabled' : 'Default'}`}</th>
+            {RANGE_FIELDS.map(([l, f]) => (
+              <td key={l}><RangeSlider label="Price ($)" field={f} min={0} max={600} step={10} defaultValue={[120, 360]} formatValue={price} disabled={dis} /></td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </table>
   ),

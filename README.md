@@ -4,7 +4,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.14.0)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.15.0)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -76,6 +76,10 @@ Open `http://localhost:6007/?path=/workspace/`. Generated stories are drafts in 
 | `ProductCard` | `1:968` | Default / Sale / Sold out; nested wishlist + CTA |
 
 Every story links to its Figma component in the **Design** panel. Each component has an **All Variants** story laid out the same way as its Figma variant grid. `forceState` props show hover/pressed/focus without interaction; they're for documentation only.
+
+## Build with AI (Natural MCP server)
+
+`npm run mcp` starts an MCP server that gives AI agents the system: components and specs, tokens by tier, brand and accessibility rules, and the repo's own checks (`validate_code`, `check_contrast`, `check_copy`). Agents work through **checkpoints** (anchor → plan → structure → style → content → accessibility → final gate), so drift is stopped at the step where it happens. `npm run mcp:demo` shows a drifted attempt being stopped and a fixed one passing; `npm run check:mcp` proves it in CI. Details: [`mcp/README.md`](mcp/README.md).
 
 ## Tokens
 

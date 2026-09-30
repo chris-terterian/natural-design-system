@@ -79,6 +79,14 @@ How the Natural Design System changes, who decides, and how quality is enforced.
 
 ---
 
+### AI agents (Natural MCP server)
+
+Agents build with the Natural MCP server (D-031) and follow its checkpoints: anchor to the current system, then plan, structure, style, content and accessibility, each verified before the next step.
+
+- **No pull request without a passing final gate.** Include the `run_checkpoints` report (it names the system version and hash it was checked against).
+- **Agents never merge or publish.** A pass means ready for a person to review the rendered result, keyboard and screen-reader behaviour and the copy; CI then runs every gate again.
+- **New parts aren't invented in code.** `review_plan` rejects components the system doesn't have; they go through the Proposal flow (§4).
+
 ### AI-generated stories (Story UI)
 
 [Story UI](https://github.com/southleft/story-ui) generates stories from prompts, using only this system's components and the rules in `story-ui-considerations.md` (it also reads generated copies of `DESIGN.md` and the tokens in `story-ui-docs/`).

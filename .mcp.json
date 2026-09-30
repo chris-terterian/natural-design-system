@@ -3,6 +3,13 @@
     "storybook": {
       "type": "http",
       "url": "http://localhost:6007/mcp"
+    },
+    "natural": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "mcp/server.mjs"
+      ]
     }
   }
 }

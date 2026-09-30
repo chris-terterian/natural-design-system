@@ -8,20 +8,25 @@
 //   node scripts/validate-file.mjs --staged        files staged for commit (the pre-commit hook)
 //   node scripts/validate-file.mjs --all           every checked file in the repo (CI)
 //   node scripts/validate-file.mjs <file> [...]    specific files
+//   import { validateSource } from './validate-file.mjs'   as a library (the Natural MCP server's validate_code)
 //
 // Escape hatch (needs a reason; reviewed like an exception): put on the same line or the line above
 //   CSS:  /* validate-ignore <rule-id>: <reason> */      TS/TSX:  // validate-ignore <rule-id>: <reason>
 import { execSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 
 // ---------------------------------------------------------------- inputs
-const args = process.argv.slice(2);
-let files;
-if (args.includes('--staged')) {
+const IS_CLI = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
+const args = IS_CLI ? process.argv.slice(2) : [];
+let files = [];
+if (!IS_CLI) {
+  // library use: no file discovery
+} else if (args.includes('--staged')) {
   files = execSync('git diff --cached --name-only --diff-filter=ACMR', { cwd: ROOT }).toString().split('\n').filter(Boolean);
 } else if (args.includes('--all')) {
   files = execSync('git ls-files src tokens', { cwd: ROOT }).toString().split('\n').filter(Boolean);
@@ -87,7 +92,7 @@ const propAt = (code, index) => { const m = [...code.slice(0, index).matchAll(/(
 const componentTokens = (primitive) => {
   const out = [];
   for (const col of SEMANTIC_COLLECTIONS) for (const [n, t] of Object.entries(tokens[col] || {})) if ((t.alias || t.modes?.Desktop?.alias) === primitive) out.push(n);
-  for (const [n, t] of Object.entries(tokens.Component || {})) if (t.modes?.Desktop?.alias === primitive && (!CTX.prefixes.length || CTX.prefixes.includes(n.split('/')[0]))) out.push(n);
+  for (const [n, t] of Object.entries(tokens.Component || {})) if (t.modes?.Desktop?.alias === primitive && CTX.prefixes.includes(n.split('/')[0])) out.push(n); // only its own one-offs
   return out;
 };
 const lev = (a, b) => { const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]); for (let j = 1; j <= b.length; j++) d[0][j] = j; for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return d[a.length][b.length]; };
@@ -253,14 +258,26 @@ function checkTokens(file, src) {
   }
 }
 
-for (const f of files) {
-  const src = read(f);
+const runChecks = (f, src) => {
   const folder = (f.match(/^src\/components\/([^/]+)\//) || [])[1];
   CTX = { prop: '', prefixes: FOLDER_PREFIX[folder] || [] };
   if (f.endsWith('.css')) checkCss(f, src);
   else if (f.endsWith('.json')) checkTokens(f, src);
   else checkTsx(f, src);
+};
+
+/**
+ * Validate source text as if it were the file at `path` (repo-relative, e.g. "src/components/GiftGuide/GiftGuide.css";
+ * the folder decides which Component tokens are the component's own). Returns the findings; nothing is written or printed.
+ */
+export function validateSource(path, src) {
+  findings.length = 0;
+  runChecks(path, src);
+  return findings.map(({ file, ...f }) => f);
 }
+
+if (IS_CLI) {
+for (const f of files) runChecks(f, read(f));
 
 // ---------------------------------------------------------------- report
 const errors = findings.filter((x) => x.severity === 'error');
@@ -281,4 +298,5 @@ console.log(`\nvalidate_file: ${files.length} file(s) checked · ${errors.length
 if (errors.length) {
   console.log(c('31', 'Commit blocked: fix the errors above (hardcoded values, broken naming or placeholder link text).'));
   process.exit(1);
+}
 }

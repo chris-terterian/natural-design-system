@@ -2,6 +2,18 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.15.0] – 2026-09-30
+
+### Added
+- **Natural MCP server** (D-031, `mcp/`): `npm run mcp`, registered for Claude Code as `natural`. Tools: `list_components`, `get_component`, `get_guidelines`, `get_tokens`, `find_token`, `validate_code`, `check_contrast`. Resources: DESIGN.md and the tokens. Prompt: `build_page`.
+- **Checkpoints against drift:** `get_system_fingerprint` (0 anchor), `review_plan` (1), `validate_code` (2 structure, 3 style), `check_copy` (4 content), `check_contrast` (5 accessibility) and `run_checkpoints` (6: all gates in order, stops at the first failure, re-checks if the system changed). Agents stop at each checkpoint; a pass means ready for human review.
+- `npm run check:mcp` (in `npm run check` and CI) and `npm run mcp:demo` (a drifted attempt stopped, a fixed Gift guide section passing).
+- GOVERNANCE.md: AI agents section (no pull request without a passing final gate; agents never merge).
+
+### Changed
+- validate_file is also a library (`validateSource`), shared by the pre-commit hook, CI and the MCP server. Fix suggestions only offer a component's own one-off tokens.
+- The deprecated token aliases (0.14.0) are now removed in **0.16.0**, so this release stays additive.
+
 ## [0.14.0] – 2026-09-30
 
 ### Changed (breaking: token names)

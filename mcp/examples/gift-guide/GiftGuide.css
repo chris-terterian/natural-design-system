@@ -1,0 +1,16 @@
+/* Layout only: every value is a token (roles and the public scale). */
+.nds-gift-guide {
+  display: grid;
+  gap: var(--nds-layout-gutter);
+  padding: var(--nds-layout-section) var(--nds-layout-page-margin);
+  background: var(--nds-bg-subtle);
+}
+.nds-gift-guide__intro { display: grid; gap: var(--nds-space-12); max-width: var(--nds-text-measure); }
+.nds-gift-guide__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--nds-layout-gutter);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

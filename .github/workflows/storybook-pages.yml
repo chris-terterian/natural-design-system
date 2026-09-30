@@ -33,6 +33,8 @@ jobs:
         run: npm run check:governance
       - name: Figma ↔ code parity (committed snapshot of the Figma file)
         run: npm run check:parity
+      - name: Natural MCP server (tools, checkpoints catch drift)
+        run: npm run check:mcp
       - name: Build Storybook
         run: npm run build-storybook
       - name: Install Chromium for the accessibility gate

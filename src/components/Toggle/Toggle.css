@@ -1,10 +1,10 @@
 .nds-toggle {
-  --_bg: var(--nds-toggle-track-bg-off);
-  --_border: var(--nds-toggle-track-border-off);
-  --_thumb: var(--nds-toggle-thumb-off);
+  --_bg: var(--nds-bg-default);
+  --_border: var(--nds-border-default);
+  --_thumb: var(--nds-fg-subtle);
   display: inline-flex;
   align-items: flex-start;
-  gap: var(--nds-toggle-gap);
+  gap: var(--nds-space-12);
   font-family: var(--nds-font-family);
   cursor: pointer;
 }
@@ -21,8 +21,8 @@
   height: var(--nds-toggle-track-height);
   padding: 0 var(--nds-toggle-thumb-inset);
   box-sizing: border-box;
-  border: var(--nds-toggle-border-width) solid var(--_border);
-  border-radius: var(--nds-toggle-radius);
+  border: var(--nds-border-width-1-5) solid var(--_border);
+  border-radius: var(--nds-radius-full);
   background: var(--_bg);
   transition: background-color 120ms ease, border-color 120ms ease;
 }
@@ -30,36 +30,36 @@
   display: block;
   width: var(--nds-toggle-thumb-size);
   height: var(--nds-toggle-thumb-size);
-  border-radius: var(--nds-toggle-radius);
+  border-radius: var(--nds-radius-full);
   background: var(--_thumb);
   transition: transform 120ms ease, background-color 120ms ease;
 }
 
-.nds-toggle__text { display: flex; flex-direction: column; gap: var(--nds-toggle-text-gap); }
-.nds-toggle__label { color: var(--nds-toggle-text-label); font: 400 var(--nds-toggle-font-size-label) / var(--nds-toggle-line-height-label) var(--nds-font-family); }
-.nds-toggle__description { color: var(--nds-toggle-text-description); font: 400 var(--nds-toggle-font-size-description) / var(--nds-toggle-line-height-description) var(--nds-font-family); }
+.nds-toggle__text { display: flex; flex-direction: column; gap: var(--nds-space-0); }
+.nds-toggle__label { color: var(--nds-fg-default); font: 400 var(--nds-ui-body-font-size) / var(--nds-ui-body-line-height) var(--nds-font-family); }
+.nds-toggle__description { color: var(--nds-fg-muted); font: 400 var(--nds-ui-label-font-size) / var(--nds-ui-label-line-height) var(--nds-font-family); }
 
 /* Off: hover / pressed */
-.nds-toggle:hover, .nds-toggle[data-state='hover'] { --_bg: var(--nds-toggle-track-bg-off-hover); --_border: var(--nds-toggle-track-border-off-hover); --_thumb: var(--nds-toggle-thumb-off-hover); }
-.nds-toggle:active, .nds-toggle[data-state='pressed'] { --_bg: var(--nds-toggle-track-bg-off-pressed); --_border: var(--nds-toggle-track-border-off-hover); --_thumb: var(--nds-toggle-thumb-off-hover); }
+.nds-toggle:hover, .nds-toggle[data-state='hover'] { --_bg: var(--nds-control-bg-hover); --_border: var(--nds-border-hover); --_thumb: var(--nds-fg-muted); }
+.nds-toggle:active, .nds-toggle[data-state='pressed'] { --_bg: var(--nds-control-bg-pressed); --_border: var(--nds-border-hover); --_thumb: var(--nds-fg-muted); }
 
 /* On: thumb moves right (track width − thumb − 2 × inset − 2 × border) */
-.nds-toggle:has(:checked) { --_bg: var(--nds-toggle-track-bg-on); --_border: var(--nds-toggle-track-border-on); --_thumb: var(--nds-toggle-thumb-on); }
-.nds-toggle:has(:checked):hover, .nds-toggle:has(:checked)[data-state='hover'] { --_bg: var(--nds-toggle-track-bg-on-hover); }
-.nds-toggle:has(:checked):active, .nds-toggle:has(:checked)[data-state='pressed'] { --_bg: var(--nds-toggle-track-bg-on-pressed); }
+.nds-toggle:has(:checked) { --_bg: var(--nds-accent-bg); --_border: var(--nds-border-strong); --_thumb: var(--nds-fg-default); }
+.nds-toggle:has(:checked):hover, .nds-toggle:has(:checked)[data-state='hover'] { --_bg: var(--nds-accent-bg-hover); }
+.nds-toggle:has(:checked):active, .nds-toggle:has(:checked)[data-state='pressed'] { --_bg: var(--nds-accent-bg-pressed); }
 .nds-toggle:has(:checked) .nds-toggle__thumb {
-  transform: translateX(calc(var(--nds-toggle-track-width) - var(--nds-toggle-thumb-size) - 2 * var(--nds-toggle-thumb-inset) - 2 * var(--nds-toggle-border-width)));
+  transform: translateX(calc(var(--nds-toggle-track-width) - var(--nds-toggle-thumb-size) - 2 * var(--nds-toggle-thumb-inset) - 2 * var(--nds-border-width-1-5)));
 }
 
 /* Focus ring: 2px, 2px gap */
 .nds-toggle:has(:focus-visible) .nds-toggle__track, .nds-toggle[data-state='focus'] .nds-toggle__track {
-  outline: var(--nds-toggle-focus-ring-width) solid var(--nds-toggle-focus-ring);
-  outline-offset: var(--nds-toggle-focus-ring-offset);
+  outline: var(--nds-focus-ring-width) solid var(--nds-focus-ring);
+  outline-offset: var(--nds-focus-ring-offset);
 }
 
 /* Disabled */
-.nds-toggle:has(:disabled) { --_bg: var(--nds-toggle-track-bg-disabled); --_border: var(--nds-toggle-track-border-disabled); --_thumb: var(--nds-toggle-thumb-disabled); cursor: not-allowed; }
-.nds-toggle:has(:disabled) :is(.nds-toggle__label, .nds-toggle__description) { color: var(--nds-toggle-text-disabled); }
+.nds-toggle:has(:disabled) { --_bg: var(--nds-bg-disabled); --_border: var(--nds-border-disabled); --_thumb: var(--nds-fg-disabled); cursor: not-allowed; }
+.nds-toggle:has(:disabled) :is(.nds-toggle__label, .nds-toggle__description) { color: var(--nds-fg-disabled); }
 
 @media (prefers-reduced-motion: reduce) {
   .nds-toggle__track, .nds-toggle__thumb { transition: none; }

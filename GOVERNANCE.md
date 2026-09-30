@@ -125,8 +125,9 @@ Runs on every `git commit` (a Git hook in `.githooks/`, installed automatically 
 
 | Blocks the commit | Examples | Suggested fix |
 |---|---|---|
-| **Hardcoded values** | `#3B2A1E`, `rgb(…)`, `padding: 18px` in component CSS; colours or sizes in component inline styles | The matching component token for that property and component (e.g. `var(--nds-card-text-title)`), or the nearest scale step |
-| **Broken naming** | Classes outside `nds-block__element--modifier`; unknown `--nds-*` tokens (typo-matched); token names with `.` or the wrong collection prefix; non-PascalCase components; story titles that don't match Figma; undocumented breakpoints | The corrected name, or "did you mean…" |
+| **Hardcoded values** | `#3B2A1E`, `rgb(…)`, `padding: 18px` in component CSS; colours or sizes in component inline styles | The role for that property (a colour in `border` suggests `border/*`, in `background` `bg/*` or `control/*`), or the public scale step (`var(--nds-space-12)`) |
+| **Token tiers** (D-030) | A component using a hidden primitive (`--nds-color-brown-900`, `--nds-font-size-14`), or another component's one-off token | The roles that alias that primitive (e.g. `var(--nds-fg-default)`); a new role or Component token through §4 |
+| **Broken naming** | Classes outside `nds-block__element--modifier`; unknown `--nds-*` tokens (typo-matched); token names with `.`, the wrong collection prefix, or a collection outside the six tiers; non-PascalCase components; story titles that don't match Figma; undocumented breakpoints | The corrected name, or "did you mean…" |
 | **Placeholder link text** | "click here", "read more", "learn more", "link" | Say where the link goes (WCAG 2.4.4) |
 
 **Warns** (doesn't block): removed focus outlines, `<img>` without `alt`, click handlers on non-interactive elements, positive `tabIndex`, icon buttons without a name.

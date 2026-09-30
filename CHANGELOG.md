@@ -2,6 +2,22 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.14.0] – 2026-09-30
+
+### Changed (breaking: token names)
+- **Tiered token architecture** (D-030, DESIGN.md §5). Per-component collections are replaced by roles: **Color** (`fg/*`, `bg/*`, `border/*`, `accent/*`, `control/*`, `focus/ring`, `shadow/float`; mode Light), **Dimension** (`size/control`, `size/target-min`, `size/icon-*`, `focus/ring-width|offset|radius`), **Layout** (`layout/page-margin`, `layout/gutter`, `layout/section`, `layout/header-height`; Desktop / Mobile modes), **Typography** (+ `ui/title|body|button|label|small`), and **Component** (41 one-offs). Space, radius and border width are the public scale.
+- 569 → 212 variables, 600 → 297 values, 18 → 6 collections, in Figma and code. Components now reference roles, e.g. `var(--nds-fg-muted)` instead of `var(--nds-input-text-helper)`.
+- Responsive twins (`*-mobile`) are gone: moded tokens have `--nds-<token>--desktop` / `--mobile` constants for container queries, and Mobile variants in Figma set the Layout and Component modes.
+- Three disabled states consolidated into their roles: secondary-button disabled text taupe/400 → taupe/500 (contrast 2.45 → 3.29), its border taupe/200 → taupe/300, and the disabled slider fill taupe/400 → taupe/500.
+- Figma: scopes restrict pickers to the right roles; colour and type primitives are hidden. Colors page now leads with the 32 roles; Spacing page counts real bindings per step.
+
+### Added
+- `tokens/migrations/0.14.0-semantic-tokens.json`: every retired token and its replacement.
+- validate_file rules `tier-primitive` and `tier-component`; role-aware fix suggestions; unknown collections rejected.
+
+### Deprecated
+- The retired component-scoped CSS variables (412) still resolve through `src/styles/tokens-deprecated.css`. **Removed in 0.15.0.** To migrate, replace each with its `to` from the migration map (use the `--mobile` constant where the map says `"mode": "mobile"`).
+
 ## [0.13.0] – 2026-09-30
 
 ### Fixed

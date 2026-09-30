@@ -29,7 +29,7 @@ if (args.includes('--staged')) {
   files = args.map((f) => relative(ROOT, new URL(f, `file://${process.cwd()}/`).pathname));
 }
 const inScope = (f) =>
-  f !== 'src/styles/tokens.css' && // generated
+  f !== 'src/styles/tokens.css' && f !== 'src/styles/tokens-deprecated.css' && // generated
   !f.startsWith('src/stories/StoryUI') && // Story UI's own tool code (third-party, like node_modules)
   !f.startsWith('src/stories/generated/') && // AI drafts (gitignored); promoted into src/components they're checked
   (/^src\/.+\.(css|tsx?)$/.test(f) || f === 'tokens/figma-variables.json');
@@ -74,15 +74,20 @@ const CATEGORY = [
   [/^(border|outline)(-width)?$|-width$/, ['border-width']],
   [/^(width|height|min-|max-|flex-basis)/, ['size', 'space']],
 ];
-const FOLDER_PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], ProductCard: ['card'], WishlistButton: ['wishlist'], ProductRow: ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Spinner: ['button'], Logo: ['logo'], Calendar: ['calendar'], ImageBlock: ['image'], Footer: ['footer'], Slider: ['slider'], TextButton: ['text-button'], CartLine: ['cart'], CartDrawer: ['drawer'] };
+// Token tiers (D-030). Components use the semantic tiers and the public scale; Component tokens only for their own
+// one-off decisions. Raw primitives outside the public scale (colour, size, type, elevation) stay behind the tiers.
+const FOLDER_PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], ProductCard: ['card', 'wishlist'], WishlistButton: ['wishlist'], ProductRow: ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Spinner: ['button'], Logo: ['logo'], Calendar: ['calendar'], ImageBlock: ['image'], Footer: ['footer'], Slider: ['slider'], TextButton: ['text-button'], CartLine: ['cart'], CartDrawer: ['drawer'] };
+const SEMANTIC_COLLECTIONS = ['Color', 'Dimension', 'Layout', 'Typography'];
+const PUBLIC_SCALE = /^--nds-(space|radius|border-width)-/;
+const HIDDEN_PRIMITIVE = /^--nds-(color|size|font-size|line-height|letter-spacing|elevation)-/;
+const COMPONENT_TOKENS = Object.keys(tokens.Component || {});
 let CTX = { prop: '', prefixes: [] };
 const propAt = (code, index) => { const m = [...code.slice(0, index).matchAll(/([a-z-]+)\s*:/g)].pop(); return m ? m[1] : ''; };
+// Tokens a component may use that alias this primitive: semantic tiers first, then its own Component tokens.
 const componentTokens = (primitive) => {
   const out = [];
-  for (const [col, vars] of Object.entries(tokens)) {
-    if (col.startsWith('$') || col === 'Primitives') continue;
-    for (const [n, t] of Object.entries(vars)) if (t.alias === primitive && (!CTX.prefixes.length || CTX.prefixes.includes(n.split('/')[0]))) out.push(n);
-  }
+  for (const col of SEMANTIC_COLLECTIONS) for (const [n, t] of Object.entries(tokens[col] || {})) if ((t.alias || t.modes?.Desktop?.alias) === primitive) out.push(n);
+  for (const [n, t] of Object.entries(tokens.Component || {})) if (t.modes?.Desktop?.alias === primitive && (!CTX.prefixes.length || CTX.prefixes.includes(n.split('/')[0]))) out.push(n);
   return out;
 };
 const lev = (a, b) => { const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]); for (let j = 1; j <= b.length; j++) d[0][j] = j; for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return d[a.length][b.length]; };
@@ -92,8 +97,11 @@ const suggestPx = (n) => {
   const pool = cats ? Object.entries(primitives).filter(([k, t]) => t.type !== 'COLOR' && cats.includes(k.split('/')[0])) : Object.entries(primitives).filter(([, t]) => t.type !== 'COLOR');
   const exact = pool.filter(([, t]) => t.value === Number(n)).map(([k]) => k);
   if (exact.length) {
+    const scale = exact.find((k) => /^(space|radius|border-width)\//.test(k));
     const comp = exact.flatMap(componentTokens);
-    return comp.length ? `use ${comp.slice(0, 2).map(cssVar).join(' or ')} (aliases \`${exact[0]}\`)` : `add a component token aliasing \`${exact[0]}\` (${CTX.prefixes[0] ? `e.g. "${CTX.prefixes[0]}/…"` : 'in the component\'s collection'}), then use it`;
+    if (comp.length) return `use ${comp.slice(0, 2).map(cssVar).join(' or ')} (aliases \`${exact[0]}\`)`;
+    if (scale) return `use ${cssVar(scale)} (public scale)`;
+    return `add a Component token aliasing \`${exact[0]}\` (${CTX.prefixes[0] ? `e.g. "${CTX.prefixes[0]}/…"` : 'in the Component collection'}), then use it`;
   }
   if (!pool.length) return 'use a token from src/styles/tokens.css';
   const [nearName, nearTok] = pool.reduce((a, b) => (Math.abs(b[1].value - n) < Math.abs(a[1].value - n) ? b : a));
@@ -104,11 +112,11 @@ const suggestHex = (hex) => {
   const full = h.length === 4 ? '#' + [...h.slice(1)].map((c) => c + c).join('') : h;
   const names = byHex[full];
   if (!names) return `${hex} isn't in the palette; pick a colour role from DESIGN.md §4.2`;
-  const role = /background|fill/.test(CTX.prop) ? /\/(bg|backdrop|fill)/ : /^(color)$/.test(CTX.prop) ? /\/(text|fg|icon|label)/ : /border|outline|stroke/.test(CTX.prop) ? /\/(border|focus-ring|divider)/ : /./;
+  const role = /background|fill/.test(CTX.prop) ? /^(bg|control|accent)\// : /^(color)$/.test(CTX.prop) ? /^fg\// : /outline/.test(CTX.prop) ? /^focus\// : /border|stroke/.test(CTX.prop) ? /^border\// : /shadow/.test(CTX.prop) ? /^shadow\// : /./;
   const sem = names.flatMap(componentTokens);
   const best = sem.filter((x) => role.test(x));
   const pick = (best.length ? best : sem).slice(0, 2);
-  return `${full} is \`${names[0]}\`; ${pick.length ? `use ${pick.map(cssVar).join(' or ')}` : `add a component token aliasing it${CTX.prefixes[0] ? ` (e.g. "${CTX.prefixes[0]}/…")` : ''}`}`;
+  return `${full} is \`${names[0]}\`; ${pick.length ? `use ${pick.map(cssVar).join(' or ')}` : 'pick the colour role in the Color collection (DESIGN.md §4.2), or propose one (GOVERNANCE.md §4)'}`;
 };
 
 // Breakpoints can't use CSS variables inside @media / @container, so the literal is allowed only when it is
@@ -164,6 +172,17 @@ function checkCss(file, src) {
       else if (!definedProps.has(prop)) {
         const guess = [...definedProps].map((p) => [p, lev(p, prop)]).sort((a, b) => a[1] - b[1]).filter(([, d]) => d <= 4).slice(0, 2).map(([p]) => p);
         add(file, n, 'naming-token', 'error', `Unknown token ${prop}`, guess.length ? `did you mean ${guess.join(' or ')}?` : 'add it to tokens/figma-variables.json (and Figma), then run npm run tokens', line);
+      } else if (/^src\/components\//.test(file) && !ignored(lines, i, 'tier')) {
+        // --- token tiers (D-030)
+        const base = prop.replace(/^--nds-/, '').replace(/--(desktop|mobile)$/, '');
+        const prim = Object.keys(primitives).find((k) => k.replaceAll('/', '-') === base);
+        if (prim && HIDDEN_PRIMITIVE.test(prop)) {
+          const alt = prim ? componentTokens(prim) : [];
+          add(file, n, 'tier-primitive', 'error', `Component uses the primitive ${prop}`, alt.length ? `use the role instead: ${alt.slice(0, 3).map(cssVar).join(', ')}` : 'add a role in Color / Dimension / Typography, or a Component token, that aliases it (GOVERNANCE.md §4)', line);
+        } else {
+          const own = COMPONENT_TOKENS.find((k) => k.replaceAll('/', '-') === base);
+          if (own && CTX.prefixes.length && !CTX.prefixes.includes(own.split('/')[0])) add(file, n, 'tier-component', 'error', `Uses another component's token ${prop}`, 'Component tokens are one-off decisions of their own component; use a semantic role, or give this component its own token', line);
+        }
       }
     }
     // --- accessibility
@@ -213,14 +232,22 @@ function checkTokens(file, src) {
   const data = JSON.parse(src);
   const PRIM = /^(color|space|size|radius|border-width|font-size|line-height|letter-spacing|elevation)\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/;
   const SEM = /^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)+$/;
-  const PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], 'Product Card': ['card', 'wishlist'], 'Product Row': ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Logo: ['logo'], Calendar: ['calendar'], 'Image Block': ['image'], Footer: ['footer'], Slider: ['slider'], 'Text Button': ['text-button'], 'Cart Line': ['cart'], 'Cart Drawer': ['drawer'] };
+  const PREFIX = {
+    Color: ['fg', 'bg', 'border', 'accent', 'control', 'focus', 'shadow'],
+    Dimension: ['focus', 'size'],
+    Layout: ['layout'],
+    Typography: ['text', 'ui'],
+    Component: [...new Set(Object.values(FOLDER_PREFIX).flat())],
+  };
+  const KNOWN = ['Primitives', ...Object.keys(PREFIX)];
   const lineOf = (name) => lines.findIndex((l) => l.includes(`"${name}"`)) + 1;
   for (const [col, vars] of Object.entries(data)) {
     if (col.startsWith('$')) continue;
+    if (!KNOWN.includes(col)) add(file, lineOf(Object.keys(vars)[0] || col), 'naming-token', 'error', `Unknown collection "${col}"`, `collections are the tiers ${KNOWN.join(', ')} (D-030); one-off component values go in "Component"`, '');
     for (const name of Object.keys(vars)) {
       const at = lineOf(name);
       if (name.includes('.')) add(file, at, 'naming-token', 'error', `Token "${name}" contains "."`, `Figma rejects "." in variable names: use "${name.replaceAll('.', '-')}"`, lines[at - 1]);
-      else if (col === 'Primitives' ? !PRIM.test(name) : !SEM.test(name)) add(file, at, 'naming-token', 'error', `Token "${name}" breaks naming`, col === 'Primitives' ? 'primitives are <category>/<scale-step> in lowercase kebab-case, e.g. "space/12", "color/brown/200"' : 'component tokens are component/part/property/state in lowercase kebab-case, e.g. "button/primary/bg/hover"', lines[at - 1]);
+      else if (col === 'Primitives' ? !PRIM.test(name) : !SEM.test(name)) add(file, at, 'naming-token', 'error', `Token "${name}" breaks naming`, col === 'Primitives' ? 'primitives are <category>/<scale-step> in lowercase kebab-case, e.g. "space/12", "color/brown/200"' : 'tokens are group/role in lowercase kebab-case, e.g. "fg/muted", "layout/gutter", "calendar/day/size"', lines[at - 1]);
       else if (PREFIX[col] && !PREFIX[col].includes(name.split('/')[0])) add(file, at, 'naming-token', 'error', `Token "${name}" is in "${col}" but doesn't start with ${PREFIX[col].map((p) => `"${p}/"`).join(' or ')}`, `rename to "${PREFIX[col][0]}/${name.split('/').slice(1).join('/')}" or move it to the matching collection`, lines[at - 1]);
     }
   }

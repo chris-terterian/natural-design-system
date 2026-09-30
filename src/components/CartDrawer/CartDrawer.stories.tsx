@@ -66,18 +66,18 @@ export const CategoryPage: Story = {
     const [open, setOpen] = useState(false);
     const [price, setPrice] = useState<[number, number]>([0, 600]);
     const [inStock, setInStock] = useState(false);
-    const pad = { paddingInline: 'var(--nds-row-padding-x)' };
+    const pad = { paddingInline: 'var(--nds-layout-page-margin)' };
     return (
       <div style={{ width: 1440 }}>
         <NavigationMenu bagCount={LINES.length} onBag={() => setOpen(true)} />
         <main>
           <ImageBlock type="banner" alt="" />
-          <div style={{ ...pad, paddingTop: 'var(--nds-text-space-section)', display: 'grid', gap: 'var(--nds-text-space-after-heading)', maxWidth: 'var(--nds-text-measure)' }}>
+          <div style={{ ...pad, paddingTop: 'var(--nds-layout-section)', display: 'grid', gap: 'var(--nds-text-space-after-heading)', maxWidth: 'var(--nds-text-measure)' }}>
             <Heading level={1}>Clay &amp; ceramics</Heading>
             <Text variant="paragraph-lg">Cups, bowls and vessels thrown from river clay and fired twice. Glazes pool and break differently on every piece, so no two are quite alike.</Text>
           </div>
-          <div style={{ ...pad, paddingTop: 'var(--nds-row-padding-y)', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', alignItems: 'flex-end', gap: 'var(--nds-row-padding-y)' }}>
+          <div style={{ ...pad, paddingTop: 'var(--nds-layout-section)', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-end', gap: 'var(--nds-layout-section)' }}>
               <RangeSlider label="Price ($)" min={0} max={600} step={10} value={price} onChange={setPrice} formatValue={(v) => `$${v}`} />
               <Toggle label="In stock only" checked={inStock} onChange={setInStock} />
             </div>
@@ -91,7 +91,7 @@ export const CategoryPage: Story = {
             <Button variant="secondary">Meet the makers</Button>
           </ImageBlock>
           <ProductRow title={ROWS[2][0]} viewAllHref={ROWS[2][1]} viewAllLabel="View all vases" products={ROWS[2][2]} />
-          <div style={{ display: 'grid', justifyItems: 'center', gap: 'var(--nds-text-space-after-heading)', paddingBottom: 'var(--nds-text-space-section)' }}>
+          <div style={{ display: 'grid', justifyItems: 'center', gap: 'var(--nds-text-space-after-heading)', paddingBottom: 'var(--nds-layout-section)' }}>
             <Text variant="paragraph-sm" muted>Showing 12 of 20 pieces</Text>
             <Button variant="secondary">Show 8 more</Button>
           </div>

@@ -4,7 +4,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.13.0)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.14.0)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -81,11 +81,16 @@ Every story links to its Figma component in the **Design** panel. Each component
 
 `tokens/figma-variables.json` mirrors the Figma variable collections one-to-one:
 
-- **Primitives**: raw values (`color/brown/200`, `space/12`, …). They're hidden from Figma pickers.
-- **Badge, Button, Input, Navigation, Radio, Toggle, Product Card, Product Row**: semantic tokens that alias primitives.
-- **Typography**: the content type scale, with **Desktop** and **Mobile** modes (mobile applies below 768px, or force it with `data-nds-mode="mobile"`).
+| Tier | Collection | Modes | Variables | Examples |
+|---|---|---|---|---|
+| 1 | **Primitives** | — | 86 | `color/brown/900`, `space/12`, `radius/8` (space, radius and border width are the public scale; the rest stays behind the tiers) |
+| 2 | **Color** | Light (Dark planned) | 32 | `fg/muted`, `bg/emphasis`, `border/hover`, `accent/bg`, `focus/ring` |
+| 2 | **Dimension** | — | 9 | `size/control`, `size/target-min`, `focus/ring-width` |
+| 3 | **Layout** | Desktop · Mobile | 4 | `layout/page-margin`, `layout/gutter`, `layout/section` |
+| 3 | **Typography** | Desktop · Mobile | 40 | `text/h1/font-size`, `ui/label/font-size` |
+| 4 | **Component** | Desktop · Mobile | 41 | `card/width`, `calendar/day/size` (one-off decisions only) |
 
-A Figma variable `button/primary/bg/default` becomes the CSS custom property `--nds-button-primary-bg-default: var(--nds-color-brown-200)`.
+A Figma variable `fg/muted` is the CSS custom property `--nds-fg-muted: var(--nds-color-brown-800)`. Moded tokens also have `--desktop` / `--mobile` constants for container queries. Components may only use tiers 2–4 and the public scale; validate_file enforces it. Architecture, rules and the decision procedure for new tokens: DESIGN.md §5 and D-030. The 0.14.0 migration map is in `tokens/migrations/`.
 
 ## Keeping code and Figma in sync
 

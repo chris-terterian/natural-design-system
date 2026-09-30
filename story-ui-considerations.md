@@ -28,7 +28,7 @@ Spinner, Heading, Text` and the icons (`PlusIcon, ArrowRightIcon, SearchIcon, Ba
 - Site chrome uses `NavigationMenu`; never build a custom header.
 
 ### Spacing and Sizing
-- Use the system's CSS variables only (`var(--nds-…)`), never raw px, hex or rgb values. For layout gaps use `var(--nds-space-*)` steps: 4, 8, 12, 16, 24, 32, 48.
+- Use the system's CSS variables only (`var(--nds-…)`), never raw px, hex or rgb values. For gaps use the spacing scale `var(--nds-space-*)` (4, 8, 12, 16, 24, 32, 48); for page rhythm use the layout roles `var(--nds-layout-page-margin)`, `var(--nds-layout-gutter)`, `var(--nds-layout-section)` (they switch Desktop / Mobile automatically).
 - Don't invent font sizes. Headings: `Heading level={1–4}`; paragraphs: `Text variant="paragraph-lg" | "paragraph" | "paragraph-sm" | "caption"`.
 
 ### Typography
@@ -37,7 +37,7 @@ Spinner, Heading, Text` and the icons (`PlusIcon, ArrowRightIcon, SearchIcon, Ba
 - Prices `$38`, measurements `120 × 35 × 45 cm`, details separated by ` · `.
 
 ### Colors
-- Never set colours directly. Component colours come from their own tokens; for surrounding layout use `var(--nds-color-white)` backgrounds and `var(--nds-text-color-*)` for any text outside components.
+- Never set colours directly, and never use palette primitives (`--nds-color-*`). Components already carry their colours; for surrounding layout use the colour roles: `var(--nds-bg-default)` or `var(--nds-bg-subtle)` backgrounds, `var(--nds-fg-default)` / `var(--nds-fg-muted)` text, `var(--nds-border-muted)` dividers (DESIGN.md §4.2).
 
 ## Content and voice
 

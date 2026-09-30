@@ -1,7 +1,7 @@
 .nds-spinner {
-  width: var(--nds-button-icon-size);
-  height: var(--nds-button-icon-size);
-  stroke: var(--nds-button-spinner);
+  width: var(--nds-size-icon-md);
+  height: var(--nds-size-icon-md);
+  stroke: var(--nds-fg-default);
   animation: nds-spin 800ms linear infinite;
 }
 .nds-spinner__track { opacity: 0.25; }

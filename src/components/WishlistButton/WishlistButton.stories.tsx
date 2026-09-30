@@ -7,7 +7,7 @@ const meta = {
   tags: ['status:stable'],
   component: WishlistButton,
   parameters: { ...figma(FIGMA_NODES.wishlistButton), backgrounds: { default: 'media' } },
-  decorators: [(Story) => <div style={{ background: 'var(--nds-card-media-bg)', padding: 32, borderRadius: 8 }}><Story /></div>],
+  decorators: [(Story) => <div style={{ background: 'var(--nds-bg-muted)', padding: 32, borderRadius: 8 }}><Story /></div>],
   args: { productName: 'Gold Hoops' },
   argTypes: { forceState: { control: 'inline-radio', options: [undefined, 'hover', 'pressed', 'focus'] } },
 } satisfies Meta<typeof WishlistButton>;

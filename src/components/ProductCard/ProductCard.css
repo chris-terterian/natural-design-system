@@ -2,19 +2,19 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--nds-card-gap);
+  gap: var(--nds-space-12);
   width: var(--nds-card-width);
-  background: var(--nds-card-bg);
+  background: var(--nds-bg-default);
   font-family: var(--nds-font-family);
-  border-radius: var(--nds-card-radius);
+  border-radius: var(--nds-radius-8);
 }
 
 .nds-card__media {
   position: relative;
   aspect-ratio: 4 / 5; /* 280 × 350 at the default width; scales when the card fills a column */
-  border-radius: var(--nds-card-radius);
+  border-radius: var(--nds-radius-8);
   overflow: hidden;
-  background: var(--nds-card-media-bg);
+  background: var(--nds-bg-muted);
 }
 .nds-card__image {
   width: 100%;
@@ -22,36 +22,36 @@
   object-fit: cover;
   transition: transform 300ms ease;
 }
-.nds-card__placeholder { display: grid; place-items: center; color: var(--nds-card-media-icon); }
-.nds-card[data-status='sold-out'] .nds-card__media { background: var(--nds-card-media-bg-sold-out); }
+.nds-card__placeholder { display: grid; place-items: center; color: var(--nds-fg-decorative); }
+.nds-card[data-status='sold-out'] .nds-card__media { background: var(--nds-bg-subtle); }
 .nds-card[data-status='sold-out'] .nds-card__image { opacity: 0.6; }
 
 .nds-card__badge {
   position: absolute;
-  top: var(--nds-card-media-inset);
-  left: var(--nds-card-media-inset);
+  top: var(--nds-space-12);
+  left: var(--nds-space-12);
 }
 
 .nds-card__wishlist {
   position: absolute;
-  top: var(--nds-card-media-inset);
-  right: var(--nds-card-media-inset);
+  top: var(--nds-space-12);
+  right: var(--nds-space-12);
   z-index: 2;
 }
 
 /* Grows so CTAs align in a row. Inset matches the badge and wishlist (media inset), so the text lines up with them. */
-.nds-card__info { display: flex; flex-direction: column; gap: var(--nds-card-info-gap); flex: 1; padding-inline: var(--nds-card-info-padding-x); }
+.nds-card__info { display: flex; flex-direction: column; gap: var(--nds-space-4); flex: 1; padding-inline: var(--nds-space-12); }
 .nds-card__info p, .nds-card__title { margin: 0; }
-.nds-card__title { font: 600 var(--nds-card-font-size-title) / var(--nds-card-line-height-title) var(--nds-font-family); }
+.nds-card__title { font: 600 var(--nds-ui-body-font-size) / var(--nds-ui-body-line-height) var(--nds-font-family); }
 /* validate-ignore a11y-focus: the whole card draws the focus ring via .nds-card:has(.nds-card__link:focus-visible) */
-.nds-card__link { color: var(--nds-card-text-title); text-decoration: none; outline: none; }
+.nds-card__link { color: var(--nds-fg-default); text-decoration: none; outline: none; }
 /* Whole card is clickable via the title link; wishlist + CTA sit above it. */
-.nds-card__link::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: var(--nds-card-radius); }
-.nds-card__meta { color: var(--nds-card-text-meta); font: 400 var(--nds-card-font-size-meta) / var(--nds-card-line-height-meta) var(--nds-font-family); }
-.nds-card__price { display: flex; align-items: baseline; gap: var(--nds-card-price-gap); }
-.nds-card__price-current { color: var(--nds-card-text-price); font: 600 var(--nds-card-font-size-title) / var(--nds-card-line-height-title) var(--nds-font-family); }
-.nds-card[data-status='sale'] .nds-card__price-current { color: var(--nds-card-text-price-sale); }
-.nds-card__price-compare { color: var(--nds-card-text-price-compare); font: 400 var(--nds-card-font-size-meta) / var(--nds-card-line-height-meta) var(--nds-font-family); }
+.nds-card__link::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: var(--nds-radius-8); }
+.nds-card__meta { color: var(--nds-fg-muted); font: 400 var(--nds-ui-label-font-size) / var(--nds-ui-label-line-height) var(--nds-font-family); }
+.nds-card__price { display: flex; align-items: baseline; gap: var(--nds-space-8); }
+.nds-card__price-current { color: var(--nds-fg-default); font: 600 var(--nds-ui-body-font-size) / var(--nds-ui-body-line-height) var(--nds-font-family); }
+.nds-card[data-status='sale'] .nds-card__price-current { color: var(--nds-fg-sale); }
+.nds-card__price-compare { color: var(--nds-fg-subtle); font: 400 var(--nds-ui-label-font-size) / var(--nds-ui-label-line-height) var(--nds-font-family); }
 
 .nds-card__cta { z-index: 2; }
 
@@ -61,9 +61,9 @@
 
 /* Focus: ring around the whole card when the title link has keyboard focus */
 .nds-card:has(.nds-card__link:focus-visible), .nds-card[data-state='focus'] {
-  outline: var(--nds-card-focus-ring-width) solid var(--nds-card-focus-ring);
+  outline: var(--nds-focus-ring-width) solid var(--nds-focus-ring);
   outline-offset: var(--nds-card-focus-ring-offset);
-  border-radius: var(--nds-card-radius);
+  border-radius: var(--nds-radius-8);
 }
 
 @media (prefers-reduced-motion: reduce) {

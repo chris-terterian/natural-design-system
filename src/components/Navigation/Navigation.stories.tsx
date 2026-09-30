@@ -64,13 +64,13 @@ export const AllVariants: Story = {
 export const MobileMenuOpen: StoryObj<typeof MobileMenu> = {
   name: 'Mobile Menu (open)',
   parameters: { ...figma(FIGMA_NODES.mobileMenu), layout: 'padded' },
-  render: () => <div style={{ width: 375, height: 812, display: 'flex', boxShadow: '0 0 0 1px var(--nds-nav-border)' }}><MobileMenu open inline bagCount={2} onClose={() => {}} /></div>,
+  render: () => <div style={{ width: 375, height: 812, display: 'flex', boxShadow: '0 0 0 1px var(--nds-border-muted)' }}><MobileMenu open inline bagCount={2} onClose={() => {}} /></div>,
 };
 
 export const MobileSubmenu: StoryObj<typeof MobileMenu> = {
   name: 'Mobile Menu (Submenu level)',
   parameters: { ...figma(FIGMA_NODES.mobileMenu), layout: 'padded' },
-  render: () => <div style={{ width: 375, height: 812, display: 'flex', boxShadow: '0 0 0 1px var(--nds-nav-border)' }}><MobileMenu open inline initialLevel="Shop" bagCount={2} onClose={() => {}} /></div>,
+  render: () => <div style={{ width: 375, height: 812, display: 'flex', boxShadow: '0 0 0 1px var(--nds-border-muted)' }}><MobileMenu open inline initialLevel="Shop" bagCount={2} onClose={() => {}} /></div>,
 };
 
 const STATES = ['Default', 'Hover', 'Active', 'Focus'] as const;

@@ -1,13 +1,13 @@
 .nds-logo {
   display: inline-flex;
-  color: var(--nds-logo-color);
+  color: var(--nds-fg-default);
   text-decoration: none;
   font: var(--nds-logo-font-size) / var(--nds-logo-line-height) var(--nds-font-family);
   letter-spacing: var(--nds-logo-letter-spacing);
-  border-radius: var(--nds-logo-radius);
+  border-radius: var(--nds-radius-8);
 }
 .nds-logo__wordmark { font-weight: 700; }
 .nds-logo:focus-visible, .nds-logo[data-state='focus'] {
-  outline: var(--nds-logo-focus-ring-width) solid var(--nds-logo-focus-ring);
-  outline-offset: var(--nds-logo-focus-ring-offset);
+  outline: var(--nds-focus-ring-width) solid var(--nds-focus-ring);
+  outline-offset: var(--nds-focus-ring-offset);
 }

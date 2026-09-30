@@ -70,7 +70,7 @@ const Article = () => (
 const page = (mode: 'desktop' | 'mobile') => ({
   ...frame,
   width: mode === 'desktop' ? 1440 : 375,
-  padding: mode === 'desktop' ? 'var(--nds-text-space-section) 40px' : 'var(--nds-text-space-section) 16px',
+  padding: mode === 'desktop' ? 'var(--nds-layout-section) 40px' : 'var(--nds-layout-section) 16px',
   boxSizing: 'border-box' as const,
 });
 
@@ -94,7 +94,7 @@ const PRODUCTS: ProductCardProps[] = [
 
 const Category = ({ mode }: { mode: 'desktop' | 'mobile' }) => (
   <div data-nds-mode={mode} style={{ ...frame, width: mode === 'desktop' ? 1440 : 375, overflow: 'hidden' }}>
-    <div className="nds-prose" style={{ padding: `var(--nds-text-space-section) ${mode === 'desktop' ? 40 : 16}px 0` }}>
+    <div className="nds-prose" style={{ padding: `var(--nds-layout-section) ${mode === 'desktop' ? 40 : 16}px 0` }}>
       <Heading level={1}>Clay &amp; ceramics</Heading>
       <Text variant="paragraph-lg">Cups, bowls and vessels thrown from river clay and fired twice. Glazes pool and break differently on every piece.</Text>
     </div>

@@ -35,7 +35,7 @@ export const FooterLinkStates: Story = {
   name: 'Footer Link',
   parameters: { ...figma(FIGMA_NODES.footerLink), layout: 'padded' },
   render: () => (
-    <table style={{ borderSpacing: '40px 20px', fontSize: 12, textAlign: 'left', background: 'var(--nds-footer-bg)' }}>
+    <table style={{ borderSpacing: '40px 20px', fontSize: 12, textAlign: 'left', background: 'var(--nds-bg-subtle)' }}>
       <thead><tr><th>State</th><th>Default</th><th>Hover</th><th>Focus</th></tr></thead>
       <tbody>
         {(['default', 'small'] as const).map((size) => (
@@ -61,9 +61,9 @@ export const FooterColumnStory: Story = {
       <tbody>
         <tr style={{ verticalAlign: 'top' }}>
           {/* Each cell is its own container: 800 wide shows Static, 343 shows the mobile disclosure. */}
-          <td><div style={{ containerType: 'inline-size', width: 800, background: 'var(--nds-footer-bg)', padding: 16 }}><FooterColumn {...DEFAULT_FOOTER_COLUMNS[0]} /></div></td>
-          <td><div style={{ containerType: 'inline-size', width: 343, background: 'var(--nds-footer-bg)', padding: 16 }}><FooterColumn {...DEFAULT_FOOTER_COLUMNS[0]} /></div></td>
-          <td><div style={{ containerType: 'inline-size', width: 343, background: 'var(--nds-footer-bg)', padding: 16 }}><FooterColumn {...DEFAULT_FOOTER_COLUMNS[0]} defaultOpen /></div></td>
+          <td><div style={{ containerType: 'inline-size', width: 800, background: 'var(--nds-bg-subtle)', padding: 16 }}><FooterColumn {...DEFAULT_FOOTER_COLUMNS[0]} /></div></td>
+          <td><div style={{ containerType: 'inline-size', width: 343, background: 'var(--nds-bg-subtle)', padding: 16 }}><FooterColumn {...DEFAULT_FOOTER_COLUMNS[0]} /></div></td>
+          <td><div style={{ containerType: 'inline-size', width: 343, background: 'var(--nds-bg-subtle)', padding: 16 }}><FooterColumn {...DEFAULT_FOOTER_COLUMNS[0]} defaultOpen /></div></td>
         </tr>
       </tbody>
     </table>

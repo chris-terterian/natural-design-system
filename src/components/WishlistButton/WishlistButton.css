@@ -6,16 +6,16 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: var(--nds-wishlist-bg-default);
-  color: var(--nds-wishlist-icon);
-  box-shadow: 0 var(--nds-wishlist-shadow-y) var(--nds-wishlist-shadow-blur) var(--nds-wishlist-shadow-color);
+  background: var(--nds-bg-default);
+  color: var(--nds-fg-default);
+  box-shadow: 0 var(--nds-wishlist-shadow-y) var(--nds-wishlist-shadow-blur) var(--nds-shadow-float);
   cursor: pointer;
   transition: background-color 120ms ease;
 }
-.nds-wishlist svg { width: var(--nds-wishlist-icon-size); height: var(--nds-wishlist-icon-size); }
-.nds-wishlist:hover, .nds-wishlist[data-state='hover'] { background: var(--nds-wishlist-bg-hover); }
-.nds-wishlist:active, .nds-wishlist[data-state='pressed'] { background: var(--nds-wishlist-bg-pressed); }
+.nds-wishlist svg { width: var(--nds-size-icon-md); height: var(--nds-size-icon-md); }
+.nds-wishlist:hover, .nds-wishlist[data-state='hover'] { background: var(--nds-control-bg-hover); }
+.nds-wishlist:active, .nds-wishlist[data-state='pressed'] { background: var(--nds-control-bg-pressed); }
 .nds-wishlist:focus-visible, .nds-wishlist[data-state='focus'] {
-  outline: var(--nds-card-focus-ring-width) solid var(--nds-wishlist-focus-ring);
-  outline-offset: var(--nds-wishlist-focus-ring-offset);
+  outline: var(--nds-focus-ring-width) solid var(--nds-focus-ring);
+  outline-offset: var(--nds-focus-ring-offset);
 }

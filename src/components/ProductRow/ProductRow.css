@@ -1,20 +1,20 @@
 .nds-product-row {
   container-type: inline-size;
-  background: var(--nds-row-bg);
+  background: var(--nds-bg-default);
   font-family: var(--nds-font-family);
 }
-.nds-product-row__inner { padding: var(--nds-row-padding-y) var(--nds-row-padding-x); }
+.nds-product-row__inner { padding: var(--nds-layout-section) var(--nds-layout-page-margin); }
 .nds-product-row__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--nds-row-header-gap);
+  margin-bottom: var(--nds-space-24);
 }
 .nds-product-row__title { margin: 0; } /* Heading/H3 via the Heading component */
 .nds-product-row__grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--nds-row-gap);
+  gap: var(--nds-layout-gutter);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -25,6 +25,6 @@
 
 /* Mobile: 2 per row, tighter spacing (the row's own width, not the viewport) */
 @container (max-width: 767px) {
-  .nds-product-row__inner { padding: var(--nds-row-padding-y-mobile) var(--nds-row-padding-x-mobile); }
-  .nds-product-row__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--nds-row-gap-mobile); }
+  .nds-product-row__inner { padding: var(--nds-layout-section--mobile) var(--nds-layout-page-margin--mobile); }
+  .nds-product-row__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--nds-layout-gutter--mobile); }
 }

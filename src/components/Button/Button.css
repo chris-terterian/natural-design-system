@@ -1,19 +1,19 @@
 .nds-button {
-  --_bg: var(--nds-button-primary-bg-default);
-  --_fg: var(--nds-button-primary-fg-default);
-  --_border: var(--nds-button-primary-border-default);
+  --_bg: var(--nds-accent-bg);
+  --_fg: var(--nds-fg-default);
+  --_border: var(--nds-border-default);
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--nds-button-gap);
-  min-height: var(--nds-button-min-height);
-  padding: var(--nds-button-padding-y) var(--nds-button-padding-x);
-  border: var(--nds-button-border-width) solid var(--_border);
-  border-radius: var(--nds-button-radius);
+  gap: var(--nds-space-8);
+  min-height: var(--nds-size-control);
+  padding: var(--nds-space-12) var(--nds-space-24);
+  border: var(--nds-border-width-1) solid var(--_border);
+  border-radius: var(--nds-radius-8);
   background: var(--_bg);
   color: var(--_fg);
-  font: 600 var(--nds-button-font-size) / var(--nds-button-line-height) var(--nds-font-family);
+  font: 600 var(--nds-ui-button-font-size) / var(--nds-ui-button-line-height) var(--nds-font-family);
   cursor: pointer;
   transition: background-color 120ms ease, border-color 120ms ease;
   position: relative;
@@ -24,47 +24,47 @@
 .nds-button--loading { cursor: progress; }
 .nds-button--loading > :not(.nds-button__spinner) { opacity: 0; } /* opacity, not visibility: the label must stay in the accessibility tree */
 .nds-button__spinner { position: absolute; inset: 0; margin: auto; }
-.nds-button--icon-left { padding-left: var(--nds-button-padding-x-icon); }
-.nds-button--icon-right { padding-right: var(--nds-button-padding-x-icon); }
+.nds-button--icon-left { padding-left: var(--nds-space-20); }
+.nds-button--icon-right { padding-right: var(--nds-space-20); }
 .nds-button__icon { display: inline-flex; }
 
 .nds-button:hover:not(:disabled), .nds-button[data-state='hover'] {
-  --_bg: var(--nds-button-primary-bg-hover);
-  --_border: var(--nds-button-primary-border-hover);
+  --_bg: var(--nds-accent-bg-hover);
+  --_border: var(--nds-accent-border-hover);
 }
 .nds-button:active:not(:disabled), .nds-button[data-state='pressed'] {
-  --_bg: var(--nds-button-primary-bg-pressed);
-  --_border: var(--nds-button-primary-border-pressed);
+  --_bg: var(--nds-accent-bg-pressed);
+  --_border: var(--nds-accent-border-hover);
 }
 
 .nds-button--secondary {
-  --_bg: var(--nds-button-secondary-bg-default);
-  --_fg: var(--nds-button-secondary-fg-default);
-  --_border: var(--nds-button-secondary-border-default);
+  --_bg: var(--nds-bg-default);
+  --_fg: var(--nds-fg-default);
+  --_border: var(--nds-border-default);
 }
 .nds-button--secondary:hover:not(:disabled), .nds-button--secondary[data-state='hover'] {
-  --_bg: var(--nds-button-secondary-bg-hover);
-  --_border: var(--nds-button-secondary-border-hover);
+  --_bg: var(--nds-control-bg-hover);
+  --_border: var(--nds-border-hover);
 }
 .nds-button--secondary:active:not(:disabled), .nds-button--secondary[data-state='pressed'] {
-  --_bg: var(--nds-button-secondary-bg-pressed);
-  --_border: var(--nds-button-secondary-border-pressed);
+  --_bg: var(--nds-control-bg-pressed);
+  --_border: var(--nds-border-hover);
 }
 
 /* Focus: 2px ring with 2px offset (matches Figma "Focus ring" layer) */
 .nds-button:focus-visible, .nds-button[data-state='focus'] {
-  outline: var(--nds-button-focus-ring-width) solid var(--nds-button-focus-ring);
-  outline-offset: var(--nds-button-focus-ring-offset);
+  outline: var(--nds-focus-ring-width) solid var(--nds-focus-ring);
+  outline-offset: var(--nds-focus-ring-offset);
 }
 
 .nds-button:disabled {
-  --_bg: var(--nds-button-primary-bg-disabled);
-  --_fg: var(--nds-button-primary-fg-disabled);
-  --_border: var(--nds-button-primary-border-disabled);
+  --_bg: var(--nds-bg-disabled);
+  --_fg: var(--nds-fg-disabled);
+  --_border: var(--nds-border-disabled);
   cursor: not-allowed;
 }
 .nds-button--secondary:disabled {
-  --_bg: var(--nds-button-secondary-bg-disabled);
-  --_fg: var(--nds-button-secondary-fg-disabled);
-  --_border: var(--nds-button-secondary-border-disabled);
+  --_bg: var(--nds-bg-default);
+  --_fg: var(--nds-fg-disabled);
+  --_border: var(--nds-border-disabled);
 }

@@ -2,6 +2,11 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.10.1] – 2026-09-30
+
+### Changed
+- Product Card: the name, meta and price have 12px side padding (`card/info-padding-x`, new token), so they line up with the badge and the wishlist button. On mobile some meta lines now wrap; the Figma Product Row (Mobile, Show buttons=True) row heights were re-equalised to 370.375.
+
 ## [0.10.0] – 2026-09-30
 
 ### Added

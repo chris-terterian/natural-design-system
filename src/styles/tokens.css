@@ -237,6 +237,7 @@
   --nds-wishlist-shadow-color: var(--nds-color-brown-900-a16);
   --nds-wishlist-shadow-y: var(--nds-elevation-float-y);
   --nds-wishlist-shadow-blur: var(--nds-elevation-float-blur);
+  --nds-card-info-padding-x: var(--nds-space-12);
   /* Badge */
   --nds-badge-dark-bg: var(--nds-color-brown-900);
   --nds-badge-dark-text: var(--nds-color-white);

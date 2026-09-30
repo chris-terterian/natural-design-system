@@ -1,6 +1,6 @@
 {
   "$comment": "Figma parity snapshot, exported through the Figma MCP (scripts/figma/export-snapshot.js). Checked by npm run check:parity. Refresh after any Figma or token change, and before every release.",
-  "generatedAt": "2026-09-30T13:37:58.757Z",
+  "generatedAt": "2026-09-30T16:07:08.419Z",
   "figmaFile": "84MjZXozBoKCvf9lwIU5pu",
   "variables": [
     "Badge|badge/border-width||@border-width/1",
@@ -336,6 +336,7 @@
     "Product Card|card/font-size/title||@font-size/16",
     "Product Card|card/gap||@space/12",
     "Product Card|card/info-gap||@space/4",
+    "Product Card|card/info-padding-x||@space/12",
     "Product Card|card/line-height/meta||@line-height/20",
     "Product Card|card/line-height/title||@line-height/24",
     "Product Card|card/media-bg-sold-out||@color/brown/50",

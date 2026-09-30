@@ -39,7 +39,8 @@
   z-index: 2;
 }
 
-.nds-card__info { display: flex; flex-direction: column; gap: var(--nds-card-info-gap); flex: 1; } /* grows so CTAs align in a row */
+/* Grows so CTAs align in a row. Inset matches the badge and wishlist (media inset), so the text lines up with them. */
+.nds-card__info { display: flex; flex-direction: column; gap: var(--nds-card-info-gap); flex: 1; padding-inline: var(--nds-card-info-padding-x); }
 .nds-card__info p, .nds-card__title { margin: 0; }
 .nds-card__title { font: 600 var(--nds-card-font-size-title) / var(--nds-card-line-height-title) var(--nds-font-family); }
 /* validate-ignore a11y-focus: the whole card draws the focus ring via .nds-card:has(.nds-card__link:focus-visible) */

@@ -306,6 +306,21 @@
         "6.28 Cart Line"
       ],
       "notes": "Beta gaps: no quantity stepper, variant line (finish, size) or per-item delivery note yet; the cart summary and page layout are not designed."
+    },
+    {
+      "name": "Cart Drawer",
+      "exports": [
+        "CartDrawer"
+      ],
+      "status": "beta",
+      "since": "0.13.0",
+      "storyFile": "src/components/CartDrawer/CartDrawer.stories.tsx",
+      "storyTitle": "Components/Cart Drawer",
+      "figmaKey": "cartDrawer",
+      "specs": [
+        "6.29 Cart Drawer"
+      ],
+      "notes": "Beta gaps: no quantity stepper or free-shipping progress; totals are passed in formatted (no currency logic); the category page story is a composition, not a page template."
     }
   ]
 }

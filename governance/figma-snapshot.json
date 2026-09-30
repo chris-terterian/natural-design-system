@@ -1,6 +1,6 @@
 {
   "$comment": "Figma parity snapshot, exported through the Figma MCP (scripts/figma/export-snapshot.js). Checked by npm run check:parity. Refresh after any Figma or token change, and before every release.",
-  "generatedAt": "2026-09-30T16:52:27.085Z",
+  "generatedAt": "2026-09-30T17:08:55.404Z",
   "figmaFile": "84MjZXozBoKCvf9lwIU5pu",
   "variables": [
     "Badge|badge/border-width||@border-width/1",
@@ -95,6 +95,24 @@
     "Calendar|calendar/row-gap||@space/4",
     "Calendar|calendar/title/text||@color/brown/900",
     "Calendar|calendar/weekday/text||@color/brown/800",
+    "Cart Drawer|drawer/backdrop||@color/brown/900-a40",
+    "Cart Drawer|drawer/bg||@color/white",
+    "Cart Drawer|drawer/border-width||@border-width/1",
+    "Cart Drawer|drawer/border||@color/taupe/200",
+    "Cart Drawer|drawer/font-size/note||@font-size/14",
+    "Cart Drawer|drawer/font-size/title||@font-size/20",
+    "Cart Drawer|drawer/font-size/total||@font-size/16",
+    "Cart Drawer|drawer/gap||@space/16",
+    "Cart Drawer|drawer/header-height||@size/72",
+    "Cart Drawer|drawer/line-height/note||@line-height/20",
+    "Cart Drawer|drawer/line-height/title||@line-height/28",
+    "Cart Drawer|drawer/line-height/total||@line-height/24",
+    "Cart Drawer|drawer/padding-x||@space/24",
+    "Cart Drawer|drawer/padding-y||@space/24",
+    "Cart Drawer|drawer/text/note||@color/brown/800",
+    "Cart Drawer|drawer/text/title||@color/brown/900",
+    "Cart Drawer|drawer/text/total||@color/brown/900",
+    "Cart Drawer|drawer/width||@size/480",
     "Cart Line|cart/action-gap||@space/8",
     "Cart Line|cart/bg||@color/white",
     "Cart Line|cart/divider-width||@border-width/1",
@@ -1412,6 +1430,29 @@
           ]
         }
       }
+    },
+    "cartDrawer": {
+      "id": "248:77",
+      "name": "Cart Drawer",
+      "type": "COMPONENT",
+      "variants": 1,
+      "properties": {
+        "Title": {
+          "type": "TEXT",
+          "default": "Your bag (3)",
+          "wired": true
+        },
+        "Subtotal": {
+          "type": "TEXT",
+          "default": "$516",
+          "wired": true
+        }
+      }
+    },
+    "categoryPage": {
+      "id": "249:2",
+      "name": "Category page / Desktop",
+      "type": "FRAME"
     }
   },
   "textStyles": {

@@ -566,6 +566,25 @@
   --nds-cart-focus-ring-width: var(--nds-border-width-2);
   --nds-cart-focus-ring-offset: var(--nds-space-2);
   --nds-cart-underline-offset: var(--nds-space-4);
+  /* Cart Drawer */
+  --nds-drawer-bg: var(--nds-color-white);
+  --nds-drawer-border: var(--nds-color-taupe-200);
+  --nds-drawer-border-width: var(--nds-border-width-1);
+  --nds-drawer-backdrop: var(--nds-color-brown-900-a40);
+  --nds-drawer-width: var(--nds-size-480);
+  --nds-drawer-padding-x: var(--nds-space-24);
+  --nds-drawer-padding-y: var(--nds-space-24);
+  --nds-drawer-header-height: var(--nds-size-72);
+  --nds-drawer-gap: var(--nds-space-16);
+  --nds-drawer-text-title: var(--nds-color-brown-900);
+  --nds-drawer-text-total: var(--nds-color-brown-900);
+  --nds-drawer-text-note: var(--nds-color-brown-800);
+  --nds-drawer-font-size-title: var(--nds-font-size-20);
+  --nds-drawer-line-height-title: var(--nds-line-height-28);
+  --nds-drawer-font-size-total: var(--nds-font-size-16);
+  --nds-drawer-line-height-total: var(--nds-line-height-24);
+  --nds-drawer-font-size-note: var(--nds-font-size-14);
+  --nds-drawer-line-height-note: var(--nds-line-height-20);
 }
 
 @media (max-width: 767px) {

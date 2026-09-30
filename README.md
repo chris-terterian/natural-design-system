@@ -4,7 +4,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.12.0)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.13.0)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -66,6 +66,7 @@ Open `http://localhost:6007/?path=/workspace/`. Generated stories are drafts in 
 | `ImageBlock` | `212:29` | Hero, Banner, Half-page imagery; full bleed, placeholder until a photo is set (Beta) |
 | `Footer`, `FooterColumn`, `FooterLink` | `221:136`, `223:116`, `221:16` | Three link columns (collapsible on mobile), copyright and legal links (Beta) |
 | `Slider`, `RangeSlider` | `239:2732`, `242:722` | One value, or a from–to range with two thumbs; number fields at the start, end, sides, above or below (Beta) |
+| `CartDrawer` | `248:77` | The bag as a sidebar from the Bag button: lines, subtotal, Check out (Beta) |
 | `CartLine`, `TextButton` | `245:707`, `245:658` | One product in the bag (image, title, SKU, price, Remove); underlined text button for small actions (Beta) |
 | `Toggle` | `67:360` | On/off switch (`role="switch"`), label + description |
 | `Radio`, `RadioGroup` | `1:637` | Fieldset + legend, group-level error |

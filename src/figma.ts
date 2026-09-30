@@ -36,4 +36,6 @@ export const FIGMA_NODES = {
   rangeSlider: '242:722',
   textButton: '245:658',
   cartLine: '245:707',
+  cartDrawer: '248:77',
+  categoryPage: '249:2',
 } as const;

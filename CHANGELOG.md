@@ -2,6 +2,12 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.13.0] – 2026-09-30
+
+### Added
+- **Cart Drawer** (Beta, D-029): `CartDrawer`, a modal `<dialog>` sidebar (480 wide) with Cart Lines, subtotal, Check out and Continue shopping; empty state. Figma component 248:77 on the Cart page. Cart Drawer collection (18 tokens).
+- **Desktop category page** (Figma Desktop Example page, 249:2): built only from system instances; prototype where the Bag button opens the drawer (Bag-open frame 250:465, Smart Animate) and Close, Continue shopping or the backdrop close it. Storybook: Cart Drawer › In a category page, with the drawer working.
+
 ## [0.12.0] – 2026-09-30
 
 ### Added

@@ -8,6 +8,7 @@ export * from './components/Footer/Footer';
 export * from './components/ImageBlock/ImageBlock';
 export * from './components/Slider/Slider';
 export * from './components/CartLine/CartLine';
+export * from './components/CartDrawer/CartDrawer';
 export * from './components/TextButton/TextButton';
 export * from './components/Logo/Logo';
 export * from './components/Navigation/Navigation';

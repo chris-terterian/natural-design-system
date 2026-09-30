@@ -34,4 +34,6 @@ export const FIGMA_NODES = {
   sliderThumb: '239:655',
   sliderInput: '239:665',
   rangeSlider: '242:722',
+  textButton: '245:658',
+  cartLine: '245:707',
 } as const;

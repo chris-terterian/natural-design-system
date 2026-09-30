@@ -7,6 +7,8 @@ export * from './components/Calendar/Calendar';
 export * from './components/Footer/Footer';
 export * from './components/ImageBlock/ImageBlock';
 export * from './components/Slider/Slider';
+export * from './components/CartLine/CartLine';
+export * from './components/TextButton/TextButton';
 export * from './components/Logo/Logo';
 export * from './components/Navigation/Navigation';
 export * from './components/Radio/Radio';

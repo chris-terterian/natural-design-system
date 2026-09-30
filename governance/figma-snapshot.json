@@ -1,6 +1,6 @@
 {
   "$comment": "Figma parity snapshot, exported through the Figma MCP (scripts/figma/export-snapshot.js). Checked by npm run check:parity. Refresh after any Figma or token change, and before every release.",
-  "generatedAt": "2026-09-30T16:44:00.060Z",
+  "generatedAt": "2026-09-30T16:52:27.085Z",
   "figmaFile": "84MjZXozBoKCvf9lwIU5pu",
   "variables": [
     "Badge|badge/border-width||@border-width/1",
@@ -95,6 +95,37 @@
     "Calendar|calendar/row-gap||@space/4",
     "Calendar|calendar/title/text||@color/brown/900",
     "Calendar|calendar/weekday/text||@color/brown/800",
+    "Cart Line|cart/action-gap||@space/8",
+    "Cart Line|cart/bg||@color/white",
+    "Cart Line|cart/divider-width||@border-width/1",
+    "Cart Line|cart/divider||@color/taupe/200",
+    "Cart Line|cart/focus-ring-offset||@space/2",
+    "Cart Line|cart/focus-ring-width||@border-width/2",
+    "Cart Line|cart/focus-ring||@color/brown/900",
+    "Cart Line|cart/font-size/price||@font-size/16",
+    "Cart Line|cart/font-size/sku||@font-size/14",
+    "Cart Line|cart/font-size/title||@font-size/16",
+    "Cart Line|cart/gap-mobile||@space/16",
+    "Cart Line|cart/gap||@space/24",
+    "Cart Line|cart/info-gap||@space/4",
+    "Cart Line|cart/line-height/price||@line-height/24",
+    "Cart Line|cart/line-height/sku||@line-height/20",
+    "Cart Line|cart/line-height/title||@line-height/24",
+    "Cart Line|cart/media-bg||@color/brown/100",
+    "Cart Line|cart/media-height-mobile||@size/90",
+    "Cart Line|cart/media-height||@size/120",
+    "Cart Line|cart/media-icon||@color/brown/300",
+    "Cart Line|cart/media-radius||@radius/8",
+    "Cart Line|cart/media-width-mobile||@size/72",
+    "Cart Line|cart/media-width||@size/96",
+    "Cart Line|cart/padding-y-mobile||@space/16",
+    "Cart Line|cart/padding-y||@space/24",
+    "Cart Line|cart/text/price-compare||@color/brown/600",
+    "Cart Line|cart/text/price-sale||@color/red/600",
+    "Cart Line|cart/text/price||@color/brown/900",
+    "Cart Line|cart/text/sku||@color/brown/800",
+    "Cart Line|cart/text/title||@color/brown/900",
+    "Cart Line|cart/underline-offset||@space/4",
     "Footer|footer/bg||@color/brown/50",
     "Footer|footer/border-width||@border-width/1",
     "Footer|footer/border||@color/taupe/200",
@@ -313,6 +344,8 @@
     "Primitives|size/640||640",
     "Primitives|size/720||720",
     "Primitives|size/72||72",
+    "Primitives|size/90||90",
+    "Primitives|size/96||96",
     "Primitives|space/0||0",
     "Primitives|space/10||10",
     "Primitives|space/12||12",
@@ -442,6 +475,17 @@
     "Slider|slider/track-height||@space/4",
     "Slider|slider/track||@color/brown/200",
     "Slider|slider/width||@size/320",
+    "Text Button|text-button/focus-ring-offset||@space/2",
+    "Text Button|text-button/focus-ring-width||@border-width/2",
+    "Text Button|text-button/focus-ring||@color/brown/900",
+    "Text Button|text-button/font-size||@font-size/14",
+    "Text Button|text-button/line-height||@line-height/20",
+    "Text Button|text-button/padding-y||@space/2",
+    "Text Button|text-button/radius||@radius/8",
+    "Text Button|text-button/text-disabled||@color/taupe/500",
+    "Text Button|text-button/text-hover||@color/brown/800",
+    "Text Button|text-button/text||@color/brown/900",
+    "Text Button|text-button/underline-offset||@space/4",
     "Toggle|toggle/border-width||@border-width/1-5",
     "Toggle|toggle/focus-ring-height-size||@space/32",
     "Toggle|toggle/focus-ring-offset||@space/2",
@@ -1301,6 +1345,70 @@
           "options": [
             "Default",
             "Disabled"
+          ]
+        }
+      }
+    },
+    "textButton": {
+      "id": "245:658",
+      "name": "Text Button",
+      "type": "COMPONENT_SET",
+      "variants": 4,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "default": "Remove",
+          "wired": true
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Focus",
+            "Disabled"
+          ]
+        }
+      }
+    },
+    "cartLine": {
+      "id": "245:707",
+      "name": "Cart Line",
+      "type": "COMPONENT_SET",
+      "variants": 4,
+      "properties": {
+        "Title": {
+          "type": "TEXT",
+          "default": "River Clay Cup",
+          "wired": true
+        },
+        "SKU": {
+          "type": "TEXT",
+          "default": "SKU RCC-ASH-01",
+          "wired": true
+        },
+        "Price": {
+          "type": "TEXT",
+          "default": "$32",
+          "wired": true
+        },
+        "Compare price": {
+          "type": "TEXT",
+          "default": "$38",
+          "wired": true
+        },
+        "Breakpoint": {
+          "type": "VARIANT",
+          "options": [
+            "Desktop",
+            "Mobile"
+          ]
+        },
+        "Status": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Sale"
           ]
         }
       }

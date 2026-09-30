@@ -74,7 +74,7 @@ const CATEGORY = [
   [/^(border|outline)(-width)?$|-width$/, ['border-width']],
   [/^(width|height|min-|max-|flex-basis)/, ['size', 'space']],
 ];
-const FOLDER_PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], ProductCard: ['card'], WishlistButton: ['wishlist'], ProductRow: ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Spinner: ['button'], Logo: ['logo'], Calendar: ['calendar'], ImageBlock: ['image'], Footer: ['footer'], Slider: ['slider'] };
+const FOLDER_PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], ProductCard: ['card'], WishlistButton: ['wishlist'], ProductRow: ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Spinner: ['button'], Logo: ['logo'], Calendar: ['calendar'], ImageBlock: ['image'], Footer: ['footer'], Slider: ['slider'], TextButton: ['text-button'], CartLine: ['cart'] };
 let CTX = { prop: '', prefixes: [] };
 const propAt = (code, index) => { const m = [...code.slice(0, index).matchAll(/([a-z-]+)\s*:/g)].pop(); return m ? m[1] : ''; };
 const componentTokens = (primitive) => {
@@ -113,7 +113,9 @@ const suggestHex = (hex) => {
 
 // Breakpoints can't use CSS variables inside @media / @container, so the literal is allowed only when it is
 // the documented breakpoint (DESIGN.md §4.4: mobile below 768px).
-const BREAKPOINTS = new Set([767, 768]);
+// 767/768: the page breakpoint. 479/480: the compact breakpoint for components that live in a column
+// (Cart Line), measured on the component's own width (DESIGN.md §4.4).
+const BREAKPOINTS = new Set([767, 768, 479, 480]);
 
 function checkCss(file, src) {
   const lines = src.split('\n');
@@ -125,7 +127,7 @@ function checkCss(file, src) {
     let code = stripped[i].replace(/(['"])(?:\\.|(?!\1).)*\1/g, '""').replace(/url\([^)]*\)/g, 'url()');
     if (/^\s*@(import|charset)\b/.test(code)) return;
     if (/^\s*@(media|container)\b/.test(code)) {
-      for (const m of code.matchAll(pxRe)) if (!BREAKPOINTS.has(Number(m[1]))) add(file, n, 'breakpoint', 'error', `Undocumented breakpoint ${m[0]}`, 'use the system breakpoint: (max-width: 767px) for mobile, (min-width: 768px) for desktop (DESIGN.md §4.4)', line);
+      for (const m of code.matchAll(pxRe)) if (!BREAKPOINTS.has(Number(m[1]))) add(file, n, 'breakpoint', 'error', `Undocumented breakpoint ${m[0]}`, 'use a system breakpoint: 767px / 768px (page), or 479px / 480px (compact component in a column) (DESIGN.md §4.4)', line);
       code = code.replace(pxRe, '');
     }
     // --- tokens: hardcoded values
@@ -211,7 +213,7 @@ function checkTokens(file, src) {
   const data = JSON.parse(src);
   const PRIM = /^(color|space|size|radius|border-width|font-size|line-height|letter-spacing|elevation)\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/;
   const SEM = /^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)+$/;
-  const PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], 'Product Card': ['card', 'wishlist'], 'Product Row': ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Logo: ['logo'], Calendar: ['calendar'], 'Image Block': ['image'], Footer: ['footer'], Slider: ['slider'] };
+  const PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], 'Product Card': ['card', 'wishlist'], 'Product Row': ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Logo: ['logo'], Calendar: ['calendar'], 'Image Block': ['image'], Footer: ['footer'], Slider: ['slider'], 'Text Button': ['text-button'], 'Cart Line': ['cart'] };
   const lineOf = (name) => lines.findIndex((l) => l.includes(`"${name}"`)) + 1;
   for (const [col, vars] of Object.entries(data)) {
     if (col.startsWith('$')) continue;

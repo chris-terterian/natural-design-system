@@ -276,6 +276,36 @@
         "6.26 Range Slider"
       ],
       "notes": "Beta gaps: no tick marks or min / max captions; the track fill is drawn across the full width while the thumbs travel inside it, so at the very ends the fill can sit a few pixels off the thumb centre."
+    },
+    {
+      "name": "Text Button",
+      "exports": [
+        "TextButton"
+      ],
+      "status": "beta",
+      "since": "0.12.0",
+      "storyFile": "src/components/TextButton/TextButton.stories.tsx",
+      "storyTitle": "Components/Text Button",
+      "figmaKey": "textButton",
+      "specs": [
+        "6.27 Text Button"
+      ],
+      "notes": "Beta gaps: one size (14/20); no icon slot."
+    },
+    {
+      "name": "Cart Line",
+      "exports": [
+        "CartLine"
+      ],
+      "status": "beta",
+      "since": "0.12.0",
+      "storyFile": "src/components/CartLine/CartLine.stories.tsx",
+      "storyTitle": "Components/Cart Line",
+      "figmaKey": "cartLine",
+      "specs": [
+        "6.28 Cart Line"
+      ],
+      "notes": "Beta gaps: no quantity stepper, variant line (finish, size) or per-item delivery note yet; the cart summary and page layout are not designed."
     }
   ]
 }

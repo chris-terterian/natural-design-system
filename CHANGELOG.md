@@ -2,6 +2,13 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.12.0] – 2026-09-30
+
+### Added
+- **Cart Line** (Beta, D-028): `CartLine` (an `<li>`): image, title link, SKU, price (sale price + struck-through compare price), Remove. Figma Cart page: Cart Line 245:707 (Breakpoint × Status) and an example bag, Desktop and Mobile. Cart Line collection (31 tokens); primitives `size/90`, `size/96`.
+- **Text Button** (Beta): `TextButton`, an underlined text-style button for small actions; Figma 245:658 (4 states). Text Button collection (11 tokens).
+- Compact component breakpoint: 479 / 480px on the component's own width (DESIGN.md §4.4), allowed by validate_file.
+
 ## [0.11.0] – 2026-09-30
 
 ### Added

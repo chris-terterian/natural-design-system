@@ -1,0 +1,45 @@
+.nds-cart-line {
+  container-type: inline-size;
+  list-style: none;
+  background: var(--nds-cart-bg);
+  /* Divider takes no space, like the Figma stroke (not included in layout). */
+  box-shadow: inset 0 calc(-1 * var(--nds-cart-divider-width)) 0 var(--nds-cart-divider);
+  font-family: var(--nds-font-family);
+}
+.nds-cart-line__inner { display: flex; align-items: flex-start; gap: var(--nds-cart-gap); padding: var(--nds-cart-padding-y) 0; }
+.nds-cart-line__media {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--nds-cart-media-width);
+  height: var(--nds-cart-media-height);
+  overflow: hidden;
+  border-radius: var(--nds-cart-media-radius);
+  background: var(--nds-cart-media-bg);
+  color: var(--nds-cart-media-icon);
+}
+.nds-cart-line__media img { width: 100%; height: 100%; object-fit: cover; }
+.nds-cart-line__info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--nds-cart-info-gap); }
+.nds-cart-line__title {
+  align-self: flex-start;
+  border-radius: var(--nds-cart-media-radius);
+  color: var(--nds-cart-text-title);
+  font: 600 var(--nds-cart-font-size-title) / var(--nds-cart-line-height-title) var(--nds-font-family);
+  text-decoration: none;
+  text-underline-offset: var(--nds-cart-underline-offset);
+}
+.nds-cart-line__title:hover { text-decoration: underline; }
+.nds-cart-line__title:focus-visible { outline: var(--nds-cart-focus-ring-width) solid var(--nds-cart-focus-ring); outline-offset: var(--nds-cart-focus-ring-offset); }
+.nds-cart-line__sku, .nds-cart-line__price { margin: 0; }
+.nds-cart-line__sku { color: var(--nds-cart-text-sku); font: 400 var(--nds-cart-font-size-sku) / var(--nds-cart-line-height-sku) var(--nds-font-family); }
+.nds-cart-line__side { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: var(--nds-cart-action-gap); }
+.nds-cart-line__price { display: flex; align-items: center; gap: var(--nds-cart-action-gap); }
+.nds-cart-line__price-value { color: var(--nds-cart-text-price); font: 600 var(--nds-cart-font-size-price) / var(--nds-cart-line-height-price) var(--nds-font-family); }
+.nds-cart-line[data-status='sale'] .nds-cart-line__price-value { color: var(--nds-cart-text-price-sale); }
+.nds-cart-line__compare { color: var(--nds-cart-text-price-compare); font: 400 var(--nds-cart-font-size-sku) / var(--nds-cart-line-height-sku) var(--nds-font-family); }
+
+/* Compact below 480px of its own width: a cart line lives in a column, so the page breakpoint doesn't apply. */
+@container (max-width: 479px) {
+  .nds-cart-line__inner { gap: var(--nds-cart-gap-mobile); padding: var(--nds-cart-padding-y-mobile) 0; }
+  .nds-cart-line__media { width: var(--nds-cart-media-width-mobile); height: var(--nds-cart-media-height-mobile); }
+}

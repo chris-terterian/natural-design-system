@@ -1,0 +1,18 @@
+.nds-text-button {
+  display: inline-block;
+  padding: var(--nds-text-button-padding-y) 0;
+  border: 0;
+  border-radius: var(--nds-text-button-radius);
+  background: none;
+  color: var(--nds-text-button-text);
+  font: 400 var(--nds-text-button-font-size) / var(--nds-text-button-line-height) var(--nds-font-family);
+  text-decoration: underline;
+  text-underline-offset: var(--nds-text-button-underline-offset);
+  cursor: pointer;
+}
+.nds-text-button:hover, .nds-text-button[data-state='hover'] { color: var(--nds-text-button-text-hover); }
+.nds-text-button:focus-visible, .nds-text-button[data-state='focus'] {
+  outline: var(--nds-text-button-focus-ring-width) solid var(--nds-text-button-focus-ring);
+  outline-offset: var(--nds-text-button-focus-ring-offset);
+}
+.nds-text-button:disabled { color: var(--nds-text-button-text-disabled); cursor: not-allowed; }

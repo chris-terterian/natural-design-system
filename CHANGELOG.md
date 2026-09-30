@@ -2,6 +2,14 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.11.0] – 2026-09-30
+
+### Added
+- **Slider** (Beta, D-027): `Slider` in code (native range input, optional number field, `formatValue` for `aria-valuetext`). Figma Slider page: Slider (239:2732, Field = None / Start / End / Top / Bottom × State), Slider Thumb (239:655, 5 states), Slider Input (239:665, 4 states). Slider token collection (39 tokens).
+
+### Fixed
+- validate_file: the focus-outline rule now honours `validate-ignore a11y-focus: <reason>`.
+
 ## [0.10.1] – 2026-09-30
 
 ### Changed

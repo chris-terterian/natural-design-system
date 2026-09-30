@@ -479,6 +479,46 @@
   --nds-footer-disclosure-padding-y: var(--nds-space-12);
   --nds-footer-chevron-size: var(--nds-size-16);
   --nds-footer-icon: var(--nds-color-brown-900);
+  /* Slider */
+  --nds-slider-track: var(--nds-color-brown-200);
+  --nds-slider-track-filled: var(--nds-color-brown-900);
+  --nds-slider-track-disabled: var(--nds-color-taupe-200);
+  --nds-slider-track-filled-disabled: var(--nds-color-taupe-400);
+  --nds-slider-thumb-bg: var(--nds-color-white);
+  --nds-slider-thumb-bg-hover: var(--nds-color-brown-50);
+  --nds-slider-thumb-bg-pressed: var(--nds-color-brown-150);
+  --nds-slider-thumb-bg-disabled: var(--nds-color-brown-100);
+  --nds-slider-thumb-border: var(--nds-color-brown-900);
+  --nds-slider-thumb-border-disabled: var(--nds-color-taupe-300);
+  --nds-slider-focus-ring: var(--nds-color-brown-900);
+  --nds-slider-text-label: var(--nds-color-brown-900);
+  --nds-slider-text-disabled: var(--nds-color-taupe-500);
+  --nds-slider-field-bg: var(--nds-color-white);
+  --nds-slider-field-bg-disabled: var(--nds-color-brown-100);
+  --nds-slider-field-border: var(--nds-color-brown-600);
+  --nds-slider-field-border-hover: var(--nds-color-brown-800);
+  --nds-slider-field-border-focus: var(--nds-color-brown-900);
+  --nds-slider-field-border-disabled: var(--nds-color-taupe-300);
+  --nds-slider-field-text: var(--nds-color-brown-900);
+  --nds-slider-track-height: var(--nds-space-4);
+  --nds-slider-thumb-size: var(--nds-space-20);
+  --nds-slider-thumb-border-width: var(--nds-border-width-2);
+  --nds-slider-hit-area: var(--nds-space-44);
+  --nds-slider-width: var(--nds-size-320);
+  --nds-slider-field-width: var(--nds-size-72);
+  --nds-slider-field-height: var(--nds-space-44);
+  --nds-slider-field-padding-x: var(--nds-space-12);
+  --nds-slider-field-radius: var(--nds-radius-8);
+  --nds-slider-border-width: var(--nds-border-width-1);
+  --nds-slider-radius: var(--nds-radius-full);
+  --nds-slider-focus-ring-width: var(--nds-border-width-2);
+  --nds-slider-focus-ring-offset: var(--nds-space-2);
+  --nds-slider-gap: var(--nds-space-16);
+  --nds-slider-stack-gap: var(--nds-space-8);
+  --nds-slider-font-size-label: var(--nds-font-size-14);
+  --nds-slider-line-height-label: var(--nds-line-height-20);
+  --nds-slider-font-size-value: var(--nds-font-size-16);
+  --nds-slider-line-height-value: var(--nds-line-height-24);
 }
 
 @media (max-width: 767px) {

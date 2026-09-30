@@ -74,7 +74,7 @@ const CATEGORY = [
   [/^(border|outline)(-width)?$|-width$/, ['border-width']],
   [/^(width|height|min-|max-|flex-basis)/, ['size', 'space']],
 ];
-const FOLDER_PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], ProductCard: ['card'], WishlistButton: ['wishlist'], ProductRow: ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Spinner: ['button'], Logo: ['logo'], Calendar: ['calendar'], ImageBlock: ['image'], Footer: ['footer'] };
+const FOLDER_PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], ProductCard: ['card'], WishlistButton: ['wishlist'], ProductRow: ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Spinner: ['button'], Logo: ['logo'], Calendar: ['calendar'], ImageBlock: ['image'], Footer: ['footer'], Slider: ['slider'] };
 let CTX = { prop: '', prefixes: [] };
 const propAt = (code, index) => { const m = [...code.slice(0, index).matchAll(/([a-z-]+)\s*:/g)].pop(); return m ? m[1] : ''; };
 const componentTokens = (primitive) => {
@@ -165,7 +165,7 @@ function checkCss(file, src) {
       }
     }
     // --- accessibility
-    if (/outline\s*:\s*(none|0)\b/.test(code) && !/focus-visible|nds-field__input/.test(src.slice(Math.max(0, src.indexOf(line) - 400), src.indexOf(line)))) {
+    if (/outline\s*:\s*(none|0)\b/.test(code) && !ignored(lines, i, 'a11y-focus') && !/focus-visible|nds-field__input/.test(src.slice(Math.max(0, src.indexOf(line) - 400), src.indexOf(line)))) {
       add(file, n, 'a11y-focus', 'warn', 'Focus outline removed', 'keep a visible focus style: add the Focus ring (outline: var(--*-focus-ring-width) solid var(--*-focus-ring); outline-offset: 2px) on :focus-visible', line);
     }
   });
@@ -211,7 +211,7 @@ function checkTokens(file, src) {
   const data = JSON.parse(src);
   const PRIM = /^(color|space|size|radius|border-width|font-size|line-height|letter-spacing|elevation)\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/;
   const SEM = /^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)+$/;
-  const PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], 'Product Card': ['card', 'wishlist'], 'Product Row': ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Logo: ['logo'], Calendar: ['calendar'], 'Image Block': ['image'], Footer: ['footer'] };
+  const PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], 'Product Card': ['card', 'wishlist'], 'Product Row': ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Logo: ['logo'], Calendar: ['calendar'], 'Image Block': ['image'], Footer: ['footer'], Slider: ['slider'] };
   const lineOf = (name) => lines.findIndex((l) => l.includes(`"${name}"`)) + 1;
   for (const [col, vars] of Object.entries(data)) {
     if (col.startsWith('$')) continue;

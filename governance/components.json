@@ -259,6 +259,21 @@
         "6.24 Footer, Footer Column & Footer Link"
       ],
       "notes": "Beta gaps: no newsletter sign-up or social links; mobile columns stack rather than collapse into disclosures; column count fixed at 3 in Figma."
+    },
+    {
+      "name": "Slider",
+      "exports": [
+        "Slider"
+      ],
+      "status": "beta",
+      "since": "0.11.0",
+      "storyFile": "src/components/Slider/Slider.stories.tsx",
+      "storyTitle": "Components/Slider",
+      "figmaKey": "slider",
+      "specs": [
+        "6.25 Slider, Slider Thumb & Slider Input"
+      ],
+      "notes": "Beta gaps: single value only (no two-thumb range yet); no tick marks or min/max captions; the track fill is drawn from the thumb centre, so at the very ends it can sit a few pixels off the thumb edge in WebKit."
     }
   ]
 }

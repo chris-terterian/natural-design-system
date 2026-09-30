@@ -30,4 +30,7 @@ export const FIGMA_NODES = {
   footer: '221:136',
   footerLink: '221:16',
   footerColumn: '223:116',
+  slider: '239:2732',
+  sliderThumb: '239:655',
+  sliderInput: '239:665',
 } as const;

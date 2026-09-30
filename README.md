@@ -4,7 +4,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.10.1)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.11.0)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -65,6 +65,7 @@ Open `http://localhost:6007/?path=/workspace/`. Generated stories are drafts in 
 | `Calendar`, `CalendarDay` | `196:580`, `195:65` | Single date or range; ARIA grid keyboard support (Beta) |
 | `ImageBlock` | `212:29` | Hero, Banner, Half-page imagery; full bleed, placeholder until a photo is set (Beta) |
 | `Footer`, `FooterColumn`, `FooterLink` | `221:136`, `223:116`, `221:16` | Three link columns (collapsible on mobile), copyright and legal links (Beta) |
+| `Slider` | `239:2732` | One value in a range; number field at start, end, above or below (Beta) |
 | `Toggle` | `67:360` | On/off switch (`role="switch"`), label + description |
 | `Radio`, `RadioGroup` | `1:637` | Fieldset + legend, group-level error |
 | `WishlistButton` | `1:815` | `aria-pressed` toggle; filled vs outline heart |

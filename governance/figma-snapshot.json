@@ -1,6 +1,6 @@
 {
   "$comment": "Figma parity snapshot, exported through the Figma MCP (scripts/figma/export-snapshot.js). Checked by npm run check:parity. Refresh after any Figma or token change, and before every release.",
-  "generatedAt": "2026-09-30T16:07:08.419Z",
+  "generatedAt": "2026-09-30T16:37:30.533Z",
   "figmaFile": "84MjZXozBoKCvf9lwIU5pu",
   "variables": [
     "Badge|badge/border-width||@border-width/1",
@@ -402,6 +402,45 @@
     "Radio|radio/text/disabled||@color/taupe/500",
     "Radio|radio/text/error||@color/red/600",
     "Radio|radio/text/label||@color/brown/900",
+    "Slider|slider/border-width||@border-width/1",
+    "Slider|slider/field-height||@space/44",
+    "Slider|slider/field-padding-x||@space/12",
+    "Slider|slider/field-radius||@radius/8",
+    "Slider|slider/field-width||@size/72",
+    "Slider|slider/field/bg-disabled||@color/brown/100",
+    "Slider|slider/field/bg||@color/white",
+    "Slider|slider/field/border-disabled||@color/taupe/300",
+    "Slider|slider/field/border-focus||@color/brown/900",
+    "Slider|slider/field/border-hover||@color/brown/800",
+    "Slider|slider/field/border||@color/brown/600",
+    "Slider|slider/field/text||@color/brown/900",
+    "Slider|slider/focus-ring-offset||@space/2",
+    "Slider|slider/focus-ring-width||@border-width/2",
+    "Slider|slider/focus-ring||@color/brown/900",
+    "Slider|slider/font-size/label||@font-size/14",
+    "Slider|slider/font-size/value||@font-size/16",
+    "Slider|slider/gap||@space/16",
+    "Slider|slider/hit-area||@space/44",
+    "Slider|slider/line-height/label||@line-height/20",
+    "Slider|slider/line-height/value||@line-height/24",
+    "Slider|slider/radius||@radius/full",
+    "Slider|slider/stack-gap||@space/8",
+    "Slider|slider/text/disabled||@color/taupe/500",
+    "Slider|slider/text/label||@color/brown/900",
+    "Slider|slider/thumb-border-width||@border-width/2",
+    "Slider|slider/thumb-size||@space/20",
+    "Slider|slider/thumb/bg-disabled||@color/brown/100",
+    "Slider|slider/thumb/bg-hover||@color/brown/50",
+    "Slider|slider/thumb/bg-pressed||@color/brown/150",
+    "Slider|slider/thumb/bg||@color/white",
+    "Slider|slider/thumb/border-disabled||@color/taupe/300",
+    "Slider|slider/thumb/border||@color/brown/900",
+    "Slider|slider/track-disabled||@color/taupe/200",
+    "Slider|slider/track-filled-disabled||@color/taupe/400",
+    "Slider|slider/track-filled||@color/brown/900",
+    "Slider|slider/track-height||@space/4",
+    "Slider|slider/track||@color/brown/200",
+    "Slider|slider/width||@size/320",
     "Toggle|toggle/border-width||@border-width/1-5",
     "Toggle|toggle/focus-ring-height-size||@space/32",
     "Toggle|toggle/focus-ring-offset||@space/2",
@@ -1152,6 +1191,81 @@
             "Static",
             "Collapsed",
             "Expanded"
+          ]
+        }
+      }
+    },
+    "slider": {
+      "id": "239:2732",
+      "name": "Slider",
+      "type": "COMPONENT_SET",
+      "variants": 10,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "default": "Max price ($)",
+          "wired": true
+        },
+        "Show label": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Field": {
+          "type": "VARIANT",
+          "options": [
+            "None",
+            "Start",
+            "End",
+            "Top",
+            "Bottom"
+          ]
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Disabled"
+          ]
+        }
+      }
+    },
+    "sliderThumb": {
+      "id": "239:655",
+      "name": "Slider Thumb",
+      "type": "COMPONENT_SET",
+      "variants": 5,
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Pressed",
+            "Focus",
+            "Disabled"
+          ]
+        }
+      }
+    },
+    "sliderInput": {
+      "id": "239:665",
+      "name": "Slider Input",
+      "type": "COMPONENT_SET",
+      "variants": 4,
+      "properties": {
+        "Value": {
+          "type": "TEXT",
+          "default": "240",
+          "wired": true
+        },
+        "State": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Hover",
+            "Focus",
+            "Disabled"
           ]
         }
       }

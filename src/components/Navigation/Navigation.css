@@ -92,7 +92,18 @@
   outline-offset: var(--nds-nav-focus-ring-offset);
 }
 /* Count sits on the icon's top-right: half the button plus the icon gap from the left (26px) */
-.nds-icon-button__count { position: absolute; top: var(--nds-nav-count-offset-top); left: calc(var(--nds-nav-icon-button-size) / 2 + var(--nds-nav-icon-gap)); }
+.nds-icon-button__count {
+  position: absolute;
+  top: var(--nds-nav-count-offset-top);
+  left: calc(var(--nds-nav-icon-button-size) / 2 + var(--nds-nav-icon-gap));
+  /* A full circle for one digit (min-width = height); two or more digits grow into a pill. */
+  box-sizing: border-box;
+  justify-content: center;
+  min-width: var(--nds-nav-count-size);
+  height: var(--nds-nav-count-size);
+  padding-block: 0;
+  padding-inline: var(--nds-nav-count-padding-x);
+}
 
 /* ---------- Menu Item ---------- */
 .nds-menu-item {

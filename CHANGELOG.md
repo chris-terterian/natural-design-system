@@ -4,6 +4,9 @@ All notable changes to the Natural Design System. Format: [Keep a Changelog](htt
 
 ## [0.13.0] – 2026-09-30
 
+### Fixed
+- **Bag count badge** is a full circle again: in Figma the Actions / Bar / Leading frames clipped the badge where it overhangs the 44px Icon Button, and in both Figma and code it was a 26 × 22 oval pill. It is now 20 × 20 for one digit (`nav/count-size`, `nav/count-padding-x` 6) and grows into a pill for two or more; the header frames no longer clip it.
+
 ### Added
 - **Cart Drawer** (Beta, D-029): `CartDrawer`, a modal `<dialog>` sidebar (480 wide) with Cart Lines, subtotal, Check out and Continue shopping; empty state. Figma component 248:77 on the Cart page. Cart Drawer collection (18 tokens).
 - **Desktop category page** (Figma Desktop Example page, 249:2): built only from system instances; prototype where the Bag button opens the drawer (Bag-open frame 250:465, Smart Animate) and Close, Continue shopping or the backdrop close it. Storybook: Cart Drawer › In a category page, with the drawer working.

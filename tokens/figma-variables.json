@@ -1258,6 +1258,14 @@
     "nav/mobile-menu/max-width": {
       "type": "FLOAT",
       "alias": "size/480"
+    },
+    "nav/count-size": {
+      "type": "FLOAT",
+      "alias": "space/20"
+    },
+    "nav/count-padding-x": {
+      "type": "FLOAT",
+      "alias": "space/6"
     }
   },
   "Toggle": {

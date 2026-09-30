@@ -1,6 +1,6 @@
 {
   "$comment": "Figma parity snapshot, exported through the Figma MCP (scripts/figma/export-snapshot.js). Checked by npm run check:parity. Refresh after any Figma or token change, and before every release.",
-  "generatedAt": "2026-09-30T17:08:55.404Z",
+  "generatedAt": "2026-09-30T17:14:43.038Z",
   "figmaFile": "84MjZXozBoKCvf9lwIU5pu",
   "variables": [
     "Badge|badge/border-width||@border-width/1",
@@ -248,6 +248,8 @@
     "Navigation|nav/border||@color/taupe/200",
     "Navigation|nav/chevron-size||@size/16",
     "Navigation|nav/count-offset-top||@space/2",
+    "Navigation|nav/count-padding-x||@space/6",
+    "Navigation|nav/count-size||@space/20",
     "Navigation|nav/divider||@color/taupe/200",
     "Navigation|nav/dropdown/bg||@color/white",
     "Navigation|nav/dropdown/border||@color/taupe/200",

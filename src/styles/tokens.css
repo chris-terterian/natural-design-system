@@ -316,6 +316,8 @@
   --nds-nav-submenu-group-padding-top: var(--nds-space-20);
   --nds-nav-submenu-group-padding-bottom: var(--nds-space-4);
   --nds-nav-mobile-menu-max-width: var(--nds-size-480);
+  --nds-nav-count-size: var(--nds-space-20);
+  --nds-nav-count-padding-x: var(--nds-space-6);
   /* Toggle */
   --nds-toggle-track-bg-off: var(--nds-color-white);
   --nds-toggle-track-bg-off-hover: var(--nds-color-brown-50);

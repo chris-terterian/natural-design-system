@@ -329,6 +329,8 @@ tokens:
     "nav/submenu/group-padding-top": { value: "20px", ref: "space/20", css: "--nds-nav-submenu-group-padding-top" }
     "nav/submenu/group-padding-bottom": { value: "4px", ref: "space/4", css: "--nds-nav-submenu-group-padding-bottom" }
     "nav/mobile-menu/max-width": { value: "480px", ref: "size/480", css: "--nds-nav-mobile-menu-max-width" }
+    "nav/count-size": { value: "20px", ref: "space/20", css: "--nds-nav-count-size" }
+    "nav/count-padding-x": { value: "6px", ref: "space/6", css: "--nds-nav-count-padding-x" }
   "Toggle":
     "toggle/track/bg/off": { value: "#FFFFFF", ref: "color/white", css: "--nds-toggle-track-bg-off" }
     "toggle/track/bg/off-hover": { value: "#F6EFE7", ref: "color/brown/50", css: "--nds-toggle-track-bg-off-hover" }
@@ -1426,7 +1428,7 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 |---|---|---|---|---|
 | State | Variant | Default, Hover, Pressed, Focus | `forceState` | `'hover' \| 'pressed' \| 'focus'` |
 | Icon | Instance swap | Icon/Search | `icon` | `ReactNode` (required) |
-| Show count | Boolean | false | `count` | `number` (hidden when 0 or omitted) |
+| Show count | Boolean | false | `count` | `number` (hidden when 0 or omitted). Shown as a Dark Badge, a 20 × 20 circle for one digit (`nav/count-size`, padding `nav/count-padding-x`), a pill for more; it overhangs the button, so containers must not clip it |
 | none | | | `label` | `string` (required), the accessible name |
 
 | State | Background | Icon |

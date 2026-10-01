@@ -8,7 +8,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Install:** `npm install natural-design-system`, then `import { Button } from 'natural-design-system'` and `import 'natural-design-system/styles.css'`.
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.15.2)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.15.3)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -85,6 +85,10 @@ Every story links to its Figma component in the **Design** panel. Each component
 ## Build with AI (Natural MCP server)
 
 No clone needed: `npx -y natural-design-system setup` registers it with Claude Desktop, Cursor and Claude Code (absolute paths, so it works from the Dock too). The MCP server gives AI agents the system: components and specs, tokens by tier, brand and accessibility rules, and the repo's own checks (`validate_code`, `check_contrast`, `check_copy`). Agents work through **checkpoints** (anchor → plan → structure → style → content → accessibility → final gate), so drift is stopped at the step where it happens. `npm run mcp:demo` shows a drifted attempt being stopped and a fixed one passing; `npm run check:mcp` proves it in CI. Details: [`mcp/README.md`](mcp/README.md).
+
+## Change colours by voice
+
+Say *"make the sale price a bit darker"* to Claude (voice in Claude Desktop or the mobile app, or dictation in Claude Code) and it changes the **design tokens**, not a layer: the role is re-pointed or the primitive retuned, the contrast of every affected pairing is read back, anything below WCAG AA is blocked, and only after a yes are the tokens written and the Figma variables updated, so every component using that colour changes in Figma and code together. Tools `propose_color_change` / `apply_color_change`, prompt `recolor`, and `/recolor` in Claude Code (D-033, [`mcp/README.md`](mcp/README.md#change-colours-by-voice)).
 
 ## Drift bot
 

@@ -15,7 +15,7 @@ const call = async (name, args = {}) => { const r = await client.callTool({ name
 const J = async (name, args) => JSON.parse(await call(name, args));
 
 const { tools } = await client.listTools();
-const expected = ['list_components', 'get_component', 'get_guidelines', 'get_tokens', 'find_token', 'validate_code', 'check_contrast', 'get_system_fingerprint', 'review_plan', 'check_copy', 'run_checkpoints'];
+const expected = ['list_components', 'get_component', 'get_guidelines', 'get_tokens', 'find_token', 'validate_code', 'check_contrast', 'get_system_fingerprint', 'review_plan', 'check_copy', 'run_checkpoints', 'propose_color_change', 'apply_color_change'];
 ok(expected.every((t) => tools.some((x) => x.name === t)), `tools missing: ${expected.filter((t) => !tools.some((x) => x.name === t))}`);
 
 const list = await J('list_components');
@@ -69,11 +69,32 @@ ok(worded.failedAt === '4 · content', `"cart" should stop at 4 (got ${worded.fa
 const faint = await run({ contrast: [{ foreground: 'fg/decorative', background: 'bg/default' }] });
 ok(faint.failedAt === '5 · accessibility', `2.11:1 text should stop at 5 (got ${faint.failedAt})`);
 
+// ---- colour changes (D-033): read back, contrast-gated, applied only with the approved id
+const warm = await J('propose_color_change', { changes: [{ token: 'accent/bg', to: 'darker' }] });
+ok(warm.pass && warm.changes[0].to === 'color/brown/300' && /Shall I apply it\?$/.test(warm.say), `propose: accent/bg darker → ${warm.changes?.[0]?.to}`);
+const pale = await J('propose_color_change', { changes: [{ token: 'border/default', to: 'color/brown/300' }] });
+ok(!pale.pass && pale.blocked[0]?.after === '2.11:1' && pale.say.includes("can't be applied"), 'propose should block a 2.11:1 border');
+const step = await J('propose_color_change', { changes: [{ token: 'color/brown/600', to: '#A08060' }] });
+ok(!step.pass && step.moved.length === 2 && step.blocked.some((b) => b.foreground === 'fg/subtle'), 'retuning a primitive should move every role on it and catch fg/subtle');
+const fresh = await J('propose_color_change', { changes: [{ token: 'fg/sale', to: '#C2410C', primitiveName: 'color/clay/600' }] });
+ok(fresh.pass && fresh.changes[0].newPrimitive?.name === 'color/clay/600', 'propose: new primitive for an off-palette hex');
+ok((await call('propose_color_change', { changes: [{ token: 'fg/sale', to: 'darker' }] })).includes('already the darkest'), 'propose: darker past the end of the scale');
+ok(/differ from proposal|needs a clone/.test(await call('apply_color_change', { changes: [{ token: 'accent/bg', to: 'darker' }], proposalId: 'not-approved' })), 'apply must refuse an unapproved proposal');
+
 const { resources } = await client.listResources();
 ok(resources.some((r) => r.uri === 'natural://design.md'), 'resource design.md missing');
 const { prompts } = await client.listPrompts();
-ok(prompts.some((p) => p.name === 'build_page'), 'prompt build_page missing');
+ok(['build_page', 'recolor'].every((n) => prompts.some((p) => p.name === n)), 'prompts build_page / recolor missing');
+
+// The Figma script the apply step returns, run against a stand-in for Figma's variables API.
+const { figmaScriptFor } = await import('./recolor.mjs');
+const mk = (id, name, col) => ({ id, name, variableCollectionId: col, values: {}, setValueForMode(m, v) { this.values[m] = v; } });
+const fv = [mk('p1', 'color/brown/300', 'P'), mk('p2', 'color/brown/300', 'C'), mk('c1', 'accent/bg', 'C'), mk('c2', 'fg/sale', 'C')]; // p2: same name in another collection
+const figma = { variables: { getLocalVariableCollectionsAsync: async () => [{ id: 'P', name: 'Primitives', modes: [{ modeId: 'pm' }] }, { id: 'C', name: 'Color', modes: [{ modeId: 'light' }] }], getLocalVariablesAsync: async () => fv, createVariable: (n, c) => mk('new', n, c.id) } };
+const runInFigma = new Function('figma', `return (async () => { ${figmaScriptFor([...warm.changes, ...fresh.changes])} })()`);
+const out = await runInFigma(figma);
+ok(fv[2].values.light?.id === 'p1' && fv[3].values.light?.id === 'new' && out.done.includes('created color/clay/600'), `Figma script: ${JSON.stringify(out.done)} (alias must target the Primitives variable, not a same-named one elsewhere)`);
 
 await client.close();
 if (errors.length) { console.error(`✖ MCP smoke test failed:\n  - ${errors.join('\n  - ')}`); process.exit(1); }
-console.log(`✔ Natural MCP server: ${tools.length} tools, ${resources.length} resources, ${prompts.length} prompt answered correctly.`);
+console.log(`✔ Natural MCP server: ${tools.length} tools, ${resources.length} resources, ${prompts.length} prompt(s) answered correctly.`);

@@ -2,6 +2,12 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.15.3] – 2026-10-01
+
+### Added
+- **Change colours by voice** (D-033): say *"make the sale price a bit darker"* to Claude and it changes the design tokens, reads the change back with its contrast impact, and after a yes updates the code and the Figma variables. MCP tools `propose_color_change` (role or primitive, hex / primitive / "darker" / "lighter", contrast before and after on the 24 pairings in DESIGN.md §4.2, blocks anything under WCAG AA) and `apply_color_change` (needs the approved `proposalId`; writes tokens, regenerates, returns the Figma script), prompt `recolor`, and `/recolor` in Claude Code.
+- Smoke test covers the colour tools and runs the generated Figma script against a stand-in for Figma's variables API.
+
 ## [0.15.2] – 2026-10-01
 
 ### Added

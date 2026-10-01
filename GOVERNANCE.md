@@ -86,6 +86,7 @@ Agents build with the Natural MCP server (D-031) and follow its checkpoints: anc
 - **No pull request without a passing final gate.** Include the `run_checkpoints` report (it names the system version and hash it was checked against).
 - **Agents never merge or publish.** A pass means ready for a person to review the rendered result, keyboard and screen-reader behaviour and the copy; CI then runs every gate again.
 - **New parts aren't invented in code.** `review_plan` rejects components the system doesn't have; they go through the Proposal flow (§4).
+- **Colour changes by voice or text** (D-033) go through `propose_color_change` → a spoken or written yes → `apply_color_change` → Figma via the Figma MCP → parity → pull request. A contrast regression can't be applied; approval is tied to the proposal id.
 - **The drift bot follows the same rules** (§6, D-032): it opens pull requests and issues, and a person merges.
 
 ### AI-generated stories (Story UI)

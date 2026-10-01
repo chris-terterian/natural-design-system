@@ -56,6 +56,24 @@ Try it: ask your agent to *"use the natural server's build_page prompt to build 
 | `get_tokens` · `find_token` | Tokens by tier; "which token for this hex in a border?" or "secondary text" → the role |
 | `validate_code` | The pre-commit guardrail on code the agent wrote, with a fix for every finding |
 | `check_contrast` | WCAG ratio and AA / AAA for hex values or roles |
+| `propose_color_change` · `apply_color_change` | Colour changes by voice or text through the tokens, contrast-gated, then mirrored to Figma (below) |
+
+## Change colours by voice
+
+Say it to Claude (Claude Desktop and the mobile app have a mic button; in Claude Code, macOS Dictation, Fn twice, works
+anywhere): *"make the sale price a bit darker"*, *"use a warmer sand for the primary button"*. Use the `recolor`
+prompt (or `/recolor` in Claude Code inside the repo).
+
+| Step | Tool | What it guarantees |
+|---|---|---|
+| Understand | `get_tokens`, DESIGN.md §4.2 | The request becomes a **token** change: a Color role re-pointed (`fg/sale` → `color/clay/600`) or a primitive retuned. Never hex on a layer |
+| Read back | `propose_color_change` | Every role that moves, and the contrast before / after for each pairing the system promises. A change that would break WCAG AA is **blocked**, with the failing pair named. `say` is a one-breath read-back for voice |
+| Approve | (the person) | Nothing is written without a clear yes. The approval is tied to a `proposalId`, so what's applied is exactly what was read back |
+| Apply | `apply_color_change` | Writes the tokens, regenerates CSS and DESIGN.md, returns a Figma script that changes only those variables (scoped per collection) |
+| Mirror | Figma MCP `use_figma` | Figma's variables update, so every component bound to the role recolours |
+| Prove | snapshot + `npm run check` | Parity confirms Figma and code agree; then a pull request for review |
+
+`propose_color_change` works from npm; `apply_color_change` needs a clone, because it edits the repo.
 
 ## Checkpoints: stop drift where it starts
 
@@ -83,3 +101,6 @@ the full CI gates again.
 - `npm run mcp:demo`: a Gift guide section built through the checkpoints. Attempt 1 drifts and is stopped at the plan
   (an invented component) and at style (hex and px values, each with its fix). Attempt 2 (`examples/gift-guide/`)
   passes all six.
+- Colour changes: the smoke test checks that a darker step is found, a 2.11:1 border is blocked, retuning a primitive
+  moves every role on it, an unapproved proposal can't be applied, and the Figma script targets the Primitives
+  variable even when another collection has one with the same name.

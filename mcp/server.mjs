@@ -8,15 +8,19 @@
 // Tools: list_components · get_component · get_guidelines · get_tokens · find_token · validate_code · check_contrast
 // Checkpoints (stop-and-verify workflow against drift): get_system_fingerprint (0) · review_plan (1) · validate_code (2, 3)
 //   · check_copy (4) · check_contrast (5) · run_checkpoints (6: all gates in order, then human review)
-// Prompt: build_page (walks the checkpoints)
+// Colour by voice or text (D-033): propose_color_change (reads the change back with its contrast impact) ·
+//   apply_color_change (writes the tokens, returns the Figma script) · prompt recolor
+// Prompts: build_page (walks the checkpoints) · recolor
 // `natural-mcp setup …` registers the server with Claude Desktop / Cursor / Claude Code instead of starting it.
 if (process.argv[2] === 'setup') { await import('./setup.mjs'); process.exit(0); }
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, writeFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
 import { validateSource } from '../scripts/validate-file.mjs';
+import { proposeColorChange, figmaScriptFor } from './recolor.mjs';
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const pkg = JSON.parse(read('package.json'));
@@ -325,6 +329,47 @@ server.registerTool('run_checkpoints', {
   });
 });
 
+// ---------------------------------------------------------------- colour changes (D-033)
+// Spoken or typed, a colour change is a token change: a role re-pointed or a primitive retuned, contrast-checked,
+// read back, applied only with the id the person approved, then mirrored to Figma from the same tokens.
+const colorChange = z.array(z.object({
+  token: z.string().describe('A Color role ("fg/sale", "accent/bg") or a colour primitive ("color/brown/600")'),
+  to: z.string().describe('A hex value, a colour primitive ("color/brown/700"), or "darker" / "lighter" (next step in the same family)'),
+  primitiveName: z.string().optional().describe('Name for a new primitive when the hex isn\'t in the palette, e.g. "color/clay/600"'),
+})).min(1);
+server.registerTool('propose_color_change', {
+  title: 'Propose a colour change (voice or text)',
+  description: 'Turn a colour request into token edits and check them. Returns the edits, every role that moves, the contrast before / after for each pairing the system promises (DESIGN.md §4.2), and `say`: a short read-back for the person (works for voice). Changes that would break WCAG AA are blocked. Writes nothing.',
+  inputSchema: { changes: colorChange },
+}, async ({ changes }) => {
+  try { const { next, ...p } = proposeColorChange(tokens(), changes); return json({ ...p, next: p.pass ? 'Read `say` back to the person. Apply only after a clear yes: apply_color_change with the same changes and this proposalId.' : 'Blocked. Suggest a value that keeps every pairing at its minimum (check_contrast helps), and propose again.' }); }
+  catch (e) { return text(e.message); }
+});
+server.registerTool('apply_color_change', {
+  title: 'Apply an approved colour change',
+  description: 'After the person said yes to a proposal: writes tokens/figma-variables.json, regenerates tokens.css and DESIGN.md, and returns the Figma script (run it with the Figma MCP use_figma on the Natural Design System file) plus the steps to finish. Needs a clone of the repo; refuses anything that differs from the approved proposal or fails contrast.',
+  inputSchema: { changes: colorChange, proposalId: z.string().describe('The proposalId the person approved') },
+}, async ({ changes, proposalId }) => {
+  const root = new URL('..', import.meta.url);
+  if (!existsSync(new URL('.git', root))) return text('apply_color_change edits the repo, so it needs a clone (git clone https://github.com/chris-terterian/natural-design-system, then npm install and run the server from there). propose_color_change works anywhere.');
+  let p; try { p = proposeColorChange(tokens(), changes); } catch (e) { return text(e.message); }
+  if (p.proposalId !== proposalId) return text(`These changes (or the tokens) differ from proposal ${proposalId}. Propose again and get a new yes.`);
+  if (!p.pass) return json({ applied: false, blocked: p.blocked });
+  writeFileSync(new URL('tokens/figma-variables.json', root), JSON.stringify(p.next, null, 2) + '\n');
+  const build = spawnSync(process.execPath, ['scripts/build-tokens.mjs'], { cwd: root, encoding: 'utf8' });
+  if (build.status !== 0) return text(`Tokens written, but regenerating failed:\n${build.stderr}`);
+  return json({
+    applied: true, changes: p.changes, moved: p.moved,
+    figma: { fileKey: '84MjZXozBoKCvf9lwIU5pu', tool: 'use_figma (load the figma-use skill first)', script: figmaScriptFor(p.changes) },
+    next: [
+      'Run figma.script with use_figma on the Natural Design System file and check it returns every change in `done`.',
+      'Refresh the parity snapshot (npm run figma:snapshot-script -- variables-1 | variables-2 | structure via use_figma, then npm run figma:snapshot-save), then npm run check.',
+      'Add a CHANGELOG entry (a colour change is a minor release in 0.x) and update the DESIGN.md §4.2 table if a role moved.',
+      'Ask the person before committing; open a pull request. Never push to main or merge.',
+    ],
+  });
+});
+
 // ---------------------------------------------------------------- resources & prompt
 server.registerResource('design-md', 'natural://design.md', { title: 'DESIGN.md', description: 'The full design brief: brand, voice, foundations, token architecture, every component spec, patterns, accessibility.', mimeType: 'text/markdown' },
   async (uri) => ({ contents: [{ uri: uri.href, text: read('DESIGN.md') }] }));
@@ -350,6 +395,24 @@ server.registerPrompt('build_page', {
     '6. Final gate: run_checkpoints with the fingerprint from step 0, the plan, all files and all copy. It re-runs 0–5 in order and stops at the first failure.',
     '',
     'When run_checkpoints passes, stop. Reply with the files, the checkpoint report, and what a person should review. Do not merge or publish anything yourself.',
+  ].join('\n') } }],
+}));
+
+server.registerPrompt('recolor', {
+  title: 'Change colours by voice (through the tokens)',
+  description: 'Say what colour should change ("make the sale price a bit darker", "use a warmer sand for the primary button"). It becomes a token change, is read back with its contrast impact, and after a yes is applied to the code and the Figma file.',
+  argsSchema: { request: z.string().describe('What to change, in plain words (dictated is fine)') },
+}, ({ request }) => ({
+  messages: [{ role: 'user', content: { type: 'text', text: [
+    `Colour change request (it may be dictated, so allow for misheard words): "${request}"`,
+    '',
+    'Change colours only through the Natural tokens, never hex in components or Figma layers. Keep every reply short enough to be read aloud.',
+    '1. Map the request to tokens: get_tokens({ collection: "Color" }) and DESIGN.md §4.2 tell you which role does what ("sale price" is fg/sale, "primary button" is accent/bg, "page background" is bg/default). Prefer re-pointing one role; retune a primitive only when the person means the whole palette step. If it is ambiguous, ask one short question.',
+    '2. propose_color_change. Read its `say` to the person, word for word. If it is blocked, offer the nearest value that passes and propose again.',
+    '3. Wait for a clear yes. Anything else ("hmm", "maybe", silence) is not a yes.',
+    '4. apply_color_change with the same changes and the proposalId.',
+    '5. Run the returned Figma script with the Figma MCP (use_figma) on file 84MjZXozBoKCvf9lwIU5pu, then follow its `next` steps: snapshot, npm run check, CHANGELOG.',
+    '6. Tell the person what changed in Figma and code in one sentence, and ask before committing or opening the pull request. Never merge.',
   ].join('\n') } }],
 }));
 

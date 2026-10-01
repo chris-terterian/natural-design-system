@@ -2,9 +2,13 @@
 
 A natural goods e-commerce design system: React + TypeScript components, design tokens and Storybook, kept in step with the Figma file **Natural Design System** (`84MjZXozBoKCvf9lwIU5pu`).
 
+[![npm](https://img.shields.io/npm/v/natural-design-system)](https://www.npmjs.com/package/natural-design-system) [![Quality gates](https://github.com/chris-terterian/natural-design-system/actions/workflows/storybook-pages.yml/badge.svg)](https://github.com/chris-terterian/natural-design-system/actions/workflows/storybook-pages.yml) [![Drift bot](https://github.com/chris-terterian/natural-design-system/actions/workflows/drift-bot.yml/badge.svg)](https://github.com/chris-terterian/natural-design-system/actions/workflows/drift-bot.yml)
+
 **Live Storybook:** https://chris-terterian.github.io/natural-design-system/
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.15.1)
+**Install:** `npm install natural-design-system`, then `import { Button } from 'natural-design-system'` and `import 'natural-design-system/styles.css'`.
+
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.15.2)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -26,6 +30,7 @@ npm run storybook        # http://localhost:6007
 | `npm run typecheck` | TypeScript check |
 | `npm run validate_file -- <files> \| --staged \| --all` | The validate_file guardrail (also runs as a pre-commit hook): blocks hardcoded values, broken naming, placeholder link text; fix suggestion for every finding |
 | `npm run check` | All quality gates: typecheck, governance, parity, Storybook build, accessibility (the same gates CI runs before deploying) |
+| `npm run drift` | Every gate, without stopping at the first failure, plus whether Figma was edited since the snapshot (with `FIGMA_TOKEN`); writes `drift/report.md`. `-- --fix` applies the safe fixes first, `-- --skip-a11y` skips the slow gates |
 | `npm run check:governance` | Registry ↔ stories ↔ Figma links ↔ DESIGN.md specs; tokens resolve and generated files are current |
 | `npm run check:parity` | Figma ↔ code parity against `governance/figma-snapshot.json` (variables per mode, linked components, unwired properties, text styles) |
 | `npm run figma:snapshot-script -- <part>` | Prints the Figma export script (`variables-1`, `variables-2`, `structure`) to run through the Figma MCP |
@@ -79,7 +84,17 @@ Every story links to its Figma component in the **Design** panel. Each component
 
 ## Build with AI (Natural MCP server)
 
-No clone needed: `npx -y github:chris-terterian/natural-design-system setup` registers it with Claude Desktop, Cursor and Claude Code (absolute paths, so it works from the Dock too). The MCP server gives AI agents the system: components and specs, tokens by tier, brand and accessibility rules, and the repo's own checks (`validate_code`, `check_contrast`, `check_copy`). Agents work through **checkpoints** (anchor → plan → structure → style → content → accessibility → final gate), so drift is stopped at the step where it happens. `npm run mcp:demo` shows a drifted attempt being stopped and a fixed one passing; `npm run check:mcp` proves it in CI. Details: [`mcp/README.md`](mcp/README.md).
+No clone needed: `npx -y natural-design-system setup` registers it with Claude Desktop, Cursor and Claude Code (absolute paths, so it works from the Dock too). The MCP server gives AI agents the system: components and specs, tokens by tier, brand and accessibility rules, and the repo's own checks (`validate_code`, `check_contrast`, `check_copy`). Agents work through **checkpoints** (anchor → plan → structure → style → content → accessibility → final gate), so drift is stopped at the step where it happens. `npm run mcp:demo` shows a drifted attempt being stopped and a fixed one passing; `npm run check:mcp` proves it in CI. Details: [`mcp/README.md`](mcp/README.md).
+
+## Drift bot
+
+When **any** quality gate fails, or **Figma and code disagree**, the drift bot (D-032, `.github/workflows/drift-bot.yml`) files one *Drift detected* issue with the full report and opens a **pull request with the fix**. A person reviews and merges; the bot never merges, never pushes to `main` and never publishes.
+
+- **Detect:** after every failed run on `main`, nightly, or on demand, `scripts/drift-check.mjs` runs every gate (it keeps going after a failure, so the report is complete), applies the safe deterministic fixes and says who can fix each failure. The issue closes itself when everything is green again.
+- **Fix code drift:** an agent (Claude Code in GitHub Actions) fixes the code with the report's fix suggestions and the Natural MCP server's checkpoints, re-runs the gates and opens the pull request. It may not loosen a rule, add an exception or touch the Figma snapshot to make a gate pass.
+- **Fix Figma drift:** CI can't read Figma variables on the Professional plan, so `/drift` in Claude Code refreshes the snapshot through the Figma MCP, brings Figma in line with code, asks when a Figma change looks intentional, and opens the pull request.
+
+Run the check yourself: `npm run drift` (add `-- --skip-a11y` for a fast pass).
 
 ## Tokens
 

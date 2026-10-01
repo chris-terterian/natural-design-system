@@ -1,0 +1,174 @@
+# Drift bot (D-032). Whenever anything fails, or Figma and code disagree, it files one "Drift detected" issue and
+# opens a pull request with the fix. A person reviews and merges; the bot never merges, never pushes to main and
+# never publishes.
+#
+#   1. detect  Runs every gate (scripts/drift-check.mjs), applies the safe deterministic fixes, files / updates /
+#              closes the drift issue.
+#   2. fix     An agent (Claude Code) fixes the remaining code drift using the Natural MCP server's checkpoints,
+#              re-runs the gates and opens a pull request. Needs the ANTHROPIC_API_KEY or CLAUDE_CODE_OAUTH_TOKEN
+#              secret; without one the issue is the hand-off.
+#
+# Figma side: CI can't read Figma variables on the Professional plan, so Figma ↔ code disagreements are reported
+# for a person to reconcile with /drift in Claude Code (Figma MCP). With a FIGMA_TOKEN secret (read-only), the
+# nightly run also notices when the Figma file was edited after the parity snapshot.
+name: Drift bot
+
+on:
+  workflow_run: # any failure of the main quality gates
+    workflows: ["Quality gates + deploy Storybook"]
+    types: [completed]
+    branches: [main]
+  schedule:
+    - cron: "23 9 * * *" # nightly: catches Figma edits and anything that broke without a push
+  workflow_dispatch:
+  issues:
+    types: [labeled] # a person adds the "drift" label to ask for a fix pull request
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: drift-bot
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: 24.21.0 # pinned with the lock file's npm 11.19.0 (D-018)
+
+jobs:
+  # A green main run closes the drift issue without re-running everything.
+  all-clear:
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Close open drift issues
+        run: |
+          for n in $(gh issue list -R "$GITHUB_REPOSITORY" --label drift --state open --json number -q '.[].number'); do
+            gh issue close "$n" -R "$GITHUB_REPOSITORY" --comment "✅ All quality gates pass on \`${{ github.event.workflow_run.head_sha }}\`. Closing."
+          done
+
+  detect:
+    if: >-
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'failure' && github.event.workflow_run.event == 'push') ||
+      github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' && github.event.label.name == 'drift')
+    runs-on: ubuntu-latest
+    outputs:
+      code_drift: ${{ steps.check.outputs.code_drift }}
+      issue: ${{ steps.issue.outputs.number }}
+      has_agent: ${{ steps.check.outputs.has_agent }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+
+      - name: Run every gate (keeps going after failures)
+        id: check
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+          HAS_AGENT: ${{ secrets.ANTHROPIC_API_KEY != '' || secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+        run: |
+          node scripts/drift-check.mjs --fix --out drift || true
+          echo "drift=$(jq -r .drift drift/report.json)" >> "$GITHUB_OUTPUT"
+          echo "code_drift=$(jq -r .codeDrift drift/report.json)" >> "$GITHUB_OUTPUT"
+          echo "has_agent=$HAS_AGENT" >> "$GITHUB_OUTPUT"
+          cat drift/report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: drift-report
+          path: drift/
+
+      - name: Pull request for the safe fixes (regenerated files)
+        # Only on its own: when an agent is also fixing code, these changes go in the agent's pull request instead.
+        if: steps.check.outputs.code_drift != 'true' || steps.check.outputs.has_agent != 'true'
+        run: |
+          if [ -z "$(git status --porcelain -- . ':!drift')" ]; then exit 0; fi
+          branch="drift-bot/regenerate-$(git rev-parse --short HEAD)"
+          git config user.name "natural-drift-bot[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add -A -- . ':!drift'
+          git commit -m "Regenerate files that drifted from tokens/figma-variables.json" -m "Opened by the drift bot (D-032): npm run tokens."
+          git push -f origin "$branch"
+          gh pr view "$branch" >/dev/null 2>&1 || gh pr create --base main --head "$branch" \
+            --title "Drift bot: regenerate files from the tokens" \
+            --body "$(printf 'The generated files no longer matched \`tokens/figma-variables.json\`. This only re-runs \`npm run tokens\`.\n\nReview and merge; the bot never merges.\n\n🤖 Opened by the Natural drift bot')"
+
+      - name: File, update or close the drift issue
+        id: issue
+        run: |
+          gh label create drift -R "$GITHUB_REPOSITORY" --color B60205 --description "Quality gate failed or Figma and code disagree" --force >/dev/null
+          open=$(gh issue list -R "$GITHUB_REPOSITORY" --label drift --state open --json number -q '.[0].number')
+          if [ "${{ steps.check.outputs.drift }}" != "true" ]; then
+            [ -n "$open" ] && gh issue close "$open" -R "$GITHUB_REPOSITORY" --comment "✅ No drift on the latest check. Closing."
+            exit 0
+          fi
+          { cat drift/report.md; printf '\n---\nRun: %s/%s/actions/runs/%s\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID"; } > drift/issue.md
+          if [ -n "$open" ]; then
+            gh issue edit "$open" -R "$GITHUB_REPOSITORY" --body-file drift/issue.md
+            gh issue comment "$open" -R "$GITHUB_REPOSITORY" --body "Still drifting. Report updated from $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "number=$open" >> "$GITHUB_OUTPUT"
+          else
+            url=$(gh issue create -R "$GITHUB_REPOSITORY" --title "Drift detected" --label drift --body-file drift/issue.md)
+            echo "number=${url##*/}" >> "$GITHUB_OUTPUT"
+          fi
+
+  fix:
+    needs: detect
+    if: needs.detect.outputs.code_drift == 'true' && needs.detect.outputs.has_agent == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      # The agent works from a fresh report generated here, never from issue text (anyone can write issue text).
+      - run: node scripts/drift-check.mjs --fix --out drift || true
+      - name: Natural MCP server for the agent (the repo's .mcp.json also lists the local-only Storybook MCP)
+        run: echo '{"mcpServers":{"natural":{"command":"node","args":["mcp/server.mjs"]}}}' > drift/mcp.json
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          claude_args: |
+            --max-turns 60
+            --mcp-config drift/mcp.json
+            --allowedTools "Read,Edit,Write,Glob,Grep,mcp__natural__*,Bash(npm run *),Bash(node scripts/*),Bash(git status*),Bash(git diff*),Bash(git switch *),Bash(git add *),Bash(git commit *),Bash(git push origin drift-bot/*),Bash(gh pr create *),Bash(gh pr view *),Bash(gh issue comment *)"
+          prompt: |
+            You are the Natural design system's drift bot. The quality gates failed on main.
+            The full report is in drift/report.md (machine-readable: drift/report.json). Issue: #${{ needs.detect.outputs.issue }}.
+
+            Read CLAUDE.md, GOVERNANCE.md §4 and §6, and the parts of DESIGN.md the failures touch. Then:
+            1. Fix every failed gate whose owner is "code" in report.json. Use the fix suggestions in the report, and
+               the `natural` MCP server (find_token, validate_code, check_contrast, run_checkpoints) for anything else.
+               Code is the source of truth: fix the code, never loosen a rule, never add validate-ignore or an a11y
+               exception to make a gate pass, never edit governance/figma-snapshot.json.
+            2. Leave Figma-owned failures (parity, Figma edited) alone: a person resolves them with /drift.
+            3. Re-run: node scripts/drift-check.mjs --out drift. Repeat until every code-owned gate passes, or stop
+               and explain if you can't fix one without breaking a rule.
+            4. git switch -c drift-bot/fix-${{ github.run_id }}, commit with a clear message (no --no-verify), and
+               git push origin drift-bot/fix-${{ github.run_id }}.
+            5. gh pr create --base main: title "Drift bot: <what you fixed>"; body = what failed, what you changed and
+               why, the final drift-check table, anything left for a person, "Refs #${{ needs.detect.outputs.issue }}",
+               and end with "🤖 Opened by the Natural drift bot". Never merge, never push to main.
+            If you could not fix something, also comment on issue #${{ needs.detect.outputs.issue }} explaining why.

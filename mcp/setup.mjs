@@ -1,9 +1,10 @@
 // natural-mcp setup: register the Natural MCP server with Claude Desktop, Cursor and Claude Code in one step.
 //
-//   npx -y github:chris-terterian/natural-design-system setup                 all three (whichever are installed)
-//   npx -y github:chris-terterian/natural-design-system setup claude-desktop  just one (also: cursor, claude-code)
-//   … setup --dry-run                                                          print what would change, write nothing
-//   … setup --remove                                                           unregister
+//   npx -y natural-design-system setup                 all three (whichever are installed)
+//   npx -y natural-design-system setup claude-desktop  just one (also: cursor, claude-code)
+//   … setup --dry-run                                   print what would change, write nothing
+//   … setup --remove                                    unregister
+//   … setup --source github:chris-terterian/natural-design-system   run from GitHub main instead of the npm release
 //
 // Why a setup command: apps launched from the Dock or Start menu don't get the terminal's PATH, so a config that says
 // "command": "npx" fails there ("spawn npx ENOENT") even though it works in a terminal. Setup writes absolute paths to
@@ -19,7 +20,7 @@ const flag = (f) => args.includes(f);
 const opt = (f) => { const i = args.indexOf(f); return i >= 0 ? args[i + 1] : undefined; };
 const DRY = flag('--dry-run');
 const REMOVE = flag('--remove');
-const SOURCE = opt('--source') || 'github:chris-terterian/natural-design-system';
+const SOURCE = opt('--source') || 'natural-design-system';
 const WIN = platform() === 'win32';
 const home = homedir();
 
@@ -30,8 +31,8 @@ const nodeDir = dirname(which('node') || process.execPath);
 let npx = which('npx') || join(dirname(process.execPath), WIN ? 'npx.cmd' : 'npx');
 if (!existsSync(npx)) npx = 'npx';
 const server = WIN
-  ? { command: 'cmd', args: ['/c', npx, '-y', SOURCE] }
-  : { command: npx, args: ['-y', SOURCE], env: { PATH: [nodeDir, '/usr/local/bin', '/usr/bin', '/bin'].filter((v, i, a) => a.indexOf(v) === i).join(':') } };
+  ? { command: 'cmd', args: ['/c', npx, '-y', '-p', SOURCE, 'natural-mcp'] }
+  : { command: npx, args: ['-y', '-p', SOURCE, 'natural-mcp'], env: { PATH: [nodeDir, '/usr/local/bin', '/usr/bin', '/bin'].filter((v, i, a) => a.indexOf(v) === i).join(':') } };
 
 const FILES = {
   'claude-desktop': WIN ? join(process.env.APPDATA || join(home, 'AppData', 'Roaming'), 'Claude', 'claude_desktop_config.json')

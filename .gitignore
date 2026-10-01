@@ -9,3 +9,7 @@ src/stories/generated
 src/stories/.story-mappings.json
 .story-ui-history/
 .story-ui/
+
+# drift bot report (scripts/drift-check.mjs)
+drift/
+.claude/settings.local.json

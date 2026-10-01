@@ -2,6 +2,20 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.15.2] – 2026-10-01
+
+### Added
+- **Published to npm:** `npm install natural-design-system` ([npmjs.com/package/natural-design-system](https://www.npmjs.com/package/natural-design-system)).
+- **Drift bot** (D-032): when any quality gate fails or Figma and code disagree, it files a *Drift detected* issue and opens a pull request with the fix for a person to review. `.github/workflows/drift-bot.yml` (after failed runs on `main`, nightly, on demand, or the `drift` label), `scripts/drift-check.mjs` / `npm run drift` (every gate without stopping, safe fixes, Figma-edited check with `FIGMA_TOKEN`), and the `/drift` command in Claude Code for Figma-side drift.
+- README badges (npm, quality gates, drift bot).
+
+### Changed
+- The MCP server installs from npm by default: `npx -y natural-design-system setup` (`--source github:chris-terterian/natural-design-system` for GitHub `main`).
+- Pull requests to `main` run the quality gates (no deploy).
+
+### Fixed
+- The package no longer ships type files for the local Story UI workspace (`dist/stories`).
+
 ## [0.15.1] – 2026-09-30
 
 ### Fixed

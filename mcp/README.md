@@ -6,24 +6,27 @@ reviews it. Everything is read live from this repo, so the server can't drift fr
 
 ## Install (no clone needed)
 
+[![npm](https://img.shields.io/npm/v/natural-design-system)](https://www.npmjs.com/package/natural-design-system)
+
 Needs Node 20+. One command registers the server with **Claude Desktop, Cursor and Claude Code** (whichever you have):
 
 ```bash
-npx -y github:chris-terterian/natural-design-system setup
+npx -y natural-design-system setup
 ```
 
 Then restart Claude Desktop / Cursor. Options: name one app (`setup claude-desktop`, `setup cursor`, `setup claude-code`),
-preview with `--dry-run`, undo with `--remove`.
+preview with `--dry-run`, undo with `--remove`, run GitHub `main` instead of the npm release with
+`--source github:chris-terterian/natural-design-system`.
 
 **Why a setup command.** Apps opened from the Dock or Start menu don't get your terminal's PATH, so a config that just
 says `"command": "npx"` fails there with `spawn npx ENOENT` (it works in a terminal, which is why it's confusing). Setup
 writes absolute paths to `npx` and Node (the stable ones, such as `/opt/homebrew/bin`, so Node upgrades don't break it),
 uses `cmd /c npx` on Windows, merges with your existing config and keeps a timestamped backup. The first start downloads
-the server (about 20 seconds); later starts are cached.
+the server; later starts are cached.
 
 <details><summary>Configure by hand instead</summary>
 
-**Claude Code:** `claude mcp add natural --scope user -- npx -y github:chris-terterian/natural-design-system`
+**Claude Code:** `claude mcp add natural --scope user -- npx -y -p natural-design-system natural-mcp`
 
 **Claude Desktop** (`~/Library/Application Support/Claude/claude_desktop_config.json`, Windows `%APPDATA%\Claude\…`) or **Cursor** (`~/.cursor/mcp.json`). Use the full path from `which npx` (Windows: `"command": "cmd", "args": ["/c", "npx", …]`):
 ```json
@@ -31,14 +34,14 @@ the server (about 20 seconds); later starts are cached.
   "mcpServers": {
     "natural": {
       "command": "/opt/homebrew/bin/npx",
-      "args": ["-y", "github:chris-terterian/natural-design-system"],
+      "args": ["-y", "-p", "natural-design-system", "natural-mcp"],
       "env": { "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin" }
     }
   }
 }
 ```
 
-**From npm**, once published: `npx -y -p natural-design-system natural-mcp`. **From a clone:** `npm install`, `npm run mcp`.
+**From GitHub `main`:** replace `natural-design-system` with `github:chris-terterian/natural-design-system`. **From a clone:** `npm install`, `npm run mcp`.
 </details>
 
 Try it: ask your agent to *"use the natural server's build_page prompt to build a gift guide with three picks under $50"*.

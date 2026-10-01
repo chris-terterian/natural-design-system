@@ -3,6 +3,8 @@ name: Quality gates + deploy Storybook
 on:
   push:
     branches: [main]
+  pull_request: # gates only; deploy happens from main
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -11,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: gates-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -42,11 +44,13 @@ jobs:
       - name: Accessibility gate (axe, WCAG 2.2 AA, every story)
         run: npm run check:a11y
       - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
         with:
           path: storybook-static
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

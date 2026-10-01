@@ -1,6 +1,6 @@
 {
   "name": "natural-design-system",
-  "version": "0.15.1",
+  "version": "0.15.2",
   "description": "A natural goods e-commerce design system — React components, tokens and Storybook, mirrored with the Figma file \"Natural Design System\".",
   "type": "module",
   "license": "MIT",
@@ -47,7 +47,8 @@
     "mcp": "node mcp/server.mjs",
     "check:mcp": "node mcp/smoke.mjs",
     "mcp:demo": "node mcp/examples/gift-guide/demo.mjs",
-    "prepublishOnly": "npm run build && npm run check:mcp"
+    "prepublishOnly": "npm run build && npm run check:mcp",
+    "drift": "node scripts/drift-check.mjs"
   },
   "peerDependencies": {
     "react": ">=18",

@@ -86,6 +86,7 @@ Agents build with the Natural MCP server (D-031) and follow its checkpoints: anc
 - **No pull request without a passing final gate.** Include the `run_checkpoints` report (it names the system version and hash it was checked against).
 - **Agents never merge or publish.** A pass means ready for a person to review the rendered result, keyboard and screen-reader behaviour and the copy; CI then runs every gate again.
 - **New parts aren't invented in code.** `review_plan` rejects components the system doesn't have; they go through the Proposal flow (§4).
+- **The drift bot follows the same rules** (§6, D-032): it opens pull requests and issues, and a person merges.
 
 ### AI-generated stories (Story UI)
 
@@ -125,7 +126,21 @@ Run on every push to `main` by `.github/workflows/storybook-pages.yml`. **Any fa
 | Accessibility | `npm run check:a11y` | ✅ | axe (WCAG 2.0 / 2.1 / 2.2, A + AA) on every story; only registered exceptions pass |
 | Figma ↔ code parity | `npm run check:parity` | ✅ | Every variable matches per mode, both directions; every Figma node the code links to exists with the registry name; no unwired component properties; text styles bound to Typography variables. Compares against `governance/figma-snapshot.json`, which is exported from the live file through the Figma MCP |
 
-Run everything locally with `npm run check`.
+Pull requests to `main` run the same gates without deploying. Run everything locally with `npm run check`.
+
+### Drift bot
+
+`.github/workflows/drift-bot.yml` (D-032) turns any failure into a reviewed fix instead of a red badge.
+
+| When | What it does |
+|---|---|
+| A gates run on `main` fails, every night, or on demand | `scripts/drift-check.mjs --fix` runs **every** gate (it doesn't stop at the first failure), applies the safe deterministic fixes (regenerating files from the tokens), checks whether Figma was edited after the parity snapshot (with the `FIGMA_TOKEN` secret), and files or updates one **Drift detected** issue (label `drift`) |
+| Code drift remains | An agent (Claude Code in GitHub Actions, with the Natural MCP server) fixes it, re-runs the check and opens a pull request that references the issue. Needs the `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN` secret; without it the issue is the hand-off |
+| Figma ↔ code disagreement | Reported for a person: `/drift` in Claude Code refreshes the snapshot through the Figma MCP, brings Figma in line with code, asks when a Figma-only change looks intentional, and opens the pull request |
+| Everything passes again | The issue closes itself |
+| A person adds the `drift` label to an issue | Runs detect and fix on demand |
+
+**Guardrails.** The bot never merges, never pushes to `main`, never publishes and never uses `--no-verify`. It works from a report it generates itself, never from issue text. It may not loosen a rule, add `validate-ignore` or an accessibility exception, or edit the Figma snapshot to make a gate pass. Pull requests opened with the workflow token don't start other workflows, so the bot's pull request body includes its own final check; a person closes and reopens it (or pushes a commit) so the gates run before merging.
 
 ### validate_file guardrail (pre-commit)
 

@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history: the parity check compares against the code at the last snapshot (D-034)
       - uses: actions/setup-node@v4
         with:
           node-version: 24.21.0 # pinned: ships npm 11.19.0, which the lock file is generated with
@@ -35,6 +37,8 @@ jobs:
         run: npm run check:governance
       - name: Figma ↔ code parity (committed snapshot of the Figma file)
         run: npm run check:parity
+      - name: Parity tells which side moved (code changed, Figma changed, both)
+        run: npm run test:parity-direction
       - name: Natural MCP server (tools, checkpoints catch drift)
         run: npm run check:mcp
       - name: Build Storybook

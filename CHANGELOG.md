@@ -2,6 +2,15 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.15.4] – 2026-10-02
+
+### Added
+- **Parity tells which side moved** (D-034). Each Figma ↔ code variable difference is compared with the code as it was when the snapshot was last committed: **Figma behind** (code changed: update Figma with `/drift`), **Figma changed** (a design decision: the drift bot opens a pull request adopting it in code, contrast-checked, for a person to approve or revert in Figma), **both changed** (a person decides) or **unknown** (no git history, so no guess). Shown in `check:parity` output, `--json` for tools, and a "Which side moved" table in the drift report.
+- `npm run test:parity-direction` (in `npm run check` and CI): proves every verdict in a throwaway clone with real history.
+
+### Changed
+- CI checks out full git history, which the direction check needs. `/drift` and the drift bot act on the verdicts instead of judging the direction themselves.
+
 ## [0.15.3] – 2026-10-01
 
 ### Added

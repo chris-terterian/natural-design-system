@@ -6,7 +6,15 @@
 //  3. Text styles: every Figma text style is bound to Typography variables that exist in the repo.
 // The snapshot can go stale if Figma is edited afterwards: refresh it after any Figma or token change and before
 // every release (GOVERNANCE.md §6).
-import { readFileSync } from 'node:fs';
+//
+// Direction (D-034): a difference alone doesn't say which side moved, so each variable difference is compared three
+// ways: code now, code when the snapshot was last committed (the baseline, from git), and Figma (the snapshot).
+//   code moved, Figma at the baseline   → figma-behind   update Figma to match code
+//   Figma moved, code at the baseline   → figma-changed  a design decision: adopt it in code, or revert Figma
+//   both moved                          → conflict       a person decides, seeing all three values
+// `--json <file>` also writes the verdicts for the drift bot.
+import { readFileSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 
 const read = (p) => JSON.parse(readFileSync(new URL(`../${p}`, import.meta.url), 'utf8'));
 const snapshot = read('governance/figma-snapshot.json');
@@ -19,22 +27,51 @@ const errors = [];
 // ---- 1. Variables ----
 const key = (line) => line.split('|').slice(0, 3).join('|');
 const val = (line) => line.split('|').slice(3).join('|');
-const expected = [];
-for (const [collection, vars] of Object.entries(tokens)) {
-  if (collection.startsWith('$')) continue;
-  for (const [name, t] of Object.entries(vars)) {
-    const fmt = (x) => (x.alias ? `@${x.alias}` : String(x.value));
-    if (t.modes) for (const [mode, m] of Object.entries(t.modes)) expected.push(`${collection}|${name}|${mode}|${fmt(m)}`);
-    else expected.push(`${collection}|${name}||${fmt(t)}`);
+const linesOf = (toks) => {
+  const out = [];
+  for (const [collection, vars] of Object.entries(toks)) {
+    if (collection.startsWith('$')) continue;
+    for (const [name, t] of Object.entries(vars)) {
+      const fmt = (x) => (x.alias ? `@${x.alias}` : String(x.value));
+      if (t.modes) for (const [mode, m] of Object.entries(t.modes)) out.push(`${collection}|${name}|${mode}|${fmt(m)}`);
+      else out.push(`${collection}|${name}||${fmt(t)}`);
+    }
   }
-}
+  return out;
+};
+const expected = linesOf(tokens);
 const figmaMap = new Map(snapshot.variables.map((l) => [key(l), val(l)]));
 const codeMap = new Map(expected.map((l) => [key(l), val(l)]));
-for (const [k, v] of codeMap) {
-  if (!figmaMap.has(k)) errors.push(`Variable missing in Figma: ${k.replace(/\|$/, '')}`);
-  else if (figmaMap.get(k) !== v) errors.push(`Variable differs: ${k.replace(/\|$/, '')}  code=${v}  figma=${figmaMap.get(k)}`);
+
+// Baseline: the tokens as they were when the snapshot was last committed (parity held then; the gates enforce it).
+const root = new URL('..', import.meta.url);
+const git = (...a) => execFileSync('git', a, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+let baseline = null, baselineCommit = null;
+try {
+  // A shallow checkout (CI's default) has no history, so every baseline would look like "now": refuse to guess.
+  if (git('rev-parse', '--is-shallow-repository') === 'true') throw new Error('shallow');
+  baselineCommit = git('log', '-1', '--format=%h', '--', 'governance/figma-snapshot.json');
+  baseline = new Map(linesOf(JSON.parse(git('show', `${baselineCommit}:tokens/figma-variables.json`))).map((l) => [key(l), val(l)]));
+} catch { baselineCommit = null; /* no or shallow git history: directions are unknown */ }
+
+const VERDICT = {
+  'figma-behind': 'code changed since the last snapshot; Figma is behind → update Figma',
+  'figma-changed': 'Figma changed; code is as it was at the last snapshot → design decision: adopt in code or revert Figma',
+  conflict: 'both changed since the last snapshot → a person decides',
+  unknown: 'direction unknown (no git history; CI needs fetch-depth: 0)',
+};
+const directions = [];
+const show = (v) => (v === undefined ? '(none)' : v);
+for (const k of new Set([...codeMap.keys(), ...figmaMap.keys()])) {
+  const code = codeMap.get(k), figma = figmaMap.get(k);
+  if (code === figma) continue;
+  const base = baseline?.get(k);
+  const verdict = !baseline ? 'unknown' : code !== base && figma === base ? 'figma-behind' : code === base && figma !== base ? 'figma-changed' : 'conflict';
+  const [collection, name, mode] = k.split('|');
+  directions.push({ collection, name, mode: mode || undefined, code, figma, baseline: base, verdict });
+  const what = code === undefined ? 'only in Figma' : figma === undefined ? 'missing in Figma' : 'differs';
+  errors.push(`Variable ${what}: ${k.replace(/\|$/, '')}  code=${show(code)}  figma=${show(figma)}${baseline ? `  baseline@${baselineCommit}=${show(base)}` : ''}\n      → ${VERDICT[verdict]}`);
 }
-for (const k of figmaMap.keys()) if (!codeMap.has(k)) errors.push(`Variable only in Figma (add to tokens or delete in Figma): ${k.replace(/\|$/, '')}`);
 
 // ---- 2. Components ----
 for (const [k, id] of Object.entries(nodes)) {
@@ -63,6 +100,8 @@ for (const [style, bindings] of Object.entries(snapshot.textStyles)) {
 }
 
 const ageDays = ((Date.now() - Date.parse(snapshot.generatedAt)) / 86400000).toFixed(1);
+const jsonAt = process.argv.indexOf('--json');
+if (jsonAt > 0) writeFileSync(process.argv[jsonAt + 1], JSON.stringify({ pass: errors.length === 0, baselineCommit, snapshotAt: snapshot.generatedAt, directions, other: errors.filter((e) => !e.startsWith('Variable ')) }, null, 2) + '\n');
 if (errors.length) {
   console.error(`✖ Figma ↔ code parity failed (${errors.length}), snapshot from ${snapshot.generatedAt} (${ageDays} days old):\n  - ${errors.join('\n  - ')}`);
   console.error('\nFix the drift, re-export the snapshot (npm run figma:snapshot-script), and run again.');

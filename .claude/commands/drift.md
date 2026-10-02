@@ -15,13 +15,15 @@ Stop and report at each checkpoint before moving on. Never merge, never push to 
    `84MjZXozBoKCvf9lwIU5pu`, save each result as JSON in the scratchpad, then `npm run figma:snapshot-save -- <3 files>`.
 3. **Detect.** `node scripts/drift-check.mjs --fix --out drift` and read `drift/report.md`.
    Checkpoint: show the user the table.
-4. **Classify every parity finding** before changing anything:
-   - Changed in code, Figma behind (the usual case): update Figma to match code. Variables: `npm run figma:sync-script`
-     run via `use_figma`. Components: edit by hand, screenshot before and after.
-   - Changed only in Figma (a variable or property that exists only in Figma, or a value the code never had): it may
-     be an intentional design decision. **Ask the user**: adopt it in code (tokens, regenerate, components) or revert
-     Figma. Don't guess.
-   Checkpoint: list each finding with the proposed direction and wait for the user's go-ahead.
+4. **Use the verdicts, don't guess the direction.** The report's "Which side moved" table (D-034) compares code now,
+   code when the snapshot was last committed, and Figma now (the snapshot you just refreshed, still uncommitted):
+   - **Figma is behind** (code changed): update Figma to match code. Variables: `npm run figma:sync-script` run via
+     `use_figma`. Components: edit by hand, screenshot before and after.
+   - **Figma changed** (code didn't): a design decision. Recommend adopting it in code (tokens, regenerate; for a
+     colour, `propose_color_change` first and never adopt one that fails AA), and **ask the user**: adopt or revert Figma.
+   - **Both changed**: show the user all three values and ask which wins. Never pick.
+   - **Unknown** (no git history) and component / text-style findings: inspect both sides, then ask.
+   Checkpoint: list each finding with its verdict and the proposed action, and wait for the user's go-ahead.
 5. **Fix code drift** using the report's fix suggestions and the `natural` MCP server (find_token, validate_code,
    check_contrast, run_checkpoints). Don't loosen rules, add `validate-ignore` or a11y exceptions to make a gate pass.
 6. **Prove it.** Refresh the snapshot again (step 2), then `npm run check`. Every gate must pass.

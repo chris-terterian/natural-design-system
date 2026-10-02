@@ -67,6 +67,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 0 # full history: the parity check compares against the code at the last snapshot (D-034)
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -134,6 +135,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 0 # full history: the parity check compares against the code at the last snapshot (D-034)
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -163,9 +165,15 @@ jobs:
                the `natural` MCP server (find_token, validate_code, check_contrast, run_checkpoints) for anything else.
                Code is the source of truth: fix the code, never loosen a rule, never add validate-ignore or an a11y
                exception to make a gate pass, never edit governance/figma-snapshot.json.
-            2. Leave Figma-owned failures (parity, Figma edited) alone: a person resolves them with /drift.
-            3. Re-run: node scripts/drift-check.mjs --out drift. Repeat until every code-owned gate passes, or stop
-               and explain if you can't fix one without breaking a rule.
+            2. Parity: report.json → parity.directions says which side moved (D-034).
+               - "figma-changed" (Figma changed, code didn't): a design decision. Propose adopting it: set that value
+                 in tokens/figma-variables.json and run npm run tokens. For a colour, run propose_color_change first;
+                 if it fails WCAG AA, don't adopt it, and explain on the issue instead. Say in the pull request that
+                 it adopts a Figma change and can be declined by reverting Figma.
+               - "figma-behind", "conflict", "unknown", component and text-style findings, and "Figma edited": leave
+                 them alone. A person resolves them with /drift (only a local session can write to Figma).
+            3. Re-run: node scripts/drift-check.mjs --out drift. Repeat until every code-owned gate passes and every
+               figma-changed value is adopted (or explained), or stop and explain if you can't without breaking a rule.
             4. git switch -c drift-bot/fix-${{ github.run_id }}, commit with a clear message (no --no-verify), and
                git push origin drift-bot/fix-${{ github.run_id }}.
             5. gh pr create --base main: title "Drift bot: <what you fixed>"; body = what failed, what you changed and

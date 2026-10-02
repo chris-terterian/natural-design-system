@@ -137,7 +137,7 @@ Pull requests to `main` run the same gates without deploying. Run everything loc
 |---|---|
 | A gates run on `main` fails, every night, or on demand | `scripts/drift-check.mjs --fix` runs **every** gate (it doesn't stop at the first failure), applies the safe deterministic fixes (regenerating files from the tokens), checks whether Figma was edited after the parity snapshot (with the `FIGMA_TOKEN` secret), and files or updates one **Drift detected** issue (label `drift`) |
 | Code drift remains | An agent (Claude Code in GitHub Actions, with the Natural MCP server) fixes it, re-runs the check and opens a pull request that references the issue. Needs the `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN` secret; without it the issue is the hand-off |
-| Figma ↔ code disagreement | Reported for a person: `/drift` in Claude Code refreshes the snapshot through the Figma MCP, brings Figma in line with code, asks when a Figma-only change looks intentional, and opens the pull request |
+| Figma ↔ code disagreement | Each difference gets a **direction** (D-034), from code now vs code when the snapshot was last committed vs Figma: **Figma behind** → a person runs `/drift`, which updates Figma through the Figma MCP. **Figma changed** (code didn't) → a design decision: the bot opens a pull request adopting it in code (colours contrast-checked), and a person approves it or reverts Figma. **Both changed** → a person decides, seeing all three values. Nothing is ever overwritten on a guess |
 | Everything passes again | The issue closes itself |
 | A person adds the `drift` label to an issue | Runs detect and fix on demand |
 

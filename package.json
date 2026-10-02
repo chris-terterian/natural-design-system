@@ -1,6 +1,6 @@
 {
   "name": "natural-design-system",
-  "version": "0.15.3",
+  "version": "0.15.4",
   "description": "A natural goods e-commerce design system \u2014 React components, tokens and Storybook, mirrored with the Figma file \"Natural Design System\".",
   "type": "module",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "figma:sync-script": "node scripts/figma/print-sync.mjs",
     "check:a11y": "node scripts/check-a11y.mjs",
     "check:governance": "node scripts/check-governance.mjs",
-    "check": "npm run check:install && node scripts/validate-file.mjs --all && npm run typecheck && npm run check:governance && npm run check:parity && npm run check:mcp && npm run build-storybook && npm run check:a11y",
+    "check": "npm run check:install && node scripts/validate-file.mjs --all && npm run typecheck && npm run check:governance && npm run check:parity && npm run test:parity-direction && npm run check:mcp && npm run build-storybook && npm run check:a11y",
     "figma:snapshot-script": "node scripts/figma/print-snapshot.mjs",
     "figma:snapshot-save": "node scripts/figma/save-snapshot.mjs",
     "check:parity": "node scripts/check-parity.mjs",
@@ -49,7 +49,8 @@
     "check:mcp": "node mcp/smoke.mjs",
     "mcp:demo": "node mcp/examples/gift-guide/demo.mjs",
     "prepublishOnly": "npm run build && npm run check:mcp",
-    "drift": "node scripts/drift-check.mjs"
+    "drift": "node scripts/drift-check.mjs",
+    "test:parity-direction": "node scripts/test-parity-direction.mjs"
   },
   "peerDependencies": {
     "react": ">=18",

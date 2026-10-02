@@ -8,7 +8,7 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Install:** `npm install natural-design-system`, then `import { Button } from 'natural-design-system'` and `import 'natural-design-system/styles.css'`.
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.15.3)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.15.4)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -30,6 +30,7 @@ npm run storybook        # http://localhost:6007
 | `npm run typecheck` | TypeScript check |
 | `npm run validate_file -- <files> \| --staged \| --all` | The validate_file guardrail (also runs as a pre-commit hook): blocks hardcoded values, broken naming, placeholder link text; fix suggestion for every finding |
 | `npm run check` | All quality gates: typecheck, governance, parity, Storybook build, accessibility (the same gates CI runs before deploying) |
+| `npm run test:parity-direction` | Proves parity tells which side moved: code changed → Figma behind, Figma changed → design decision, both → conflict, no history → unknown |
 | `npm run drift` | Every gate, without stopping at the first failure, plus whether Figma was edited since the snapshot (with `FIGMA_TOKEN`); writes `drift/report.md`. `-- --fix` applies the safe fixes first, `-- --skip-a11y` skips the slow gates |
 | `npm run check:governance` | Registry ↔ stories ↔ Figma links ↔ DESIGN.md specs; tokens resolve and generated files are current |
 | `npm run check:parity` | Figma ↔ code parity against `governance/figma-snapshot.json` (variables per mode, linked components, unwired properties, text styles) |
@@ -96,7 +97,7 @@ When **any** quality gate fails, or **Figma and code disagree**, the drift bot (
 
 - **Detect:** after every failed run on `main`, nightly, or on demand, `scripts/drift-check.mjs` runs every gate (it keeps going after a failure, so the report is complete), applies the safe deterministic fixes and says who can fix each failure. The issue closes itself when everything is green again.
 - **Fix code drift:** an agent (Claude Code in GitHub Actions) fixes the code with the report's fix suggestions and the Natural MCP server's checkpoints, re-runs the gates and opens the pull request. It may not loosen a rule, add an exception or touch the Figma snapshot to make a gate pass.
-- **Fix Figma drift:** CI can't read Figma variables on the Professional plan, so `/drift` in Claude Code refreshes the snapshot through the Figma MCP, brings Figma in line with code, asks when a Figma change looks intentional, and opens the pull request.
+- **Which side is wrong?** The bot doesn't guess. Each Figma ↔ code difference is compared with the code as it was when the snapshot was last taken: if the code moved, Figma is behind and `/drift` updates Figma through the Figma MCP; if Figma moved, it's a design decision, and the bot opens a pull request adopting it in code for a person to approve (or revert in Figma); if both moved, a person decides (D-034).
 
 Run the check yourself: `npm run drift` (add `-- --skip-a11y` for a fast pass).
 

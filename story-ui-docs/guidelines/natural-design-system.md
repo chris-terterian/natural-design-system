@@ -1935,6 +1935,8 @@ Non-negotiable for every component and page. Each component in §6 lists its own
 
 **Next up:** real photography for Image Block and Product Card (the Images page has the slots) · Modal Form (Figma page still empty). Also planned: display type size. Also planned: product detail, material swatches, heading scale, Figma Styles for §4.
 
+**Planned, not started:** a system that proposes its own changes (rule of three, retirement with consent, decisions by the teams that use it). See [`governance/plans/evolving-system.md`](governance/plans/evolving-system.md).
+
 **Known differences to resolve:** none. Figma and code match.
 
 Version history lives in [`CHANGELOG.md`](CHANGELOG.md) (current: **v0.15.4**). Component status lives in `governance/components.json`; the reasoning behind decisions is in [`DECISIONS.md`](DECISIONS.md).

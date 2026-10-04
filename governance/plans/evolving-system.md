@@ -15,7 +15,8 @@ Natural notices how it is used and **proposes** changes, and the organisation de
 
 ## Shaped by community feedback
 
-Two comments on the LinkedIn post shaped this plan. Points 1–3 came from the first, 4–8 from the second.
+Comments on the LinkedIn post shaped this plan. Points 1–3 came from the first commenter, 4–8 from the second, and
+9–11 from the second's follow-up.
 
 1. **Similarity can't rely on layer names.** In Figma a composition can be named anything, so patterns are compared
    by what they are made of, with a similarity score, not by name or an exact match.
@@ -31,6 +32,11 @@ Two comments on the LinkedIn post shaped this plan. Points 1–3 came from the f
 6. **Someone has to own it.** No owner, no component.
 7. **Others may already be working on it.** Check work in flight and connect the teams before anything is built.
 8. **Impact matters.** Priority weighs reach, teams affected, business weight (set by the organisation) and risk.
+9. **Start with what's feasible now.** "Can an existing component solve this?" and "would a variant, prop, docs or
+   pattern solve it?" need only the system's own knowledge, which the MCP server already serves. Build them first.
+10. **Accept, modify or reject.** "Modify" is the most useful signal: it shows *how* a recommendation was wrong.
+11. **A maturity path.** Classify and visualise → prioritise → recommend → automate low-risk decisions → (optionally)
+    more. Each stage is unlocked by measured agreement.
 
 ## How it works
 
@@ -110,23 +116,49 @@ proves how often its recommendations match people's decisions**, before anyone r
 2. **Precedent (memory).** The decision log is the training data. 34 decisions already record what was chosen and why
    (D-022 chose a variant over a new component; D-021 split Logo out because it was reused). For each candidate the
    agent retrieves similar past decisions and cites them: "like D-022, a variant fits."
-3. **Shadow mode (trust).** For the first months the layer runs silently: it writes its recommendation, people decide
-   as usual, and the two are compared. A public scorecard reports agreement (e.g. "matched the team's decision in
-   78% of 40 cases; disagreed mostly on business priority").
-4. **Promotion by evidence.** It moves from shadow → digest → drafting pull requests only when agreement passes a bar
-   the organisation sets, and drops back if it falls. Every disagreement is reviewed and becomes new precedent.
-5. **Ask for the data the org has; don't infer it.** Business weight comes from the organisation (analytics, revenue
+3. **Semantic judgement.** "Is this a variant of Product Card or something new?" is about meaning, not structure.
+   Start with an LLM (Claude) as the judge, given the candidate, the specs and similar past decisions: it works now and
+   explains itself. Log every case; once there are enough labelled decisions, a small classifier trained on them can
+   take the routine cases (cheaper and more consistent), with the LLM kept for the unclear ones.
+4. **Shadow mode (trust).** For the first months the layer runs silently: it writes its recommendation, people decide
+   as usual, and each case is recorded as **accept**, **modify** or **reject**, with a reason. A modify records the
+   correction: which ladder rung, component or owner the people chose instead (e.g. "recommended a new component;
+   the team chose a variant of Product Card", one rung lower). The scorecard reports all three, e.g. "accepted 60%,
+   modified 30% (usually one rung too high), rejected 10%", so it's clear what to tune.
+5. **Promotion by evidence** through the maturity stages below, only when the scorecard passes a bar the organisation
+   sets, and back down if it falls. Every modify and reject is reviewed and becomes new precedent.
+6. **Ask for the data the org has; don't infer it.** Business weight comes from the organisation (analytics, revenue
    tiers), not from the model.
 
 **What it is:** a research and triage assistant whose accuracy is measured. **What it isn't:** an authority.
 
+### Maturity stages
+
+| Stage | The system… | People… | Unlocked when |
+|---|---|---|---|
+| 1. Classify and visualise | Groups patterns and shows usage on a dashboard; no recommendations | Explore it, decide everything | Built |
+| 2. Prioritise | Ranks candidates by reach, teams, business weight, risk | Decide what to look at | The ranking matches the team's own priorities in review |
+| 3. Recommend | Proposes a ladder rung, owner and linked work, in shadow mode first | Accept, modify or reject every case | The scorecard passes the organisation's bar |
+| 4. Automate low-risk | Acts on its own for low-risk cases only, reporting each action | Can undo any action; review the log | Sustained accuracy on that class of case |
+| 5. Further automation | Only what the organisation explicitly chooses | Set the ceiling | An organisational decision, never a default |
+
+**Low-risk** means all of: reversible, no API change, no visual change. Examples: adding a docs example, labelling or
+linking an issue, connecting two teams working on the same thing, flagging (not starting) a retirement candidate.
+**Never automated by default:** creating, changing or removing a component or token, because that changes what every
+team builds with. Natural's default ceiling is **stage 4**; going further is each organisation's choice.
+
 ## Build order
+0. **Solution-ladder check, usable now** (needs no consumers or usage data): an MCP tool that takes a described need
+   or a screenshot of a hand-built pattern and answers "existing component as is / variant or prop / documented
+   pattern / new component", with reasons and the Natural specs and decisions it relied on. Every answer and the
+   person's accept / modify / reject is logged from day one.
 1. `data-nds` attribute on every component (with a test that each one renders it) and the consumers registry.
 2. Usage matrix: live-site crawl first (authoritative), then code scan, then Figma; monthly history.
 3. Retirement flow, tested with a short threshold on a test component.
 4. Pattern finder, Figma and code signals, with tests for renamed layers, aliased imports and look-alikes built differently.
 5. Triage: solution ladder, work in flight, priority score, monthly digest.
-6. Intelligence layer in **shadow mode**: system graph, precedent retrieval, agreement scorecard.
+6. Intelligence layer in **shadow mode** (stage 3): system graph, precedent retrieval, LLM judge, accept / modify /
+   reject scorecard. A stage 1 dashboard (patterns and usage, no recommendations) comes first, after step 4.
 7. Proposal flow with team-based review and owners, promoted out of shadow mode only by evidence; `/evolve` for
    Figma, D-035, GOVERNANCE.md §2 and §5 updates, CHANGELOG.
 
@@ -138,6 +170,8 @@ proves how often its recommendations match people's decisions**, before anyone r
 - **Collaboration:** the first commenter is working on code-side similarity; compare approaches before building step 4.
 - **Agreement bar** for leaving shadow mode, and how many decisions are needed before the scorecard means anything.
 - **Business weights:** who in the organisation sets them, and from which data.
+- **Classifier:** when there are enough labelled decisions to train one, and which model; the second commenter
+  mentioned "JEV" (unfamiliar to us; ask what it is).
 
 ## Limits to state honestly
 - Natural has no real consumers yet, so the triggers need a seeded demo until products adopt it.

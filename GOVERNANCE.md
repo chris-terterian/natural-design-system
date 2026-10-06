@@ -124,7 +124,8 @@ Run on every push to `main` by `.github/workflows/storybook-pages.yml`. **Any fa
 | **validate_file** | `npm run validate_file -- --all` (and the pre-commit hook) | ✅ | Hardcoded values, broken naming and placeholder link text block; other static accessibility issues warn. Every finding comes with a fix suggestion |
 | Governance | `npm run check:governance` | ✅ | Tokens resolve; generated `tokens.css` and `DESIGN.md` front matter are current; every component is registered with a valid status, matching story tag, Figma node and `DESIGN.md` spec |
 | Build | `npm run build-storybook` | ✅ | Every story builds |
-| Accessibility | `npm run check:a11y` | ✅ | axe (WCAG 2.0 / 2.1 / 2.2, A + AA) on every story; only registered exceptions pass |
+| Contrast | `npm run check:contrast` | ✅ | Every pairing DESIGN.md §4.2 promises (24: text 4.5:1, UI 3:1) passes in every brand × Color mode (Natural, Tide × Light, Dark) |
+| Accessibility | `npm run check:a11y` | ✅ | axe (WCAG 2.0 / 2.1 / 2.2, A + AA) on every story in every brand × theme; only registered exceptions pass |
 | Figma ↔ code parity | `npm run check:parity` | ✅ | Every variable matches per mode, both directions; every Figma node the code links to exists with the registry name; no unwired component properties; text styles bound to Typography variables. Compares against `governance/figma-snapshot.json`, which is exported from the live file through the Figma MCP |
 
 Pull requests to `main` run the same gates without deploying. Run everything locally with `npm run check`.

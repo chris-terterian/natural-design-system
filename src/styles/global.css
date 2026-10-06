@@ -1,15 +1,16 @@
 @import './tokens.css';
-/* Retired component-scoped names (0.14.0), kept as aliases for one release. Remove in 0.16.0. */
+/* Retired token names, kept as aliases until their announced removal (see tokens/migrations/). */
 @import './tokens-deprecated.css';
 
 :root {
   --nds-font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
+/* Roles, not primitives, so the page follows the theme (D-035). */
 body {
   font-family: var(--nds-font-family);
-  color: var(--nds-color-brown-900);
-  background: var(--nds-color-white);
+  color: var(--nds-fg-default);
+  background: var(--nds-bg-default);
 }
 
 .nds-visually-hidden {

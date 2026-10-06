@@ -8,14 +8,14 @@
   font-family: var(--nds-font-family);
 }
 
-.nds-heading { font-weight: 600; color: var(--nds-text-color-heading); text-wrap: balance; }
+.nds-heading { font-weight: 600; color: var(--nds-fg-default); text-wrap: balance; }
 .nds-h1 { font-size: var(--nds-text-h1-font-size); line-height: var(--nds-text-h1-line-height); letter-spacing: var(--nds-text-h1-letter-spacing); }
 .nds-h2 { font-size: var(--nds-text-h2-font-size); line-height: var(--nds-text-h2-line-height); letter-spacing: var(--nds-text-h2-letter-spacing); }
 .nds-h3 { font-size: var(--nds-text-h3-font-size); line-height: var(--nds-text-h3-line-height); letter-spacing: var(--nds-text-h3-letter-spacing); }
 .nds-h4 { font-size: var(--nds-text-h4-font-size); line-height: var(--nds-text-h4-line-height); letter-spacing: var(--nds-text-h4-letter-spacing); }
 
-.nds-text { font-weight: 400; color: var(--nds-text-color-paragraph); max-width: var(--nds-text-measure); }
-.nds-text--muted { color: var(--nds-text-color-muted); }
+.nds-text { font-weight: 400; color: var(--nds-fg-default); max-width: var(--nds-text-measure); }
+.nds-text--muted { color: var(--nds-fg-muted); }
 .nds-paragraph-lg { font-size: var(--nds-text-paragraph-lg-font-size); line-height: var(--nds-text-paragraph-lg-line-height); }
 .nds-paragraph { font-size: var(--nds-text-paragraph-font-size); line-height: var(--nds-text-paragraph-line-height); }
 .nds-paragraph-sm { font-size: var(--nds-text-paragraph-sm-font-size); line-height: var(--nds-text-paragraph-sm-line-height); }

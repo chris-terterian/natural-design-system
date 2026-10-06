@@ -27,7 +27,7 @@ ok(card.includes('### 6.28 Cart Line') && card.includes('interface CartLineProps
 ok((await call('get_guidelines', { topic: 'voice' })).includes('Add to Bag'), 'get_guidelines(voice) missing UI vocabulary');
 
 const roles = await J('get_tokens', { collection: 'Color', query: 'fg/' });
-ok(roles.some((t) => t.name === 'fg/muted' && t.css === 'var(--nds-fg-muted)' && t.value === '#6B4F35'), 'get_tokens: fg/muted wrong');
+ok(roles.some((t) => t.name === 'fg/muted' && t.css === 'var(--nds-fg-muted)' && t.Light?.value === '#6B4F35' && t.Dark?.value === '#D8BFA0'), 'get_tokens: fg/muted Light / Dark wrong');
 const layout = await J('get_tokens', { collection: 'Layout', query: 'gutter' });
 ok(layout[0]?.Desktop?.value === '24px' && layout[0]?.Mobile?.value === '16px', 'get_tokens: layout/gutter modes wrong');
 
@@ -44,7 +44,7 @@ const good = await J('validate_code', { path: 'src/components/Demo/Demo.css', co
 ok(good.pass === true, 'validate_code rejected valid code');
 
 const c = await J('check_contrast', { foreground: 'fg/muted', background: 'bg/default' });
-ok(c.ratio === '7.51:1' && c.text.AAA === true, `check_contrast fg/muted → ${c.ratio}`);
+ok(c.ratio === '7.51:1' && c.text.AAA === true && c.modes.Dark?.text.AA === true, `check_contrast fg/muted → ${c.ratio} (dark ${c.modes?.Dark?.ratio})`);
 
 // ---- checkpoints: each must catch drift and pass good work
 const fp = await J('get_system_fingerprint');
@@ -71,13 +71,16 @@ ok(faint.failedAt === '5 · accessibility', `2.11:1 text should stop at 5 (got $
 
 // ---- colour changes (D-033): read back, contrast-gated, applied only with the approved id
 const warm = await J('propose_color_change', { changes: [{ token: 'accent/bg', to: 'darker' }] });
-ok(warm.pass && warm.changes[0].to === 'color/brown/300' && /Shall I apply it\?$/.test(warm.say), `propose: accent/bg darker → ${warm.changes?.[0]?.to}`);
+ok(warm.pass && warm.changes[0].to === 'palette/neutral/300' && /Shall I apply it\?$/.test(warm.say), `propose: accent/bg darker → ${warm.changes?.[0]?.to}`);
 const pale = await J('propose_color_change', { changes: [{ token: 'border/default', to: 'color/brown/300' }] });
 ok(!pale.pass && pale.blocked[0]?.after === '2.11:1' && pale.say.includes("can't be applied"), 'propose should block a 2.11:1 border');
 const step = await J('propose_color_change', { changes: [{ token: 'color/brown/600', to: '#A08060' }] });
-ok(!step.pass && step.moved.length === 2 && step.blocked.some((b) => b.foreground === 'fg/subtle'), 'retuning a primitive should move every role on it and catch fg/subtle');
-const fresh = await J('propose_color_change', { changes: [{ token: 'fg/sale', to: '#C2410C', primitiveName: 'color/clay/600' }] });
-ok(fresh.pass && fresh.changes[0].newPrimitive?.name === 'color/clay/600', 'propose: new primitive for an off-palette hex');
+ok(!step.pass && ['fg/subtle', 'border/default'].every((r) => step.moved.some((m) => m.role === r && m.mode === 'Light')) && step.moved.some((m) => m.role === 'border/default' && m.mode === 'Dark') && step.blocked.some((b) => b.foreground === 'fg/subtle'), 'retuning a primitive should move every role on it, in every mode, and catch fg/subtle');
+const darkFail = await J('propose_color_change', { changes: [{ token: 'fg/muted', to: 'color/brown/800', mode: 'Dark' }] });
+ok(!darkFail.pass && darkFail.blocked.every((b) => b.mode === 'Dark') && darkFail.say.includes('in dark mode'), 'a dark-mode change is checked against dark surfaces');
+ok((await call('propose_color_change', { changes: [{ token: 'fg/sale', to: '#C2410C' }] })).includes("isn't a step of the palette"), 'propose: an off-palette hex on one role must be refused (every brand needs a value)');
+const tideCheck = await J('propose_color_change', { changes: [{ token: 'color/sea/600', to: '#A0C8DC' }] });
+ok(!tideCheck.pass && tideCheck.moved.every((m) => m.brand === 'Tide') && tideCheck.blocked.some((b) => b.brand === 'Tide'), 'retuning a Tide primitive is checked in Tide only, and blocked when Tide text fails');
 ok((await call('propose_color_change', { changes: [{ token: 'fg/sale', to: 'darker' }] })).includes('already the darkest'), 'propose: darker past the end of the scale');
 ok(/differ from proposal|needs a clone/.test(await call('apply_color_change', { changes: [{ token: 'accent/bg', to: 'darker' }], proposalId: 'not-approved' })), 'apply must refuse an unapproved proposal');
 
@@ -89,11 +92,11 @@ ok(['build_page', 'recolor'].every((n) => prompts.some((p) => p.name === n)), 'p
 // The Figma script the apply step returns, run against a stand-in for Figma's variables API.
 const { figmaScriptFor } = await import('./recolor.mjs');
 const mk = (id, name, col) => ({ id, name, variableCollectionId: col, values: {}, setValueForMode(m, v) { this.values[m] = v; } });
-const fv = [mk('p1', 'color/brown/300', 'P'), mk('p2', 'color/brown/300', 'C'), mk('c1', 'accent/bg', 'C'), mk('c2', 'fg/sale', 'C')]; // p2: same name in another collection
-const figma = { variables: { getLocalVariableCollectionsAsync: async () => [{ id: 'P', name: 'Primitives', modes: [{ modeId: 'pm' }] }, { id: 'C', name: 'Color', modes: [{ modeId: 'light' }] }], getLocalVariablesAsync: async () => fv, createVariable: (n, c) => mk('new', n, c.id) } };
-const runInFigma = new Function('figma', `return (async () => { ${figmaScriptFor([...warm.changes, ...fresh.changes])} })()`);
+const fv = [mk('b1', 'palette/neutral/300', 'B'), mk('x1', 'palette/neutral/300', 'C'), mk('c1', 'accent/bg', 'C'), mk('p1', 'color/sea/600', 'P')]; // x1: same name in another collection
+const figma = { variables: { getLocalVariableCollectionsAsync: async () => [{ id: 'P', name: 'Primitives', modes: [{ modeId: 'pm' }] }, { id: 'B', name: 'Brand', modes: [{ modeId: 'nat', name: 'Natural' }, { modeId: 'tide', name: 'Tide' }] }, { id: 'C', name: 'Color', modes: [{ modeId: 'light', name: 'Light' }, { modeId: 'dark', name: 'Dark' }] }], getLocalVariablesAsync: async () => fv } };
+const runInFigma = new Function('figma', `return (async () => { ${figmaScriptFor([...warm.changes, { kind: 'value', token: 'color/sea/600', to: '#467892' }])} })()`);
 const out = await runInFigma(figma);
-ok(fv[2].values.light?.id === 'p1' && fv[3].values.light?.id === 'new' && out.done.includes('created color/clay/600'), `Figma script: ${JSON.stringify(out.done)} (alias must target the Primitives variable, not a same-named one elsewhere)`);
+ok(fv[2].values.light?.id === 'b1' && !fv[2].values.dark && fv[3].values.pm?.b > 0.5, `Figma script: ${JSON.stringify(out.done)} (a role must point at the Brand palette step, only in the approved mode)`);
 
 await client.close();
 if (errors.length) { console.error(`✖ MCP smoke test failed:\n  - ${errors.join('\n  - ')}`); process.exit(1); }

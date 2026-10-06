@@ -66,7 +66,7 @@ prompt (or `/recolor` in Claude Code inside the repo).
 
 | Step | Tool | What it guarantees |
 |---|---|---|
-| Understand | `get_tokens`, DESIGN.md §4.2 | The request becomes a **token** change: a Color role re-pointed (`fg/sale` → `color/clay/600`) or a primitive retuned. Never hex on a layer |
+| Understand | `get_tokens`, DESIGN.md §4.2 | The request becomes a **token** change: a Color role re-pointed to another palette step (`fg/sale` → `palette/danger/300`), or a primitive retuned. A colour outside the palette can't go on one role: it becomes a palette step every brand defines. Never hex on a layer |
 | Read back | `propose_color_change` | Every role that moves, and the contrast before / after for each pairing the system promises. A change that would break WCAG AA is **blocked**, with the failing pair named. `say` is a one-breath read-back for voice |
 | Approve | (the person) | Nothing is written without a clear yes. The approval is tied to a `proposalId`, so what's applied is exactly what was read back |
 | Apply | `apply_color_change` | Writes the tokens, regenerates CSS and DESIGN.md, returns a Figma script that changes only those variables (scoped per collection) |

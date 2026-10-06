@@ -6,7 +6,7 @@ import { Badge, type BadgeTone } from '../components/Badge/Badge';
 const TONE: Record<string, BadgeTone> = { proposed: 'outline', 'in-progress': 'outline', beta: 'light', stable: 'success', deprecated: 'sale' };
 const LABEL: Record<string, string> = { proposed: 'Proposed', 'in-progress': 'In progress', beta: 'Beta', stable: 'Stable', deprecated: 'Deprecated' };
 
-const cell = { padding: '10px 12px', borderBottom: '1px solid var(--nds-color-taupe-200)', verticalAlign: 'top', textAlign: 'left' } as const;
+const cell = { padding: '10px 12px', borderBottom: '1px solid var(--nds-border-muted)', verticalAlign: 'top', textAlign: 'left' } as const;
 const FIGMA = 'https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=';
 
 export const StatusLegend = () => (

@@ -35,6 +35,8 @@ jobs:
         run: node scripts/validate-file.mjs --all
       - name: Governance check (registry, specs, Figma links, generated tokens)
         run: npm run check:governance
+      - name: Contrast (every promised pairing, Light and Dark)
+        run: npm run check:contrast
       - name: Figma ↔ code parity (committed snapshot of the Figma file)
         run: npm run check:parity
       - name: Parity tells which side moved (code changed, Figma changed, both)

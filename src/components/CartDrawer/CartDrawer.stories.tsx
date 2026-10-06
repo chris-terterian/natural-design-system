@@ -31,11 +31,11 @@ type Story = StoryObj<typeof meta>;
 
 /** Figma: Cart Drawer, shown in place (static) so the layout can be reviewed without opening it. */
 export const Default: Story = {
-  render: (args) => <div style={{ display: 'flex', justifyContent: 'flex-end', height: 900, background: 'var(--nds-color-brown-50)' }}><CartDrawer {...args} inline /></div>,
+  render: (args) => <div style={{ display: 'flex', justifyContent: 'flex-end', height: 900, background: 'var(--nds-bg-subtle)' }}><CartDrawer {...args} inline /></div>,
 };
 export const Empty: Story = {
   args: { lines: [], subtotal: '$0' },
-  render: (args) => <div style={{ display: 'flex', justifyContent: 'flex-end', height: 600, background: 'var(--nds-color-brown-50)' }}><CartDrawer {...args} inline /></div>,
+  render: (args) => <div style={{ display: 'flex', justifyContent: 'flex-end', height: 600, background: 'var(--nds-bg-subtle)' }}><CartDrawer {...args} inline /></div>,
 };
 
 /** Click Open bag: the drawer opens as a modal; Escape, Close, Continue shopping or the backdrop close it. */

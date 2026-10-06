@@ -55,8 +55,8 @@ export const OrderPreferences: Story = {
     const [notify, setNotify] = useState(false);
     const [handmade, setHandmade] = useState(true);
     return (
-      <fieldset style={{ display: 'grid', gap: 16, border: '1px solid var(--nds-color-taupe-200)', borderRadius: 8, padding: 24 }}>
-        <legend style={{ font: '600 14px/20px var(--nds-font-family)', color: 'var(--nds-color-brown-900)', padding: '0 4px' }}>Order preferences</legend>
+      <fieldset style={{ display: 'grid', gap: 16, border: '1px solid var(--nds-border-muted)', borderRadius: 8, padding: 24 }}>
+        <legend style={{ font: '600 14px/20px var(--nds-font-family)', color: 'var(--nds-fg-default)', padding: '0 4px' }}>Order preferences</legend>
         <Toggle label="Gift wrap this order" description="Wrapped in recycled kraft paper and tied with jute twine" checked={wrap} onChange={setWrap} />
         <Toggle label="Email me when it’s back in stock" description="One note when the next batch comes out of the kiln" checked={notify} onChange={setNotify} />
         <Toggle label="Show only handmade pieces" checked={handmade} onChange={setHandmade} />

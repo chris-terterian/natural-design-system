@@ -1,0 +1,14 @@
+{
+  "$comment": "Dark mode migration 0.16.0 (D-035): colour decisions live only in the Color collection, which has Light and Dark modes. Typography's own colour tokens are retired in favour of the roles (same Light values). Kept as aliases in tokens-deprecated.css until 0.17.0.",
+  "map": {
+    "text/color/heading": {
+      "to": "fg/default"
+    },
+    "text/color/paragraph": {
+      "to": "fg/default"
+    },
+    "text/color/muted": {
+      "to": "fg/muted"
+    }
+  }
+}

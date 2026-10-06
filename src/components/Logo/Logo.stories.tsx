@@ -35,7 +35,7 @@ export const AllVariants: Story = {
 /** Keep at least 16px (space/16) of clear space on every side; don't scale below the 24px wordmark. */
 export const ClearSpace: Story = {
   render: () => (
-    <div style={{ padding: 'var(--nds-space-16)', background: 'var(--nds-color-brown-50)', outline: '1px dashed var(--nds-color-brown-600)' }}>
+    <div style={{ padding: 'var(--nds-space-16)', background: 'var(--nds-bg-subtle)', outline: '1px dashed var(--nds-border-default)' }}>
       <Logo />
     </div>
   ),

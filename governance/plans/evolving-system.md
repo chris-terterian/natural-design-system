@@ -1,7 +1,7 @@
 # Plan: a design system that proposes its own changes (not started)
 
 **Status:** planned, not built. Approved for planning on 2026-10-03; building waits for a go-ahead.
-**Will become:** D-035 when built.
+**Will become:** a new decision (the next free D-number) when built.
 
 ## Goal
 

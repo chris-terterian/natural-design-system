@@ -33,6 +33,7 @@ const GATES = [
   { id: 'validate', name: 'validate_file (hardcoded values, naming, link text, a11y)', cmd: 'node scripts/validate-file.mjs --all', owner: 'code' },
   { id: 'typecheck', name: 'Typecheck', cmd: 'npm run --silent typecheck', owner: 'code' },
   { id: 'governance', name: 'Governance (registry, specs, Figma links, generated tokens)', cmd: 'npm run --silent check:governance', owner: 'code' },
+  { id: 'contrast', name: 'Contrast (every promised pairing, every Color mode)', cmd: 'npm run --silent check:contrast', owner: 'code' },
   { id: 'parity', name: 'Figma ↔ code parity (committed snapshot)', cmd: `node scripts/check-parity.mjs --json "${join(OUT, 'parity.json')}"`, owner: 'figma' },
   { id: 'mcp', name: 'Natural MCP server (tools, checkpoints catch drift)', cmd: 'npm run --silent check:mcp', owner: 'code' },
   { id: 'build', name: 'Storybook build', cmd: 'npm run --silent build-storybook', owner: 'code', slow: true },

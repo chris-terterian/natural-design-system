@@ -26,7 +26,7 @@ export function Heading({ level, size, className, children, ...rest }: HeadingPr
 export interface TextProps extends HTMLAttributes<HTMLElement> {
   /** Figma text style Paragraph/Large, Paragraph/Default, Paragraph/Small or Caption. */
   variant?: TextVariant;
-  /** Secondary colour (text/color/muted). Default for Paragraph/Small and Caption. */
+  /** Secondary colour (fg/muted). Default for Paragraph/Small and Caption. */
   muted?: boolean;
   /** Rendered element: p (default), span, div or figcaption. */
   as?: 'p' | 'span' | 'div' | 'figcaption';

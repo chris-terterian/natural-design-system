@@ -84,14 +84,17 @@ const CATEGORY = [
 const FOLDER_PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], ProductCard: ['card', 'wishlist'], WishlistButton: ['wishlist'], ProductRow: ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Spinner: ['button'], Logo: ['logo'], Calendar: ['calendar'], ImageBlock: ['image'], Footer: ['footer'], Slider: ['slider'], TextButton: ['text-button'], CartLine: ['cart'], CartDrawer: ['drawer'] };
 const SEMANTIC_COLLECTIONS = ['Color', 'Dimension', 'Layout', 'Typography'];
 const PUBLIC_SCALE = /^--nds-(space|radius|border-width)-/;
-const HIDDEN_PRIMITIVE = /^--nds-(color|size|font-size|line-height|letter-spacing|elevation)-/;
+const HIDDEN_PRIMITIVE = /^--nds-(color|palette|size|font-size|line-height|letter-spacing|elevation)-/; // palette: Brand steps (D-036)
 const COMPONENT_TOKENS = Object.keys(tokens.Component || {});
 let CTX = { prop: '', prefixes: [] };
 const propAt = (code, index) => { const m = [...code.slice(0, index).matchAll(/([a-z-]+)\s*:/g)].pop(); return m ? m[1] : ''; };
 // Tokens a component may use that alias this primitive: semantic tiers first, then its own Component tokens.
 const componentTokens = (primitive) => {
   const out = [];
-  for (const col of SEMANTIC_COLLECTIONS) for (const [n, t] of Object.entries(tokens[col] || {})) if ((t.alias || t.modes?.Desktop?.alias) === primitive) out.push(n);
+  // A role matches if any of its modes aliases the primitive (Light / Dark, Desktop / Mobile).
+  // A palette step (Brand) counts as the primitive it shows in any brand.
+  const shows = (alias) => alias === primitive || Object.values(tokens.Brand?.[alias]?.modes || {}).some((m) => m.alias === primitive);
+  for (const col of SEMANTIC_COLLECTIONS) for (const [n, t] of Object.entries(tokens[col] || {})) if (shows(t.alias) || Object.values(t.modes || {}).some((m) => shows(m.alias))) out.push(n);
   for (const [n, t] of Object.entries(tokens.Component || {})) if (t.modes?.Desktop?.alias === primitive && CTX.prefixes.includes(n.split('/')[0])) out.push(n); // only its own one-offs
   return out;
 };
@@ -238,6 +241,7 @@ function checkTokens(file, src) {
   const PRIM = /^(color|space|size|radius|border-width|font-size|line-height|letter-spacing|elevation)\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/;
   const SEM = /^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)+$/;
   const PREFIX = {
+    Brand: ['palette'], // palette steps per brand (D-036)
     Color: ['fg', 'bg', 'border', 'accent', 'control', 'focus', 'shadow'],
     Dimension: ['focus', 'size'],
     Layout: ['layout'],
@@ -248,7 +252,7 @@ function checkTokens(file, src) {
   const lineOf = (name) => lines.findIndex((l) => l.includes(`"${name}"`)) + 1;
   for (const [col, vars] of Object.entries(data)) {
     if (col.startsWith('$')) continue;
-    if (!KNOWN.includes(col)) add(file, lineOf(Object.keys(vars)[0] || col), 'naming-token', 'error', `Unknown collection "${col}"`, `collections are the tiers ${KNOWN.join(', ')} (D-030); one-off component values go in "Component"`, '');
+    if (!KNOWN.includes(col)) add(file, lineOf(Object.keys(vars)[0] || col), 'naming-token', 'error', `Unknown collection "${col}"`, `collections are the tiers ${KNOWN.join(', ')} (D-030, D-036); one-off component values go in "Component"`, '');
     for (const name of Object.keys(vars)) {
       const at = lineOf(name);
       if (name.includes('.')) add(file, at, 'naming-token', 'error', `Token "${name}" contains "."`, `Figma rejects "." in variable names: use "${name.replaceAll('.', '-')}"`, lines[at - 1]);

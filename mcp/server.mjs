@@ -20,7 +20,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
 import { validateSource } from '../scripts/validate-file.mjs';
-import { proposeColorChange, figmaScriptFor } from './recolor.mjs';
+import { proposeColorChange, figmaScriptFor, colorOf, colorModes, brands, primitiveOf } from './recolor.mjs';
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const pkg = JSON.parse(read('package.json'));
@@ -52,7 +52,8 @@ const json = (o) => text(JSON.stringify(o, null, 2));
 // Resolve a token (any tier) to its primitive value, per mode.
 const resolveToken = (t, all) => {
   const prim = all.Primitives;
-  const val = (alias) => { const p = prim[alias]; return p ? (p.type === 'COLOR' ? p.value : `${p.value}px`) : alias; };
+  // A palette step (Brand) resolves to its primitive in the default brand, Natural.
+  const val = (alias) => { const p = prim[alias] ?? prim[primitiveOf(all, alias)]; return p ? (p.type === 'COLOR' ? p.value : `${p.value}px`) : alias; };
   if (t.modes) return Object.fromEntries(Object.entries(t.modes).map(([m, x]) => [m, { value: val(x.alias), ref: x.alias }]));
   return t.alias ? { value: val(t.alias), ref: t.alias } : { value: t.type === 'COLOR' ? t.value : `${t.value}px` };
 };
@@ -112,9 +113,9 @@ server.registerTool('get_guidelines', {
 
 server.registerTool('get_tokens', {
   title: 'Get tokens',
-  description: 'Design tokens by tier: Color (semantic roles), Dimension, Layout (Desktop/Mobile), Typography, Component (one-offs), Primitives. Each entry has its value(s), the primitive it aliases and its CSS variable. Components must use roles and the public scale (space/*, radius/*, border-width/*), never colour or type primitives.',
+  description: 'Design tokens by tier: Brand (palette steps per brand: Natural, Tide), Color (semantic roles, Light / Dark), Dimension, Layout (Desktop/Mobile), Typography, Component (one-offs), Primitives. Each entry has its value(s), the primitive it aliases and its CSS variable. Components must use roles and the public scale (space/*, radius/*, border-width/*), never colour or type primitives.',
   inputSchema: {
-    collection: z.enum(['Color', 'Dimension', 'Layout', 'Typography', 'Component', 'Primitives']).optional().describe('Omit for an overview of the tiers'),
+    collection: z.enum(['Color', 'Brand', 'Dimension', 'Layout', 'Typography', 'Component', 'Primitives']).optional().describe('Omit for an overview of the tiers'),
     query: z.string().optional().describe('Filter by substring of the token name, e.g. "fg/", "focus", "gutter"'),
   },
 }, async ({ collection, query }) => {
@@ -142,7 +143,9 @@ server.registerTool('find_token', {
 }, async ({ value, property = '', intent }) => {
   const all = tokens();
   const semantic = ['Color', 'Dimension', 'Layout', 'Typography'];
-  const aliasesOf = (prim) => semantic.flatMap((col) => Object.entries(all[col]).filter(([, t]) => (t.alias || t.modes?.Desktop?.alias) === prim).map(([n]) => ({ collection: col, name: n, css: `var(${cssVar(n)})` })));
+  // Default mode (Light / Desktop) decides the match: a hex from a light-mode mock maps to the role that shows it there.
+  const defaultAlias = (t) => primitiveOf(all, t.alias || Object.values(t.modes || {})[0]?.alias);
+  const aliasesOf = (prim) => semantic.flatMap((col) => Object.entries(all[col]).filter(([, t]) => defaultAlias(t) === prim).map(([n]) => ({ collection: col, name: n, css: `var(${cssVar(n)})` })));
   if (value) {
     const hex = hexOf(value);
     if (hex) {
@@ -189,16 +192,21 @@ server.registerTool('validate_code', {
 const lum = (hex) => { const n = parseInt(hex.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255].map((c) => c / 255).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)).reduce((s, c, i) => s + c * [0.2126, 0.7152, 0.0722][i], 0); };
 server.registerTool('check_contrast', {
   title: 'Check contrast',
-  description: 'WCAG 2.2 contrast between two colours (hex, or a Color role such as "fg/muted" or "bg/subtle"). Reports AA / AAA for normal and large text and the 3:1 non-text threshold.',
-  inputSchema: { foreground: z.string(), background: z.string() },
-}, async ({ foreground, background }) => {
+  description: 'WCAG 2.2 contrast between two colours (hex, or a Color role such as "fg/muted" or "bg/subtle"). Reports AA / AAA for normal and large text and the 3:1 non-text threshold. Roles have a value per Color mode: the top-level result is Light (or the mode you ask for), and `modes` reports every mode.',
+  inputSchema: { foreground: z.string(), background: z.string(), mode: z.string().optional().describe('Color mode, e.g. "Light" (default) or "Dark"'), brand: z.string().optional().describe('Brand, e.g. "Natural" (default) or "Tide"') },
+}, async ({ foreground, background, mode = 'Light', brand }) => {
   const all = tokens();
-  const toHex = (s) => { const h = hexOf(s); if (h) return h; const t = all.Color[s] || all.Primitives[s]; const p = t?.alias ? all.Primitives[t.alias] : t; return p?.type === 'COLOR' ? p.value.slice(0, 7).toUpperCase() : null; };
-  const [a, b] = [toHex(foreground), toHex(background)];
-  if (!a || !b) return text(`Unknown colour: ${!a ? foreground : background}. Use a hex value or a Color role (get_tokens({ collection: "Color" })).`);
-  const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m);
-  const r = Math.round(((x + 0.05) / (y + 0.05)) * 100) / 100;
-  return json({ foreground: a, background: b, ratio: `${r}:1`, text: { AA: r >= 4.5, AAA: r >= 7 }, largeText: { AA: r >= 3, AAA: r >= 4.5 }, nonText: { '3:1': r >= 3 } });
+  brand ??= brands(all)[0];
+  const measure = (m, b0 = brand) => {
+    const [a, b] = [colorOf(all, foreground, m, b0), colorOf(all, background, m, b0)];
+    if (!a || !b) return null;
+    const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p);
+    const r = Math.round(((x + 0.05) / (y + 0.05)) * 100) / 100;
+    return { foreground: a, background: b, ratio: `${r}:1`, text: { AA: r >= 4.5, AAA: r >= 7 }, largeText: { AA: r >= 3, AAA: r >= 4.5 }, nonText: { '3:1': r >= 3 } };
+  };
+  const main = measure(mode);
+  if (!main) return text(`Unknown colour: ${!colorOf(all, foreground, mode) ? foreground : background}. Use a hex value or a Color role (get_tokens({ collection: "Color" })).`);
+  return json({ brand, mode, ...main, modes: Object.fromEntries(colorModes(all).map((m) => [m, measure(m)])), brands: Object.fromEntries(brands(all).map((b) => [b, Object.fromEntries(colorModes(all).map((m) => [m, measure(m, b)?.ratio]))])) });
 });
 
 // ---------------------------------------------------------------- checkpoints (anti-drift workflow)
@@ -313,12 +321,11 @@ server.registerTool('run_checkpoints', {
   if (!c.pass) return stop(4, 'content', c);
   steps.push({ checkpoint: 4, name: 'content', pass: true, warnings: c.warnings });
   const all = tokens();
-  const toHex = (s) => { const h = hexOf(s); if (h) return h; const t = all.Color[s] || all.Primitives[s]; const p = t?.alias ? all.Primitives[t.alias] : t; return p?.type === 'COLOR' ? p.value.slice(0, 7).toUpperCase() : null; };
   const failing = [];
-  for (const pr of contrast) {
-    const [a, b] = [toHex(pr.foreground), toHex(pr.background)]; if (!a || !b) { failing.push({ ...pr, error: 'unknown colour' }); continue; }
-    const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); const r = (x + 0.05) / (y + 0.05);
-    if (r < (pr.largeText ? 3 : 4.5)) failing.push({ ...pr, ratio: `${r.toFixed(2)}:1` });
+  for (const pr of contrast) for (const br of brands(all)) for (const m of colorModes(all)) { // every pairing, every brand and Color mode
+    const [a, b] = [colorOf(all, pr.foreground, m, br), colorOf(all, pr.background, m, br)]; if (!a || !b) { failing.push({ ...pr, brand: br, mode: m, error: 'unknown colour' }); continue; }
+    const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); const r = (x + 0.05) / (y + 0.05);
+    if (r < (pr.largeText ? 3 : 4.5)) failing.push({ ...pr, brand: br, mode: m, ratio: `${r.toFixed(2)}:1` });
   }
   const a11yWarnings = files.flatMap((f) => validateSource(f.path, f.code).filter((x) => x.severity === 'warn').map((x) => `${f.path}:${x.line} ${x.message}`));
   if (failing.length) return stop(5, 'accessibility', { contrast: failing, warnings: a11yWarnings });
@@ -334,8 +341,8 @@ server.registerTool('run_checkpoints', {
 // read back, applied only with the id the person approved, then mirrored to Figma from the same tokens.
 const colorChange = z.array(z.object({
   token: z.string().describe('A Color role ("fg/sale", "accent/bg") or a colour primitive ("color/brown/600")'),
-  to: z.string().describe('A hex value, a colour primitive ("color/brown/700"), or "darker" / "lighter" (next step in the same family)'),
-  primitiveName: z.string().optional().describe('Name for a new primitive when the hex isn\'t in the palette, e.g. "color/clay/600"'),
+  to: z.string().describe('For a role: a palette step ("palette/neutral/700"), a primitive or hex that is a palette step in the default brand, or "darker" / "lighter" (next palette step). For a primitive: a hex value.'),
+  mode: z.string().optional().describe('For a role: which Color mode to change, "Light" (default) or "Dark". Primitives change in every mode that uses them.'),
 })).min(1);
 server.registerTool('propose_color_change', {
   title: 'Propose a colour change (voice or text)',

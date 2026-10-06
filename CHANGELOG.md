@@ -2,6 +2,28 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.16.0] – 2026-10-06
+
+### Added
+- **Dark mode** (D-035, DESIGN.md §4.2.1). The Color collection has **Light** and **Dark** modes in Figma and code; all 32 roles have a Dark value, over 7 new primitives (`brown/925 · 950 · 975`, `red/300`, `green/300`, `brown/975-a40 · a60`). Components are unchanged.
+- `data-nds-theme="dark"` applies Dark to any element; `"system"` follows the OS; `"light"` makes a light island. Light stays the default. Constants `--nds-<role>--light` / `--dark` for explicit use.
+- Storybook **Theme** switch in the toolbar (`?globals=theme:dark` in story URLs).
+- `npm run check:contrast` (in `npm run check`, CI and the drift bot): every pairing DESIGN.md §4.2 promises passes WCAG AA in every Color mode.
+- The accessibility gate runs every story in Light and Dark (107 stories × 2).
+- MCP: `check_contrast` reports every mode (`mode` to choose the main one); `propose_color_change` takes a `mode` and re-checks contrast in all modes; `run_checkpoints` requires every pairing to pass in every mode.
+- Figma: Colors page **Light and Dark** section (both columns from the same bound frames, components in both modes, the new primitives) and the category page in Dark on Desktop Example.
+- **Tide, a second brand** (D-036, DESIGN.md §4.2.2): a **Brand** collection (modes Natural, Tide) of 25 palette steps between Primitives and Color; roles point at palette steps, so every brand works in Light and Dark. 21 Tide primitives (`sea/*`, `mist/*`), Natural's scale re-hued in OKLCH at the same lightness. `data-nds-brand="tide"`; Storybook **Brand** switch; `check:contrast` and the a11y gate run all four brand × theme combinations; `check_contrast` takes a `brand`.
+- Figma: Brand collection; Colors page **Brands** section (palette per brand, components in all four combinations); category page in Tide Light and Tide Dark.
+
+### Changed (breaking)
+- **Removed the 0.14.0 deprecated token aliases** (`tokens-deprecated.css`), as announced in 0.14.0 and 0.15.0. The map stays in `tokens/migrations/0.14.0-semantic-tokens.json`.
+- **Color roles now point at Brand palette steps** (`fg/default` → `palette/neutral/900`), not primitives. CSS variable names and values are unchanged for Natural. `propose_color_change` re-points roles to palette steps and refuses a one-off hex (`primitiveName` removed).
+- **Typography colour tokens retired**: `text/color/heading`, `text/color/paragraph` → `fg/default`; `text/color/muted` → `fg/muted` (same Light values). Aliases remain until 0.17.0, but they resolve on `:root` and don't follow a theme set on a subtree. Governance now fails on any colour token outside the Color collection.
+
+### Fixed
+- Page text and background (`global.css`) and several story wrappers used colour primitives instead of roles, so they couldn't follow a theme.
+- Figma: four component properties added outside the contribution flow were removed (Calendar *Show Week Numbers*, *Disabled*, *Has Footer Actions*; Logo *Href/URL*). Three weren't wired to any layer (D-009); the weekday row they toggled stays visible, as in code. Found by the parity snapshot refresh.
+
 ## [0.15.4] – 2026-10-02
 
 ### Added

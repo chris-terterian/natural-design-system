@@ -17,8 +17,8 @@ type Story = StoryObj<typeof meta>;
 /** Follows the real viewport: desktop sizes by default, mobile sizes below 768px. */
 export const Default: Story = {};
 
-const frame = { background: 'var(--nds-color-white)', boxShadow: '0 0 0 1px var(--nds-color-taupe-200)', borderRadius: 8 } as const;
-const label = { font: '600 12px/16px var(--nds-font-family)', color: 'var(--nds-color-brown-600)', margin: '0 0 12px' } as const;
+const frame = { background: 'var(--nds-bg-default)', boxShadow: '0 0 0 1px var(--nds-border-muted)', borderRadius: 8 } as const;
+const label = { font: '600 12px/16px var(--nds-font-family)', color: 'var(--nds-fg-subtle)', margin: '0 0 12px' } as const;
 
 const SCALE = [
   ['Heading/H1', <Heading level={1}>Made from what the land lets go</Heading>, '48 / 56 · −1', '32 / 40 · −0.5'],
@@ -36,7 +36,7 @@ const Scale = ({ mode }: { mode: 'desktop' | 'mobile' }) => (
     <p style={label}>{mode === 'desktop' ? 'Desktop' : 'Mobile'} mode</p>
     {SCALE.map(([name, el, d, m]) => (
       <div key={name} style={{ display: 'grid', gap: 4 }}>
-        <span style={{ font: '400 11px/14px var(--nds-font-family)', color: 'var(--nds-color-brown-600)' }}>{`${name} · ${mode === 'desktop' ? d : m}`}</span>
+        <span style={{ font: '400 11px/14px var(--nds-font-family)', color: 'var(--nds-fg-subtle)' }}>{`${name} · ${mode === 'desktop' ? d : m}`}</span>
         {el}
       </div>
     ))}

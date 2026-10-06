@@ -30,8 +30,11 @@ const page = await browser.newPage({ viewport: { width: 1600, height: 1200 } });
 const failures = [];
 const excused = [];
 
-for (const story of stories) {
-  await page.goto(`${base}/iframe.html?id=${story.id}&viewMode=story`);
+// Every story in every brand × theme (D-035, D-036): Tide and Dark meet the same bar as Natural Light.
+const THEMES = ['natural:light', 'natural:dark', 'tide:light', 'tide:dark'];
+for (const combo of THEMES) for (const story of stories) {
+  const [brand, theme] = combo.split(':');
+  await page.goto(`${base}/iframe.html?id=${story.id}&viewMode=story&globals=brand:${brand};theme:${theme}`);
   await page.waitForSelector('#storybook-root > *', { timeout: 15000 });
   await page.evaluate(() => document.fonts.ready);
   await page.addScriptTag({ content: axeSource });
@@ -60,14 +63,14 @@ for (const story of stories) {
   }, exceptions);
   for (const v of violations) {
     const ex = exceptions.find((e) => e.id === v.exception);
-    (ex ? excused : failures).push({ story: story.id, ...v, reason: ex?.reason });
+    (ex ? excused : failures).push({ story: `${story.id} (${brand} ${theme})`, ...v, reason: ex?.reason });
   }
 }
 
 await browser.close();
 server.close();
 
-console.log(`Checked ${stories.length} stories.`);
+console.log(`Checked ${stories.length} stories in ${THEMES.length} brand × theme combinations (${THEMES.join(', ')}).`);
 if (excused.length) console.log(`${excused.length} violation(s) excused by governance/a11y-exceptions.json: ${[...new Set(excused.map((e) => e.exception))].join(', ')}`);
 if (failures.length) {
   console.error(`\n✖ ${failures.length} accessibility violation(s):`);

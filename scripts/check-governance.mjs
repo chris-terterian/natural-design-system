@@ -20,8 +20,16 @@ for (const [collection, vars] of Object.entries(tokens)) {
   for (const [name, t] of Object.entries(vars)) {
     const refs = t.modes ? Object.values(t.modes).map((m) => m.alias) : t.alias ? [t.alias] : [];
     if (t.modes) modeSets.add(Object.keys(t.modes).join(','));
-    for (const ref of refs) if (ref && !primitives[ref]) fail(`Token ${collection}/${name} aliases missing primitive "${ref}"`);
+    // Tiers (D-030, D-036): Color roles point at Brand palette steps; every other token points at a primitive.
+    for (const ref of refs) {
+      if (!ref) continue;
+      if (collection === 'Color') { if (!tokens.Brand?.[ref]) fail(`Color role ${name} must point at a Brand palette step, not "${ref}"`); }
+      else if (!primitives[ref]) fail(`Token ${collection}/${name} aliases missing primitive "${ref}"`);
+    }
     if (name.includes('.')) fail(`Token name "${name}" contains "." (not allowed in Figma)`);
+    // Colour decisions live only in the Color collection, which carries the Light / Dark modes (D-035). A colour
+    // token anywhere else can't follow the theme.
+    if (t.type === 'COLOR' && !['Primitives', 'Brand', 'Color'].includes(collection)) fail(`Colour token ${collection}/${name} must be a role in the Color collection (it can't follow the brand or Light / Dark from ${collection})`);
   }
   if (modeSets.size > 1) fail(`Collection ${collection} mixes mode sets: ${[...modeSets].join(' | ')}`);
 }

@@ -115,6 +115,24 @@
   --nds-size-720: 720px;
   --nds-size-90: 90px;
   --nds-size-96: 96px;
+  --nds-duration-0: 0ms;
+  --nds-duration-120: 120ms;
+  --nds-duration-200: 200ms;
+  --nds-duration-300: 300ms;
+  --nds-duration-450: 450ms;
+  --nds-duration-510: 510ms;
+  --nds-duration-800: 800ms;
+  --nds-duration-2400: 2400ms;
+  --nds-easing-standard: ease;
+  --nds-easing-enter: ease-out;
+  --nds-easing-linear: linear;
+  --nds-easing-spring-press: linear(0, 0.023, 0.077, 0.158, 0.254, 0.359, 0.46, 0.564, 0.662, 0.746, 0.825, 0.892, 0.948, 0.991, 1.026, 1.052, 1.069, 1.08, 1.085, 1.085, 1.082, 1.077, 1.069, 1.061, 1.052, 1.043, 1.034, 1.026, 1.019, 1.013, 1.008, 1.003, 1, 0.997, 0.995, 0.994, 0.993, 0.993, 0.993, 0.993, 0.994, 0.994, 0.995, 0.996, 0.997, 0.997, 0.998, 0.999, 1);
+  --nds-easing-spring-settle: linear(0, 0.02, 0.075, 0.151, 0.246, 0.344, 0.445, 0.548, 0.642, 0.731, 0.807, 0.876, 0.932, 0.978, 1.015, 1.043, 1.063, 1.076, 1.083, 1.085, 1.083, 1.079, 1.073, 1.065, 1.056, 1.048, 1.039, 1.031, 1.023, 1.017, 1.011, 1.006, 1.002, 0.999, 0.997, 0.995, 0.994, 0.993, 0.993, 0.993, 0.993, 0.994, 0.994, 0.995, 0.996, 0.997, 0.997, 0.998, 1);
+  --nds-scale-0: 0;
+  --nds-scale-100: 1;
+  --nds-scale-105: 1.05;
+  --nds-scale-145: 1.45;
+  --nds-scale-175: 1.75;
   /* Brand */
   --nds-palette-white: var(--nds-color-white);
   --nds-palette-white--natural: var(--nds-color-white);
@@ -202,6 +220,64 @@
   --nds-size-icon-sm: var(--nds-size-16);
   --nds-size-icon-md: var(--nds-space-20);
   --nds-size-icon-lg: var(--nds-space-24);
+  /* Motion */
+  --nds-motion-feedback-duration: var(--nds-duration-120);
+  --nds-motion-feedback-duration--standard: var(--nds-duration-120);
+  --nds-motion-feedback-duration--reduced: var(--nds-duration-120);
+  --nds-motion-feedback-easing: var(--nds-easing-standard);
+  --nds-motion-feedback-easing--standard: var(--nds-easing-standard);
+  --nds-motion-feedback-easing--reduced: var(--nds-easing-standard);
+  --nds-motion-reveal-duration: var(--nds-duration-120);
+  --nds-motion-reveal-duration--standard: var(--nds-duration-120);
+  --nds-motion-reveal-duration--reduced: var(--nds-duration-0);
+  --nds-motion-reveal-easing: var(--nds-easing-standard);
+  --nds-motion-reveal-easing--standard: var(--nds-easing-standard);
+  --nds-motion-reveal-easing--reduced: var(--nds-easing-standard);
+  --nds-motion-zoom-duration: var(--nds-duration-300);
+  --nds-motion-zoom-duration--standard: var(--nds-duration-300);
+  --nds-motion-zoom-duration--reduced: var(--nds-duration-0);
+  --nds-motion-zoom-easing: var(--nds-easing-standard);
+  --nds-motion-zoom-easing--standard: var(--nds-easing-standard);
+  --nds-motion-zoom-easing--reduced: var(--nds-easing-standard);
+  --nds-motion-zoom-scale: var(--nds-scale-105);
+  --nds-motion-zoom-scale--standard: var(--nds-scale-105);
+  --nds-motion-zoom-scale--reduced: var(--nds-scale-100);
+  --nds-motion-press-duration: var(--nds-duration-450);
+  --nds-motion-press-duration--standard: var(--nds-duration-450);
+  --nds-motion-press-duration--reduced: var(--nds-duration-0);
+  --nds-motion-press-easing: var(--nds-easing-spring-press);
+  --nds-motion-press-easing--standard: var(--nds-easing-spring-press);
+  --nds-motion-press-easing--reduced: var(--nds-easing-standard);
+  --nds-motion-press-scale-x: var(--nds-scale-175);
+  --nds-motion-press-scale-x--standard: var(--nds-scale-175);
+  --nds-motion-press-scale-x--reduced: var(--nds-scale-100);
+  --nds-motion-press-scale-y: var(--nds-scale-145);
+  --nds-motion-press-scale-y--standard: var(--nds-scale-145);
+  --nds-motion-press-scale-y--reduced: var(--nds-scale-100);
+  --nds-motion-settle-duration: var(--nds-duration-510);
+  --nds-motion-settle-duration--standard: var(--nds-duration-510);
+  --nds-motion-settle-duration--reduced: var(--nds-duration-0);
+  --nds-motion-settle-easing: var(--nds-easing-spring-settle);
+  --nds-motion-settle-easing--standard: var(--nds-easing-spring-settle);
+  --nds-motion-settle-easing--reduced: var(--nds-easing-standard);
+  --nds-motion-enter-duration: var(--nds-duration-300);
+  --nds-motion-enter-duration--standard: var(--nds-duration-300);
+  --nds-motion-enter-duration--reduced: var(--nds-duration-200);
+  --nds-motion-enter-easing: var(--nds-easing-enter);
+  --nds-motion-enter-easing--standard: var(--nds-easing-enter);
+  --nds-motion-enter-easing--reduced: var(--nds-easing-standard);
+  --nds-motion-enter-travel: var(--nds-scale-100);
+  --nds-motion-enter-travel--standard: var(--nds-scale-100);
+  --nds-motion-enter-travel--reduced: var(--nds-scale-0);
+  --nds-motion-enter-opacity-from: var(--nds-scale-100);
+  --nds-motion-enter-opacity-from--standard: var(--nds-scale-100);
+  --nds-motion-enter-opacity-from--reduced: var(--nds-scale-0);
+  --nds-motion-progress-duration: var(--nds-duration-800);
+  --nds-motion-progress-duration--standard: var(--nds-duration-800);
+  --nds-motion-progress-duration--reduced: var(--nds-duration-2400);
+  --nds-motion-progress-easing: var(--nds-easing-linear);
+  --nds-motion-progress-easing--standard: var(--nds-easing-linear);
+  --nds-motion-progress-easing--reduced: var(--nds-easing-linear);
   /* Layout */
   --nds-layout-page-margin: var(--nds-space-40);
   --nds-layout-page-margin--desktop: var(--nds-space-40);
@@ -453,6 +529,30 @@
   --nds-wishlist-size--mobile: var(--nds-size-40);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --nds-motion-feedback-duration: var(--nds-motion-feedback-duration--reduced);
+    --nds-motion-feedback-easing: var(--nds-motion-feedback-easing--reduced);
+    --nds-motion-reveal-duration: var(--nds-motion-reveal-duration--reduced);
+    --nds-motion-reveal-easing: var(--nds-motion-reveal-easing--reduced);
+    --nds-motion-zoom-duration: var(--nds-motion-zoom-duration--reduced);
+    --nds-motion-zoom-easing: var(--nds-motion-zoom-easing--reduced);
+    --nds-motion-zoom-scale: var(--nds-motion-zoom-scale--reduced);
+    --nds-motion-press-duration: var(--nds-motion-press-duration--reduced);
+    --nds-motion-press-easing: var(--nds-motion-press-easing--reduced);
+    --nds-motion-press-scale-x: var(--nds-motion-press-scale-x--reduced);
+    --nds-motion-press-scale-y: var(--nds-motion-press-scale-y--reduced);
+    --nds-motion-settle-duration: var(--nds-motion-settle-duration--reduced);
+    --nds-motion-settle-easing: var(--nds-motion-settle-easing--reduced);
+    --nds-motion-enter-duration: var(--nds-motion-enter-duration--reduced);
+    --nds-motion-enter-easing: var(--nds-motion-enter-easing--reduced);
+    --nds-motion-enter-travel: var(--nds-motion-enter-travel--reduced);
+    --nds-motion-enter-opacity-from: var(--nds-motion-enter-opacity-from--reduced);
+    --nds-motion-progress-duration: var(--nds-motion-progress-duration--reduced);
+    --nds-motion-progress-easing: var(--nds-motion-progress-easing--reduced);
+  }
+}
+
 @media (max-width: 767px) {
   :root {
     --nds-layout-page-margin: var(--nds-layout-page-margin--mobile);
@@ -538,6 +638,52 @@
     --nds-wishlist-shadow-y: var(--nds-wishlist-shadow-y--mobile);
     --nds-wishlist-size: var(--nds-wishlist-size--mobile);
   }
+}
+
+/* Force Standard values for a subtree (mirrors setting a frame's mode in Figma) */
+[data-nds-motion='standard'] {
+  --nds-motion-feedback-duration: var(--nds-motion-feedback-duration--standard);
+  --nds-motion-feedback-easing: var(--nds-motion-feedback-easing--standard);
+  --nds-motion-reveal-duration: var(--nds-motion-reveal-duration--standard);
+  --nds-motion-reveal-easing: var(--nds-motion-reveal-easing--standard);
+  --nds-motion-zoom-duration: var(--nds-motion-zoom-duration--standard);
+  --nds-motion-zoom-easing: var(--nds-motion-zoom-easing--standard);
+  --nds-motion-zoom-scale: var(--nds-motion-zoom-scale--standard);
+  --nds-motion-press-duration: var(--nds-motion-press-duration--standard);
+  --nds-motion-press-easing: var(--nds-motion-press-easing--standard);
+  --nds-motion-press-scale-x: var(--nds-motion-press-scale-x--standard);
+  --nds-motion-press-scale-y: var(--nds-motion-press-scale-y--standard);
+  --nds-motion-settle-duration: var(--nds-motion-settle-duration--standard);
+  --nds-motion-settle-easing: var(--nds-motion-settle-easing--standard);
+  --nds-motion-enter-duration: var(--nds-motion-enter-duration--standard);
+  --nds-motion-enter-easing: var(--nds-motion-enter-easing--standard);
+  --nds-motion-enter-travel: var(--nds-motion-enter-travel--standard);
+  --nds-motion-enter-opacity-from: var(--nds-motion-enter-opacity-from--standard);
+  --nds-motion-progress-duration: var(--nds-motion-progress-duration--standard);
+  --nds-motion-progress-easing: var(--nds-motion-progress-easing--standard);
+}
+
+/* Force Reduced values for a subtree (mirrors setting a frame's mode in Figma) */
+[data-nds-motion='reduced'] {
+  --nds-motion-feedback-duration: var(--nds-motion-feedback-duration--reduced);
+  --nds-motion-feedback-easing: var(--nds-motion-feedback-easing--reduced);
+  --nds-motion-reveal-duration: var(--nds-motion-reveal-duration--reduced);
+  --nds-motion-reveal-easing: var(--nds-motion-reveal-easing--reduced);
+  --nds-motion-zoom-duration: var(--nds-motion-zoom-duration--reduced);
+  --nds-motion-zoom-easing: var(--nds-motion-zoom-easing--reduced);
+  --nds-motion-zoom-scale: var(--nds-motion-zoom-scale--reduced);
+  --nds-motion-press-duration: var(--nds-motion-press-duration--reduced);
+  --nds-motion-press-easing: var(--nds-motion-press-easing--reduced);
+  --nds-motion-press-scale-x: var(--nds-motion-press-scale-x--reduced);
+  --nds-motion-press-scale-y: var(--nds-motion-press-scale-y--reduced);
+  --nds-motion-settle-duration: var(--nds-motion-settle-duration--reduced);
+  --nds-motion-settle-easing: var(--nds-motion-settle-easing--reduced);
+  --nds-motion-enter-duration: var(--nds-motion-enter-duration--reduced);
+  --nds-motion-enter-easing: var(--nds-motion-enter-easing--reduced);
+  --nds-motion-enter-travel: var(--nds-motion-enter-travel--reduced);
+  --nds-motion-enter-opacity-from: var(--nds-motion-enter-opacity-from--reduced);
+  --nds-motion-progress-duration: var(--nds-motion-progress-duration--reduced);
+  --nds-motion-progress-easing: var(--nds-motion-progress-easing--reduced);
 }
 
 /* Force Desktop values for a subtree (mirrors setting a frame's mode in Figma) */

@@ -15,7 +15,7 @@
   color: var(--_fg);
   font: 600 var(--nds-ui-button-font-size) / var(--nds-ui-button-line-height) var(--nds-font-family);
   cursor: pointer;
-  transition: background-color 120ms ease, border-color 120ms ease;
+  transition: background-color var(--nds-motion-feedback-duration) var(--nds-motion-feedback-easing), border-color var(--nds-motion-feedback-duration) var(--nds-motion-feedback-easing);
   position: relative;
 }
 .nds-button--full-width { display: flex; width: 100%; }

@@ -50,12 +50,13 @@ const text = (s) => ({ content: [{ type: 'text', text: s }] });
 const json = (o) => text(JSON.stringify(o, null, 2));
 
 // Resolve a token (any tier) to its primitive value, per mode.
-const resolveToken = (t, all) => {
+const resolveToken = (t, all, own = '') => {
   const prim = all.Primitives;
   // A palette step (Brand) resolves to its primitive in the default brand, Natural.
-  const val = (alias) => { const p = prim[alias] ?? prim[primitiveOf(all, alias)]; return p ? (p.type === 'COLOR' ? p.value : `${p.value}px`) : alias; };
+  const unit = (name) => (name.startsWith('duration/') ? 'ms' : name.startsWith('scale/') ? '' : 'px'); // D-037
+  const val = (alias) => { const name = prim[alias] ? alias : primitiveOf(all, alias); const p = prim[name]; return p ? (p.type === 'COLOR' || p.type === 'STRING' ? p.value : `${p.value}${unit(name)}`) : alias; };
   if (t.modes) return Object.fromEntries(Object.entries(t.modes).map(([m, x]) => [m, { value: val(x.alias), ref: x.alias }]));
-  return t.alias ? { value: val(t.alias), ref: t.alias } : { value: t.type === 'COLOR' ? t.value : `${t.value}px` };
+  return t.alias ? { value: val(t.alias), ref: t.alias } : { value: t.type === 'COLOR' || t.type === 'STRING' ? t.value : `${t.value}${unit(own)}` };
 };
 
 // ---------------------------------------------------------------- server
@@ -113,9 +114,9 @@ server.registerTool('get_guidelines', {
 
 server.registerTool('get_tokens', {
   title: 'Get tokens',
-  description: 'Design tokens by tier: Brand (palette steps per brand: Natural, Tide), Color (semantic roles, Light / Dark), Dimension, Layout (Desktop/Mobile), Typography, Component (one-offs), Primitives. Each entry has its value(s), the primitive it aliases and its CSS variable. Components must use roles and the public scale (space/*, radius/*, border-width/*), never colour or type primitives.',
+  description: 'Design tokens by tier: Brand (palette steps per brand: Natural, Tide), Color (semantic roles, Light / Dark), Motion (presets: feedback, reveal, zoom, press, settle, enter, progress; Standard / Reduced), Dimension, Layout (Desktop/Mobile), Typography, Component (one-offs), Primitives. Each entry has its value(s), the primitive it aliases and its CSS variable. Components must use roles and the public scale (space/*, radius/*, border-width/*), never colour or type primitives.',
   inputSchema: {
-    collection: z.enum(['Color', 'Brand', 'Dimension', 'Layout', 'Typography', 'Component', 'Primitives']).optional().describe('Omit for an overview of the tiers'),
+    collection: z.enum(['Color', 'Brand', 'Motion', 'Dimension', 'Layout', 'Typography', 'Component', 'Primitives']).optional().describe('Omit for an overview of the tiers'),
     query: z.string().optional().describe('Filter by substring of the token name, e.g. "fg/", "focus", "gutter"'),
   },
 }, async ({ collection, query }) => {
@@ -126,7 +127,7 @@ server.registerTool('get_tokens', {
   const out = [];
   for (const [col, vars] of Object.entries(all)) {
     if (col.startsWith('$') || (collection && col !== collection)) continue;
-    for (const [name, t] of Object.entries(vars)) if (!query || name.includes(query)) out.push({ collection: col, name, css: `var(${cssVar(name)})`, ...resolveToken(t, all) });
+    for (const [name, t] of Object.entries(vars)) if (!query || name.includes(query)) out.push({ collection: col, name, css: `var(${cssVar(name)})`, ...resolveToken(t, all, name) });
   }
   return json(out.slice(0, 200));
 });

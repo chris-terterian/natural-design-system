@@ -82,9 +82,9 @@ const CATEGORY = [
 // Token tiers (D-030). Components use the semantic tiers and the public scale; Component tokens only for their own
 // one-off decisions. Raw primitives outside the public scale (colour, size, type, elevation) stay behind the tiers.
 const FOLDER_PREFIX = { Button: ['button'], Input: ['input'], Radio: ['radio'], Toggle: ['toggle'], ProductCard: ['card', 'wishlist'], WishlistButton: ['wishlist'], ProductRow: ['row'], Badge: ['badge'], Navigation: ['nav'], Typography: ['text'], Spinner: ['button'], Logo: ['logo'], Calendar: ['calendar'], ImageBlock: ['image'], Footer: ['footer'], Slider: ['slider'], TextButton: ['text-button'], CartLine: ['cart'], CartDrawer: ['drawer'] };
-const SEMANTIC_COLLECTIONS = ['Color', 'Dimension', 'Layout', 'Typography'];
+const SEMANTIC_COLLECTIONS = ['Color', 'Dimension', 'Motion', 'Layout', 'Typography'];
 const PUBLIC_SCALE = /^--nds-(space|radius|border-width)-/;
-const HIDDEN_PRIMITIVE = /^--nds-(color|palette|size|font-size|line-height|letter-spacing|elevation)-/; // palette: Brand steps (D-036)
+const HIDDEN_PRIMITIVE = /^--nds-(color|palette|size|font-size|line-height|letter-spacing|elevation|duration|easing|scale)-/; // palette: Brand steps (D-036); duration, easing, scale: motion (D-037)
 const COMPONENT_TOKENS = Object.keys(tokens.Component || {});
 let CTX = { prop: '', prefixes: [] };
 const propAt = (code, index) => { const m = [...code.slice(0, index).matchAll(/([a-z-]+)\s*:/g)].pop(); return m ? m[1] : ''; };
@@ -165,6 +165,16 @@ function checkCss(file, src) {
         add(file, n, 'hardcoded-size', 'error', `Hardcoded size ${m[0]}`, suggestPx(v), line);
       }
     }
+    // --- motion (D-037): timings and easings come from the motion presets; only compositor properties animate
+    if (!/^\s*--/.test(code) && !ignored(lines, i, 'hardcoded-motion')) {
+      for (const m of code.matchAll(/(?<![\w.-])\d*\.?\d+(ms|s)\b/g)) add(file, n, 'hardcoded-motion', 'error', `Hardcoded duration ${m[0]}`, 'use a motion preset: var(--nds-motion-<preset>-duration), e.g. feedback (colour fades), reveal, zoom, press, settle, enter, progress (DESIGN.md §3.7)', line);
+      const easing = code.match(/cubic-bezier\(|steps\(|(?<![\w-])linear\(|(?<![\w-])(ease|ease-in|ease-out|ease-in-out|linear)(?![\w-])/);
+      if (easing) add(file, n, 'hardcoded-motion', 'error', `Hardcoded easing ${easing[0].replace('(', '()')}`, 'use the preset\'s easing: var(--nds-motion-<preset>-easing); springs are defined by their physics in the Primitives (easing/spring/*)', line);
+    }
+    if (!ignored(lines, i, 'motion-layout')) for (const decl of code.matchAll(/(?:^|[;{\s])transition(?:-property)?\s*:\s*([^;}]+)/g)) {
+      const bad = decl[1].replace(/var\([^)]*\)/g, '').match(/\b(width|height|top|left|right|bottom|margin[\w-]*|padding[\w-]*|max-height|max-width|inset|all)\b/);
+      if (bad) add(file, n, 'motion-layout', 'error', `Animates ${bad[1]}`, 'animate transform, translate, scale, opacity or colours instead: layout properties re-flow the page on every frame and stutter', line);
+    }
     // --- naming: classes and custom properties
     const selector = code.includes('{') ? code.slice(0, code.indexOf('{')) : /,\s*$/.test(code) && !code.includes(':') ? code : '';
     for (const m of selector.replace(/\([^)]*\)/g, (x) => x.replace(/\./g, ' ')).matchAll(/\.([a-zA-Z_][\w-]*)/g)) {
@@ -238,12 +248,13 @@ function checkTsx(file, src) {
 function checkTokens(file, src) {
   const lines = src.split('\n');
   const data = JSON.parse(src);
-  const PRIM = /^(color|space|size|radius|border-width|font-size|line-height|letter-spacing|elevation)\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/;
+  const PRIM = /^(color|space|size|radius|border-width|font-size|line-height|letter-spacing|elevation|duration|easing|scale)\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/;
   const SEM = /^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)+$/;
   const PREFIX = {
     Brand: ['palette'], // palette steps per brand (D-036)
     Color: ['fg', 'bg', 'border', 'accent', 'control', 'focus', 'shadow'],
     Dimension: ['focus', 'size'],
+    Motion: ['motion'], // presets with Standard / Reduced modes (D-037)
     Layout: ['layout'],
     Typography: ['text', 'ui'],
     Component: [...new Set(Object.values(FOLDER_PREFIX).flat())],

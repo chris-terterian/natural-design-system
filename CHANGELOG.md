@@ -2,6 +2,25 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [0.17.0] – 2026-10-07
+
+### Added
+- **Motion as tokens** (D-037, DESIGN.md §3.7). A **Motion** collection (modes **Standard** and **Reduced**) with seven presets: `feedback`, `reveal`, `zoom`, `press`, `settle`, `enter`, `progress`. Primitives `duration/*` (ms), `easing/*` and `scale/*`.
+- **Springs defined by their physics**: `easing/spring/press` (mass 1, stiffness 520, damping 28) and `easing/spring/settle` (380, 24), compiled to CSS `linear()` by `scripts/springs.mjs`; governance requires each preset's duration to be its spring's settle time.
+- **Reduced is a mode**: `prefers-reduced-motion` or `data-nds-motion="reduced"`; Storybook **Motion** switch.
+- `npm run check:motion` (in `npm run check`, CI and the drift bot): every story with reduced motion on; fails if anything moves.
+- validate_file: `hardcoded-motion` (raw durations, easings) and `motion-layout` (animating width, height, margins, `all`).
+- **Toggle springs**: the thumb swells under the finger and travels with a small overshoot; instant in Reduced. Figma: Pressed variants show the swell; the Toggle prototype uses Custom springs with the same physics; new **Motion** page.
+- MCP: `get_tokens` covers Motion and reports durations in ms; smoke tests cover motion.
+
+### Changed
+- Button, Wishlist Button, Product Card, Navigation, Spinner, Toggle and Cart Drawer use motion presets instead of hardcoded timings; their own reduced-motion blocks are gone (the Reduced mode handles them).
+- Cart Drawer in reduced motion **fades in** (200ms) instead of appearing with no transition.
+- The Figma snapshot export rounds numbers to 4 decimals (Figma stores 32-bit floats).
+
+### Removed (breaking)
+- The Typography colour aliases deprecated in 0.16.0 (`--nds-text-color-heading`, `-paragraph`, `-muted`): use `--nds-fg-default` and `--nds-fg-muted`.
+
 ## [0.16.0] – 2026-10-06
 
 ### Added

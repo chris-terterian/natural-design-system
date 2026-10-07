@@ -28,7 +28,8 @@ if (PART.startsWith('variables')) {
       const v = byId[id];
       for (const m of c.modes) {
         const val = v.valuesByMode[m.modeId];
-        const out = val && val.type === 'VARIABLE_ALIAS' ? '@' + byId[val.id].name : v.resolvedType === 'COLOR' ? toHex(val) : val;
+        // Figma stores numbers as 32-bit floats (1.45 reads back as 1.4500000477): round to 4 places to compare with the JSON.
+        const out = val && val.type === 'VARIABLE_ALIAS' ? '@' + byId[val.id].name : v.resolvedType === 'COLOR' ? toHex(val) : typeof val === 'number' ? +val.toFixed(4) : val;
         lines.push(`${c.name}|${v.name}|${c.modes.length > 1 ? m.name : ''}|${out}`);
       }
     }

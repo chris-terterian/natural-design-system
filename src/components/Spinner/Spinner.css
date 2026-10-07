@@ -2,7 +2,7 @@
   width: var(--nds-size-icon-md);
   height: var(--nds-size-icon-md);
   stroke: var(--nds-fg-default);
-  animation: nds-spin 800ms linear infinite;
+  animation: nds-spin var(--nds-motion-progress-duration) var(--nds-motion-progress-easing) infinite; /* 3x slower in Reduced: it's the only sign of progress (D-037) */
 }
 .nds-spinner__track { opacity: 0.25; }
 
@@ -11,6 +11,3 @@
 }
 
 /* Keep a visible cue under reduced motion, just slower */
-@media (prefers-reduced-motion: reduce) {
-  .nds-spinner { animation-duration: 2400ms; }
-}

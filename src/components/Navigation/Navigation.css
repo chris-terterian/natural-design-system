@@ -41,9 +41,8 @@
 }
 /* Open: tinted background + chevron up (Figma: Nav Link State=Open) */
 .nds-nav-link[aria-expanded='true'], .nds-nav-link[data-state='open'] { background: var(--nds-control-bg-hover); text-decoration: none; }
-.nds-nav-link__chevron { transition: transform 120ms ease; }
+.nds-nav-link__chevron { transition: transform var(--nds-motion-reveal-duration) var(--nds-motion-reveal-easing); } /* instant in Reduced (D-037) */
 .nds-nav-link[aria-expanded='true'] .nds-nav-link__chevron, .nds-nav-link[data-state='open'] .nds-nav-link__chevron { transform: rotate(180deg); }
-@media (prefers-reduced-motion: reduce) { .nds-nav-link__chevron { transition: none; } }
 
 .nds-nav-link:focus-visible, .nds-nav-link[data-state='focus'] {
   outline: var(--nds-focus-ring-width) solid var(--nds-focus-ring);

@@ -125,6 +125,7 @@ Run on every push to `main` by `.github/workflows/storybook-pages.yml`. **Any fa
 | Governance | `npm run check:governance` | ✅ | Tokens resolve; generated `tokens.css` and `DESIGN.md` front matter are current; every component is registered with a valid status, matching story tag, Figma node and `DESIGN.md` spec |
 | Build | `npm run build-storybook` | ✅ | Every story builds |
 | Contrast | `npm run check:contrast` | ✅ | Every pairing DESIGN.md §4.2 promises (24: text 4.5:1, UI 3:1) passes in every brand × Color mode (Natural, Tide × Light, Dark) |
+| Reduced motion | `npm run check:motion` | ✅ | Every story with `prefers-reduced-motion: reduce`: nothing moves (no transitions on transform, translate, scale or rotate; animations leave position and size unchanged); fades and a progress indicator slowed to 2000ms or more are allowed |
 | Accessibility | `npm run check:a11y` | ✅ | axe (WCAG 2.0 / 2.1 / 2.2, A + AA) on every story in every brand × theme; only registered exceptions pass |
 | Figma ↔ code parity | `npm run check:parity` | ✅ | Every variable matches per mode, both directions; every Figma node the code links to exists with the registry name; no unwired component properties; text styles bound to Typography variables. Compares against `governance/figma-snapshot.json`, which is exported from the live file through the Figma MCP |
 
@@ -153,6 +154,7 @@ Runs on every `git commit` (a Git hook in `.githooks/`, installed automatically 
 | **Hardcoded values** | `#3B2A1E`, `rgb(…)`, `padding: 18px` in component CSS; colours or sizes in component inline styles | The role for that property (a colour in `border` suggests `border/*`, in `background` `bg/*` or `control/*`), or the public scale step (`var(--nds-space-12)`) |
 | **Token tiers** (D-030) | A component using a hidden primitive (`--nds-color-brown-900`, `--nds-font-size-14`), or another component's one-off token | The roles that alias that primitive (e.g. `var(--nds-fg-default)`); a new role or Component token through §4 |
 | **Broken naming** | Classes outside `nds-block__element--modifier`; unknown `--nds-*` tokens (typo-matched); token names with `.`, the wrong collection prefix, or a collection outside the six tiers; non-PascalCase components; story titles that don't match Figma; undocumented breakpoints | The corrected name, or "did you mean…" |
+| **Hardcoded motion** (D-037) | `transition: transform 300ms ease`, `cubic-bezier(…)`, `linear(…)`; animating `width`, `height`, `margin`, `all` | A motion preset (`var(--nds-motion-zoom-duration)`, `var(--nds-motion-zoom-easing)`); animate transform, opacity or colours instead |
 | **Placeholder link text** | "click here", "read more", "learn more", "link" | Say where the link goes (WCAG 2.4.4) |
 
 **Warns** (doesn't block): removed focus outlines, `<img>` without `alt`, click handlers on non-interactive elements, positive `tabIndex`, icon buttons without a name.

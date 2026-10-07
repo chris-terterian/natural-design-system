@@ -8,9 +8,11 @@ A natural goods e-commerce design system: React + TypeScript components, design 
 
 **Two brands, Light and Dark:** every component in Natural and **Tide** (a coastal store), each in Light and Dark, from the same tokens: four combinations, all WCAG AA. Set `data-nds-brand="tide"` and `data-nds-theme="dark"` (or `"system"`) on the page; Storybook has Brand and Theme switches in the toolbar.
 
+**Motion as tokens:** seven presets with Standard and Reduced modes; springs defined by their physics and shared by Figma prototypes and code; reduced motion tested on every story.
+
 **Install:** `npm install natural-design-system`, then `import { Button } from 'natural-design-system'` and `import 'natural-design-system/styles.css'`.
 
-**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.16.0)
+**Governance:** [GOVERNANCE.md](GOVERNANCE.md) · [DECISIONS.md](DECISIONS.md) · [CHANGELOG.md](CHANGELOG.md) (v0.17.0)
 
 **Design guidelines:** [DESIGN.md](DESIGN.md) covers the brand, voice, foundations, components and e-commerce patterns.
 
@@ -34,6 +36,7 @@ npm run storybook        # http://localhost:6007
 | `npm run check` | All quality gates: typecheck, governance, parity, Storybook build, accessibility (the same gates CI runs before deploying) |
 | `npm run test:parity-direction` | Proves parity tells which side moved: code changed → Figma behind, Figma changed → design decision, both → conflict, no history → unknown |
 | `npm run drift` | Every gate, without stopping at the first failure, plus whether Figma was edited since the snapshot (with `FIGMA_TOKEN`); writes `drift/report.md`. `-- --fix` applies the safe fixes first, `-- --skip-a11y` skips the slow gates |
+| `npm run check:motion` | Every story with reduced motion on: fails if anything still moves (fades and a slowed spinner allowed) |
 | `npm run check:contrast` | Every promised colour pairing passes WCAG AA in every brand × theme (Natural, Tide × Light, Dark) |
 | `npm run check:governance` | Registry ↔ stories ↔ Figma links ↔ DESIGN.md specs; tokens resolve and generated files are current |
 | `npm run check:parity` | Figma ↔ code parity against `governance/figma-snapshot.json` (variables per mode, linked components, unwired properties, text styles) |
@@ -110,9 +113,10 @@ Run the check yourself: `npm run drift` (add `-- --skip-a11y` for a fast pass).
 
 | Tier | Collection | Modes | Variables | Examples |
 |---|---|---|---|---|
-| 1 | **Primitives** | — | 114 | `color/brown/900`, `space/12`, `radius/8` (space, radius and border width are the public scale; the rest stays behind the tiers) |
+| 1 | **Primitives** | — | 132 | `color/brown/900`, `space/12`, `radius/8` (space, radius and border width are the public scale; the rest stays behind the tiers) |
 | 2 | **Brand** | Natural · Tide | 25 | `palette/neutral/900`, `palette/quiet/200` (each brand's colour family; roles point here) |
 | 2 | **Color** | Light, Dark | 32 | `fg/muted`, `bg/emphasis`, `border/hover`, `accent/bg`, `focus/ring` |
+| 2 | **Motion** | Standard · Reduced | 19 | `motion/settle/duration`, `motion/press/easing` (7 presets; springs defined by their physics) |
 | 2 | **Dimension** | — | 9 | `size/control`, `size/target-min`, `focus/ring-width` |
 | 3 | **Layout** | Desktop · Mobile | 4 | `layout/page-margin`, `layout/gutter`, `layout/section` |
 | 3 | **Typography** | Desktop · Mobile | 37 | `text/h1/font-size`, `ui/label/font-size` |

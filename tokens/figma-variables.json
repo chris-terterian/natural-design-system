@@ -478,6 +478,88 @@
     "size/96": {
       "type": "FLOAT",
       "value": 96
+    },
+    "duration/0": {
+      "type": "FLOAT",
+      "value": 0
+    },
+    "duration/120": {
+      "type": "FLOAT",
+      "value": 120
+    },
+    "duration/200": {
+      "type": "FLOAT",
+      "value": 200
+    },
+    "duration/300": {
+      "type": "FLOAT",
+      "value": 300
+    },
+    "duration/450": {
+      "type": "FLOAT",
+      "value": 450
+    },
+    "duration/510": {
+      "type": "FLOAT",
+      "value": 510
+    },
+    "duration/800": {
+      "type": "FLOAT",
+      "value": 800
+    },
+    "duration/2400": {
+      "type": "FLOAT",
+      "value": 2400
+    },
+    "easing/standard": {
+      "type": "STRING",
+      "value": "ease"
+    },
+    "easing/enter": {
+      "type": "STRING",
+      "value": "ease-out"
+    },
+    "easing/linear": {
+      "type": "STRING",
+      "value": "linear"
+    },
+    "easing/spring/press": {
+      "type": "STRING",
+      "value": "linear(0, 0.023, 0.077, 0.158, 0.254, 0.359, 0.46, 0.564, 0.662, 0.746, 0.825, 0.892, 0.948, 0.991, 1.026, 1.052, 1.069, 1.08, 1.085, 1.085, 1.082, 1.077, 1.069, 1.061, 1.052, 1.043, 1.034, 1.026, 1.019, 1.013, 1.008, 1.003, 1, 0.997, 0.995, 0.994, 0.993, 0.993, 0.993, 0.993, 0.994, 0.994, 0.995, 0.996, 0.997, 0.997, 0.998, 0.999, 1)",
+      "spring": {
+        "mass": 1,
+        "stiffness": 520,
+        "damping": 28
+      }
+    },
+    "easing/spring/settle": {
+      "type": "STRING",
+      "value": "linear(0, 0.02, 0.075, 0.151, 0.246, 0.344, 0.445, 0.548, 0.642, 0.731, 0.807, 0.876, 0.932, 0.978, 1.015, 1.043, 1.063, 1.076, 1.083, 1.085, 1.083, 1.079, 1.073, 1.065, 1.056, 1.048, 1.039, 1.031, 1.023, 1.017, 1.011, 1.006, 1.002, 0.999, 0.997, 0.995, 0.994, 0.993, 0.993, 0.993, 0.993, 0.994, 0.994, 0.995, 0.996, 0.997, 0.997, 0.998, 1)",
+      "spring": {
+        "mass": 1,
+        "stiffness": 380,
+        "damping": 24
+      }
+    },
+    "scale/0": {
+      "type": "FLOAT",
+      "value": 0
+    },
+    "scale/100": {
+      "type": "FLOAT",
+      "value": 1
+    },
+    "scale/105": {
+      "type": "FLOAT",
+      "value": 1.05
+    },
+    "scale/145": {
+      "type": "FLOAT",
+      "value": 1.45
+    },
+    "scale/175": {
+      "type": "FLOAT",
+      "value": 1.75
     }
   },
   "Brand": {
@@ -1147,6 +1229,217 @@
     "size/icon-lg": {
       "type": "FLOAT",
       "alias": "space/24"
+    }
+  },
+  "Motion": {
+    "motion/feedback/duration": {
+      "type": "FLOAT",
+      "modes": {
+        "Standard": {
+          "alias": "duration/120"
+        },
+        "Reduced": {
+          "alias": "duration/120"
+        }
+      }
+    },
+    "motion/feedback/easing": {
+      "type": "STRING",
+      "modes": {
+        "Standard": {
+          "alias": "easing/standard"
+        },
+        "Reduced": {
+          "alias": "easing/standard"
+        }
+      }
+    },
+    "motion/reveal/duration": {
+      "type": "FLOAT",
+      "modes": {
+        "Standard": {
+          "alias": "duration/120"
+        },
+        "Reduced": {
+          "alias": "duration/0"
+        }
+      }
+    },
+    "motion/reveal/easing": {
+      "type": "STRING",
+      "modes": {
+        "Standard": {
+          "alias": "easing/standard"
+        },
+        "Reduced": {
+          "alias": "easing/standard"
+        }
+      }
+    },
+    "motion/zoom/duration": {
+      "type": "FLOAT",
+      "modes": {
+        "Standard": {
+          "alias": "duration/300"
+        },
+        "Reduced": {
+          "alias": "duration/0"
+        }
+      }
+    },
+    "motion/zoom/easing": {
+      "type": "STRING",
+      "modes": {
+        "Standard": {
+          "alias": "easing/standard"
+        },
+        "Reduced": {
+          "alias": "easing/standard"
+        }
+      }
+    },
+    "motion/zoom/scale": {
+      "type": "FLOAT",
+      "modes": {
+        "Standard": {
+          "alias": "scale/105"
+        },
+        "Reduced": {
+          "alias": "scale/100"
+        }
+      }
+    },
+    "motion/press/duration": {
+      "type": "FLOAT",
+      "modes": {
+        "Standard": {
+          "alias": "duration/450"
+        },
+        "Reduced": {
+          "alias": "duration/0"
+        }
+      }
+    },
+    "motion/press/easing": {
+      "type": "STRING",
+      "modes": {
+        "Standard": {
+          "alias": "easing/spring/press"
+        },
+        "Reduced": {
+          "alias": "easing/standard"
+        }
+      }
+    },
+    "motion/press/scale-x": {
+      "type": "FLOAT",
+      "modes": {
+        "Standard": {
+          "alias": "scale/175"
+        },
+        "Reduced": {
+          "alias": "scale/100"
+        }
+      }
+    },
+    "motion/press/scale-y": {
+      "type": "FLOAT",
+      "modes": {
+        "Standard": {
+          "alias": "scale/145"
+        },
+        "Reduced": {
+          "alias": "scale/100"
+        }
+      }
+    },
+    "motion/settle/duration": {
+      "type": "FLOAT",
+      "modes": {
+        "Standard": {
+          "alias": "duration/510"
+        },
+        "Reduced": {
+          "alias": "duration/0"
+        }
+      }
+    },
+    "motion/settle/easing": {
+      "type": "STRING",
+      "modes": {
+        "Standard": {
+          "alias": "easing/spring/settle"
+        },
+        "Reduced": {
+          "alias": "easing/standard"
+        }
+      }
+    },
+    "motion/enter/duration": {
+      "type": "FLOAT",
+      "modes": {
+        "Standard": {
+          "alias": "duration/300"
+        },
+        "Reduced": {
+          "alias": "duration/200"
+        }
+      }
+    },
+    "motion/enter/easing": {
+      "type": "STRING",
+      "modes": {
+        "Standard": {
+          "alias": "easing/enter"
+        },
+        "Reduced": {
+          "alias": "easing/standard"
+        }
+      }
+    },
+    "motion/enter/travel": {
+      "type": "FLOAT",
+      "modes": {
+        "Standard": {
+          "alias": "scale/100"
+        },
+        "Reduced": {
+          "alias": "scale/0"
+        }
+      }
+    },
+    "motion/enter/opacity-from": {
+      "type": "FLOAT",
+      "modes": {
+        "Standard": {
+          "alias": "scale/100"
+        },
+        "Reduced": {
+          "alias": "scale/0"
+        }
+      }
+    },
+    "motion/progress/duration": {
+      "type": "FLOAT",
+      "modes": {
+        "Standard": {
+          "alias": "duration/800"
+        },
+        "Reduced": {
+          "alias": "duration/2400"
+        }
+      }
+    },
+    "motion/progress/easing": {
+      "type": "STRING",
+      "modes": {
+        "Standard": {
+          "alias": "easing/linear"
+        },
+        "Reduced": {
+          "alias": "easing/linear"
+        }
+      }
     }
   },
   "Layout": {

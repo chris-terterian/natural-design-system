@@ -6,6 +6,7 @@
 //  4. Exceptions register entries are complete.
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { execSync } from 'node:child_process';
+import { compileSpring } from './springs.mjs';
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const errors = [];
@@ -32,6 +33,20 @@ for (const [collection, vars] of Object.entries(tokens)) {
     if (t.type === 'COLOR' && !['Primitives', 'Brand', 'Color'].includes(collection)) fail(`Colour token ${collection}/${name} must be a role in the Color collection (it can't follow the brand or Light / Dark from ${collection})`);
   }
   if (modeSets.size > 1) fail(`Collection ${collection} mixes mode sets: ${[...modeSets].join(' | ')}`);
+}
+
+// ---- 1b. Motion presets (D-037): a spring's duration is its settle time, recompiled from its physics ----
+for (const [name, t] of Object.entries(tokens.Motion || {})) {
+  if (!name.endsWith('/easing')) continue;
+  const durationName = name.replace(/\/easing$/, '/duration');
+  for (const [mode, m] of Object.entries(t.modes || {})) {
+    const spring = primitives[m.alias]?.spring;
+    if (!spring) continue;
+    const { easing, duration } = compileSpring(spring);
+    if (primitives[m.alias].value !== easing) fail(`${m.alias} is out of date with its spring; run npm run tokens`);
+    const d = primitives[tokens.Motion[durationName]?.modes?.[mode]?.alias]?.value;
+    if (d !== duration) fail(`${durationName} (${mode}) is ${d}ms but ${m.alias} settles in ${duration}ms; use duration/${duration}`);
+  }
 }
 
 // ---- 2. Generated files are current ----

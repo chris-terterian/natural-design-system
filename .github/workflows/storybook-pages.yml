@@ -35,7 +35,7 @@ jobs:
         run: node scripts/validate-file.mjs --all
       - name: Governance check (registry, specs, Figma links, generated tokens)
         run: npm run check:governance
-      - name: Contrast (every promised pairing, Light and Dark)
+      - name: Contrast (every promised pairing, every brand × theme)
         run: npm run check:contrast
       - name: Figma ↔ code parity (committed snapshot of the Figma file)
         run: npm run check:parity
@@ -47,8 +47,10 @@ jobs:
         run: npm run build-storybook
       - name: Install Chromium for the accessibility gate
         run: npx playwright install --with-deps chromium
-      - name: Accessibility gate (axe, WCAG 2.2 AA, every story)
+      - name: Accessibility gate (axe, WCAG 2.2 AA, every story in every brand × theme)
         run: npm run check:a11y
+      - name: Reduced motion (every story; nothing moves)
+        run: npm run check:motion
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
         with:

@@ -24,15 +24,20 @@
   border: var(--nds-border-width-1-5) solid var(--_border);
   border-radius: var(--nds-radius-full);
   background: var(--_bg);
-  transition: background-color 120ms ease, border-color 120ms ease;
+  transition: background-color var(--nds-motion-feedback-duration) var(--nds-motion-feedback-easing),
+    border-color var(--nds-motion-feedback-duration) var(--nds-motion-feedback-easing);
 }
+/* Motion (D-037): the thumb travels on the settle spring and swells on the press spring. Separate translate and
+   scale properties so each has its own timing. In Reduced the tokens make it a short plain step with no swell. */
 .nds-toggle__thumb {
   display: block;
   width: var(--nds-toggle-thumb-size);
   height: var(--nds-toggle-thumb-size);
   border-radius: var(--nds-radius-full);
   background: var(--_thumb);
-  transition: transform 120ms ease, background-color 120ms ease;
+  transition: translate var(--nds-motion-settle-duration) var(--nds-motion-settle-easing),
+    scale var(--nds-motion-press-duration) var(--nds-motion-press-easing),
+    background-color var(--nds-motion-feedback-duration) var(--nds-motion-feedback-easing);
 }
 
 .nds-toggle__text { display: flex; flex-direction: column; gap: var(--nds-space-0); }
@@ -48,7 +53,11 @@
 .nds-toggle:has(:checked):hover, .nds-toggle:has(:checked)[data-state='hover'] { --_bg: var(--nds-accent-bg-hover); }
 .nds-toggle:has(:checked):active, .nds-toggle:has(:checked)[data-state='pressed'] { --_bg: var(--nds-accent-bg-pressed); }
 .nds-toggle:has(:checked) .nds-toggle__thumb {
-  transform: translateX(calc(var(--nds-toggle-track-width) - var(--nds-toggle-thumb-size) - 2 * var(--nds-toggle-thumb-inset) - 2 * var(--nds-border-width-1-5)));
+  translate: calc(var(--nds-toggle-track-width) - var(--nds-toggle-thumb-size) - 2 * var(--nds-toggle-thumb-inset) - 2 * var(--nds-border-width-1-5)) 0;
+}
+/* Pressed: the thumb swells under the finger. */
+.nds-toggle:active:not(:has(:disabled)) .nds-toggle__thumb, .nds-toggle[data-state='pressed'] .nds-toggle__thumb {
+  scale: var(--nds-motion-press-scale-x) var(--nds-motion-press-scale-y);
 }
 
 /* Focus ring: 2px, 2px gap */
@@ -61,6 +70,3 @@
 .nds-toggle:has(:disabled) { --_bg: var(--nds-bg-disabled); --_border: var(--nds-border-disabled); --_thumb: var(--nds-fg-disabled); cursor: not-allowed; }
 .nds-toggle:has(:disabled) :is(.nds-toggle__label, .nds-toggle__description) { color: var(--nds-fg-disabled); }
 
-@media (prefers-reduced-motion: reduce) {
-  .nds-toggle__track, .nds-toggle__thumb { transition: none; }
-}

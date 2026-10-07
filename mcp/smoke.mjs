@@ -31,6 +31,10 @@ ok(roles.some((t) => t.name === 'fg/muted' && t.css === 'var(--nds-fg-muted)' &&
 const layout = await J('get_tokens', { collection: 'Layout', query: 'gutter' });
 ok(layout[0]?.Desktop?.value === '24px' && layout[0]?.Mobile?.value === '16px', 'get_tokens: layout/gutter modes wrong');
 
+const settle = await J('get_tokens', { collection: 'Motion', query: 'settle/duration' });
+ok(settle[0]?.Standard?.value === '510ms' && settle[0]?.Reduced?.value === '0ms', `get_tokens: motion/settle/duration → ${JSON.stringify(settle[0])}`);
+const motionBad = await J('validate_code', { path: 'src/components/Demo/Demo.css', code: '.nds-demo { transition: width 200ms ease-in; }\n' });
+ok(['hardcoded-motion', 'motion-layout'].every((r) => motionBad.findings.some((f) => f.rule === r)), 'validate_code missed hardcoded motion or a layout animation');
 const border = await J('find_token', { value: '#6B4F35', property: 'border-color' });
 ok(border.use?.[0]?.name === 'border/hover', `find_token hex in border → ${border.use?.[0]?.name}`);
 const text = await J('find_token', { value: '#6B4F35', property: 'color' });

@@ -10,7 +10,7 @@
   color: var(--nds-fg-default);
   box-shadow: 0 var(--nds-wishlist-shadow-y) var(--nds-wishlist-shadow-blur) var(--nds-shadow-float);
   cursor: pointer;
-  transition: background-color 120ms ease;
+  transition: background-color var(--nds-motion-feedback-duration) var(--nds-motion-feedback-easing);
 }
 .nds-wishlist svg { width: var(--nds-size-icon-md); height: var(--nds-size-icon-md); }
 .nds-wishlist:hover, .nds-wishlist[data-state='hover'] { background: var(--nds-control-bg-hover); }

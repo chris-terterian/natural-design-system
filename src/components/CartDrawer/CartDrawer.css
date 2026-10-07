@@ -15,10 +15,13 @@
 .nds-drawer[open] { display: flex; }
 .nds-drawer::backdrop { background: var(--nds-bg-backdrop); }
 .nds-drawer--inline { display: flex; height: var(--_inline-height, 100%); }
-@media (prefers-reduced-motion: no-preference) {
-  .nds-drawer[open] { animation: nds-drawer-in 300ms ease-out; }
+/* Enters with the motion/enter tokens (D-037): slides in from the right in Standard; in Reduced it doesn't travel
+   (travel 0) and fades in instead (opacity-from 0). The choreography change is expressed in tokens. */
+.nds-drawer[open] { animation: nds-drawer-in var(--nds-motion-enter-duration) var(--nds-motion-enter-easing); }
+@keyframes nds-drawer-in {
+  from { transform: translateX(calc(100% * var(--nds-motion-enter-travel))); opacity: var(--nds-motion-enter-opacity-from); }
+  to { transform: translateX(0); opacity: 1; }
 }
-@keyframes nds-drawer-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
 .nds-drawer__panel { display: flex; flex-direction: column; width: 100%; min-height: 0; }
 .nds-drawer__header {

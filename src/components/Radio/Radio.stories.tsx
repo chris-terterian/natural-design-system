@@ -68,10 +68,10 @@ export const ShippingMethod: Story = {
 
 export const GroupError: Story = {
   render: () => (
-    <RadioGroup legend="Ring size" error="Select a ring size to continue.">
-      <Radio value="6" label="6" />
-      <Radio value="7" label="7" />
-      <Radio value="8" label="8" />
+    <RadioGroup legend="Basket size" error="Select a basket size to continue.">
+      <Radio value="small" label="Small" />
+      <Radio value="medium" label="Medium" />
+      <Radio value="large" label="Large" />
     </RadioGroup>
   ),
 };

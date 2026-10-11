@@ -634,7 +634,7 @@
         },
         "Meta": {
           "type": "TEXT",
-          "default": "14k gold · 3 colors",
+          "default": "Stoneware · ash glaze",
           "wired": true
         },
         "Price": {

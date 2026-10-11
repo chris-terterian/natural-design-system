@@ -7,7 +7,7 @@ const meta = {
   tags: ['status:stable'],
   component: ProductCard,
   parameters: figma(FIGMA_NODES.productCard),
-  args: { title: 'Product name', meta: '14k gold · 3 colors', price: '$120', comparePrice: '$150', href: '#', status: 'default' },
+  args: { title: 'Product name', meta: 'Stoneware · ash glaze', price: '$120', comparePrice: '$150', href: '#', status: 'default' },
   argTypes: {
     status: { control: 'inline-radio', options: ['default', 'sale', 'sold-out'] },
     forceState: { control: 'inline-radio', options: [undefined, 'hover', 'focus'] },

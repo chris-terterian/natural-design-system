@@ -1126,7 +1126,7 @@ Label `#3B2A1E` (13.67), description `#6B4F35` (7.51).
 
 | ✅ Do | ❌ Don't |
 |---|---|
-| Use for 2–6 mutually exclusive options that should all be visible: shipping method, ring size. | Use for on/off (use Toggle) or for long lists (use a select; **Planned**). |
+| Use for 2–6 mutually exclusive options that should all be visible: shipping method, basket size. | Use for on/off (use Toggle) or for long lists (use a select; **Planned**). |
 | Pre-select the sensible default when there is one (Standard shipping). | Pre-select an option that costs more. |
 | Short labels, detail in the description: "Express" / "2–3 business days · $12". | Put price and timing in a long label. |
 | Keep the disabled option visible with the reason: "Unavailable for this address". | Hide unavailable options with no explanation. |
@@ -1142,7 +1142,7 @@ Label `#3B2A1E` (13.67), description `#6B4F35` (7.51).
 
 ### 6.7 Radio Group
 
-Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size" examples on the Radio Buttons page. [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/components-radio--shipping-method)
+Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Basket size" examples on the Radio Buttons page. [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/components-radio--shipping-method)
 
 | Code prop | Type | Notes |
 |---|---|---|
@@ -1159,7 +1159,7 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 | ✅ Do | ❌ Don't |
 |---|---|
 | A legend that asks the question: "Shipping method". | Radios with no legend, or a legend like "Options". |
-| One group error: "Select a ring size to continue." | An error under every option. |
+| One group error: "Select a basket size to continue." | An error under every option. |
 | Stack options vertically. | Put options in a row where labels wrap unevenly. |
 
 **Keyboard & screen reader**
@@ -1218,7 +1218,7 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Ring size
 | Status | Variant | Default, Sale, Sold out | `status` | `'default' \| 'sale' \| 'sold-out'` = `'default'` |
 | State | Variant | Default, Hover, Focus | `forceState` | `'hover' \| 'focus'` |
 | Title | Text | "Product name" | `title` | `string` (required) |
-| Meta | Text | "14k gold · 3 colors" | `meta` | `string` |
+| Meta | Text | "Stoneware · ash glaze" | `meta` | `string` |
 | Price | Text | "$120" | `price` | `string` (required) |
 | Compare price | Text | "$150" | `comparePrice` | `string` (shown when sale) |
 | Show badge | Boolean | true | `badge` | `string \| false`; default by status: New / Sale / Sold out |

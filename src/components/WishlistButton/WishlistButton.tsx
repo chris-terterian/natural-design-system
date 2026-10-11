@@ -9,7 +9,7 @@ export interface WishlistButtonProps extends Omit<ButtonHTMLAttributes<HTMLButto
   selected?: boolean;
   defaultSelected?: boolean;
   onChange?: (selected: boolean) => void;
-  /** Used in the accessible name, e.g. "Add Gold Hoops to wishlist". */
+  /** Used in the accessible name, e.g. "Add River Clay Cup to wishlist". */
   productName?: string;
   forceState?: WishlistForcedState;
 }

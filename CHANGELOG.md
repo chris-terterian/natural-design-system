@@ -2,6 +2,11 @@
 
 All notable changes to the Natural Design System. Format: [Keep a Changelog](https://keepachangelog.com); versioning: [semver](https://semver.org), in 0.x per `GOVERNANCE.md` §7 (breaking changes bump the minor version).
 
+## [Unreleased]
+
+### Fixed
+- Sample copy left over from a jewelry kit now fits Natural's goods. Product Card's default Meta is "Stoneware · ash glaze" (was "14k gold · 3 colors") in Figma, the story and DESIGN.md. Wishlist Button's example product is "River Clay Cup" (was "Gold Hoops"). The Radio group-error example asks for a basket size (Small, Medium, Large) instead of a ring size, in Figma and Storybook.
+
 ## [0.17.0] – 2026-10-07
 
 ### Added

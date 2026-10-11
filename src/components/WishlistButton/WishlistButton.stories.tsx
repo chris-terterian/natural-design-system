@@ -8,7 +8,7 @@ const meta = {
   component: WishlistButton,
   parameters: { ...figma(FIGMA_NODES.wishlistButton), backgrounds: { default: 'media' } },
   decorators: [(Story) => <div style={{ background: 'var(--nds-bg-muted)', padding: 32, borderRadius: 8 }}><Story /></div>],
-  args: { productName: 'Gold Hoops' },
+  args: { productName: 'River Clay Cup' },
   argTypes: { forceState: { control: 'inline-radio', options: [undefined, 'hover', 'pressed', 'focus'] } },
 } satisfies Meta<typeof WishlistButton>;
 export default meta;

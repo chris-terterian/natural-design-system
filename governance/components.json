@@ -321,6 +321,68 @@
         "6.29 Cart Drawer"
       ],
       "notes": "Beta gaps: no quantity stepper or free-shipping progress; totals are passed in formatted (no currency logic); the category page story is a composition, not a page template."
+    },
+    {
+      "name": "Product Gallery",
+      "exports": [
+        "ProductGallery"
+      ],
+      "status": "beta",
+      "since": "0.18.0",
+      "storyFile": "src/components/ProductGallery/ProductGallery.stories.tsx",
+      "storyTitle": "Components/Product Gallery",
+      "figmaKey": "productGallery",
+      "specs": [
+        "6.30 Product Gallery"
+      ],
+      "notes": "Beta gaps: no zoom or full-screen view; no swipe between photos on touch (thumbnails only); no video. Real product photography still to come, so it shows the placeholder."
+    },
+    {
+      "name": "Product Summary",
+      "exports": [
+        "ProductSummary"
+      ],
+      "status": "beta",
+      "since": "0.18.0",
+      "storyFile": "src/components/ProductSummary/ProductSummary.stories.tsx",
+      "storyTitle": "Components/Product Summary",
+      "figmaKey": "productSummary",
+      "specs": [
+        "6.31 Product Summary"
+      ],
+      "notes": "Beta gaps: no quantity stepper; options are a Radio Group until material swatches are designed; prices are passed in formatted (no currency logic); Figma shows one example product (no text properties yet)."
+    },
+    {
+      "name": "Product Details",
+      "exports": [
+        "ProductDetails"
+      ],
+      "status": "beta",
+      "since": "0.18.0",
+      "storyFile": "src/components/ProductDetails/ProductDetails.stories.tsx",
+      "storyTitle": "Components/Product Details",
+      "figmaKey": "productDetails",
+      "specs": [
+        "6.32 Product Details"
+      ],
+      "notes": "Beta gaps: always expanded (no accordion on mobile yet); section titles are fixed (Details, No two alike, Care, Delivery); Figma shows one example product."
+    },
+    {
+      "name": "Page Template",
+      "exports": [
+        "PageTemplate",
+        "TEMPLATE_CONTRACT",
+        "validateComposition"
+      ],
+      "status": "beta",
+      "since": "0.18.0",
+      "storyFile": "src/components/PageTemplate/PageTemplate.stories.tsx",
+      "storyTitle": "Components/Page Template",
+      "figmaKey": "pageTemplate",
+      "specs": [
+        "6.33 Page Template"
+      ],
+      "notes": "Beta gaps: three templates (Homepage, Collection, Product page); personalised rows are allowed by the contract but the reason label isn't rendered yet; hero and story actions are buttons, not links; filters are uncontrolled. Figma variants are annotated examples, not slot-swappable components."
     }
   ]
 }

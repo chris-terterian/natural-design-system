@@ -15,7 +15,7 @@ const call = async (name, args = {}) => { const r = await client.callTool({ name
 const J = async (name, args) => JSON.parse(await call(name, args));
 
 const { tools } = await client.listTools();
-const expected = ['list_components', 'get_component', 'get_guidelines', 'get_tokens', 'find_token', 'validate_code', 'check_contrast', 'get_system_fingerprint', 'review_plan', 'check_copy', 'run_checkpoints', 'propose_color_change', 'apply_color_change'];
+const expected = ['list_components', 'get_component', 'get_guidelines', 'get_tokens', 'find_token', 'validate_code', 'check_contrast', 'get_system_fingerprint', 'review_plan', 'check_copy', 'run_checkpoints', 'propose_color_change', 'apply_color_change', 'get_templates', 'validate_composition'];
 ok(expected.every((t) => tools.some((x) => x.name === t)), `tools missing: ${expected.filter((t) => !tools.some((x) => x.name === t))}`);
 
 const list = await J('list_components');
@@ -87,6 +87,14 @@ const tideCheck = await J('propose_color_change', { changes: [{ token: 'color/se
 ok(!tideCheck.pass && tideCheck.moved.every((m) => m.brand === 'Tide') && tideCheck.blocked.some((b) => b.brand === 'Tide'), 'retuning a Tide primitive is checked in Tide only, and blocked when Tide text fails');
 ok((await call('propose_color_change', { changes: [{ token: 'fg/sale', to: 'darker' }] })).includes('already the darkest'), 'propose: darker past the end of the scale');
 ok(/differ from proposal|needs a clone/.test(await call('apply_color_change', { changes: [{ token: 'accent/bg', to: 'darker' }], proposalId: 'not-approved' })), 'apply must refuse an unapproved proposal');
+
+const tpl = await J('get_templates', { template: 'homepage' });
+ok(tpl.templates.homepage.slots.some((s) => s.id === 'shelves' && s.accepts.includes('product-row')), 'get_templates: homepage shelves slot missing');
+const twoHeroes = await J('validate_composition', { composition: { template: 'homepage', slots: { header: [{ kind: 'navigation' }], hero: [{ kind: 'hero', props: { heading: 'A', alt: '' } }, { kind: 'hero', props: { heading: 'B', alt: '' } }], shelves: [{ kind: 'story', props: { heading: 'S', text: 'T', alt: '' } }], footer: [{ kind: 'footer' }] } } });
+ok(!twoHeroes.pass && ['max', 'requires-kind', 'first'].every((rule) => twoHeroes.errors.some((e) => e.rule === rule)), `validate_composition: two heroes and no products must fail → ${JSON.stringify(twoHeroes.errors?.map((e) => e.rule))}`);
+const p4 = [1, 2, 3, 4].map((i) => ({ title: `Cup ${i}`, price: '$32', href: `#cup-${i}` }));
+const personal = await J('validate_composition', { composition: { template: 'homepage', slots: { header: [{ kind: 'navigation' }], hero: [{ kind: 'hero', props: { heading: 'Welcome back', alt: '' } }], shelves: [{ kind: 'product-row', source: 'recently-viewed', reason: 'You looked at these this week', props: { title: 'Recently viewed', products: p4.slice(0, 1) }, fallback: { source: 'new', title: 'New arrivals', products: p4 } }], footer: [{ kind: 'footer' }] } } });
+ok(personal.pass && personal.warnings.some((w) => w.rule === 'fallback-used') && personal.resolved.slots.shelves[0].props.title === 'New arrivals', 'validate_composition: a thin personalised row must fall back');
 
 const { resources } = await client.listResources();
 ok(resources.some((r) => r.uri === 'natural://design.md'), 'resource design.md missing');

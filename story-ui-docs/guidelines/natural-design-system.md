@@ -859,6 +859,7 @@ Import everything from the package root:
 
 ```tsx
 import { Button, Badge, TextField, TextArea, DateField, Calendar, CalendarDay, ImageBlock, Footer, Slider, RangeSlider, CartLine, CartDrawer, TextButton, Radio, RadioGroup, Toggle, WishlistButton, ProductCard, ProductRow,
+  ProductGallery, ProductSummary, ProductDetails, PageTemplate, validateComposition,
   NavigationMenu, MobileMenu, NavLink, NavMenuButton, NavDropdown, NavGroup,
   IconButton, MenuItem, Logo, Spinner, Heading, Text } from 'natural-design-system';
 import 'natural-design-system/styles.css';
@@ -2006,6 +2007,143 @@ Sizes: 480 wide (`drawer/width`), full height, full width on phones; header 72; 
 | Escape | Closes; focus back on Bag |
 | Announced | "Your bag (3), dialog"; "Items in your bag, list, 3 items" |
 
+### 6.30 Product Gallery
+
+[Figma 825:3397](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=825-3397) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/docs/components-product-gallery--docs)
+
+**Status: Beta.** **Purpose:** the photos on a product page. §3.6 asks for three per product: the whole piece, a material close-up and scale or use. **Anatomy:** ① Photo (4:5, `bg/muted` while it loads) · ② Thumbnails (one button per photo; the selected one has a 2px `border/strong` border) · ③ Focus ring.
+
+| Figma property | Type | Values / default | Code prop | Type / default |
+|---|---|---|---|---|
+| Breakpoint | Variant | Desktop, Mobile | none (container query at 480px) | |
+| State | Variant | Default, Hover, Focus (on the second thumbnail) | `forceState` | `'hover' \| 'focus'` |
+| none | | | `images`, `productName` | `{ src?, alt, label }[]`; `string` (required) |
+| none | | | `index`, `defaultIndex`, `onIndexChange` | controlled or uncontrolled; `0` |
+
+Layout: thumbnails in a column beside the photo (1 : 5) when the gallery is 480px or wider, and in a row of four below it on phones; gap `space/12` (`space/8` on phones); radius `radius/8`. The border colour changes over `motion/feedback`.
+
+**Accessibility:** a group named "{product} photos". Each thumbnail is a button with `aria-pressed` and a name like "Glaze close-up, photo 2 of 3"; its image is decorative because the button already names it. Write the photo's alt material first (§2). Contrast: selected border 11.08:1 on `bg/muted` (Natural Light), hover border 6.09:1, focus ring 13.67:1. Every brand × theme stays above 3:1.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Show the whole piece first, then the material, then scale. | Lead with a lifestyle shot where the piece is small. |
+| Name thumbnails by what they show ("Glaze close-up"). | Name them "Image 2". |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab | Moves through the thumbnails |
+| Enter / Space | Shows that photo; the button becomes pressed |
+| Announced | "River Clay Cup photos, group"; "Glaze close-up, photo 2 of 3, toggle button, not pressed" |
+
+### 6.31 Product Summary
+
+[Figma 825:3487](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=825-3487) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/docs/components-product-summary--docs)
+
+**Status: Beta.** **Purpose:** the buying column of a product page, following the §2 product copy pattern (name, one-line story) and §7 (made to order, freight). **Anatomy:** ① Badge (Sale, Sold out, or a product badge like One of a kind) · ② Name (the page's H1 at Heading/H2 size) · ③ Story (Paragraph/Large) · ④ Price + compare price · ⑤ Lead time and freight notes · ⑥ Options (Radio Group) · ⑦ Add to Bag (or Notify me) + Wishlist Button.
+
+| Figma property | Type | Values / default | Code prop | Type / default |
+|---|---|---|---|---|
+| Status | Variant | Default, Sale, Sold out | `status` | `'default' \| 'sale' \| 'sold-out'` = `'default'` |
+| none | | | `title`, `story`, `price`, `comparePrice` | strings; `title` and `price` required |
+| none | | | `badge`, `badgeTone` | `string \| false`; Sale and Sold out come from the status |
+| none | | | `options`, `optionsLegend`, `optionValue`, `onOptionChange` | `{ value, label, description? }[]`; `'Finish'` |
+| none | | | `madeToOrderWeeks`, `freight` | "Made to order · ships in {n} weeks"; "Ships by freight" |
+| none | | | `onAddToBag`, `adding`, `onNotify`, `wishlisted`, `onWishlistChange` | `adding` shows the Button's Loading state |
+
+Layout: one column, gap `space/16`; Add to Bag fills the row and the Wishlist Button sits beside it (`space/12`). Price uses `ui/title` (Semi Bold), compare price `ui/body` in `fg/subtle`, notes `ui/label` in `fg/muted`.
+
+**Accessibility:** the product name is the page's only H1. The sale price is read as "Sale price $32, Original price $38", and the Sale badge and strikethrough show it too, never red alone. Add to Bag is described by the price. Sold out swaps Add to Bag for a Secondary "Notify me" and hides the options.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Keep the story to one line about where it came from and how it was made. | Put the full details here; they belong in Product Details. |
+| Say "Made to order · ships in 3 weeks" beside the price. | Hide the lead time until checkout. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab | Options (arrows move between them) → Add to Bag → wishlist |
+| Announced | "River Clay Cup, heading level 1"; "Glaze, group, Ash, radio button, checked"; "Add to Bag, button, Sale price $32 Original price $38" |
+
+### 6.32 Product Details
+
+[Figma 825:3553](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=825-3553) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/docs/components-product-details--docs)
+
+**Status: Beta.** **Purpose:** the facts below the summary, in the order §2 sets. **Anatomy:** ① Details (a list: material · finish · dimensions · weight · capacity) · ② No two alike (the variation note) · ③ Care · ④ Delivery.
+
+| Figma property | Type | Values / default | Code prop | Type / default |
+|---|---|---|---|---|
+| Breakpoint | Variant | Desktop, Mobile | none (container query at 768px) | |
+| none | | | `details` | `{ label, value }[]` (required) |
+| none | | | `variation`, `care`, `delivery` | strings; `care` and `delivery` required |
+| none | | | `headingLevel` | `2 \| 3` = `2` |
+
+Layout: two columns (`layout/gutter`) at 768px and wider, one column (`space/32`) below. Rows are separated by `border/muted` hairlines with `space/12` padding; labels in `fg/muted`. Section titles use Heading/H4.
+
+**Accessibility:** a section named by its Details heading. Details is a `<dl>`, so screen readers pair each label with its value. Contrast: labels 7.51:1, values and notes 13.67:1. The dividers are decorative.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Celebrate variation: "Yours will be its own." | Apologise for it: "Slight imperfections may occur." |
+| Give care that keeps the piece for decades. | Make claims you can't prove ("100% sustainable"). |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab | Nothing to focus; it's read in order |
+| Announced | "Details, heading level 2"; "Material, Stoneware" (description list) |
+
+### 6.33 Page Template
+
+[Figma 825:6402](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=825-6402) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/docs/components-page-template--docs) · Contract: [`governance/templates.json`](governance/templates.json) (D-038)
+
+**Status: Beta.** **Purpose:** whole pages built from data. A page is a *composition*: a template id plus the sections in each slot. `PageTemplate` checks it against the template's slot contract and renders it only when it passes. Anything that builds pages (a person, an agent, a future personalisation service) gets the same rules. **Anatomy:** ① `header` slot (Navigation Menu) · ② body slots, which differ per template · ③ `footer` slot (Footer). Slots render in contract order; `header` and `footer` sit outside `<main>`.
+
+| Template | Slots (accepts · count) | Rules |
+|---|---|---|
+| **Homepage** | header (navigation · 1) · hero (hero · 1) · shelves (product-row or story · 1–6) · footer | At least one product row; products come first; stories never stack |
+| **Collection** | header · banner (0–1) · intro (1) · filters (0–1) · products (product-row or story · 1–8) · more (load-more · 0–1) · footer | Products come first; stories never stack; at most two stories |
+| **Product page** | header · media (product-gallery · 1) · summary (product-summary · 1) · details (product-details · 1) · related (product-row · 0–2) · footer | Related rows come from related, curated or personalised sources; media sits beside summary at 768px+ |
+
+**Product rows and personalisation.** Every product row names its `source`: curated, new, collection, related, recently-viewed, because-you-bought or recommended. A personalised source needs a `reason` the shopper can read ("Because you bought the River Clay Cup") and a `fallback` from curated, new or related. A page has at most two personalised rows. When a personalised row has fewer than 2 products, the fallback shows instead, so a shopper with no history still sees a full page. The reason label isn't rendered yet (a later release).
+
+| Figma property | Type | Values / default | Code prop | Type / default |
+|---|---|---|---|---|
+| Template | Variant | Homepage, Collection, Product page | `composition.template` | `'homepage' \| 'collection' \| 'product'` |
+| Breakpoint | Variant | Desktop, Mobile | none (container query at 768px) | |
+| none | | | `composition.slots` | `{ [slot]: { kind, props, source?, reason?, fallback? }[] }` |
+| none | | | `onRejected` | `(errors) => void` |
+
+Also exported: `validateComposition(contract, composition)` returns `{ valid, errors, warnings, resolved }`, and `TEMPLATE_CONTRACT` is the contract. The Natural MCP server has `get_templates` and `validate_composition`, and `npm run check:templates` gates the contract and its examples.
+
+**Rejected compositions.** Instead of a half-built page, `PageTemplate` renders an alert, "This page doesn't meet the {Template} contract", listing each broken rule with its slot and reason.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Change a page by changing its composition (data). | Fork a template to squeeze in a one-off section. |
+| Give every personalised row a fallback for first visits. | Leave a gap when there's no history. |
+| Propose a new section kind or rule through §4 if a page needs one. | Loosen a rule so a composition passes. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Landmarks | Header navigation → `main` → footer `contentinfo` |
+| Headings | One H1 per page (hero, intro or product name); sections use H2 |
+| Rejected | Announced as an alert with the list of broken rules |
+
 ---
 
 ## 7. E-commerce patterns
@@ -2019,14 +2157,16 @@ How the parts combine for Natural's shop. **Available** means buildable today fr
 | Content page (About, Journal) | Available | Heading + Text in `nds-prose`: H1 → Paragraph/Large → H2/H3 → Paragraph/Default → Caption |
 | Category page header | Available | Same H1 + Paragraph/Large intro as content pages, then Product Rows (H3 titles) |
 | Product grid | Available | Product Row: 4 columns desktop, 2 per row mobile, buttons off by default. Longer listings repeat rows (or the same grid with more items) |
-| Product detail | Planned | Gallery (whole piece, material close-up, scale shot) · name · story · details list · variation note · care · delivery · Add to Bag |
+| Product detail | Available (Beta) | Page Template `product`: Product Gallery (whole piece, material close-up, scale shot) beside Product Summary (name, story, price, options, Add to Bag), then Product Details (details, variation note, care, delivery) and related rows (§6.30–6.33) |
+| Homepage | Available (Beta) | Page Template `homepage`: Hero + intro, then Product Rows and stories (products first, stories never stack) |
+| Page templates & slot contracts | Available (Beta) | Homepage, Collection, Product page as data, checked against `governance/templates.json` before they render (§6.33, D-038). Personalised rows need a reason and a fallback |
 | Finish / glaze / wood picker | Planned | Material swatches (oak, walnut, ash glaze…). Use Radio Group until designed |
 | One-of-a-kind stock | Planned | "One of a kind" Light badge; no quantity picker; sold out after one sale |
 | Made to order | Planned | "Made to order · ships in {n} weeks" beside the price |
 | Large items (freight) | Planned | "Ships by freight" + weight and dimensions before Add to Bag |
 | Bag (cart lines) | Available (Beta) | Cart Line in a list; Remove as Text Button. Quantity and checkout still to design |
 | Bag drawer | Available (Beta) | Cart Drawer from the header's Bag button: lines, subtotal, Check out. Example: Figma Desktop Example page (prototype) and Storybook "In a category page" |
-| Category page (desktop) | Available | Figma Desktop Example page: Navigation Menu, Banner Image Block, H1 + intro, Range Slider + Toggle filters, Product Rows, Half-page Image Block + copy, Show more, Footer |
+| Category page (desktop) | Available (Beta: Page Template `collection`) | Figma Desktop Example page: Navigation Menu, Banner Image Block, H1 + intro, Range Slider + Toggle filters, Product Rows, Half-page Image Block + copy, Show more, Footer |
 | Forms & checkout | Partly available | Text Field, Text Area, Date Field, Radio Group, Button. Modal Form page is empty |
 | Delivery date & booking | Available (Beta) | Date Field with the Calendar; Calendar Mode=Range for pickup or hire windows |
 | Loading & full-width buttons | Available | Button `State=Loading` / `loading`; Fill container / `fullWidth` |
@@ -2124,7 +2264,7 @@ Non-negotiable for every component and page. Each component in §6 lists its own
 
 ## 10. Roadmap & changelog
 
-**Next up:** real photography for Image Block and Product Card (the Images page has the slots) · Modal Form (Figma page still empty). Also planned: display type size. Also planned: product detail, material swatches, heading scale, Figma Styles for §4.
+**Next up:** the personalisation reason label and the personalised shelf demo on top of the slot contracts (D-038) · real photography for Image Block, Product Card and Product Gallery · Modal Form (Figma page still empty). Also planned: display type size, material swatches (replacing the Radio Group in Product Summary), heading scale, Figma Styles for §4.
 
 **Planned, not started:** a system that proposes its own changes (rule of three, retirement with consent, decisions by the teams that use it). See [`governance/plans/evolving-system.md`](governance/plans/evolving-system.md).
 

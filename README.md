@@ -36,6 +36,7 @@ npm run storybook        # http://localhost:6007
 | `npm run check` | All quality gates: typecheck, governance, parity, Storybook build, accessibility (the same gates CI runs before deploying) |
 | `npm run test:parity-direction` | Proves parity tells which side moved: code changed → Figma behind, Figma changed → design decision, both → conflict, no history → unknown |
 | `npm run drift` | Every gate, without stopping at the first failure, plus whether Figma was edited since the snapshot (with `FIGMA_TOKEN`); writes `drift/report.md`. `-- --fix` applies the safe fixes first, `-- --skip-a11y` skips the slow gates |
+| `npm run check:templates` | The page template and slot contracts hold: example pages pass, broken ones are rejected for the right reasons |
 | `npm run check:motion` | Every story with reduced motion on: fails if anything still moves (fades and a slowed spinner allowed) |
 | `npm run check:contrast` | Every promised colour pairing passes WCAG AA in every brand × theme (Natural, Tide × Light, Dark) |
 | `npm run check:governance` | Registry ↔ stories ↔ Figma links ↔ DESIGN.md specs; tokens resolve and generated files are current |

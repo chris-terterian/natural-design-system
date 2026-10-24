@@ -123,6 +123,7 @@ Run on every push to `main` by `.github/workflows/storybook-pages.yml`. **Any fa
 | Typecheck | `npm run typecheck` | ✅ | TypeScript compiles |
 | **validate_file** | `npm run validate_file -- --all` (and the pre-commit hook) | ✅ | Hardcoded values, broken naming and placeholder link text block; other static accessibility issues warn. Every finding comes with a fix suggestion |
 | Governance | `npm run check:governance` | ✅ | Tokens resolve; generated `tokens.css` and `DESIGN.md` front matter are current; every component is registered with a valid status, matching story tag, Figma node and `DESIGN.md` spec |
+| Template contracts | `npm run check:templates` | ✅ | `governance/templates.json` is consistent (every section names a registry component, every rule has a reason, fallbacks never need history); every example page in `src/components/PageTemplate/examples.json` passes and every deliberately broken one is rejected for exactly the rules it expects (D-038) |
 | Build | `npm run build-storybook` | ✅ | Every story builds |
 | Contrast | `npm run check:contrast` | ✅ | Every pairing DESIGN.md §4.2 promises (24: text 4.5:1, UI 3:1) passes in every brand × Color mode (Natural, Tide × Light, Dark) |
 | Reduced motion | `npm run check:motion` | ✅ | Every story with `prefers-reduced-motion: reduce`: nothing moves (no transitions on transform, translate, scale or rotate; animations leave position and size unchanged); fades and a progress indicator slowed to 2000ms or more are allowed |

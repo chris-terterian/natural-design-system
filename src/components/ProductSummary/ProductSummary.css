@@ -1,0 +1,31 @@
+.nds-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--nds-space-16);
+  font-family: var(--nds-font-family);
+  color: var(--nds-fg-default);
+}
+.nds-summary__title, .nds-summary__story { margin: 0; } /* Heading/H2 and Paragraph/Large via Heading and Text */
+
+.nds-summary__price { display: flex; align-items: baseline; gap: var(--nds-space-8); margin: 0; }
+.nds-summary__price-current { font: 600 var(--nds-ui-title-font-size) / var(--nds-ui-title-line-height) var(--nds-font-family); }
+.nds-summary[data-status='sale'] .nds-summary__price-current { color: var(--nds-fg-sale); }
+.nds-summary__price-compare { color: var(--nds-fg-subtle); font: 400 var(--nds-ui-body-font-size) / var(--nds-ui-body-line-height) var(--nds-font-family); }
+
+.nds-summary__notes {
+  display: grid;
+  gap: var(--nds-space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--nds-fg-muted);
+  font: 400 var(--nds-ui-label-font-size) / var(--nds-ui-label-line-height) var(--nds-font-family);
+}
+
+.nds-summary__options { align-self: stretch; }
+
+/* Add to Bag fills the row; the wishlist sits beside it at its own 40px target */
+.nds-summary__actions { display: flex; align-items: center; gap: var(--nds-space-12); align-self: stretch; }
+.nds-summary__actions > .nds-button { flex: 1; }
+.nds-summary__wishlist { flex: none; }

@@ -19,4 +19,8 @@ export * from './components/Typography/Typography';
 export * from './components/WishlistButton/WishlistButton';
 export * from './components/ProductCard/ProductCard';
 export * from './components/ProductRow/ProductRow';
+export * from './components/ProductGallery/ProductGallery';
+export * from './components/ProductSummary/ProductSummary';
+export * from './components/ProductDetails/ProductDetails';
+export * from './components/PageTemplate/PageTemplate';
 export * from './icons';

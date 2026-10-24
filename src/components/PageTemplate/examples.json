@@ -1,0 +1,546 @@
+{
+  "$comment": "Example compositions for the Page Template stories and npm run check:templates. Valid ones must pass the contract; each rejected one must fail with exactly the rules in expect.",
+  "products": {
+    "cups": [
+      {
+        "title": "River Clay Cup",
+        "meta": "Stoneware · ash glaze",
+        "price": "$32",
+        "comparePrice": "$38",
+        "status": "sale",
+        "href": "#river-clay-cup"
+      },
+      {
+        "title": "Tenmoku Mug",
+        "meta": "Stoneware · iron glaze",
+        "price": "$36",
+        "badge": "Handmade",
+        "href": "#tenmoku-mug"
+      },
+      {
+        "title": "Pinched Tea Bowl",
+        "meta": "Porcelain · celadon",
+        "price": "$42",
+        "badge": "One of a kind",
+        "href": "#pinched-tea-bowl"
+      },
+      {
+        "title": "Espresso Cup Pair",
+        "meta": "Stoneware · raw clay foot",
+        "price": "$48",
+        "status": "sold-out",
+        "href": "#espresso-cup-pair"
+      }
+    ],
+    "bowls": [
+      {
+        "title": "Salt-fired Serving Bowl",
+        "meta": "Stoneware · salt glaze",
+        "price": "$120",
+        "badge": "One of a kind",
+        "href": "#salt-fired-serving-bowl"
+      },
+      {
+        "title": "Everyday Plate, Set of 4",
+        "meta": "Stoneware · oat glaze",
+        "price": "$140",
+        "badge": "Handmade",
+        "href": "#everyday-plate-set-of-4"
+      },
+      {
+        "title": "Nesting Bowls",
+        "meta": "Earthenware · slip-trailed",
+        "price": "$88",
+        "badge": "New",
+        "href": "#nesting-bowls"
+      },
+      {
+        "title": "Shallow Olive Dish",
+        "meta": "Porcelain · clear glaze",
+        "price": "$28",
+        "comparePrice": "$34",
+        "status": "sale",
+        "href": "#shallow-olive-dish"
+      }
+    ],
+    "home": [
+      {
+        "title": "Split Log Bench",
+        "meta": "Oak · oiled",
+        "price": "$420",
+        "badge": "Made to order",
+        "badgeTone": "light",
+        "href": "#split-log-bench"
+      },
+      {
+        "title": "Woven Rush Basket",
+        "meta": "Rush · hand-woven",
+        "price": "$64",
+        "badge": "Handmade",
+        "href": "#woven-rush-basket"
+      },
+      {
+        "title": "Moon Jar",
+        "meta": "Porcelain · hand-coiled",
+        "price": "$260",
+        "badge": "One of a kind",
+        "href": "#moon-jar"
+      },
+      {
+        "title": "Linen Throw",
+        "meta": "Linen · stonewashed",
+        "price": "$96",
+        "badge": "New",
+        "href": "#linen-throw"
+      }
+    ],
+    "one": [
+      {
+        "title": "River Clay Cup",
+        "meta": "Stoneware · ash glaze",
+        "price": "$32",
+        "comparePrice": "$38",
+        "status": "sale",
+        "href": "#river-clay-cup"
+      }
+    ]
+  },
+  "valid": {
+    "homepage": {
+      "template": "homepage",
+      "slots": {
+        "header": [
+          {
+            "kind": "navigation"
+          }
+        ],
+        "hero": [
+          {
+            "kind": "hero",
+            "props": {
+              "heading": "Made slowly, by hand",
+              "text": "Cups, benches and baskets from small studios. Every piece carries the marks of the hands that made it.",
+              "alt": "",
+              "actionLabel": "Shop new arrivals"
+            }
+          }
+        ],
+        "shelves": [
+          {
+            "kind": "product-row",
+            "source": "new",
+            "props": {
+              "title": "New arrivals",
+              "viewAllHref": "#new",
+              "viewAllLabel": "View all new arrivals",
+              "products": "@home"
+            }
+          },
+          {
+            "kind": "story",
+            "props": {
+              "heading": "Thrown in our studio",
+              "text": "Every piece is thrown on the wheel from river clay we dig and wedge ourselves, then fired twice. Small runs mean each glaze batch is a little different.",
+              "alt": "",
+              "actionLabel": "Meet the makers"
+            }
+          },
+          {
+            "kind": "product-row",
+            "source": "curated",
+            "props": {
+              "title": "Cups & mugs",
+              "viewAllHref": "#cups",
+              "viewAllLabel": "View all cups",
+              "products": "@cups"
+            }
+          }
+        ],
+        "footer": [
+          {
+            "kind": "footer",
+            "props": {
+              "copyright": "© 2026 Natural. All rights reserved."
+            }
+          }
+        ]
+      }
+    },
+    "collection": {
+      "template": "collection",
+      "slots": {
+        "header": [
+          {
+            "kind": "navigation"
+          }
+        ],
+        "banner": [
+          {
+            "kind": "banner",
+            "props": {
+              "alt": ""
+            }
+          }
+        ],
+        "intro": [
+          {
+            "kind": "intro",
+            "props": {
+              "heading": "Clay & ceramics",
+              "text": "Cups, bowls and vessels thrown from river clay and fired twice. Glazes pool and break differently on every piece, so no two are quite alike."
+            }
+          }
+        ],
+        "filters": [
+          {
+            "kind": "filters",
+            "props": {
+              "count": 20
+            }
+          }
+        ],
+        "products": [
+          {
+            "kind": "product-row",
+            "source": "collection",
+            "props": {
+              "title": "Cups & mugs",
+              "viewAllHref": "#cups",
+              "viewAllLabel": "View all cups",
+              "products": "@cups"
+            }
+          },
+          {
+            "kind": "story",
+            "props": {
+              "heading": "Glazed by hand",
+              "text": "We mix our glazes from wood ash and local stone. They pool in the curves and thin on the rims, so every piece has its own colour.",
+              "alt": ""
+            }
+          },
+          {
+            "kind": "product-row",
+            "source": "collection",
+            "props": {
+              "title": "Bowls & plates",
+              "viewAllHref": "#bowls",
+              "viewAllLabel": "View all bowls",
+              "products": "@bowls"
+            }
+          }
+        ],
+        "more": [
+          {
+            "kind": "load-more",
+            "props": {
+              "shown": 8,
+              "total": 20
+            }
+          }
+        ],
+        "footer": [
+          {
+            "kind": "footer",
+            "props": {
+              "copyright": "© 2026 Natural. All rights reserved."
+            }
+          }
+        ]
+      }
+    },
+    "product": {
+      "template": "product",
+      "slots": {
+        "header": [
+          {
+            "kind": "navigation"
+          }
+        ],
+        "media": [
+          {
+            "kind": "product-gallery",
+            "props": {
+              "productName": "River Clay Cup",
+              "images": [
+                {
+                  "label": "Whole piece",
+                  "alt": "River clay cup with a matte grey ash glaze, on a linen cloth"
+                },
+                {
+                  "label": "Glaze close-up",
+                  "alt": "Ash glaze pooling at the base of the cup"
+                },
+                {
+                  "label": "In the hand",
+                  "alt": "River clay cup held in one hand"
+                }
+              ]
+            }
+          }
+        ],
+        "summary": [
+          {
+            "kind": "product-summary",
+            "props": {
+              "title": "River Clay Cup",
+              "story": "Thrown from river clay we dig ourselves, then fired twice in a wood kiln.",
+              "price": "$32",
+              "comparePrice": "$38",
+              "status": "sale",
+              "optionsLegend": "Glaze",
+              "options": [
+                {
+                  "value": "ash",
+                  "label": "Ash",
+                  "description": "Matte grey, pools at the base"
+                },
+                {
+                  "value": "tenmoku",
+                  "label": "Tenmoku",
+                  "description": "Glossy iron brown"
+                }
+              ],
+              "madeToOrderWeeks": 2
+            }
+          }
+        ],
+        "details": [
+          {
+            "kind": "product-details",
+            "props": {
+              "details": [
+                {
+                  "label": "Material",
+                  "value": "Stoneware"
+                },
+                {
+                  "label": "Finish",
+                  "value": "Ash glaze, raw clay foot"
+                },
+                {
+                  "label": "Dimensions",
+                  "value": "8 cm tall · 9 cm across"
+                },
+                {
+                  "label": "Weight",
+                  "value": "280 g"
+                },
+                {
+                  "label": "Capacity",
+                  "value": "250 ml"
+                }
+              ],
+              "variation": "The glaze pools like still water at the base, and every firing moves it a little differently. Yours will be its own.",
+              "care": "Dishwasher safe. Hand washing keeps the glaze bright for longer.",
+              "delivery": "Made to order · ships in 2 weeks. Wrapped in recycled paper."
+            }
+          }
+        ],
+        "related": [
+          {
+            "kind": "product-row",
+            "source": "related",
+            "props": {
+              "title": "You may also like",
+              "products": "@cups"
+            }
+          }
+        ],
+        "footer": [
+          {
+            "kind": "footer",
+            "props": {
+              "copyright": "© 2026 Natural. All rights reserved."
+            }
+          }
+        ]
+      }
+    }
+  },
+  "personalised": {
+    "returning": {
+      "template": "homepage",
+      "slots": {
+        "header": [
+          {
+            "kind": "navigation"
+          }
+        ],
+        "hero": [
+          {
+            "kind": "hero",
+            "props": {
+              "heading": "Welcome back",
+              "text": "New cups from the river studio, fired this week.",
+              "alt": "",
+              "actionLabel": "Shop new arrivals"
+            }
+          }
+        ],
+        "shelves": [
+          {
+            "kind": "product-row",
+            "source": "because-you-bought",
+            "reason": "Because you bought the River Clay Cup",
+            "props": {
+              "title": "Goes with your cup",
+              "products": "@bowls"
+            },
+            "fallback": {
+              "source": "new",
+              "title": "New arrivals",
+              "products": "@home"
+            }
+          },
+          {
+            "kind": "product-row",
+            "source": "recently-viewed",
+            "reason": "You looked at these this week",
+            "props": {
+              "title": "Recently viewed",
+              "products": "@one"
+            },
+            "fallback": {
+              "source": "curated",
+              "title": "Cups & mugs",
+              "products": "@cups"
+            }
+          }
+        ],
+        "footer": [
+          {
+            "kind": "footer"
+          }
+        ]
+      }
+    }
+  },
+  "rejected": {
+    "two-heroes-no-products": {
+      "expect": [
+        "max",
+        "requires-kind",
+        "first",
+        "no-adjacent"
+      ],
+      "composition": {
+        "template": "homepage",
+        "slots": {
+          "header": [
+            {
+              "kind": "navigation"
+            }
+          ],
+          "hero": [
+            {
+              "kind": "hero",
+              "props": {
+                "heading": "Made slowly, by hand",
+                "alt": ""
+              }
+            },
+            {
+              "kind": "hero",
+              "props": {
+                "heading": "Autumn pieces",
+                "alt": ""
+              }
+            }
+          ],
+          "shelves": [
+            {
+              "kind": "story",
+              "props": {
+                "heading": "Thrown in our studio",
+                "text": "Every piece is thrown on the wheel.",
+                "alt": ""
+              }
+            },
+            {
+              "kind": "story",
+              "props": {
+                "heading": "Glazed by hand",
+                "text": "We mix our glazes from wood ash.",
+                "alt": ""
+              }
+            }
+          ],
+          "footer": [
+            {
+              "kind": "footer"
+            }
+          ]
+        }
+      }
+    },
+    "personalised-without-fallback": {
+      "expect": [
+        "reason",
+        "fallback"
+      ],
+      "composition": {
+        "template": "product",
+        "slots": {
+          "header": [
+            {
+              "kind": "navigation"
+            }
+          ],
+          "media": [
+            {
+              "kind": "product-gallery",
+              "props": {
+                "productName": "River Clay Cup",
+                "images": [
+                  {
+                    "label": "Whole piece",
+                    "alt": "River clay cup"
+                  }
+                ]
+              }
+            }
+          ],
+          "summary": [
+            {
+              "kind": "product-summary",
+              "props": {
+                "title": "River Clay Cup",
+                "price": "$32"
+              }
+            }
+          ],
+          "details": [
+            {
+              "kind": "product-details",
+              "props": {
+                "details": [
+                  {
+                    "label": "Material",
+                    "value": "Stoneware"
+                  }
+                ],
+                "care": "Dishwasher safe.",
+                "delivery": "Ships in 2 weeks."
+              }
+            }
+          ],
+          "related": [
+            {
+              "kind": "product-row",
+              "source": "recently-viewed",
+              "props": {
+                "title": "Recently viewed",
+                "products": "@cups"
+              }
+            }
+          ],
+          "footer": [
+            {
+              "kind": "footer"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

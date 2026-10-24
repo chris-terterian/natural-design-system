@@ -10,6 +10,7 @@
 //   · check_copy (4) · check_contrast (5) · run_checkpoints (6: all gates in order, then human review)
 // Colour by voice or text (D-033): propose_color_change (reads the change back with its contrast impact) ·
 //   apply_color_change (writes the tokens, returns the Figma script) · prompt recolor
+// Page templates (D-038): get_templates (slot contracts) · validate_composition (a page as data, checked before it renders)
 // Prompts: build_page (walks the checkpoints) · recolor
 // `natural-mcp setup …` registers the server with Claude Desktop / Cursor / Claude Code instead of starting it.
 if (process.argv[2] === 'setup') { await import('./setup.mjs'); process.exit(0); }
@@ -21,6 +22,7 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { z } from 'zod';
 import { validateSource } from '../scripts/validate-file.mjs';
 import { proposeColorChange, figmaScriptFor, colorOf, colorModes, brands, primitiveOf } from './recolor.mjs';
+import { validateComposition } from '../src/templates/contract.mjs';
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const pkg = JSON.parse(read('package.json'));
@@ -31,6 +33,7 @@ const STORYBOOK = 'https://chris-terterian.github.io/natural-design-system/';
 const design = () => read('DESIGN.md').replace(/^---\n[\s\S]*?\n---\n/, '');
 const tokens = () => JSON.parse(read('tokens/figma-variables.json'));
 const registry = () => JSON.parse(read('governance/components.json')).components;
+const templateContract = () => JSON.parse(read('governance/templates.json'));
 const figmaNodes = () => Object.fromEntries([...read('src/figma.ts').matchAll(/^\s+(\w+): '(\d+:\d+)',$/gm)].map((m) => [m[1], m[2]]));
 const figmaUrl = (id) => `${FIGMA_FILE}?node-id=${id.replace(':', '-')}`;
 const storyUrl = (title) => `${STORYBOOK}?path=/docs/${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '')}--docs`;
@@ -218,7 +221,7 @@ server.registerTool('check_contrast', {
 /** Identity of the system the agent is working against: version + hash of tokens, registry and spec. */
 const fingerprint = () => ({
   version: pkg.version,
-  hash: createHash('sha256').update(read('tokens/figma-variables.json')).update(read('governance/components.json')).update(design()).digest('hex').slice(0, 12),
+  hash: createHash('sha256').update(read('tokens/figma-variables.json')).update(read('governance/components.json')).update(read('governance/templates.json')).update(design()).digest('hex').slice(0, 12),
 });
 
 const findComponent = (name) => {
@@ -266,6 +269,28 @@ const checkCopy = ({ headings = [], buttons = [], links = [], alts = [], body = 
   }
   return { pass: issues.length === 0, issues, warnings };
 };
+
+server.registerTool('get_templates', {
+  title: 'Page templates and slot contracts',
+  description: 'The page templates (Homepage, Collection, Product page) with their slots: which section kinds each accepts, how many, the order rules and why, plus the product sources and the rules for personalised rows. Read this before composing a page.',
+  inputSchema: { template: z.string().optional().describe('homepage, collection or product; omit for all') },
+}, async ({ template }) => {
+  const c = templateContract();
+  const templates = template ? { [template]: c.templates[template] } : c.templates;
+  if (template && !c.templates[template]) return text(`No template "${template}". Templates: ${Object.keys(c.templates).join(', ')}.`);
+  return json({ templates, sections: c.sections, sources: c.sources, personalization: c.personalization, render: 'Pass the composition to <PageTemplate composition={…} />; it renders only when validate_composition passes.' });
+});
+
+server.registerTool('validate_composition', {
+  title: 'Validate a page composition',
+  description: 'Check a page as data ({ template, slots: { slotId: [{ kind, props, source?, reason?, fallback? }] } }) against its slot contract: section kinds per slot, counts, order rules, required props, product counts, and personalised rows (reason, fallback, at most two per page). Returns every error with the rule and a reason, warnings when a fallback will show, and the resolved composition to render.',
+  inputSchema: {
+    composition: z.object({ template: z.string(), slots: z.record(z.string(), z.array(z.any())) }).describe('The page as data'),
+  },
+}, async ({ composition }) => {
+  const r = validateComposition(templateContract(), composition);
+  return json({ pass: r.valid, errors: r.errors, warnings: r.warnings, resolved: r.resolved, next: r.valid ? 'Render it with <PageTemplate composition={resolved} />, then run_checkpoints on the page file.' : 'Fix every error; the renderer refuses this composition.' });
+});
 
 server.registerTool('get_system_fingerprint', {
   title: 'Checkpoint 0: anchor',

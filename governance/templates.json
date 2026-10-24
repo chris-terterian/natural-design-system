@@ -1,0 +1,348 @@
+{
+  "$comment": "Template and slot contracts (D-038). The single source for which sections a page template accepts, in what order and how many. Read by src/templates/contract.mjs (validateComposition), the PageTemplate renderer, the Natural MCP server (validate_composition) and npm run check:templates. A composition is the data a page is built from: { template, slots: { <slotId>: [section, ...] } }. Personalised sources are allowed by the contract today; their reason label and demo come in a later release.",
+  "version": 1,
+  "sections": {
+    "navigation": {
+      "component": "Navigation Menu",
+      "description": "The site header: logo, shop links, search, account, wishlist and Bag."
+    },
+    "hero": {
+      "component": "Image Block",
+      "description": "Full-bleed Hero image with a page intro below it: one H1, an optional line of Paragraph/Large and one action.",
+      "requires": [
+        "heading",
+        "alt"
+      ]
+    },
+    "intro": {
+      "component": "Typography",
+      "description": "A page intro: one H1 and an optional line of Paragraph/Large. Collection pages use it under their banner.",
+      "requires": [
+        "heading"
+      ]
+    },
+    "banner": {
+      "component": "Image Block",
+      "description": "A Banner Image Block. Decorative unless alt is given.",
+      "requires": [
+        "alt"
+      ]
+    },
+    "product-row": {
+      "component": "Product Row",
+      "description": "A titled row of Product Cards. Its source says where the products come from.",
+      "requires": [
+        "title",
+        "products"
+      ],
+      "minItems": 2,
+      "maxItems": 8,
+      "needsSource": true
+    },
+    "story": {
+      "component": "Image Block",
+      "description": "A Half-page Image Block with copy beside it: an H2, a paragraph and an optional action.",
+      "requires": [
+        "heading",
+        "text",
+        "alt"
+      ]
+    },
+    "filters": {
+      "component": "Slider",
+      "description": "The collection filter bar: price Range Slider, In stock only Toggle and the piece count."
+    },
+    "load-more": {
+      "component": "Button",
+      "description": "Showing n of m pieces, with a Secondary Show more button.",
+      "requires": [
+        "shown",
+        "total"
+      ]
+    },
+    "product-gallery": {
+      "component": "Product Gallery",
+      "description": "The product's photos: the whole piece, a material close-up and a scale shot.",
+      "requires": [
+        "images"
+      ]
+    },
+    "product-summary": {
+      "component": "Product Summary",
+      "description": "Name, one-line story, price, options and Add to Bag.",
+      "requires": [
+        "title",
+        "price"
+      ]
+    },
+    "product-details": {
+      "component": "Product Details",
+      "description": "Details, variation note, care and delivery, in the order DESIGN.md §2 sets.",
+      "requires": [
+        "details",
+        "care",
+        "delivery"
+      ]
+    },
+    "footer": {
+      "component": "Footer",
+      "description": "The site footer."
+    }
+  },
+  "sources": {
+    "curated": {
+      "personalized": false,
+      "description": "Chosen by a person for this page."
+    },
+    "new": {
+      "personalized": false,
+      "description": "Newest pieces first."
+    },
+    "collection": {
+      "personalized": false,
+      "description": "Every piece in the current collection, filtered."
+    },
+    "related": {
+      "personalized": false,
+      "description": "Pieces that share a material or collection with the current product."
+    },
+    "recently-viewed": {
+      "personalized": true,
+      "description": "Pieces this shopper looked at recently."
+    },
+    "because-you-bought": {
+      "personalized": true,
+      "description": "Pieces that go with something this shopper bought."
+    },
+    "recommended": {
+      "personalized": true,
+      "description": "Pieces chosen for this shopper by a recommendation service."
+    }
+  },
+  "personalization": {
+    "$comment": "Rules every personalised section must meet, whatever produced it.",
+    "requiresReason": true,
+    "requiresFallback": true,
+    "fallbackSources": [
+      "curated",
+      "new",
+      "related"
+    ],
+    "maxPerPage": 2
+  },
+  "templates": {
+    "homepage": {
+      "name": "Homepage",
+      "description": "The front door: one hero, then a mix of product rows and studio stories.",
+      "slots": [
+        {
+          "id": "header",
+          "accepts": [
+            "navigation"
+          ],
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "hero",
+          "accepts": [
+            "hero"
+          ],
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "shelves",
+          "accepts": [
+            "product-row",
+            "story"
+          ],
+          "min": 1,
+          "max": 6,
+          "rules": [
+            {
+              "type": "requires",
+              "kind": "product-row",
+              "min": 1,
+              "reason": "A homepage shows at least one row of products."
+            },
+            {
+              "type": "first",
+              "kind": "product-row",
+              "reason": "Products come before stories, so the page opens on something to buy."
+            },
+            {
+              "type": "no-adjacent",
+              "kind": "story",
+              "reason": "Two stories in a row read as a magazine, not a shop."
+            }
+          ]
+        },
+        {
+          "id": "footer",
+          "accepts": [
+            "footer"
+          ],
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "collection": {
+      "name": "Collection",
+      "description": "A category of pieces: banner, intro, filters, rows of products and Show more.",
+      "slots": [
+        {
+          "id": "header",
+          "accepts": [
+            "navigation"
+          ],
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "banner",
+          "accepts": [
+            "banner"
+          ],
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "intro",
+          "accepts": [
+            "intro"
+          ],
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "filters",
+          "accepts": [
+            "filters"
+          ],
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "products",
+          "accepts": [
+            "product-row",
+            "story"
+          ],
+          "min": 1,
+          "max": 8,
+          "rules": [
+            {
+              "type": "requires",
+              "kind": "product-row",
+              "min": 1,
+              "reason": "A collection shows its products."
+            },
+            {
+              "type": "first",
+              "kind": "product-row",
+              "reason": "The first thing after the filters is what they filter."
+            },
+            {
+              "type": "no-adjacent",
+              "kind": "story",
+              "reason": "Stories break up rows; they don't stack."
+            },
+            {
+              "type": "max-kind",
+              "kind": "story",
+              "max": 2,
+              "reason": "More than two stories bury the products."
+            }
+          ]
+        },
+        {
+          "id": "more",
+          "accepts": [
+            "load-more"
+          ],
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "footer",
+          "accepts": [
+            "footer"
+          ],
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "product": {
+      "name": "Product page",
+      "description": "One piece: gallery beside the summary, then the details, then related pieces.",
+      "slots": [
+        {
+          "id": "header",
+          "accepts": [
+            "navigation"
+          ],
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "media",
+          "accepts": [
+            "product-gallery"
+          ],
+          "min": 1,
+          "max": 1,
+          "layout": "split-start"
+        },
+        {
+          "id": "summary",
+          "accepts": [
+            "product-summary"
+          ],
+          "min": 1,
+          "max": 1,
+          "layout": "split-end"
+        },
+        {
+          "id": "details",
+          "accepts": [
+            "product-details"
+          ],
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "related",
+          "accepts": [
+            "product-row"
+          ],
+          "min": 0,
+          "max": 2,
+          "rules": [
+            {
+              "type": "sources",
+              "allow": [
+                "related",
+                "curated",
+                "recently-viewed",
+                "because-you-bought",
+                "recommended"
+              ],
+              "reason": "Rows on a product page relate to the product or the shopper."
+            }
+          ]
+        },
+        {
+          "id": "footer",
+          "accepts": [
+            "footer"
+          ],
+          "min": 1,
+          "max": 1
+        }
+      ]
+    }
+  }
+}

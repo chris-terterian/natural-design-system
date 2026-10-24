@@ -56,6 +56,7 @@ Try it: ask your agent to *"use the natural server's build_page prompt to build 
 | `get_tokens` · `find_token` | Tokens by tier; "which token for this hex in a border?" or "secondary text" → the role |
 | `validate_code` | The pre-commit guardrail on code the agent wrote, with a fix for every finding |
 | `check_contrast` | WCAG ratio and AA / AAA for hex values or roles |
+| `get_templates` · `validate_composition` | Page templates and their slot contracts (D-038); checks a page as data before it renders, including personalised rows (reason, fallback) |
 | `propose_color_change` · `apply_color_change` | Colour changes by voice or text through the tokens, contrast-gated, then mirrored to Figma (below) |
 
 ## Change colours by voice

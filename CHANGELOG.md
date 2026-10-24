@@ -4,6 +4,17 @@ All notable changes to the Natural Design System. Format: [Keep a Changelog](htt
 
 ## [Unreleased]
 
+### Added
+- **Page templates and slot contracts** (D-038, DESIGN.md §6.33). `governance/templates.json` defines Homepage, Collection and Product page: slots, the section kinds each accepts, counts and order rules with reasons. `PageTemplate` renders a composition (a page as data) only when it passes and lists the broken rules when it doesn't. `validateComposition` and `TEMPLATE_CONTRACT` are exported.
+- **Personalisation rules in the contract**: every product row names a source. Personalised rows (recently viewed, because you bought, recommended) need a reason and a fallback, at most two per page, and fall back automatically below 2 products. The reason label comes in a later release.
+- **Product Gallery**, **Product Summary** and **Product Details** (Beta, §6.30–6.32): the parts of the product page. Figma: new **Product Detail** page.
+- `npm run check:templates` (in `npm run check`, CI and the drift bot): the contract is consistent, example pages pass and broken ones are rejected for the right rules.
+- MCP: `get_templates` and `validate_composition`; the system fingerprint now includes the contract.
+- Figma: new **Templates** page with the Page Template set (Template × Breakpoint), dashed slot outlines and each template's contract.
+
+### Changed
+- DESIGN.md §7: Product detail, Homepage and page templates are Available (Beta).
+
 ### Fixed
 - Sample copy left over from a jewelry kit now fits Natural's goods. Product Card's default Meta is "Stoneware · ash glaze" (was "14k gold · 3 colors") in Figma, the story and DESIGN.md. Wishlist Button's example product is "River Clay Cup" (was "Gold Hoops"). The Radio group-error example asks for a basket size (Small, Medium, Large) instead of a ring size, in Figma and Storybook.
 

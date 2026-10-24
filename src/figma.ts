@@ -38,4 +38,8 @@ export const FIGMA_NODES = {
   cartLine: '245:707',
   cartDrawer: '248:77',
   categoryPage: '249:2',
+  productGallery: '825:3397',
+  productSummary: '825:3487',
+  productDetails: '825:3553',
+  pageTemplate: '825:6402',
 } as const;

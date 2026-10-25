@@ -48,10 +48,6 @@
 /* Whole card is clickable via the title link; wishlist + CTA sit above it. */
 .nds-card__link::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: var(--nds-radius-8); }
 .nds-card__meta { color: var(--nds-fg-muted); font: 400 var(--nds-ui-label-font-size) / var(--nds-ui-label-line-height) var(--nds-font-family); }
-.nds-card__price { display: flex; align-items: baseline; gap: var(--nds-space-8); }
-.nds-card__price-current { color: var(--nds-fg-default); font: 600 var(--nds-ui-body-font-size) / var(--nds-ui-body-line-height) var(--nds-font-family); }
-.nds-card[data-status='sale'] .nds-card__price-current { color: var(--nds-fg-sale); }
-.nds-card__price-compare { color: var(--nds-fg-subtle); font: 400 var(--nds-ui-label-font-size) / var(--nds-ui-label-line-height) var(--nds-font-family); }
 
 .nds-card__cta { z-index: 2; }
 

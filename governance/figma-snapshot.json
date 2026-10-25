@@ -1,6 +1,6 @@
 {
   "$comment": "Figma parity snapshot, exported through the Figma MCP (scripts/figma/export-snapshot.js). Checked by npm run check:parity. Refresh after any Figma or token change, and before every release.",
-  "generatedAt": "2026-10-24T23:29:34.000Z",
+  "generatedAt": "2026-10-24T23:51:57.000Z",
   "figmaFile": "84MjZXozBoKCvf9lwIU5pu",
   "variables": [
     "Brand|palette/danger/300|Natural|@color/red/300",
@@ -1342,6 +1342,46 @@
       "type": "COMPONENT_SET",
       "variants": 3,
       "properties": {
+        "Title": {
+          "type": "TEXT",
+          "default": "River Clay Cup",
+          "wired": true
+        },
+        "Story": {
+          "type": "TEXT",
+          "default": "Thrown from river clay we dig ourselves, then fired twice in a wood kiln.",
+          "wired": true
+        },
+        "Lead time": {
+          "type": "TEXT",
+          "default": "Made to order · ships in 2 weeks",
+          "wired": true
+        },
+        "Show badge": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Show story": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Show lead time": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Show freight": {
+          "type": "BOOLEAN",
+          "default": false,
+          "wired": true
+        },
+        "Show options": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
         "Status": {
           "type": "VARIANT",
           "options": [
@@ -1358,6 +1398,41 @@
       "type": "COMPONENT_SET",
       "variants": 2,
       "properties": {
+        "Show row 3": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Show row 4": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Show row 5": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
+        "Variation note": {
+          "type": "TEXT",
+          "default": "The glaze pools like still water at the base, and every firing moves it a little differently. Yours will be its own.",
+          "wired": true
+        },
+        "Care": {
+          "type": "TEXT",
+          "default": "Dishwasher safe. Hand washing keeps the glaze bright for longer.",
+          "wired": true
+        },
+        "Delivery": {
+          "type": "TEXT",
+          "default": "Made to order · ships in 2 weeks. Wrapped in recycled paper.",
+          "wired": true
+        },
+        "Show variation note": {
+          "type": "BOOLEAN",
+          "default": true,
+          "wired": true
+        },
         "Breakpoint": {
           "type": "VARIANT",
           "options": [
@@ -1380,6 +1455,63 @@
             "Collection",
             "Product page"
           ]
+        },
+        "Breakpoint": {
+          "type": "VARIANT",
+          "options": [
+            "Desktop",
+            "Mobile"
+          ]
+        }
+      }
+    },
+    "price": {
+      "id": "825:9167",
+      "name": "Price",
+      "type": "COMPONENT_SET",
+      "variants": 4,
+      "properties": {
+        "Price": {
+          "type": "TEXT",
+          "default": "$32",
+          "wired": true
+        },
+        "Compare price": {
+          "type": "TEXT",
+          "default": "$38",
+          "wired": true
+        },
+        "Size": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Large"
+          ]
+        },
+        "Status": {
+          "type": "VARIANT",
+          "options": [
+            "Default",
+            "Sale"
+          ]
+        }
+      }
+    },
+    "productDetailRow": {
+      "id": "825:9203",
+      "name": "Product Detail Row",
+      "type": "COMPONENT_SET",
+      "variants": 2,
+      "properties": {
+        "Label": {
+          "type": "TEXT",
+          "default": "Material",
+          "wired": true
+        },
+        "Value": {
+          "type": "TEXT",
+          "default": "Stoneware",
+          "wired": true
         },
         "Breakpoint": {
           "type": "VARIANT",

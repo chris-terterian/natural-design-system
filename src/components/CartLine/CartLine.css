@@ -30,13 +30,11 @@
 }
 .nds-cart-line__title:hover { text-decoration: underline; }
 .nds-cart-line__title:focus-visible { outline: var(--nds-focus-ring-width) solid var(--nds-focus-ring); outline-offset: var(--nds-focus-ring-offset); }
-.nds-cart-line__sku, .nds-cart-line__price { margin: 0; }
+.nds-cart-line__sku { margin: 0; }
+/* Price (nested) is centred in the bag line, as before it became its own component */
+.nds-cart-line__price { align-items: center; }
 .nds-cart-line__sku { color: var(--nds-fg-muted); font: 400 var(--nds-ui-label-font-size) / var(--nds-ui-label-line-height) var(--nds-font-family); }
 .nds-cart-line__side { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: var(--nds-space-8); }
-.nds-cart-line__price { display: flex; align-items: center; gap: var(--nds-space-8); }
-.nds-cart-line__price-value { color: var(--nds-fg-default); font: 600 var(--nds-ui-body-font-size) / var(--nds-ui-body-line-height) var(--nds-font-family); }
-.nds-cart-line[data-status='sale'] .nds-cart-line__price-value { color: var(--nds-fg-sale); }
-.nds-cart-line__compare { color: var(--nds-fg-subtle); font: 400 var(--nds-ui-label-font-size) / var(--nds-ui-label-line-height) var(--nds-font-family); }
 
 /* Compact below 480px of its own width: a cart line lives in a column, so the page breakpoint doesn't apply. */
 @container (max-width: 479px) {

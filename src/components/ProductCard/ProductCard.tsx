@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Badge, type BadgeTone } from '../Badge/Badge';
 import { Button } from '../Button/Button';
+import { Price } from '../Price/Price';
 import { WishlistButton } from '../WishlistButton/WishlistButton';
 import { ImagePlaceholderIcon } from '../../icons';
 import './ProductCard.css';
@@ -89,18 +90,7 @@ export function ProductCard({
           <WishlistButton className="nds-card__wishlist" productName={title} selected={wishlisted} onChange={onWishlistChange} />
         )}
         {meta && <p className="nds-card__meta">{meta}</p>}
-        <p className="nds-card__price">
-          {status === 'sale' && comparePrice ? (
-            <>
-              <span className="nds-visually-hidden">Sale price</span>
-              <span className="nds-card__price-current">{price}</span>
-              <span className="nds-visually-hidden">Original price</span>
-              <s className="nds-card__price-compare">{comparePrice}</s>
-            </>
-          ) : (
-            <span className="nds-card__price-current">{price}</span>
-          )}
-        </p>
+        <Price className="nds-card__price" price={price} comparePrice={comparePrice} sale={status === 'sale'} />
       </div>
       {showCta &&
         (soldOut ? (

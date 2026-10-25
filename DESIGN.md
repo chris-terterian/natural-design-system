@@ -858,7 +858,7 @@ Import everything from the package root:
 
 ```tsx
 import { Button, Badge, TextField, TextArea, DateField, Calendar, CalendarDay, ImageBlock, Footer, Slider, RangeSlider, CartLine, CartDrawer, TextButton, Radio, RadioGroup, Toggle, WishlistButton, ProductCard, ProductRow,
-  ProductGallery, ProductSummary, ProductDetails, PageTemplate, validateComposition,
+  ProductGallery, ProductSummary, ProductDetails, ProductDetailRow, PageTemplate, validateComposition, Price,
   NavigationMenu, MobileMenu, NavLink, NavMenuButton, NavDropdown, NavGroup,
   IconButton, MenuItem, Logo, Spinner, Heading, Text } from 'natural-design-system';
 import 'natural-design-system/styles.css';
@@ -1212,7 +1212,7 @@ Code only (`RadioGroup`); shown in Figma as the "Shipping method" and "Basket si
 
 [Figma 1:968](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=1-968) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/story/components-product-card--all-variants)
 
-**Purpose:** a product in a listing. **Anatomy:** ① Media (4:5 image) · ② Badge (top-left, nested Badge) · ③ Wishlist Button (top-right, nested) · ④ Title (link) · ⑤ Meta · ⑥ Price (+ compare price) · ⑦ CTA (nested Button) · ⑧ Focus ring.
+**Purpose:** a product in a listing. **Anatomy:** ① Media (4:5 image) · ② Badge (top-left, nested Badge) · ③ Wishlist Button (top-right, nested) · ④ Title (link) · ⑤ Meta · ⑥ Price (+ compare price; the Price component in code, §6.34) · ⑦ CTA (nested Button) · ⑧ Focus ring.
 
 | Figma property | Type | Values / default | Code prop | Type / default |
 |---|---|---|---|---|
@@ -1941,7 +1941,7 @@ Colours: `bg/subtle` sand (brown/50), `border/muted` dividers. Titles and hover 
 
 [Figma 245:707](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=245-707) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/docs/components-cart-line--docs)
 
-**Status: Beta.** **Purpose:** one product in the bag. **Anatomy:** ① Image (Image/Placeholder until a photo, 4:5) · ② Title (a link to the product) · ③ SKU · ④ Price (right) · ⑤ Remove (Text Button, below the price) · divider below.
+**Status: Beta.** **Purpose:** one product in the bag. **Anatomy:** ① Image (Image/Placeholder until a photo, 4:5) · ② Title (a link to the product) · ③ SKU · ④ Price (right; the Price component in code, §6.34, centred; screen readers hear "Original price" for the compare price) · ⑤ Remove (Text Button, below the price) · divider below.
 
 | Figma property | Type | Values / default | Code prop | Type / default |
 |---|---|---|---|---|
@@ -2047,13 +2047,16 @@ Layout: thumbnails in a column beside the photo (1 : 5) when the gallery is 480p
 | Figma property | Type | Values / default | Code prop | Type / default |
 |---|---|---|---|---|
 | Status | Variant | Default, Sale, Sold out | `status` | `'default' \| 'sale' \| 'sold-out'` = `'default'` |
-| none | | | `title`, `story`, `price`, `comparePrice` | strings; `title` and `price` required |
-| none | | | `badge`, `badgeTone` | `string \| false`; Sale and Sold out come from the status |
-| none | | | `options`, `optionsLegend`, `optionValue`, `onOptionChange` | `{ value, label, description? }[]`; `'Finish'` |
-| none | | | `madeToOrderWeeks`, `freight` | "Made to order · ships in {n} weeks"; "Ships by freight" |
+| Title | Text | "River Clay Cup" | `title` | `string` (required) |
+| Story · Show story | Text · Boolean | one line · true | `story` | `string`; omit to hide |
+| Price (nested Price, exposed) | Price, Compare price | "$32", "$38" | `price`, `comparePrice` | strings; `price` required |
+| Show badge + Badge (nested, exposed) | Boolean · Label, Tone | true; Handmade / Sale / Sold out | `badge`, `badgeTone` | `string \| false`; Sale and Sold out come from the status |
+| Show options + Radios (nested, exposed) | Boolean · Label, Description | true | `options`, `optionsLegend`, `optionValue`, `onOptionChange` | `{ value, label, description? }[]`; `'Finish'` |
+| Lead time · Show lead time | Text · Boolean | "Made to order · ships in 2 weeks" · true | `madeToOrderWeeks` | number → "Made to order · ships in {n} weeks" |
+| Show freight | Boolean | false | `freight` | "Ships by freight" |
 | none | | | `onAddToBag`, `adding`, `onNotify`, `wishlisted`, `onWishlistChange` | `adding` shows the Button's Loading state |
 
-Layout: one column, gap `space/16`; Add to Bag fills the row and the Wishlist Button sits beside it (`space/12`). Price uses `ui/title` (Semi Bold), compare price `ui/body` in `fg/subtle`, notes `ui/label` in `fg/muted`.
+Layout: one column, gap `space/16`; Add to Bag fills the row and the Wishlist Button sits beside it (`space/12`). Price is the nested **Price** at Size Large (§6.34); notes use `ui/label` in `fg/muted`.
 
 **Accessibility:** the product name is the page's only H1. The sale price is read as "Sale price $32, Original price $38", and the Sale badge and strikethrough show it too, never red alone. Add to Bag is described by the price. Sold out swaps Add to Bag for a Secondary "Notify me" and hides the options.
 
@@ -2080,11 +2083,14 @@ Layout: one column, gap `space/16`; Add to Bag fills the row and the Wishlist Bu
 | Figma property | Type | Values / default | Code prop | Type / default |
 |---|---|---|---|---|
 | Breakpoint | Variant | Desktop, Mobile | none (container query at 768px) | |
-| none | | | `details` | `{ label, value }[]` (required) |
-| none | | | `variation`, `care`, `delivery` | strings; `care` and `delivery` required |
+| Rows (nested Product Detail Row, exposed) · Show row 3–5 | Label, Value · Boolean | Material, Finish, Dimensions, Weight, Capacity · true | `details` | `{ label, value }[]` (required), rendered as `ProductDetailRow` |
+| Variation note · Show variation note | Text · Boolean | "The glaze pools…" · true | `variation` | `string`; omit to hide |
+| Care · Delivery | Text | the River Clay Cup's | `care`, `delivery` | strings (required) |
 | none | | | `headingLevel` | `2 \| 3` = `2` |
 
 Layout: two columns (`layout/gutter`) at 768px and wider, one column (`space/32`) below. Rows are separated by `border/muted` hairlines with `space/12` padding; labels in `fg/muted`. Section titles use Heading/H4.
+
+**Product Detail Row** (Figma 825:9203, code `ProductDetailRow`): one label and value, a `<dt>` / `<dd>` pair; Breakpoint sets the label column (a third of the row).
 
 **Accessibility:** a section named by its Details heading. Details is a `<dl>`, so screen readers pair each label with its value. Contrast: labels 7.51:1, values and notes 13.67:1. The dividers are decorative.
 
@@ -2142,6 +2148,39 @@ Also exported: `validateComposition(contract, composition)` returns `{ valid, er
 | Landmarks | Header navigation → `main` → footer `contentinfo` |
 | Headings | One H1 per page (hero, intro or product name); sections use H2 |
 | Rejected | Announced as an alert with the list of broken rules |
+
+### 6.34 Price
+
+[Figma 825:9167](https://www.figma.com/design/84MjZXozBoKCvf9lwIU5pu/Natural-Design-System?node-id=825-9167) · [Storybook](https://chris-terterian.github.io/natural-design-system/?path=/docs/components-price--docs)
+
+**Status: Beta.** **Purpose:** one place for how a price reads, so a sale looks and sounds the same on a card, in the bag and on the product page. **Anatomy:** ① Price · ② Compare price (struck through, on sale only).
+
+| Figma property | Type | Values / default | Code prop | Type / default |
+|---|---|---|---|---|
+| Size | Variant | Default, Large | `size` | `'default' \| 'large'` = `'default'` |
+| Status | Variant | Default, Sale | `sale` | `boolean` = `false` |
+| Price | Text | "$32" | `price` | `string` (required, formatted) |
+| Compare price | Text | "$38" | `comparePrice` | `string`; shown only on sale |
+
+Type: Default is `ui/body` Semi Bold with the compare price in `ui/label`; Large is `ui/title` with `ui/body`. Sale price `fg/sale` (6.54:1), compare price `fg/subtle` (4.95:1), gap `space/8`, baseline-aligned. Cart Line centres it in its column.
+
+**Used by:** Product Card (§6.9), Cart Line (§6.28) and Product Summary (§6.31) in code. In Figma, Product Summary nests it; Product Card and Cart Line still draw their own price layers for now (D-039).
+
+**Accessibility:** on sale, screen readers hear "Sale price $32, Original price $38". The sale is never colour or strikethrough alone.
+
+**Do / Don't**
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Pass the price already formatted for the shopper's currency. | Build "$" + number in the component. |
+| Show a compare price only for a real sale. | Strike through a price that was never charged. |
+
+**Keyboard & screen reader**
+
+| Key / event | Result |
+|---|---|
+| Tab | Nothing to focus |
+| Announced | "$32"; on sale "Sale price $32, Original price $38" |
 
 ---
 

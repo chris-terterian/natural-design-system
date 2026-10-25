@@ -17,6 +17,7 @@ export * from './components/Spinner/Spinner';
 export * from './components/Toggle/Toggle';
 export * from './components/Typography/Typography';
 export * from './components/WishlistButton/WishlistButton';
+export * from './components/Price/Price';
 export * from './components/ProductCard/ProductCard';
 export * from './components/ProductRow/ProductRow';
 export * from './components/ProductGallery/ProductGallery';

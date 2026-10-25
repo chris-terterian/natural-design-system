@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import { Badge, type BadgeTone } from '../Badge/Badge';
 import { Button } from '../Button/Button';
+import { Price } from '../Price/Price';
 import { Radio, RadioGroup } from '../Radio/Radio';
 import { WishlistButton } from '../WishlistButton/WishlistButton';
 import { Heading, Text } from '../Typography/Typography';
@@ -89,15 +90,7 @@ export function ProductSummary({
       <Heading level={1} size="h2" className="nds-summary__title">{title}</Heading>
       {story && <Text variant="paragraph-lg" className="nds-summary__story">{story}</Text>}
 
-      <p className="nds-summary__price" id={priceId}>
-        <span className="nds-summary__price-current">
-          {status === 'sale' && comparePrice ? <span className="nds-visually-hidden">Sale price </span> : null}
-          {price}
-        </span>
-        {status === 'sale' && comparePrice && (
-          <><span className="nds-visually-hidden">Original price </span><s className="nds-summary__price-compare">{comparePrice}</s></>
-        )}
-      </p>
+      <Price id={priceId} size="large" price={price} comparePrice={comparePrice} sale={status === 'sale'} />
       {notes.length > 0 && (
         <ul className="nds-summary__notes">
           {notes.map((n) => <li key={n}>{n}</li>)}

@@ -8,10 +8,6 @@
 }
 .nds-summary__title, .nds-summary__story { margin: 0; } /* Heading/H2 and Paragraph/Large via Heading and Text */
 
-.nds-summary__price { display: flex; align-items: baseline; gap: var(--nds-space-8); margin: 0; }
-.nds-summary__price-current { font: 600 var(--nds-ui-title-font-size) / var(--nds-ui-title-line-height) var(--nds-font-family); }
-.nds-summary[data-status='sale'] .nds-summary__price-current { color: var(--nds-fg-sale); }
-.nds-summary__price-compare { color: var(--nds-fg-subtle); font: 400 var(--nds-ui-body-font-size) / var(--nds-ui-body-line-height) var(--nds-font-family); }
 
 .nds-summary__notes {
   display: grid;

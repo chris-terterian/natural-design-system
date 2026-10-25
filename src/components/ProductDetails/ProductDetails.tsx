@@ -22,6 +22,16 @@ export interface ProductDetailsProps {
   className?: string;
 }
 
+/** Figma: Product Detail Row. One label and value in the Details list (a <dt> / <dd> pair). */
+export function ProductDetailRow({ label, value }: ProductDetail) {
+  return (
+    <div className="nds-details__row">
+      <dt>{label}</dt>
+      <dd>{value}</dd>
+    </div>
+  );
+}
+
 /**
  * Figma: Product Details. The facts below the summary, in the order DESIGN.md §2 sets: details,
  * variation note, care, delivery. Two columns when it's 768px or wider, one below.
@@ -40,12 +50,7 @@ export function ProductDetails({ details, variation, care, delivery, headingLeve
         <div className="nds-details__facts">
           <Heading level={headingLevel} size="h4" id={`${id}-details`} className="nds-details__title">Details</Heading>
           <dl className="nds-details__list">
-            {details.map((d) => (
-              <div key={d.label} className="nds-details__row">
-                <dt>{d.label}</dt>
-                <dd>{d.value}</dd>
-              </div>
-            ))}
+            {details.map((d) => <ProductDetailRow key={d.label} {...d} />)}
           </dl>
         </div>
         <div className="nds-details__notes">

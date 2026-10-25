@@ -350,12 +350,13 @@
       "specs": [
         "6.31 Product Summary"
       ],
-      "notes": "Beta gaps: no quantity stepper; options are a Radio Group until material swatches are designed; prices are passed in formatted (no currency logic); Figma shows one example product (no text properties yet)."
+      "notes": "Beta gaps: no quantity stepper; options are a Radio Group until material swatches are designed; prices are passed in formatted (no currency logic). Figma: Title, Story and Lead time text properties, five Show booleans, and nested exposed Badge, Price, Radio, Button and Wishlist Button."
     },
     {
       "name": "Product Details",
       "exports": [
-        "ProductDetails"
+        "ProductDetails",
+        "ProductDetailRow"
       ],
       "status": "beta",
       "since": "0.18.0",
@@ -365,7 +366,7 @@
       "specs": [
         "6.32 Product Details"
       ],
-      "notes": "Beta gaps: always expanded (no accordion on mobile yet); section titles are fixed (Details, No two alike, Care, Delivery); Figma shows one example product."
+      "notes": "Beta gaps: always expanded (no accordion on mobile yet); section titles are fixed (Details, No two alike, Care, Delivery); Figma shows up to five Product Detail Rows (rows 3–5 can be hidden)."
     },
     {
       "name": "Page Template",
@@ -383,6 +384,21 @@
         "6.33 Page Template"
       ],
       "notes": "Beta gaps: three templates (Homepage, Collection, Product page); personalised rows are allowed by the contract but the reason label isn't rendered yet; hero and story actions are buttons, not links; filters are uncontrolled. Figma variants are annotated examples, not slot-swappable components."
+    },
+    {
+      "name": "Price",
+      "exports": [
+        "Price"
+      ],
+      "status": "beta",
+      "since": "0.18.0",
+      "storyFile": "src/components/Price/Price.stories.tsx",
+      "storyTitle": "Components/Price",
+      "figmaKey": "price",
+      "specs": [
+        "6.34 Price"
+      ],
+      "notes": "Beta gaps: prices are passed in formatted (no currency or locale logic); no 'from' or range prices. Product Card and Cart Line use it in code; in Figma they still draw their own price layers, because their Price / Compare price properties carry overrides on 167 instances (D-039)."
     }
   ]
 }

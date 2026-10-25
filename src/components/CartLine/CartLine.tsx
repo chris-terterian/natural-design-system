@@ -1,5 +1,6 @@
 import { ImagePlaceholderIcon } from '../../icons';
 import { TextButton } from '../TextButton/TextButton';
+import { Price } from '../Price/Price';
 import './CartLine.css';
 
 export interface CartLineProps {
@@ -36,17 +37,7 @@ export function CartLine({ title, href, sku, price, comparePrice, imageSrc, imag
           <p className="nds-cart-line__sku">SKU {sku}</p>
         </div>
         <div className="nds-cart-line__side">
-          <p className="nds-cart-line__price">
-            {comparePrice ? (
-              <>
-                <span className="nds-visually-hidden">Sale price </span>
-                <span className="nds-cart-line__price-value">{price}</span>{' '}
-                <s className="nds-cart-line__compare"><span className="nds-visually-hidden">was </span>{comparePrice}</s>
-              </>
-            ) : (
-              <span className="nds-cart-line__price-value">{price}</span>
-            )}
-          </p>
+          <Price className="nds-cart-line__price" price={price} comparePrice={comparePrice} sale={Boolean(comparePrice)} />
           <TextButton aria-label={`Remove ${title}`} onClick={onRemove}>Remove</TextButton>
         </div>
       </div>

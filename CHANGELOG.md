@@ -12,8 +12,13 @@ All notable changes to the Natural Design System. Format: [Keep a Changelog](htt
 - MCP: `get_templates` and `validate_composition`; the system fingerprint now includes the contract.
 - Figma: new **Templates** page with the Page Template set (Template × Breakpoint), dashed slot outlines and each template's contract.
 
+- **Price** (Beta, §6.34, D-039): one component for the current and compare price, Size Default / Large. Product Card, Cart Line and Product Summary use it in code.
+- **Product Detail Row** (`ProductDetailRow`): the label / value row inside Product Details, its own Figma component.
+- Figma properties so designers can change the product without detaching. Product Summary: Title, Story, Lead time; Show badge, story, lead time, freight, options; nested Badge, Price, Radios, Button, Wishlist Button. Product Details: rows as nested Product Detail Rows, Show row 3–5, Variation note, Care, Delivery, Show variation note.
+
 ### Changed
 - DESIGN.md §7: Product detail, Homepage and page templates are Available (Beta).
+- Cart Line's compare price is announced as "Original price $38" (was "was $38"), the same as Product Card. No visual change: all 128 stories match pixel for pixel.
 
 ### Fixed
 - Sample copy left over from a jewelry kit now fits Natural's goods. Product Card's default Meta is "Stoneware · ash glaze" (was "14k gold · 3 colors") in Figma, the story and DESIGN.md. Wishlist Button's example product is "River Clay Cup" (was "Gold Hoops"). The Radio group-error example asks for a basket size (Small, Medium, Large) instead of a ring size, in Figma and Storybook.

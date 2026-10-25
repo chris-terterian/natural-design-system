@@ -42,4 +42,6 @@ export const FIGMA_NODES = {
   productSummary: '825:3487',
   productDetails: '825:3553',
   pageTemplate: '825:6402',
+  price: '825:9167',
+  productDetailRow: '825:9203',
 } as const;

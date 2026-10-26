@@ -1,14 +1,17 @@
 {
   "name": "natural-design-system",
-  "version": "0.17.0",
-  "description": "A natural goods e-commerce design system \u2014 React components, tokens and Storybook, mirrored with the Figma file \"Natural Design System\".",
+  "version": "0.18.0",
+  "description": "A natural goods e-commerce design system — React components, tokens and Storybook, mirrored with the Figma file \"Natural Design System\".",
   "type": "module",
   "license": "MIT",
   "main": "./dist/natural-design-system.js",
   "module": "./dist/natural-design-system.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/natural-design-system.js",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/natural-design-system.js"
+    },
     "./styles.css": "./dist/natural-design-system.css"
   },
   "files": [
@@ -33,7 +36,7 @@
     "tokens": "node scripts/build-tokens.mjs",
     "storybook": "npm run tokens && storybook dev -p 6007",
     "build-storybook": "npm run tokens && storybook build",
-    "build": "npm run tokens && tsc -p tsconfig.build.json && vite build",
+    "build": "npm run tokens && tsc -p tsconfig.build.json && vite build && mkdir -p dist/templates && cp src/templates/contract.d.mts dist/templates/",
     "typecheck": "tsc --noEmit",
     "figma:sync-script": "node scripts/figma/print-sync.mjs",
     "check:a11y": "node scripts/check-a11y.mjs",

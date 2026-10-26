@@ -4,6 +4,15 @@ All notable changes to the Natural Design System. Format: [Keep a Changelog](htt
 
 ## [Unreleased]
 
+## [0.18.0] – 2026-10-25
+
+The first npm release since 0.15.4: it also ships everything in 0.16.0 (dark mode, the Tide brand) and 0.17.0 (motion tokens, which removed the deprecated Typography colour aliases).
+
+### Fixed (package)
+- TypeScript users now get the package's types: `exports["."]` has a `types` condition (since 0.15.4, projects using `moduleResolution: "bundler"` or `node16` fell back to `any`).
+- The type definitions for `PageTemplate` and `validateComposition` ship with the package (`dist/templates/contract.d.mts`).
+- Known gap: with `skipLibCheck: false`, or `node16` resolution, the type files still trip on their CSS imports and extensionless paths. Most apps (Vite and Next.js defaults) aren't affected.
+
 ### Added
 - **Page templates and slot contracts** (D-038, DESIGN.md §6.33). `governance/templates.json` defines Homepage, Collection and Product page: slots, the section kinds each accepts, counts and order rules with reasons. `PageTemplate` renders a composition (a page as data) only when it passes and lists the broken rules when it doesn't. `validateComposition` and `TEMPLATE_CONTRACT` are exported.
 - **Personalisation rules in the contract**: every product row names a source. Personalised rows (recently viewed, because you bought, recommended) need a reason and a fallback, at most two per page, and fall back automatically below 2 products. The reason label comes in a later release.

@@ -148,6 +148,9 @@ jobs:
         run: echo '{"mcpServers":{"natural":{"command":"node","args":["mcp/server.mjs"]}}}' > drift/mcp.json
 
       - uses: anthropics/claude-code-action@v1
+        env:
+          # The key is organization-level, so every request names the workspace (repo variable ANTHROPIC_WORKSPACE_ID).
+          ANTHROPIC_CUSTOM_HEADERS: "${{ vars.ANTHROPIC_WORKSPACE_ID && format('anthropic-workspace-id: {0}', vars.ANTHROPIC_WORKSPACE_ID) || '' }}"
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
